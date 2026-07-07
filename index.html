@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신수학 대표유형 리더 — 평면좌표</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root { --ink:#1a1a1a; --accent:#2e7d32; --line:#e0e0e0; }
+  * { box-sizing:border-box; }
+  body { font-family:'Malgun Gothic',sans-serif; color:var(--ink); max-width:720px; margin:0 auto; padding:16px; background:#fafafa; }
+  h1 { font-size:1.15rem; margin:4px 0 2px; }
+  .sub { color:#666; font-size:.85rem; margin-bottom:16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px 24px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .type-card { display:flex; align-items:center; gap:12px; padding:14px 18px; margin-bottom:10px; cursor:pointer; transition:border-color .15s; }
+  .type-card:hover { border-color:var(--accent); }
+  .num { background:var(--accent); color:#fff; border-radius:8px; min-width:44px; text-align:center; padding:6px 0; font-weight:bold; font-size:.85rem; }
+  .type-card .name { flex:1; font-weight:bold; }
+  .type-card .info { color:#888; font-size:.8rem; white-space:nowrap; }
+  .meta { display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
+  .badge { background:var(--accent); color:#fff; border-radius:6px; padding:2px 10px; font-size:.8rem; font-weight:bold; }
+  .unit { color:#666; font-size:.85rem; }
+  .problem { font-size:1.05rem; line-height:1.8; margin:8px 0 16px; }
+  .choices { display:flex; gap:18px; flex-wrap:wrap; margin-bottom:16px; }
+  iframe.player { width:100%; aspect-ratio:16/9; border:0; border-radius:8px; }
+  details { border:1px solid var(--line); border-radius:8px; margin-top:10px; overflow:hidden; }
+  summary { cursor:pointer; padding:10px 14px; font-weight:bold; background:#f5f5f5; user-select:none; }
+  details[open] summary { border-bottom:1px solid var(--line); }
+  .slot-body { padding:12px 16px; line-height:1.8; }
+  .slot-empty { color:#aaa; }
+  .back { display:inline-block; margin-bottom:12px; color:var(--accent); font-weight:bold; cursor:pointer; text-decoration:none; }
+  .note { color:#888; font-size:.8rem; margin-top:14px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ── 데이터: D:\01_수업녹화\2026-07-07 16-13-29.index.json 에서 생성 ──
+const VIDEO = {
+  youtube: "Lqi0m6xelj8",
+  date: "2026-07-07",
+  unit: "공통수학2 > 도형의 방정식 > 평면좌표",
+  textbook: "라이트쎈 공통수학2"
+};
+
+// 문제/정답/풀이/개념 텍스트는 수학유형DB 자체 문항으로 채우는 게 정본 방향(저작권).
+// 지금은 0027(유형01)만 데모로 채워져 있음.
+const SEGMENTS = [
+  { 유형:"유형01", 이름:"두 점 사이의 거리",                문항:"0027", start:0,    end:120,  쪽:11,
+    정답:"④ $7$",
+    풀이:"$\\overline{AB}^2 = (a-3)^2 + (0-3)^2 = 25$ 이므로 $(a-3)^2 = 16$, $a-3 = \\pm 4$. 따라서 $a = 7$ 또는 $a = -1$ 인데 $a$는 양수이므로 $a = 7$.",
+    개념:"두 점 $A(x_1,\\,y_1)$, $B(x_2,\\,y_2)$ 사이의 거리는 $\\overline{AB} = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$" },
+  { 유형:"유형02", 이름:"같은 거리에 있는 점",              문항:"0032", start:120,  end:240,  쪽:11 },
+  { 유형:"유형03", 이름:"두 점 사이의 거리와 삼각형의 모양", 문항:"0037", start:240,  end:420,  쪽:12 },
+  { 유형:"유형04", 이름:"선분의 길이의 합의 최솟값",         문항:"0041", start:420,  end:480,  쪽:13 },
+  { 유형:"유형05", 이름:"선분의 길이의 제곱의 합의 최솟값",  문항:"0044", start:480,  end:660,  쪽:13 },
+  { 유형:"유형06", 이름:"좌표를 이용하여 도형의 성질 확인",  문항:"0049", start:660,  end:780,  쪽:14 },
+  { 유형:"유형07", 이름:"수직선 위의 선분의 내분점",         문항:"0052", start:780,  end:960,  쪽:15 },
+  { 유형:"유형08", 이름:"좌표평면 위의 선분의 내분점(1)",    문항:"0055", start:960,  end:1080, 쪽:15 },
+  { 유형:"유형09", 이름:"좌표평면 위의 선분의 내분점(2)",    문항:"0060", start:1080, end:1140, 쪽:16 },
+  { 유형:"유형10", 이름:"선분의 내분점의 활용",              문항:"0064", start:1140, end:1380, 쪽:16 },
+  { 유형:"유형10+", 이름:"선분의 내분점의 활용 (추가)",      문항:"0067", start:1380, end:1440, 쪽:17 },
+  { 유형:"유형11", 이름:"삼각형의 무게중심",                 문항:"0068", start:1440, end:1500, 쪽:17 },
+  { 유형:"유형12", 이름:"평행사변형의 성질",                 문항:"0073", start:1500, end:1620, 쪽:18 },
+  { 유형:"유형13", 이름:"각의 이등분선의 성질",              문항:"0077", start:1620, end:1914, 쪽:18 }
+];
+
+// ── 렌더링 ──
+const app = document.getElementById('app');
+const mmss = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+
+function slot(title, html) {
+  const body = html
+    ? `<div class="slot-body">${html}</div>`
+    : `<div class="slot-body slot-empty">아직 준비 중</div>`;
+  return `<details><summary>${title}</summary>${body}</details>`;
+}
+
+function renderList() {
+  app.innerHTML = `
+    <h1>평면좌표 — 대표유형 강의</h1>
+    <div class="sub">${VIDEO.unit} · ${VIDEO.date} 녹화 · 유형을 누르면 해당 구간만 재생됩니다</div>
+    ${SEGMENTS.map((s, i) => `
+      <div class="card type-card" onclick="location.hash='#q${i}'">
+        <span class="num">${s.유형}</span>
+        <span class="name">${s.이름}</span>
+        <span class="info">${mmss(s.end - s.start)} · ${s.문항}번</span>
+      </div>`).join('')}
+    <div class="note">신수학 재원생 전용 · 문의는 원장님께</div>`;
+}
+
+function renderDetail(i) {
+  const s = SEGMENTS[i];
+  app.innerHTML = `
+    <a class="back" href="#">← 유형 목록</a>
+    <div class="card">
+      <div class="meta"><span class="badge">${s.유형}</span><span class="unit">${VIDEO.unit}</span></div>
+      <h1>${s.이름}</h1>
+      ${s.문제
+        ? `<div class="problem">${s.문제}</div>
+           <div class="choices">${(s.선지||[]).map(c => `<span>${c}</span>`).join('')}</div>`
+        : `<div class="problem slot-empty">대표문제: ${VIDEO.textbook} ${s.쪽}쪽 ${s.문항}번 (교재를 펴 놓고 들으세요)</div>`}
+      <iframe class="player" allowfullscreen
+        src="https://www.youtube.com/embed/${VIDEO.youtube}?start=${s.start}&end=${s.end}&rel=0"></iframe>
+      ${slot('정답', s.정답)}
+      ${slot('풀이', s.풀이)}
+      ${slot('개념', s.개념)}
+      ${slot('유사문제', s.유사문제)}
+    </div>`;
+  if (window.renderMathInElement) renderMathInElement(app, {
+    delimiters: [{left:'$$', right:'$$', display:true}, {left:'$', right:'$', display:false}]
+  });
+}
+
+function route() {
+  const m = location.hash.match(/^#q(\d+)$/);
+  if (m && SEGMENTS[+m[1]]) renderDetail(+m[1]); else renderList();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('DOMContentLoaded', route);
+</script>
+</body>
+</html>
