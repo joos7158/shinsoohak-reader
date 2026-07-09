@@ -95,7 +95,7 @@ function card(o,i){
     <div class="problem">${esc(o.문제.stem)}</div>
     ${choicesHtml(o.문제.choices)}
     <div class="ans-row">
-      <span class="pill mine">내가 고른 답: ${esc(o.내답)} ✗</span>
+      <span class="pill mine">${(o.내답==='blank'||!o.내답)?'무응답 (안 풂)':'내가 고른 답: '+esc(o.내답)} ✗</span>
       <span class="pill correct">정답: ${esc(o.문제.answer)} ✓</span>
     </div>
     ${o.유사 ? `<details><summary>🔁 유사문제로 다시 풀어보기</summary>
