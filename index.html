@@ -86,6 +86,23 @@ const UNITS = [
 const app = document.getElementById('app');
 const mmss = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
 
+// ── 열람 기록 비콘 (구글 폼) — 학생별 ?s=코드 로 접속하면 열람이 시트에 기록됨 ──
+const LOG = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse",
+  코드: "entry.1580342508", 내용: "entry.1507722106"
+};
+const SID = new URLSearchParams(location.search).get('s') || '';
+const _logged = new Set();
+function logView(label) {
+  if (!SID || _logged.has(label)) return;   // 코드 없으면 기록 안 함 / 같은 세션 중복 방지
+  _logged.add(label);
+  const body = new URLSearchParams();
+  body.append(LOG.코드, SID);
+  body.append(LOG.내용, label);
+  fetch(LOG.action, { method:'POST', mode:'no-cors', body }).catch(()=>{});
+}
+if (SID) logView('(리더 열기)');
+
 function slot(title, html) {
   const body = html
     ? `<div class="slot-body">${html}</div>`
@@ -123,6 +140,7 @@ function renderUnitList(U) {
 
 function renderDetail(U, i) {
   const u = UNITS[U], s = u.segments[i], V = u.video;
+  logView(`${u.title} · ${s.유형} ${s.이름}`);
   const isConcept = /^유형|개념/.test(s.문항) || s.문항.includes('유형');
   app.innerHTML = `
     <a class="back" href="#u${U}">← ${u.title} 유형 목록</a>
