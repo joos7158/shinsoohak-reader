@@ -75,7 +75,7 @@ function render(){
     ${list.length? list.map((o,i)=>card(o,i)).join('')
       : `<div class="card" style="text-align:center"><div style="font-size:1.1rem;font-weight:bold;color:var(--accent)">🎉 오늘 일일테스트 만점!</div><div class="sub" style="margin-top:6px">틀린 문제가 없어요. 아래 강의로 시험 대비 복습만 해두면 완벽해요.</div></div>`}
     ${(D.복습&&D.복습.length)? `<h1 style="font-size:1.05rem;margin-top:18px">📺 시험 대비 복습 강의</h1>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
-    <div class="note">신수학 재원생 전용 · 홍단 실데이터(오늘 일일테스트 채점 반영) · 오답이 있으면 이 자리에 유사문제 재도전이 뜹니다</div>`;
+    <div class="note">신수학 재원생 전용 · 오늘 일일테스트 채점 반영 · 틀린 문제는 유사문제로 다시 풀고 강의로 복습하세요</div>`;
   if (window.renderMathInElement) renderMathInElement(app, {
     delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
 }
@@ -98,13 +98,13 @@ function card(o,i){
       <span class="pill mine">내가 고른 답: ${esc(o.내답)} ✗</span>
       <span class="pill correct">정답: ${esc(o.문제.answer)} ✓</span>
     </div>
-    <details><summary>🔁 유사문제로 다시 풀어보기</summary>
+    ${o.유사 ? `<details><summary>🔁 유사문제로 다시 풀어보기</summary>
       <div class="slot-body">
         <div class="problem">${esc(o.유사.stem)}</div>
         ${choicesHtml(o.유사.choices)}
         <details><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
       </div>
-    </details>
+    </details>` : `<div class="sub" style="margin-top:8px">🔁 유사문제 준비 중 — 우선 강의로 이 유형을 복습해 보세요.</div>`}
     ${lecBtn}
   </div>`;
 }
