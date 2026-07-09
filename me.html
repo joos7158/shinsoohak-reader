@@ -56,6 +56,12 @@ function render(){
     return;
   }
   logView('오답노트 열기');
+  if (D.대기) {
+    app.innerHTML = `<div class="nav"><a href="./index.html?s=${encodeURIComponent(SID)}">▶ 유형별 강의</a></div>
+      <h1>📕 나의 오답노트</h1>
+      <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.<br><br>그동안 <a href="./index.html?s=${encodeURIComponent(SID)}">유형별 강의</a>로 복습해두세요!</div>`;
+    return;
+  }
   const list = D.오답||[];
   app.innerHTML = `
     <div class="nav"><a href="./index.html?s=${encodeURIComponent(SID)}">▶ 유형별 강의</a><a href="#">🔄 새로고침</a></div>
