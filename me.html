@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나의 오답노트 — 신수학</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root { --ink:#1a1a1a; --accent:#2e7d32; --red:#c62828; --line:#e0e0e0; }
+  * { box-sizing:border-box; }
+  body { font-family:'Malgun Gothic',sans-serif; color:var(--ink); max-width:720px; margin:0 auto; padding:16px; background:#fafafa; }
+  h1 { font-size:1.2rem; margin:4px 0 2px; }
+  .sub { color:#666; font-size:.85rem; margin-bottom:14px; }
+  .dash { background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:16px; display:flex; gap:20px; flex-wrap:wrap; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .dash .kpi { font-size:.9rem; } .dash .kpi b { color:var(--accent); font-size:1.05rem; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .badge { background:var(--accent); color:#fff; border-radius:6px; padding:2px 10px; font-size:.78rem; font-weight:bold; }
+  .problem { font-size:1.03rem; line-height:1.8; margin:10px 0 12px; }
+  .choices { display:flex; flex-direction:column; gap:4px; margin:6px 0 12px; font-size:.98rem; }
+  .ans-row { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0; }
+  .pill { border-radius:8px; padding:5px 12px; font-size:.85rem; font-weight:bold; }
+  .pill.mine { background:#fdeaea; color:var(--red); border:1px solid #f3c0c0; }
+  .pill.correct { background:#e7f4ea; color:var(--accent); border:1px solid #bfe0c8; }
+  details { border:1px solid var(--line); border-radius:8px; margin-top:8px; overflow:hidden; }
+  summary { cursor:pointer; padding:10px 14px; font-weight:bold; background:#f5f5f5; }
+  .slot-body { padding:12px 16px; line-height:1.8; }
+  a.btn, button.btn { display:inline-block; margin-top:10px; background:var(--accent); color:#fff; border:0; border-radius:8px; padding:9px 16px; font-weight:bold; font-size:.9rem; text-decoration:none; cursor:pointer; }
+  .nav { margin-bottom:12px; } .nav a { color:var(--accent); font-weight:bold; text-decoration:none; font-size:.88rem; margin-right:14px; }
+  .note { color:#888; font-size:.8rem; margin-top:16px; line-height:1.6; }
+  .empty { color:#888; padding:24px 0; text-align:center; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="me_data.js"></script>
+<script>
+const SID = new URLSearchParams(location.search).get('s') || '';
+// 열람 기록 비콘 (리더와 동일 폼)
+const LOG = { action:"https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse", 코드:"entry.1580342508", 내용:"entry.1507722106" };
+const _logged = new Set();
+function logView(label){ if(!SID||_logged.has(label))return; _logged.add(label);
+  const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
+  fetch(LOG.action,{method:'POST',mode:'no-cors',body:b}).catch(()=>{}); }
+
+const app = document.getElementById('app');
+const esc = s => String(s??'');
+const choicesHtml = arr => `<div class="choices">${(arr||[]).map(c=>`<div>${esc(c)}</div>`).join('')}</div>`;
+
+function render(){
+  const D = (window.ME_DATA||{})[SID];
+  if (!SID || !D) {
+    app.innerHTML = `<h1>나의 오답노트</h1><div class="card empty">개인 링크로 열어주세요.<br>선생님이 보내주신 링크를 눌러 들어오면 내 오답이 보입니다.</div>`;
+    return;
+  }
+  logView('오답노트 열기');
+  const list = D.오답||[];
+  app.innerHTML = `
+    <div class="nav"><a href="./index.html?s=${encodeURIComponent(SID)}">▶ 유형별 강의</a><a href="#">🔄 새로고침</a></div>
+    <h1>📕 나의 오답노트</h1>
+    <div class="sub">틀린 문제를 유사문제로 다시 풀고, 막히면 그 유형 강의를 바로 볼 수 있어요.</div>
+    <div class="dash">
+      <div class="kpi">진도 <b>${esc(D.진도)}</b></div>
+      <div class="kpi">복습할 오답 <b>${list.length}개</b></div>
+      <div class="kpi">약점 유형 <b>${new Set(list.map(o=>o.유형)).size}종</b></div>
+    </div>
+    ${list.length? list.map((o,i)=>card(o,i)).join('')
+      : `<div class="card" style="text-align:center"><div style="font-size:1.1rem;font-weight:bold;color:var(--accent)">🎉 오늘 일일테스트 만점!</div><div class="sub" style="margin-top:6px">틀린 문제가 없어요. 아래 강의로 시험 대비 복습만 해두면 완벽해요.</div></div>`}
+    ${(D.복습&&D.복습.length)? `<h1 style="font-size:1.05rem;margin-top:18px">📺 시험 대비 복습 강의</h1>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
+    <div class="note">신수학 재원생 전용 · 홍단 실데이터(오늘 일일테스트 채점 반영) · 오답이 있으면 이 자리에 유사문제 재도전이 뜹니다</div>`;
+  if (window.renderMathInElement) renderMathInElement(app, {
+    delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+}
+
+function reviewCard(r){
+  const seg=r.강의;
+  const lec = seg? `<a class="btn" href="./index.html?s=${encodeURIComponent(SID)}#u${seg[0]}q${seg[1]}">▶ 강의 다시보기</a>`:'';
+  return `<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 18px">
+    <span class="badge" style="background:#eef2f7;color:#2b4a9b">${esc(r.유형)}</span>${lec}</div>`;
+}
+function card(o,i){
+  const seg = o.강의;
+  const lecBtn = seg ? `<a class="btn" href="./index.html?s=${encodeURIComponent(SID)}#u${seg[0]}q${seg[1]}">▶ 이 유형 강의 다시보기</a>` : '';
+  return `
+  <div class="card">
+    <span class="badge">${esc(o.유형)}</span>
+    <div class="problem">${esc(o.문제.stem)}</div>
+    ${choicesHtml(o.문제.choices)}
+    <div class="ans-row">
+      <span class="pill mine">내가 고른 답: ${esc(o.내답)} ✗</span>
+      <span class="pill correct">정답: ${esc(o.문제.answer)} ✓</span>
+    </div>
+    <details><summary>🔁 유사문제로 다시 풀어보기</summary>
+      <div class="slot-body">
+        <div class="problem">${esc(o.유사.stem)}</div>
+        ${choicesHtml(o.유사.choices)}
+        <details><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
+      </div>
+    </details>
+    ${lecBtn}
+  </div>`;
+}
+document.addEventListener('DOMContentLoaded', render);
+</script>
+</body>
+</html>
