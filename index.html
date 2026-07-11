@@ -42,7 +42,7 @@
 // 문제/정답/풀이/개념 텍스트는 수학유형DB 자체 문항으로 채우는 게 정본 방향(저작권).
 const UNITS = [
   {
-    key:"평면좌표", title:"평면좌표",
+    key:"평면좌표", title:"평면좌표", course:"공통수학2",
     video:{ youtube:"Lqi0m6xelj8", date:"2026-07-07", unit:"공통수학2 > 도형의 방정식 > 평면좌표", textbook:"라이트쎈 공통수학2" },
     segments:[
       { 유형:"유형01", 이름:"두 점 사이의 거리",                문항:"0027", start:0,    end:120,  쪽:11,
@@ -65,7 +65,7 @@ const UNITS = [
     ]
   },
   {
-    key:"직선의방정식", title:"직선의 방정식",
+    key:"직선의방정식", title:"직선의 방정식", course:"공통수학2",
     video:{ youtube:"hBVLfXPp-mE", date:"2026-07-09", unit:"공통수학2 > 도형의 방정식 > 직선의 방정식", textbook:"라이트쎈 공통수학2" },
     segments:[
       { 유형:"개념",   이름:"직선의 방정식 핵심 개념 (기본형·교점·평행과 수직·거리)", 문항:"개념 총정리", start:0,    end:1020, 쪽:21 },
@@ -84,6 +84,7 @@ const UNITS = [
   {
     "key": "함수의극한",
     "title": "함수의 극한",
+    "course": "미적분Ⅰ",
     "video": {
       "youtube": "wwECLc9hZuE",
       "date": "2026-07-11",
@@ -249,6 +250,22 @@ const LOG = {
   코드: "entry.1580342508", 내용: "entry.1507722106"
 };
 const SID = new URLSearchParams(location.search).get('s') || '';
+
+// ── 과정별 자동 노출 ── 학생 코드 → 수강 과정(노션 명단 기준). 각 단원의 course 와 일치하는 것만 표시.
+//   · 코드 없음/미등록 = 전체 노출(기존과 동일)   · extra:[단원key] = 예외로 추가 노출(하이브리드)
+const STUDENTS = {
+  pj7q: { name:"박지휴", courses:["공통수학2"] },
+  ks3m: { name:"김시은", courses:["공통수학2"] },
+  id5v: { name:"이다연", courses:["공통수학2"] },
+  hd8x: { name:"홍단",   courses:["공통수학2"] },
+};
+const _me = STUDENTS[SID] || null;
+function unitVisible(u) {
+  if (!_me) return true;                                  // 무코드/미등록 → 전체
+  if ((_me.extra || []).includes(u.key)) return true;     // 예외 추가
+  return (_me.courses || []).includes(u.course);          // 내 과정과 일치
+}
+
 const _logged = new Set();
 function logView(label) {
   if (!SID || _logged.has(label)) return;   // 코드 없으면 기록 안 함 / 같은 세션 중복 방지
@@ -271,12 +288,12 @@ function renderHome() {
   app.innerHTML = `
     <h1>신수학 대표유형 강의</h1>
     <div class="sub">단원을 누르면 유형별 강의로 이동합니다 · 유형을 누르면 해당 구간만 재생</div>
-    ${UNITS.map((u, U) => `
+    ${UNITS.map((u, U) => ({ u, U })).filter(x => unitVisible(x.u)).map(({ u, U }) => `
       <div class="card type-card" onclick="location.hash='#u${U}'">
         <span class="num" style="min-width:0;padding:6px 12px">단원</span>
         <span class="name">${u.title}</span>
         <span class="info">${u.segments.length}개 유형 · ${u.video.date}</span>
-      </div>`).join('')}
+      </div>`).join('') || '<div class="card slot-empty" style="text-align:center">배정된 강의가 아직 없습니다.</div>'}
     <div class="note">신수학 재원생 전용 · 문의는 원장님께</div>`;
 }
 
@@ -325,8 +342,8 @@ function renderDetail(U, i) {
 function route() {
   const d = location.hash.match(/^#u(\d+)q(\d+)$/);
   const l = location.hash.match(/^#u(\d+)$/);
-  if (d && UNITS[+d[1]] && UNITS[+d[1]].segments[+d[2]]) renderDetail(+d[1], +d[2]);
-  else if (l && UNITS[+l[1]]) renderUnitList(+l[1]);
+  if (d && UNITS[+d[1]] && unitVisible(UNITS[+d[1]]) && UNITS[+d[1]].segments[+d[2]]) renderDetail(+d[1], +d[2]);
+  else if (l && UNITS[+l[1]] && unitVisible(UNITS[+l[1]])) renderUnitList(+l[1]);
   else renderHome();
   window.scrollTo(0, 0);
 }
