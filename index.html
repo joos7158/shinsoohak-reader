@@ -25,6 +25,11 @@
   .problem { font-size:1.05rem; line-height:1.8; margin:8px 0 16px; }
   .choices { display:flex; gap:18px; flex-wrap:wrap; margin-bottom:16px; }
   iframe.player { width:100%; aspect-ratio:16/9; border:0; border-radius:8px; }
+  .speed-row { display:flex; align-items:center; gap:6px; margin:8px 0 4px; flex-wrap:wrap; }
+  .speed-label { color:#888; font-size:.8rem; margin-right:2px; }
+  .speed-btn { border:1px solid var(--line); background:#fff; border-radius:6px; padding:4px 11px; font-size:.82rem; cursor:pointer; color:#444; }
+  .speed-btn:hover { border-color:var(--accent); }
+  .speed-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:bold; }
   details { border:1px solid var(--line); border-radius:8px; margin-top:10px; overflow:hidden; }
   summary { cursor:pointer; padding:10px 14px; font-weight:bold; background:#f5f5f5; user-select:none; }
   details[open] summary { border-bottom:1px solid var(--line); }
@@ -244,6 +249,15 @@ const UNITS = [
 const app = document.getElementById('app');
 const mmss = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
 
+// ── 배속 제어: YouTube IFrame(enablejsapi=1) 에 postMessage 명령 전송 ──
+function setSpeed(rate, btn){
+  const f = document.getElementById('ytplayer');
+  if (f && f.contentWindow) f.contentWindow.postMessage(
+    JSON.stringify({event:'command', func:'setPlaybackRate', args:[rate]}), '*');
+  document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
 // ── 열람 기록 비콘 (구글 폼) — 학생별 ?s=코드 로 접속하면 열람이 시트에 기록됨 ──
 const LOG = {
   action: "https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse",
@@ -327,8 +341,11 @@ function renderDetail(U, i) {
            <div class="choices">${(s.선지||[]).map(c => `<span>${c}</span>`).join('')}</div>`
         : `<div class="problem slot-empty">${V.textbook} ${s.쪽}쪽 · ${s.문항}${isConcept?'':'번'} (교재를 펴 놓고 들으세요)</div>`}
       ${V.youtube
-        ? `<iframe class="player" allowfullscreen
-             src="https://www.youtube.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0"></iframe>`
+        ? `<iframe id="ytplayer" class="player" allowfullscreen
+             src="https://www.youtube.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0&enablejsapi=1"></iframe>
+           <div class="speed-row"><span class="speed-label">배속</span>
+             ${[0.75,1,1.25,1.5,2].map(r=>`<button class="speed-btn${r===1?' active':''}" onclick="setSpeed(${r},this)">${r}x</button>`).join('')}
+           </div>`
         : `<div class="problem slot-empty">🎬 강의 영상 업로드 준비 중입니다 (${mmss(s.start)}~${mmss(s.end)} 구간)</div>`}
       ${slot('개념', s.개념)}
       ${slot('유사문제', s.유사문제)}
