@@ -268,12 +268,25 @@ const SID = new URLSearchParams(location.search).get('s') || '';
 // ── 과정별 자동 노출 ── 학생 코드 → 수강 과정(노션 명단 기준). 각 단원의 course 와 일치하는 것만 표시.
 //   · 코드 없음/미등록 = 전체 노출(기존과 동일)   · extra:[단원key] = 예외로 추가 노출(하이브리드)
 const STUDENTS = {
+  // 고1 · 공통수학2
   pj7q: { name:"박지휴", courses:["공통수학2"] },
   ks3m: { name:"김시은", courses:["공통수학2"] },
   id5v: { name:"이다연", courses:["공통수학2"] },
   hd8x: { name:"홍단",   courses:["공통수학2"] },
+  jhj7: { name:"전현준", courses:["공통수학2"] },
+  csh9: { name:"조성훈", courses:["공통수학2"] },
+  kmj4: { name:"권민재", courses:["공통수학2"] },
+  bsj2: { name:"박서준", courses:["공통수학2"] },
+  shs5: { name:"송혜솔", courses:["공통수학2"] },
+  lhy6: { name:"이하윤", courses:["공통수학2"] },
+  jhr8: { name:"전효린", courses:["공통수학2"] },
+  // 고2 · 미적분Ⅰ
   is6h: { name:"이수현", courses:["미적분Ⅰ"] },
-   ig7u: { name:"이건우", courses:["미적분Ⅰ"] },
+  ig7u: { name:"이건우", courses:["미적분Ⅰ"] },
+  mms2: { name:"문민석", courses:["미적분Ⅰ"] },
+  bsw3: { name:"박서우", courses:["미적분Ⅰ"] },
+  syj4: { name:"서예준", courses:["미적분Ⅰ"] },
+  jyy5: { name:"지영윤", courses:["미적분Ⅰ"] },
 };
 const _me = STUDENTS[SID] || null;
 function unitVisible(u) {
