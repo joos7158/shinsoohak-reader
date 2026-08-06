@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신수학 수학일기장</title>
+<style>
+  :root {
+    --bg:#faf7f2; --card:#ffffff; --ink:#2b2620; --sub:#8a8074;
+    --accent:#b5541c; --accent-soft:#f6e3d3; --line:#e8e0d4; --ok:#2e7d32;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI','Malgun Gothic',sans-serif; background:var(--bg); color:var(--ink); }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
+  header { text-align:center; padding:18px 0 6px; }
+  header h1 { font-size:1.45rem; letter-spacing:-0.5px; }
+  header p { color:var(--sub); font-size:0.85rem; margin-top:4px; }
+
+  .streak { display:flex; align-items:center; justify-content:center; gap:14px;
+            background:var(--card); border:1px solid var(--line); border-radius:14px;
+            padding:14px 18px; margin:16px 0; }
+  .streak .tree { font-size:2.2rem; }
+  .streak .info b { font-size:1.05rem; }
+  .streak .info small { display:block; color:var(--sub); margin-top:2px; }
+
+  .ep { background:var(--card); border:1px solid var(--line); border-radius:14px;
+        margin-bottom:14px; overflow:hidden; }
+  .ep-head { display:flex; justify-content:space-between; align-items:center;
+             padding:14px 16px; cursor:pointer; }
+  .ep-head .t b { font-size:1.0rem; }
+  .ep-head .t small { display:block; color:var(--sub); margin-top:2px; }
+  .ep-head .done { font-size:1.3rem; }
+  .ep-body { display:none; padding:0 16px 16px; }
+  .ep.open .ep-body { display:block; }
+  .player { position:relative; width:100%; padding-top:56.25%; border-radius:10px; overflow:hidden; background:#000; }
+  .player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  .pwbox { margin-top:14px; background:var(--accent-soft); border-radius:10px; padding:14px; }
+  .pwbox label { font-size:0.9rem; font-weight:600; }
+  .pwrow { display:flex; gap:8px; margin-top:8px; }
+  .pwrow input { flex:1; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:1rem; }
+  .pwrow button { background:var(--accent); color:#fff; border:0; border-radius:8px;
+                  padding:10px 16px; font-size:0.95rem; cursor:pointer; }
+  .pwmsg { margin-top:8px; font-size:0.9rem; min-height:1.2em; }
+  .pwmsg.ok { color:var(--ok); font-weight:700; }
+  .pwmsg.no { color:#c62828; }
+  .pwnote { margin-top:12px; color:var(--sub); font-size:0.85rem; }
+
+  footer { text-align:center; margin-top:26px; }
+  footer a { color:var(--sub); font-size:0.85rem; text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📔 신수학 수학일기장</h1>
+    <p>매일 한 편, 오늘의 복습. 영상 끝의 <b>오늘의 암호</b>를 입력하면 나무가 자라요.</p>
+  </header>
+
+  <div class="streak">
+    <div class="tree" id="tree">🌰</div>
+    <div class="info">
+      <b id="streakLine">시작 전</b>
+      <small id="levelLine">첫 암호를 맞히면 씨앗이 싹터요</small>
+    </div>
+  </div>
+
+  <div id="list"></div>
+
+  <footer><a id="readerLink" href="index.html">📚 유형 강의 리더로 가기</a></footer>
+</div>
+
+<script src="diary_data.js"></script>
+<script>
+// ── 열람 기록 비콘 — 리더(index.html)와 동일한 구글 폼 재사용 ──
+const LOG = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse",
+  코드: "entry.1580342508", 내용: "entry.1507722106"
+};
+const SID = new URLSearchParams(location.search).get('s') || '';
+const _logged = new Set();
+function logView(label) {
+  if (!SID || _logged.has(label)) return;
+  _logged.add(label);
+  const body = new URLSearchParams();
+  body.append(LOG.코드, SID);
+  body.append(LOG.내용, label);
+  fetch(LOG.action, { method:'POST', mode:'no-cors', body }).catch(()=>{});
+}
+if (SID) {
+  logView('(일기장 열기)');
+  document.getElementById('readerLink').href = 'index.html?s=' + encodeURIComponent(SID);
+}
+
+// ── 성장 기록 (이 기기 localStorage) ──
+const KEY = 'diary_done_' + (SID || 'anon');
+function loadDone() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } }
+function saveDone(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+
+const LEVELS = [
+  [0, '🌰', '씨앗'], [1, '🌱', '새싹'], [3, '🌿', '줄기'],
+  [7, '🌳', '나무'], [14, '🌲', '큰 나무'], [30, '🏞️', '숲']
+];
+function renderStreak() {
+  const done = loadDone();
+  const days = Object.keys(done).map(Number).sort((a,b)=>a-b);
+  const n = days.length;
+  let lv = LEVELS[0];
+  for (const L of LEVELS) if (n >= L[0]) lv = L;
+  document.getElementById('tree').textContent = lv[1];
+  // 연속 일수: 완료한 날짜(에피소드 date 기준)가 이어진 길이
+  let streak = 0;
+  const dates = days.map(d => (DIARY.find(e=>e.day===d)||{}).date).filter(Boolean).sort();
+  for (let i = dates.length - 1; i >= 0; i--) {
+    if (i === dates.length - 1) { streak = 1; continue; }
+    const cur = new Date(dates[i]), next = new Date(dates[i+1]);
+    if ((next - cur) / 86400000 <= 2) streak++; else break; // 하루 건너뜀(주말)까지 허용
+  }
+  document.getElementById('streakLine').textContent =
+    n === 0 ? '시작 전' : `${lv[2]} · 총 ${n}일 완료${streak >= 2 ? ` · 🔥${streak}일 연속` : ''}`;
+  const next = LEVELS.find(L => L[0] > n);
+  document.getElementById('levelLine').textContent =
+    next ? `${next[0] - n}일 더 하면 ${next[1]} ${next[2]}!` : '최고 단계! 숲을 지켜요';
+}
+
+// ── 에피소드 렌더 ──
+async function sha256(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function render() {
+  const done = loadDone();
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  [...DIARY].sort((a,b)=>b.day-a.day).forEach(ep => {
+    const el = document.createElement('div');
+    el.className = 'ep';
+    el.innerHTML = `
+      <div class="ep-head">
+        <div class="t"><b>${ep.day}일차 · ${ep.topic}</b><small>${ep.date}</small></div>
+        <div class="done">${done[ep.day] ? '✅' : '▶️'}</div>
+      </div>
+      <div class="ep-body">
+        <div class="player" data-yt="${ep.youtube}"></div>
+        ${ep.pw ? `
+        <div class="pwbox">
+          <label>🔑 오늘의 암호</label>
+          <div class="pwrow">
+            <input type="text" placeholder="영상 끝에서 알려준 암호" autocomplete="off">
+            <button>확인</button>
+          </div>
+          <div class="pwmsg"></div>
+        </div>` : `
+        <div class="pwnote">${done[ep.day] ? '✅ 완료한 날이에요.' : '이 회차는 암호 없이 시청만 하면 돼요.'}</div>`}
+      </div>`;
+    const head = el.querySelector('.ep-head');
+    head.addEventListener('click', () => {
+      const opening = !el.classList.contains('open');
+      document.querySelectorAll('.ep.open').forEach(o => o.classList.remove('open'));
+      if (opening) {
+        el.classList.add('open');
+        const p = el.querySelector('.player');
+        if (!p.querySelector('iframe')) {
+          p.innerHTML = `<iframe src="https://www.youtube.com/embed/${p.dataset.yt}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        }
+        logView(`일기장${ep.day}일차 열람`);
+      }
+    });
+    if (ep.pw) {
+      const input = el.querySelector('.pwrow input');
+      const btn = el.querySelector('.pwrow button');
+      const msg = el.querySelector('.pwmsg');
+      const submit = async () => {
+        const v = input.value.trim().toLowerCase().replace(/\s+/g,'');
+        if (!v) return;
+        if (await sha256(v) === ep.pw) {
+          msg.textContent = '⭕ 정답! 나무가 자랐어요';
+          msg.className = 'pwmsg ok';
+          logView(`일기장${ep.day}일차 암호⭕`);
+          const d = loadDone(); d[ep.day] = true; saveDone(d);
+          renderStreak();
+          el.querySelector('.done').textContent = '✅';
+        } else {
+          msg.textContent = '❌ 다시 한번 — 영상 마지막을 확인해봐';
+          msg.className = 'pwmsg no';
+          logView(`일기장${ep.day}일차 암호❌:${v.slice(0,20)}`);
+        }
+      };
+      btn.addEventListener('click', submit);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    }
+    list.appendChild(el);
+  });
+}
+render();
+renderStreak();
+</script>
+</body>
+</html>

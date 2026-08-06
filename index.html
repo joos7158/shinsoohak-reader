@@ -638,6 +638,11 @@ function renderHome() {
   app.innerHTML = `
     <h1>신수학 대표유형 강의</h1>
     <div class="sub">단원을 누르면 유형별 강의로 이동합니다 · 유형을 누르면 해당 구간만 재생</div>
+    <div class="card type-card" onclick="location.href='diary.html'+(SID?'?s='+encodeURIComponent(SID):'')" style="background:#f6e3d3">
+      <span class="num" style="min-width:0;padding:6px 12px">📔</span>
+      <span class="name">수학일기장 — 매일 한 편, 오늘의 복습</span>
+      <span class="info">오늘의 암호를 맞히면 나무가 자라요</span>
+    </div>
     ${body || '<div class="card slot-empty" style="text-align:center">배정된 강의가 아직 없습니다.</div>'}
     <div class="note">신수학 재원생 전용 · 문의는 원장님께</div>`;
 }
