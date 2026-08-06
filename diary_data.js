@@ -2,4 +2,5 @@
 // pw: 오늘의 암호의 SHA-256 hex (소문자·공백제거 후 해시). null이면 암호 코너 숨김.
 const DIARY = [
   { day: 1, date: "2026-08-06", topic: "도형의 방정식 복습 6제", youtube: "N4H-tYQL8CY", pw: null },
+  { day: 2, date: "2026-08-07", topic: "도형의 방정식 복습", youtube: "cDncrjbnbmQ", pw: "2c4930ad509e4bdce9b3914d6b8b6c8fc20e6c308505e78fe4b150123b35525b" },
 ];
