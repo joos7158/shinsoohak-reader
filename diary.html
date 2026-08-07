@@ -159,7 +159,7 @@
           <g id="acc7" style="display:none"><path d="M86,142 Q120,158 154,142" stroke="#E24B4A" stroke-width="8" fill="none" stroke-linecap="round"/><g class="bellg"><circle cx="120" cy="156" r="6.5" fill="#FAC775" stroke="#BA7517" stroke-width="1.4"/><path d="M120,156 v4" stroke="#BA7517" stroke-width="1.4"/></g></g>
           <g id="acc14" style="display:none"><path d="M158,36 l16,-9 l-3,16 Z" fill="#ED93B1"/><path d="M158,36 l-13,11 l16,3 Z" fill="#ED93B1"/><circle cx="158" cy="37" r="3.4" fill="#D4537E"/></g>
           <g id="acc21" style="display:none"><path d="M86,140 Q120,156 154,140" stroke="#378ADD" stroke-width="10" fill="none" stroke-linecap="round"/><rect x="130" y="146" width="11" height="24" rx="5" fill="#378ADD"/><path d="M132,166 v4 M136,166 v4 M140,166 v4" stroke="#B5D4F4" stroke-width="1.6"/></g>
-          <g id="acc30" style="display:none" transform="translate(0,14)"><path d="M101,30 L107,10 L115,24 L120,7 L125,24 L133,10 L139,30 Q120,36 101,30 Z" fill="#FAC775" stroke="#BA7517" stroke-width="1.6" stroke-linejoin="round"/><circle cx="107" cy="10" r="2.6" fill="#EF9F27"/><circle cx="120" cy="7" r="2.6" fill="#EF9F27"/><circle cx="133" cy="10" r="2.6" fill="#EF9F27"/></g>
+          <g id="acc30" style="display:none" transform="translate(0,19)"><g class="popt"><path d="M101,30 L107,10 L115,24 L120,7 L125,24 L133,10 L139,30 Q120,36 101,30 Z" fill="#FAC775" stroke="#BA7517" stroke-width="1.6" stroke-linejoin="round"/><circle cx="107" cy="10" r="2.6" fill="#EF9F27"/><circle cx="120" cy="7" r="2.6" fill="#EF9F27"/><circle cx="133" cy="10" r="2.6" fill="#EF9F27"/></g></g>
           <g id="aura" style="display:none" fill="#FAC775">
             <path class="tw"  transform="translate(58,40)"  d="M0,-7 L1.8,-1.8 L7,0 L1.8,1.8 L0,7 L-1.8,1.8 L-7,0 L-1.8,-1.8 Z"/>
             <path class="tw2" transform="translate(184,58)" d="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"/>
@@ -182,22 +182,22 @@
         </g>
         <path d="M260,224 q9,3 13,-2" stroke="#7F77DD" stroke-width="1.8" fill="none" stroke-linecap="round"/>
       </g>
-      <g id="item5" style="display:none" transform="translate(292,218)">
+      <g id="item5" style="display:none" transform="translate(292,218)"><g class="popt">
         <ellipse cx="0" cy="0" rx="17" ry="6" fill="#FFFFFF" stroke="#C9B896" stroke-width="1.5"/>
         <path d="M-9,-6 Q0,-13 9,-6 Q0,1 -9,-6 Z" fill="#5DCAA5"/>
         <path d="M8,-6 L15,-11 L15,-1 Z" fill="#1D9E75"/>
         <circle cx="-5" cy="-7" r="1.2" fill="#04342C"/>
-      </g>
-      <g id="item9" style="display:none" transform="translate(330,222)">
+      </g></g>
+      <g id="item9" style="display:none" transform="translate(330,222)"><g class="popt">
         <circle cx="0" cy="-18" r="8.5" fill="#97C459"/>
         <circle cx="-8" cy="-10" r="6.5" fill="#97C459"/>
         <circle cx="8" cy="-10" r="6.5" fill="#97C459"/>
         <path d="M-11,-4 h22 l-4,15 h-14 Z" fill="#D85A30"/>
-      </g>
-      <g id="item12" style="display:none" transform="translate(44,52)">
+      </g></g>
+      <g id="item12" style="display:none" transform="translate(44,52)"><g class="popt">
         <rect x="-18" y="-22" width="36" height="44" rx="4" fill="#FFF8EC" stroke="#BA7517" stroke-width="3"/>
         <path d="M0,8 C-11,-3 -4,-13 0,-6 C4,-13 11,-3 0,8 Z" fill="#ED93B1"/>
-      </g>
+      </g></g>
       <g id="item25" style="display:none">
         <rect x="16" y="120" width="52" height="6" rx="3" fill="#C9A87C"/>
         <rect x="26" y="99" width="26" height="21" rx="3" fill="#D4537E"/>
@@ -282,7 +282,12 @@ const ITEMS = [
 let _preview = null;   // 원장 미리보기 일수 (null이면 실제 기록)
 let _shownN = null;    // 직전 렌더의 완료 일수 — 증가분만 팝 연출
 
-function _pop(g) { if (!g) return; g.classList.remove('newitem'); void g.getBBox(); g.classList.add('newitem'); }
+function _pop(g) {
+  if (!g) return;
+  // transform 속성이 있는 그룹은 CSS 애니메이션이 위치를 덮어쓰므로 내부 .popt 래퍼에 건다
+  const t = g.querySelector(':scope > .popt') || g;
+  t.classList.remove('newitem'); void t.getBBox(); t.classList.add('newitem');
+}
 function catJump() { const j = document.getElementById('jumper'); j.classList.remove('catjump'); void j.getBBox(); j.classList.add('catjump'); }
 
 function renderRoom() {
