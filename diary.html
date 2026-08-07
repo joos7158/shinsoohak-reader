@@ -51,6 +51,17 @@
   .tw{animation:twinkle 1.6s infinite}
   .tw2{animation:twinkle 1.6s .5s infinite}
   .tw3{animation:twinkle 1.6s 1s infinite}
+  @keyframes catjump{0%,100%{transform:translateY(0)}30%{transform:translateY(-14px)}55%{transform:translateY(0)}70%{transform:translateY(-6px)}}
+  .catjump{animation:catjump .8s ease}
+  @keyframes bellswing{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  .bellg{animation:bellswing 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:top center}
+  @keyframes yarnwig{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+  .yarn{animation:yarnwig 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+  @keyframes notefloat{0%{opacity:0;transform:translateY(4px)}25%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+  .note1{animation:notefloat 3s ease-out infinite;transform-box:fill-box}
+  .note2{animation:notefloat 3s 1.5s ease-out infinite;transform-box:fill-box}
+  @keyframes sunbreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .sun{animation:sunbreathe 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 
   .ep { background:var(--card); border:1px solid var(--line); border-radius:14px;
         margin-bottom:14px; overflow:hidden; }
@@ -98,7 +109,7 @@
       <g>
         <rect x="252" y="26" width="74" height="56" rx="6" fill="#CDE8F5" stroke="#C9B896" stroke-width="3"/>
         <path d="M289,26 v56 M252,54 h74" stroke="#C9B896" stroke-width="2.5"/>
-        <circle cx="272" cy="42" r="8" fill="#FAC775"/>
+        <circle class="sun" cx="272" cy="42" r="8" fill="#FAC775"/>
       </g>
       <g id="item18" style="display:none">
         <ellipse cx="172" cy="226" rx="142" ry="17" fill="#EADFF1"/>
@@ -110,6 +121,7 @@
         <ellipse cx="130" cy="222" rx="43" ry="9" fill="#F9D3DD"/>
       </g>
       <g transform="translate(55,88) scale(0.6)">
+        <g id="jumper">
         <g class="bobber">
           <g class="tail"><path d="M64,176 C26,180 20,146 42,136 C30,152 40,168 68,162 Z" fill="#E8975A"/>
             <g id="fur-tail" style="display:none">
@@ -144,7 +156,7 @@
           <ellipse id="bl2" cx="160" cy="108" rx="8" ry="5" fill="#F9A8A8" opacity=".75"/>
           <path d="M54,96 L76,99 M54,108 L76,105" stroke="#E5CDB6" stroke-width="1.6" stroke-linecap="round"/>
           <path d="M186,96 L164,99 M186,108 L164,105" stroke="#E5CDB6" stroke-width="1.6" stroke-linecap="round"/>
-          <g id="acc7" style="display:none"><path d="M86,142 Q120,158 154,142" stroke="#E24B4A" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="120" cy="156" r="6.5" fill="#FAC775" stroke="#BA7517" stroke-width="1.4"/><path d="M120,156 v4" stroke="#BA7517" stroke-width="1.4"/></g>
+          <g id="acc7" style="display:none"><path d="M86,142 Q120,158 154,142" stroke="#E24B4A" stroke-width="8" fill="none" stroke-linecap="round"/><g class="bellg"><circle cx="120" cy="156" r="6.5" fill="#FAC775" stroke="#BA7517" stroke-width="1.4"/><path d="M120,156 v4" stroke="#BA7517" stroke-width="1.4"/></g></g>
           <g id="acc14" style="display:none"><path d="M158,36 l16,-9 l-3,16 Z" fill="#ED93B1"/><path d="M158,36 l-13,11 l16,3 Z" fill="#ED93B1"/><circle cx="158" cy="37" r="3.4" fill="#D4537E"/></g>
           <g id="acc21" style="display:none"><path d="M86,140 Q120,156 154,140" stroke="#378ADD" stroke-width="10" fill="none" stroke-linecap="round"/><rect x="130" y="146" width="11" height="24" rx="5" fill="#378ADD"/><path d="M132,166 v4 M136,166 v4 M140,166 v4" stroke="#B5D4F4" stroke-width="1.6"/></g>
           <g id="acc30" style="display:none" transform="translate(0,14)"><path d="M101,30 L107,10 L115,24 L120,7 L125,24 L133,10 L139,30 Q120,36 101,30 Z" fill="#FAC775" stroke="#BA7517" stroke-width="1.6" stroke-linejoin="round"/><circle cx="107" cy="10" r="2.6" fill="#EF9F27"/><circle cx="120" cy="7" r="2.6" fill="#EF9F27"/><circle cx="133" cy="10" r="2.6" fill="#EF9F27"/></g>
@@ -157,14 +169,17 @@
           <ellipse cx="146" cy="202" rx="17" ry="11" fill="#F7B980"/>
           <path d="M90,197 v8 M98,197 v8 M142,197 v8 M150,197 v8" stroke="#E8975A" stroke-width="1.8" stroke-linecap="round"/>
         </g>
+        </g>
       </g>
       <g id="item1" style="display:none">
         <ellipse cx="208" cy="224" rx="15" ry="6.5" fill="#85B7EB"/>
         <ellipse cx="208" cy="222" rx="10" ry="3.8" fill="#FFFFFF"/>
       </g>
       <g id="item3" style="display:none">
+        <g class="yarn">
         <circle cx="250" cy="218" r="11" fill="#AFA9EC"/>
         <path d="M241,215 a11 11 0 0 1 18,2 M242,222 a11 11 0 0 0 16,-1" stroke="#7F77DD" stroke-width="1.8" fill="none"/>
+        </g>
         <path d="M260,224 q9,3 13,-2" stroke="#7F77DD" stroke-width="1.8" fill="none" stroke-linecap="round"/>
       </g>
       <g id="item5" style="display:none" transform="translate(292,218)">
@@ -189,6 +204,8 @@
         <rect x="26" y="99" width="26" height="6" rx="3" fill="#B23A63"/>
         <circle cx="60" cy="94" r="3" fill="#72243E"/>
         <path d="M63,94 V81 q6,2 0,6" stroke="#72243E" stroke-width="1.8" fill="none"/>
+        <g class="note1"><circle cx="76" cy="88" r="2.6" fill="#D4537E"/><path d="M78.5,88 V77 q5,2 0,5" stroke="#D4537E" stroke-width="1.6" fill="none"/></g>
+        <g class="note2"><circle cx="88" cy="94" r="2.2" fill="#993556"/><path d="M90,94 V85 q4,1.6 0,4" stroke="#993556" stroke-width="1.4" fill="none"/></g>
       </g>
       <g id="hearts" style="display:none">
         <path class="heart" d="M176,86 c-6,-7 -1,-13 3,-8 c4,-5 9,1 3,8 l-3,3 Z" fill="#ED93B1"/>
@@ -263,6 +280,10 @@ const ITEMS = [
 ];
 
 let _preview = null;   // 원장 미리보기 일수 (null이면 실제 기록)
+let _shownN = null;    // 직전 렌더의 완료 일수 — 증가분만 팝 연출
+
+function _pop(g) { if (!g) return; g.classList.remove('newitem'); void g.getBBox(); g.classList.add('newitem'); }
+function catJump() { const j = document.getElementById('jumper'); j.classList.remove('catjump'); void j.getBBox(); j.classList.add('catjump'); }
 
 function renderRoom() {
   const done = loadDone();
@@ -278,8 +299,19 @@ function renderRoom() {
   document.getElementById('streakLine').textContent = (_preview !== null)
     ? `미리보기 ${n}일`
     : `완료 ${n}일${streak >= 2 ? ` · 🔥${streak}일 연속` : ''}`;
+  const prev = _shownN;
   for (const [d, , id] of ITEMS)
     document.getElementById(id).style.display = (n >= d) ? '' : 'none';
+  // 새로 생긴 것들 팝 + 고양이 점프 (첫 렌더는 조용히)
+  if (prev !== null && n > prev) {
+    ITEMS.filter(([d]) => d > prev && d <= n)
+         .forEach(([, , id]) => _pop(document.getElementById(id)));
+    [[7,'fur-tail'],[12,'fur-back'],[21,'fur-chest'],[30,'aura']]
+      .filter(([d]) => d > prev && d <= n)
+      .forEach(([, id]) => _pop(document.getElementById(id)));
+    catJump();
+  }
+  _shownN = n;
   // 고양이 성장 단계 — 크기 대신 생김새가 변한다
   const spark = n >= 5;
   ['hl1','hl2'].forEach(id => document.getElementById(id).setAttribute('r', spark ? '2.7' : '1.9'));
@@ -312,10 +344,7 @@ function markDone(day) {
   d[day] = true; saveDone(d);
   renderRoom(); popHearts();
   const won = ITEMS.filter(it => it[0] > nBefore && it[0] <= nBefore + 1);
-  if (won.length) {
-    won.forEach(it => { const g = document.getElementById(it[2]); if (g) g.classList.add('newitem'); });
-    giftFx(won.map(it => it[1]));
-  }
+  if (won.length) giftFx(won.map(it => it[1]));
   return true;
 }
 
