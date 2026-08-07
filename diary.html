@@ -399,7 +399,7 @@ function render() {
         el.classList.add('open');
         const p = el.querySelector('.player');
         if (!p.querySelector('iframe')) {
-          p.innerHTML = `<iframe src="https://www.youtube.com/embed/${p.dataset.yt}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          p.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.dataset.yt}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         }
         logView(`일기장${ep.day}일차 열람`);
         if (!ep.pw && markDone(ep.day)) el.querySelector('.done').textContent = '✅';

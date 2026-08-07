@@ -678,7 +678,7 @@ function renderDetail(U, i) {
         : `<div class="problem slot-empty">${V.textbook} ${s.쪽}쪽 · ${s.문항}${isConcept?'':'번'} (교재를 펴 놓고 들으세요)</div>`}
       ${V.youtube
         ? `<iframe id="ytplayer" class="player" allowfullscreen
-             src="https://www.youtube.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0&enablejsapi=1"></iframe>
+             src="https://www.youtube-nocookie.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0&enablejsapi=1"></iframe>
            <div class="speed-row"><span class="speed-label">배속</span>
              ${[0.75,1,1.25,1.5,2].map(r=>`<button class="speed-btn${r===1?' active':''}" onclick="setSpeed(${r},this)">${r}x</button>`).join('')}
            </div>`
