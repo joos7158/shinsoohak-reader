@@ -595,9 +595,10 @@ function unitVisible(u) {
   return (_me.courses || []).includes(u.course);          // 내 과정과 일치
 }
 
+const IS_ADMIN = ['wonjang'].includes(SID);   // 원장 전용 — 열람 기록 남기지 않음
 const _logged = new Set();
 function logView(label) {
-  if (!SID || _logged.has(label)) return;   // 코드 없으면 기록 안 함 / 같은 세션 중복 방지
+  if (!SID || IS_ADMIN || _logged.has(label)) return;   // 코드 없거나 원장이면 기록 안 함 / 세션 중복 방지
   _logged.add(label);
   const body = new URLSearchParams();
   body.append(LOG.코드, SID);

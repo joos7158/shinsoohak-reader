@@ -162,6 +162,15 @@
     </svg>
     <div class="nextline" id="nextLine">첫 완료를 하면 우유 그릇이 도착해요</div>
     <div class="chips" id="chips"></div>
+    <div id="adminbox" style="display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
+      <div style="font-size:0.85rem;color:var(--sub);margin-bottom:6px">
+        🔑 원장 모드 — 열람 기록이 남지 않습니다. 슬라이더로 보상 진행을 미리 볼 수 있어요.
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input type="range" id="pvslider" min="0" max="30" step="1" value="0" autocomplete="off" style="flex:1">
+        <span id="pvlabel" style="font-size:0.85rem;min-width:74px;text-align:right">실제 기록</span>
+      </div>
+    </div>
   </div>
 
   <div id="list"></div>
@@ -177,9 +186,12 @@ const LOG = {
   코드: "entry.1580342508", 내용: "entry.1507722106"
 };
 const SID = new URLSearchParams(location.search).get('s') || '';
+// 원장 전용 코드 — 열람 기록을 남기지 않고(학생 통계 오염 방지) 미리보기 도구를 띄운다.
+const ADMINS = ['wonjang'];
+const IS_ADMIN = ADMINS.includes(SID);
 const _logged = new Set();
 function logView(label) {
-  if (!SID || _logged.has(label)) return;
+  if (!SID || IS_ADMIN || _logged.has(label)) return;
   _logged.add(label);
   const body = new URLSearchParams();
   body.append(LOG.코드, SID);
@@ -212,10 +224,12 @@ const ITEMS = [
   [30, '황금 왕관',   'acc30'],
 ];
 
+let _preview = null;   // 원장 미리보기 일수 (null이면 실제 기록)
+
 function renderRoom() {
   const done = loadDone();
   const days = Object.keys(done).map(Number);
-  const n = days.length;
+  const n = (_preview === null) ? days.length : _preview;
   // 연속 일수: 완료한 에피소드의 date가 이어진 길이(주말 하루 건너뜀 허용)
   let streak = 0;
   const dates = days.map(d => (DIARY.find(e=>e.day===d)||{}).date).filter(Boolean).sort();
@@ -223,8 +237,9 @@ function renderRoom() {
     if (i === dates.length - 1) { streak = 1; continue; }
     if ((new Date(dates[i+1]) - new Date(dates[i])) / 86400000 <= 2) streak++; else break;
   }
-  document.getElementById('streakLine').textContent =
-    `완료 ${n}일${streak >= 2 ? ` · 🔥${streak}일 연속` : ''}`;
+  document.getElementById('streakLine').textContent = (_preview !== null)
+    ? `미리보기 ${n}일`
+    : `완료 ${n}일${streak >= 2 ? ` · 🔥${streak}일 연속` : ''}`;
   for (const [d, , id] of ITEMS)
     document.getElementById(id).style.display = (n >= d) ? '' : 'none';
   const next = ITEMS.find(i => i[0] > n);
@@ -322,6 +337,20 @@ function render() {
 }
 render();
 renderRoom();
+
+if (IS_ADMIN) {
+  const box = document.getElementById('adminbox');
+  const sl = document.getElementById('pvslider');
+  const lb = document.getElementById('pvlabel');
+  box.style.display = '';
+  sl.value = Object.keys(loadDone()).length;
+  lb.textContent = '실제 기록';
+  sl.addEventListener('input', () => {
+    _preview = +sl.value;
+    lb.textContent = `${_preview}일 시점`;
+    renderRoom();
+  });
+}
 </script>
 </body>
 </html>
