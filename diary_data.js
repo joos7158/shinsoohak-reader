@@ -4,4 +4,5 @@ const DIARY = [
   { day: 1, date: "2026-08-06", topic: "도형의 방정식 복습 6제", youtube: "N4H-tYQL8CY", pw: null },
   { day: 2, date: "2026-08-07", topic: "도형의 방정식 복습", youtube: "cDncrjbnbmQ", pw: "2c4930ad509e4bdce9b3914d6b8b6c8fc20e6c308505e78fe4b150123b35525b" },
   { day: 3, date: "2026-08-08", topic: "도형의 방정식 복습 — 직선족·넓이 이등분", youtube: "yK3I9VaPT8k", pw: "51d24d240d60bc95cc9bfae3146c573382d5b7268032030d9f0691ef25778d43" },
+  { day: 4, date: "2026-08-10", topic: "도형의 방정식 복습 — 수직조건·내접원", youtube: "N2W_osAVFjs", pw: null },
 ];
