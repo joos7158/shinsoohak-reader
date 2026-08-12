@@ -6,4 +6,5 @@ const DIARY = [
   { day: 3, date: "2026-08-08", topic: "도형의 방정식 복습 — 직선족·넓이 이등분", youtube: "yK3I9VaPT8k", pw: "51d24d240d60bc95cc9bfae3146c573382d5b7268032030d9f0691ef25778d43" },
   { day: 4, date: "2026-08-10", topic: "도형의 방정식 복습 — 수직조건·내접원", youtube: "N2W_osAVFjs", pw: "c11d77021b21f5b26b22bb8feae99425fb61eb06de4edf619788b2f01aa034a9" },
   { day: 5, date: "2026-08-11", topic: "도형의 방정식 복습 — 파푸스 중선정리·외심", youtube: "cVeBOwJxpo0", pw: "11fe7c76025a236aaccf9a633262826e48866cc9661fbacfbfd22339a57a9a58" },
+  { day: 6, date: "2026-08-13", topic: "도형의 방정식 복습 — 넓이 이등분·대칭이동", youtube: "8F-qPNi5O2g", pw: "7659575fd72a872b8d0597a795f362a5f549d3dbfe3895be707aa0418a9bfce5" },
 ];
