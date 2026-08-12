@@ -92,6 +92,12 @@
   .pwsend b { color:#e65100; }
   .pwsend small { display:block; margin-top:4px; color:#8d6e63; font-size:0.85em; }
   .pwnote { margin-top:12px; color:var(--sub); font-size:0.85rem; }
+  /* 그날만 있는 숙제·도전 안내(diary_data 의 note). 암호와 달리 카톡으로만 잡히는 채널이라
+     영상 밖에도 한 번 더 적어둔다(2026-08-12 36번 ㄷ 도전). */
+  .epnote { margin-top:12px; padding:10px 12px; border-radius:10px;
+            background:#f1f8e9; border:1px solid #c5e1a5; color:#33691e;
+            font-size:0.92rem; line-height:1.5; }
+  .epnote b { color:#2e7d32; }
 
   footer { text-align:center; margin-top:26px; }
   footer a { color:var(--sub); font-size:0.85rem; text-decoration:none; }
@@ -387,6 +393,7 @@ function render() {
       </div>
       <div class="ep-body">
         <div class="player" data-yt="${ep.youtube}"></div>
+        ${ep.note ? `<div class="epnote">${ep.note}</div>` : ''}
         ${ep.pw ? `
         <div class="pwbox">
           <label>🔑 오늘의 암호</label>
