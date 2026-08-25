@@ -50,6 +50,12 @@
   .askbox { margin-top:10px; display:none; }
   .askbox textarea { width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-family:inherit; font-size:.92rem; resize:vertical; min-height:56px; }
   .askbox .hint { color:#999; font-size:.78rem; margin:4px 0 6px; line-height:1.55; }
+  /* 💬 선생님 답 (2026-08-25) — 질문이 투고함으로 끝나지 않게. 답이 오면 카드 안에 남는다. */
+  .reply { margin-top:12px; border-left:3px solid var(--accent); background:#f3f8f4; border-radius:0 10px 10px 0; padding:11px 14px; }
+  .reply + .reply { margin-top:8px; }
+  .reply .rh { font-size:.8rem; font-weight:bold; color:var(--accent); margin-bottom:5px; }
+  .reply .rb { font-size:.93rem; line-height:1.65; white-space:pre-wrap; word-break:break-word; }
+  .reply .rt { font-size:.74rem; color:#8aa08f; margin-top:6px; }
   .tool { background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 15px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
   .tool .nm { font-size:.93rem; }
   .tool .ck { color:var(--accent); font-weight:bold; font-size:.85rem; white-space:nowrap; }
@@ -235,14 +241,24 @@ function card(o,i){
     : `<div class="sub" style="margin:6px 0 2px">🔁 같은 유형 다른 문제는 준비 중이에요 — 우선 강의로 복습해 보세요.</div>
     ${원문}`}
     ${lecBtn}
-    ${actsHtml(i)}
+    ${actsHtml(i, o)}
   </div>`;
 }
 
 // 카드 하단 공통 — 고해소 버튼. 모든 칸(오늘·복습대기)에 똑같이 붙는다.
-function actsHtml(i){
-  return `<div class="acts">
-      <button class="ask" onclick="askOpen('${i}')">🙋 이거 모르겠어요</button>
+function actsHtml(i, o){
+  // 💬 선생님 답 — 2026-08-25. 아이가 물은 뒤 답이 없으면 그 창구는 두 번째부터 안 쓴다.
+  //   답은 카드 **안에** 남는다(따로 알림을 보내지 않는다 — 아이가 열었을 때 거기 있으면 된다).
+  //   여러 번 주고받을 수 있게 배열로 받는다.
+  const rp = (o && o.답변) || [];
+  const reply = rp.map(r => `<div class="reply">
+      <div class="rh">💬 선생님 답</div>
+      <div class="rb">${esc(r.답||'')}</div>
+      ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
+    </div>`).join('');
+  return `${reply}
+    <div class="acts">
+      <button class="ask" onclick="askOpen('${i}')">${rp.length?'🙋 아직 모르겠어요':'🙋 이거 모르겠어요'}</button>
     </div>
     <div class="askbox" id="ab_${i}">
       <div class="hint">그냥 보내도 돼요 — 어느 문제인지는 선생님이 이미 알아요.<br>
@@ -267,7 +283,7 @@ function waitCard(o,i){
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
     : `<div class="sub">문제를 준비 중이에요 — 강의로 먼저 복습해 볼까요?</div>`}
     ${lecBtn}
-    ${actsHtml(i)}
+    ${actsHtml(i, o)}
   </div>`;
 }
 
