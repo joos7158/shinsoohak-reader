@@ -17,7 +17,9 @@
   .dash .kpi { font-size:.9rem; } .dash .kpi b { color:var(--accent); font-size:1.05rem; }
   .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
   .badge { background:var(--accent); color:#fff; border-radius:6px; padding:2px 10px; font-size:.78rem; font-weight:bold; }
-  .problem { font-size:1.03rem; line-height:1.8; margin:10px 0 12px; }
+  /* overflow-x — 폰(375px)에서 긴 한 줄 수식이 잘려 조건이 사라지는 것을 막는다.
+     현재 문항은 전부 줄바꿈되지만(08-25 실측 잘림 0건) 더 긴 식이 올 수 있다. */
+  .problem { font-size:1.03rem; line-height:1.8; margin:10px 0 12px; overflow-x:auto; }
   .choices { display:flex; flex-direction:column; gap:4px; margin:6px 0 12px; font-size:.98rem; }
   .ans-row { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0; }
   .pill { border-radius:8px; padding:5px 12px; font-size:.85rem; font-weight:bold; }
@@ -30,6 +32,28 @@
   .nav { margin-bottom:12px; } .nav a { color:var(--accent); font-weight:bold; text-decoration:none; font-size:.88rem; margin-right:14px; }
   .note { color:#888; font-size:.8rem; margin-top:16px; line-height:1.6; }
   .empty { color:#888; padding:24px 0; text-align:center; }
+  /* ── 2026-08-25: 세 칸(오늘 / 복습 대기 / 도구함) + 고해소 버튼 ── */
+  .sect { margin:22px 0 8px; font-size:1.02rem; font-weight:bold; display:flex; align-items:center; gap:8px; }
+  .sect .cnt { font-size:.8rem; color:#888; font-weight:normal; }
+  .sect .why { font-size:.78rem; color:#999; font-weight:normal; }
+  .pick { border:1px solid var(--line); border-radius:8px; padding:9px 13px; cursor:pointer; background:#fff; text-align:left; font-size:.98rem; font-family:inherit; color:inherit; }
+  .pick:hover { border-color:var(--accent); }
+  .pick.ok { background:#e7f4ea; border-color:var(--accent); font-weight:bold; }
+  .pick.no { background:#fdeaea; border-color:#f3c0c0; }
+  .pick[disabled] { cursor:default; opacity:.75; }
+  .verdict { margin:8px 0 2px; font-size:.92rem; font-weight:bold; }
+  .verdict.ok { color:var(--accent); } .verdict.no { color:var(--red); }
+  .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); }
+  button.ask { background:#fff; color:#7a5c00; border:1px solid #e0cf8a; border-radius:8px; padding:9px 14px; font-weight:bold; font-size:.88rem; cursor:pointer; font-family:inherit; }
+  button.ask:hover { background:#fffbe9; }
+  button.ask.sent { background:#fff8e1; color:#8a6d00; border-color:#e6d9a3; cursor:default; }
+  .askbox { margin-top:10px; display:none; }
+  .askbox textarea { width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-family:inherit; font-size:.92rem; resize:vertical; min-height:56px; }
+  .askbox .hint { color:#999; font-size:.78rem; margin:4px 0 6px; line-height:1.55; }
+  .tool { background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 15px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .tool .nm { font-size:.93rem; }
+  .tool .ck { color:var(--accent); font-weight:bold; font-size:.85rem; white-space:nowrap; }
+  .due { font-size:.78rem; color:#a0761d; background:#fdf6e3; border:1px solid #eadfb8; border-radius:6px; padding:2px 8px; }
 </style>
 </head>
 <body>
@@ -51,6 +75,17 @@ const _logged = new Set();
 function logView(label){ if(!SID||_logged.has(label))return; _logged.add(label);
   const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
   fetch(LOG.action,{method:'POST',mode:'no-cors',body:b}).catch(()=>{}); }
+// 🔴 2026-08-25 — 아이 행동(질문·정복)도 **같은 폼**으로 남긴다. 이 페이지는 GitHub Pages(정적)라
+//   서버가 없다. 열람 로그가 이미 이 폼을 쓰고 있으니 새 인프라를 만들지 않는다.
+//   logView 와 달리 중복 차단을 하지 않는다 — 같은 문항을 두 번 물으면 두 번 다 원장에게 가야 한다.
+function logAct(label){ if(!SID) return;
+  const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
+  fetch(LOG.action,{method:'POST',mode:'no-cors',body:b}).catch(()=>{}); }
+// 아이가 이 기기에서 한 것(맞힘·질문)을 기억해 새로고침해도 UI 가 유지되게. **정본은 아니다** —
+// 정복 판정은 빌더가 척추(실제 시험 결과)로 계산한다. 기기를 바꾸면 이 표시만 사라진다.
+const MEM = 'me_'+SID;
+function memGet(){ try { return JSON.parse(localStorage.getItem(MEM)||'{}'); } catch(e){ return {}; } }
+function memSet(k,v){ try { const m=memGet(); m[k]=v; localStorage.setItem(MEM,JSON.stringify(m)); } catch(e){} }
 
 const app = document.getElementById('app');
 // 🔴🔴 2026-08-13 — 여기가 String() 캐스트뿐이라 **아무것도 이스케이프하지 않았다.**
@@ -75,20 +110,38 @@ function render(){
       <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>`;
     return;
   }
-  const list = D.오답||[];
+  // 🔴 2026-08-25 세 칸 구성 (원장: "누적된 걸 주기적으로 확인하는 형태. 확실하게 이해한 건
+  //   도구함 같은 곳으로 옮기고, 그래도 나중에 다시 확인 가능하게")
+  //   ① 오늘 틀린 것 ② 복습 대기(예전에 틀리고 아직 정복 못 한 것 — 빌더가 다시 물을 때가 된
+  //   것만 3개 올려준다) ③ 내 도구함(정복 완료, 접혀 있지만 언제든 다시 열림).
+  const list = D.오답||[], wait = D.복습대기||[], box = D.도구함||[];
   app.innerHTML = `
     <div class="nav">${rlink('▶ 유형별 강의')}<a href="#">🔄 새로고침</a></div>
     <h1>📕 나의 오답노트</h1>
-    <div class="sub">틀린 문제를 유사문제로 다시 풀고, 막히면 그 유형 강의를 바로 볼 수 있어요.</div>
+    <div class="sub">틀린 문제를 유사문제로 다시 풀고, 막히면 그 유형 강의를 바로 볼 수 있어요.<br>
+      모르겠으면 <b>언제든</b> 아래 버튼으로 물어보세요 — 다른 친구에게는 안 보여요.</div>
     <div class="dash">
       <div class="kpi">진도 <b>${esc(D.진도)}</b></div>
-      <div class="kpi">복습할 오답 <b>${list.length}개</b></div>
-      <div class="kpi">약점 유형 <b>${new Set(list.map(o=>o.유형)).size}종</b></div>
+      <div class="kpi">오늘 <b>${list.length}개</b></div>
+      <div class="kpi">복습 대기 <b>${wait.length}개</b></div>
+      <div class="kpi">🧰 도구함 <b>${box.length}개</b></div>
     </div>
-    ${list.length? list.map((o,i)=>card(o,i)).join('')
-      : `<div class="card" style="text-align:center"><div style="font-size:1.1rem;font-weight:bold;color:var(--accent)">지금 남은 오답이 없어요</div><div class="sub" style="margin-top:6px">다시 풀 게 없습니다. 아래 강의로 복습만 해두면 됩니다.</div></div>`}
-    ${(D.복습&&D.복습.length)? `<h1 style="font-size:1.05rem;margin-top:18px">📺 시험 대비 복습 강의</h1>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
-    <div class="note">신수학 재원생 전용 · 오늘 일일테스트 채점 반영 · 틀린 문제는 유사문제로 다시 풀고 강의로 복습하세요</div>`;
+
+    <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
+    ${list.length? list.map((o,i)=>card(o,'t'+i)).join('')
+      : `<div class="card" style="text-align:center"><div style="font-size:1.05rem;font-weight:bold;color:var(--accent)">오늘은 틀린 게 없어요</div><div class="sub" style="margin-top:6px">아래 복습 대기만 한 번 확인해 볼까요?</div></div>`}
+
+    ${wait.length? `<div class="sect">🔁 복습 대기 <span class="cnt">${wait.length}개</span>
+      <span class="why">· 예전에 틀린 유형이에요. 다시 볼 때가 됐어요</span></div>
+      ${wait.map((o,i)=>waitCard(o,'w'+i)).join('')}`:''}
+
+    ${box.length? `<div class="sect">🧰 내 도구함 <span class="cnt">${box.length}개</span>
+      <span class="why">· 세 번 연속 맞힌 유형이에요. 언제든 다시 열어볼 수 있어요</span></div>
+      ${box.map(o=>boxCard(o)).join('')}`:''}
+
+    ${(D.복습&&D.복습.length)? `<div class="sect">📺 시험 대비 복습 강의</div>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
+    <div class="note">신수학 재원생 전용 · 이 페이지는 <b>나만</b> 볼 수 있어요.<br>
+      질문한 건 선생님만 봅니다 — 틀린 걸 부끄러워하지 않아도 돼요.</div>`;
   if (window.renderMathInElement) renderMathInElement(app, {
     delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
 }
@@ -99,6 +152,61 @@ function reviewCard(r){
   return `<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 18px">
     <span class="badge" style="background:#eef2f7;color:#2b4a9b">${esc(r.유형)}</span>${lec}</div>`;
 }
+// ── 유사문제 자가채점 + 고해소 버튼 (2026-08-25) ──────────────────
+//  🔴 왜 자가채점인가: 원장 지시대로 "이해했어요"만 눌러서 도구함으로 보내면 안 된다.
+//     실측(척추 247세션): 틀린 뒤 다시 만났을 때 정답률이 63~77% — **넷 중 하나는 또 틀린다**.
+//     그래서 유사문제를 **맞혀야** 정복 신호를 보낸다. 틀리면 혼내지 않고 조용히 강의로 안내한다.
+const MARKS = ['①','②','③','④','⑤'];
+function _answerMark(ans){                      // 정답 문자열에서 ①~⑤ 를 뽑는다. 없으면 null(=채점 불가)
+  const m = String(ans||'').match(/[①②③④⑤]/);
+  return m ? m[0] : null;
+}
+function pickHtml(arr, ans, id){
+  const mark = _answerMark(ans);
+  if (!mark) return choicesHtml(arr);           // 주관식·기호 없는 정답은 예전처럼 보여주기만
+  return `<div class="choices" id="pk_${id}">${(arr||[]).map((c,k)=>
+    `<button class="pick" data-m="${MARKS[k]||''}" onclick="pickAns('${id}','${MARKS[k]||''}','${mark}',this)">${esc(c)}</button>`).join('')}</div>
+    <div class="verdict" id="vd_${id}"></div>`;
+}
+function pickAns(id, chosen, mark, el){
+  const box = document.getElementById('pk_'+id), vd = document.getElementById('vd_'+id);
+  if (!box || box.dataset.done) return;
+  box.dataset.done = '1';
+  const ok = chosen === mark;
+  [...box.children].forEach(b=>{ b.disabled = true;
+    if (b.dataset.m === mark) b.classList.add('ok');
+    else if (b === el) b.classList.add('no'); });
+  const t = (document.getElementById('ty_'+id)||{}).textContent || '';
+  if (ok){
+    vd.className = 'verdict ok';
+    vd.textContent = '✅ 맞았어요 — 이 유형은 이제 손에 잡혔네요!';
+    logAct('정복 ⭕ ' + t);
+    memSet('ok_'+id, 1);
+  } else {
+    vd.className = 'verdict no';
+    vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 강의를 한 번 보고 다시 오면 돼요.';
+    logAct('재도전 ❌ ' + t);
+  }
+  if (window.renderMathInElement) renderMathInElement(vd, {delimiters:[{left:'$',right:'$',display:false}]});
+}
+// 🙋 고해소 — 원장 2026-08-25 "가림막 있고 언제든 질문해도 되는 시스템".
+//   ① 글을 안 써도 된다(버튼만 눌러도 그 문항이 선생님께 간다) ② 다른 친구 화면엔 안 뜬다
+//   ③ 보낸 뒤엔 "선생님이 답해줄 거예요"만 뜬다 — 답을 재촉하거나 읽음 표시를 두지 않는다.
+function askOpen(id){
+  const b = document.getElementById('ab_'+id);
+  if (b) b.style.display = b.style.display==='block' ? 'none' : 'block';
+}
+function askSend(id, btn){
+  const ta = document.getElementById('at_'+id);
+  const t = (document.getElementById('ty_'+id)||{}).textContent || '';
+  const memo = ta && ta.value.trim() ? ' — ' + ta.value.trim().slice(0,120) : '';
+  logAct('🙋질문 ' + t + memo);
+  memSet('ask_'+id, 1);
+  const box = document.getElementById('ab_'+id);
+  if (box) box.innerHTML = '<div class="hint">✅ 선생님께 전달됐어요. 답을 준비해서 알려주실 거예요.</div>';
+  if (btn){ btn.classList.add('sent'); btn.textContent = '🙋 물어봤어요'; btn.disabled = true; }
+}
+
 function card(o,i){
   const seg = o.강의;
   const lecBtn = seg ? rbtn('▶ 이 유형 강의 다시보기', `#u${seg[0]}q${seg[1]}`) : '';
@@ -115,18 +223,60 @@ function card(o,i){
     </div>`;
   return `
   <div class="card">
-    <span class="badge">${esc(o.유형)}</span>
+    <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     ${o.유사 ? `
-    <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 이것부터 풀어보세요</div>
+    <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요</div>
     <div class="problem">${esc(o.유사.stem)}</div>
-    ${choicesHtml(o.유사.choices)}
-    <details><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
+    ${pickHtml(o.유사.choices, o.유사.answer, i)}
+    <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
     <details style="margin-top:8px"><summary>아까 틀린 문제 다시 보기</summary>
       <div class="slot-body">${원문}</div>
     </details>`
     : `<div class="sub" style="margin:6px 0 2px">🔁 같은 유형 다른 문제는 준비 중이에요 — 우선 강의로 복습해 보세요.</div>
     ${원문}`}
     ${lecBtn}
+    ${actsHtml(i)}
+  </div>`;
+}
+
+// 카드 하단 공통 — 고해소 버튼. 모든 칸(오늘·복습대기)에 똑같이 붙는다.
+function actsHtml(i){
+  return `<div class="acts">
+      <button class="ask" onclick="askOpen('${i}')">🙋 이거 모르겠어요</button>
+    </div>
+    <div class="askbox" id="ab_${i}">
+      <div class="hint">그냥 보내도 돼요 — 어느 문제인지는 선생님이 이미 알아요.<br>
+        하고 싶은 말이 있으면 한 줄만 적어도 좋아요. (예: 3번째 줄부터 모르겠어요)</div>
+      <textarea id="at_${i}" placeholder="안 써도 괜찮아요"></textarea>
+      <button class="btn" onclick="askSend('${i}',this)" style="margin-top:8px">선생님께 보내기</button>
+    </div>`;
+}
+
+// 🔁 복습 대기 — 예전에 틀린 유형. 원문은 이미 학원에서 고쳤으니 **다른 문제만** 준다.
+function waitCard(o,i){
+  const seg = o.강의;
+  const lecBtn = seg ? rbtn('▶ 이 유형 강의 다시보기', `#u${seg[0]}q${seg[1]}`) : '';
+  const 단계말 = ['처음 다시 보는 거예요','한 번 맞혔던 유형이에요','두 번 맞혔어요 — 이번이 마지막 확인!'][o.단계] || '';
+  return `
+  <div class="card">
+    <span class="badge" id="ty_${i}" style="background:#eef2f7;color:#2b4a9b">${esc(o.유형)}</span>
+    <span class="due">${esc(o.마지막오답||'')}에 틀림</span>
+    <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
+    ${o.유사 ? `<div class="problem">${esc(o.유사.stem)}</div>
+    ${pickHtml(o.유사.choices, o.유사.answer, i)}
+    <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
+    : `<div class="sub">문제를 준비 중이에요 — 강의로 먼저 복습해 볼까요?</div>`}
+    ${lecBtn}
+    ${actsHtml(i)}
+  </div>`;
+}
+
+// 🧰 도구함 — 정복한 유형. 목록만 조용히, 강의는 언제든 다시 열린다.
+function boxCard(o){
+  const seg = o.강의;
+  return `<div class="tool">
+    <span class="nm">${esc(o.유형)}</span>
+    <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
 document.addEventListener('DOMContentLoaded', render);
