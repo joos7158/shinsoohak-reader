@@ -113,7 +113,8 @@ function render(){
   if (D.대기) {
     app.innerHTML = `<div class="nav">${rlink('▶ 유형별 강의')}</div>
       <h1>📕 나의 오답노트</h1>
-      <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>`;
+      <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>
+      ${freeAskHtml(D)}`;   /* 채점 전에도 물어볼 수 있어야 한다 (2026-08-25 (나)) */
     return;
   }
   // 🔴 2026-08-25 세 칸 구성 (원장: "누적된 걸 주기적으로 확인하는 형태. 확실하게 이해한 건
@@ -146,6 +147,7 @@ function render(){
       ${box.map(o=>boxCard(o)).join('')}`:''}
 
     ${(D.복습&&D.복습.length)? `<div class="sect">📺 시험 대비 복습 강의</div>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
+    ${freeAskHtml(D)}
     <div class="note">신수학 재원생 전용 · 이 페이지는 <b>나만</b> 볼 수 있어요.<br>
       질문한 건 선생님만 봅니다 — 틀린 걸 부끄러워하지 않아도 돼요.</div>`;
   if (window.renderMathInElement) renderMathInElement(app, {
@@ -211,6 +213,47 @@ function askSend(id, btn){
   const box = document.getElementById('ab_'+id);
   if (box) box.innerHTML = '<div class="hint">✅ 선생님께 전달됐어요. 답을 준비해서 알려주실 거예요.</div>';
   if (btn){ btn.classList.add('sent'); btn.textContent = '🙋 물어봤어요'; btn.disabled = true; }
+}
+
+// 🙋 그냥 물어보기 — 2026-08-25 (나). 질문이 **오답 카드에 묶여 있던** 것을 푼다.
+//   오답이 0건인 날엔 물어볼 수단이 아예 없었다(실측: 그런 아이가 26명 중 9명).
+//   숙제·수업·"그냥 이게 안 풀려요" 같은 문항 밖 질문도 여기로 온다.
+//   🔴 문항 카드와 달리 **내용이 필수**다 — 붙일 문항이 없으니 빈 전송은 원장이 읽을 수 없다.
+//   답장은 유형이 없으므로 `_자유` 키로 쌓이고 D.자유답변 으로 내려온다.
+function freeAskHtml(D){
+  const rp = (D && D.자유답변) || [];
+  const reply = rp.map(r => `<div class="reply">
+      <div class="rh">💬 선생님 답</div>
+      <div class="rb">${esc(r.답||'')}</div>
+      ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
+    </div>`).join('');
+  return `<div class="sect">🙋 그 밖에 궁금한 것</div>
+    <div class="card">
+      <div class="sub" style="margin:0 0 8px">위에 없는 것도 괜찮아요 — 숙제, 수업에서 놓친 부분,
+        혼자 풀다 막힌 문제. 무엇이든 물어보세요.</div>
+      ${reply}
+      <div class="acts" style="border-top:0;padding-top:0;margin-top:${reply?'12px':'0'}">
+        <button class="ask" onclick="askOpen('free')">🙋 ${rp.length?'또 물어볼래요':'그냥 물어보기'}</button>
+      </div>
+      <div class="askbox" id="ab_free">
+        <div class="hint">어떤 게 궁금한지 적어주세요. 짧아도 괜찮아요.<br>
+          (예: 오늘 수업에서 극한 부분이 이해가 안 됐어요 / 숙제 12번이 안 풀려요)</div>
+        <textarea id="at_free" placeholder="여기에 적어주세요"></textarea>
+        <button class="btn" onclick="freeSend(this)">선생님께 보내기</button>
+      </div>
+    </div>`;
+}
+function freeSend(btn){
+  const ta = document.getElementById('at_free');
+  const v = ta ? ta.value.trim() : '';
+  if (!v) {                       // 빈 전송 차단 — 문항이 안 붙으니 내용이 없으면 못 읽는다
+    if (ta) { ta.style.borderColor = '#c62828'; ta.focus(); }
+    return;
+  }
+  logAct('🙋자유질문 — ' + v.slice(0, 300));
+  const box = document.getElementById('ab_free');
+  if (box) box.innerHTML = '<div class="hint">✅ 선생님께 전달됐어요. 답을 준비해서 알려주실 거예요.</div>';
+  if (btn) btn.disabled = true;
 }
 
 function card(o,i){
