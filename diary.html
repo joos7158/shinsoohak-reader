@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신수학 수학일기장</title>
+<style>
+  :root {
+    --bg:#faf7f2; --card:#ffffff; --ink:#2b2620; --sub:#8a8074;
+    --accent:#b5541c; --accent-soft:#f6e3d3; --line:#e8e0d4; --ok:#2e7d32;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI','Malgun Gothic',sans-serif; background:var(--bg); color:var(--ink); }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
+  header { text-align:center; padding:18px 0 6px; }
+  header h1 { font-size:1.45rem; letter-spacing:-0.5px; }
+  header p { color:var(--sub); font-size:0.85rem; margin-top:4px; }
+
+  .roomcard { background:var(--card); border:1px solid var(--line); border-radius:14px;
+              padding:14px 16px; margin:16px 0; }
+  .roomhead { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+  .roomhead b { font-size:1.0rem; }
+  .roomhead small { color:var(--sub); }
+  .roomsvg { width:100%; border-radius:10px; display:block; }
+  .nextline { text-align:center; color:var(--sub); font-size:0.85rem; margin-top:8px; }
+  .chips { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:10px; }
+  .chip { font-size:0.72rem; text-align:center; border-radius:8px; padding:5px 2px;
+          background:#f0ede6; color:#b3ab9e; }
+  .chip.on { background:var(--accent-soft); color:#712B13; font-weight:600; }
+
+  @keyframes blink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.06)}}
+  @keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(9deg)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .eye{animation:blink 3.8s infinite;transform-box:fill-box;transform-origin:center}
+  .tail{animation:sway 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:15% 85%}
+  .bobber{animation:bob 3.2s ease-in-out infinite}
+  @keyframes heartpop{0%{opacity:0;transform:translateY(6px) scale(.6)}30%{opacity:1;transform:translateY(0) scale(1.1)}100%{opacity:0;transform:translateY(-16px) scale(1)}}
+  .heart{animation:heartpop 1.4s ease-out forwards;transform-box:fill-box;transform-origin:center}
+  #giftfx{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+          background:rgba(43,38,32,.28);border-radius:10px;z-index:5}
+  .gwrap{text-align:center}
+  .gbox{font-size:3.2rem;animation:giftshake .9s ease}
+  .gname{margin-top:6px;background:#fff;border-radius:999px;padding:6px 16px;font-weight:700;
+         color:#712B13;box-shadow:0 4px 14px rgba(0,0,0,.18);animation:gnamepop .5s .7s both}
+  @keyframes giftshake{0%{transform:scale(.2) rotate(0)}40%{transform:scale(1.15) rotate(-8deg)}
+    55%{transform:rotate(8deg)}70%{transform:rotate(-6deg)}85%{transform:rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+  @keyframes gnamepop{0%{opacity:0;transform:translateY(10px) scale(.7)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes itempop{0%{transform:scale(.2)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+  .newitem{animation:itempop .7s ease .3s both;transform-box:fill-box;transform-origin:center}
+  @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
+  .tw{animation:twinkle 1.6s infinite}
+  .tw2{animation:twinkle 1.6s .5s infinite}
+  .tw3{animation:twinkle 1.6s 1s infinite}
+  @keyframes catjump{0%,100%{transform:translateY(0)}30%{transform:translateY(-14px)}55%{transform:translateY(0)}70%{transform:translateY(-6px)}}
+  .catjump{animation:catjump .8s ease}
+  @keyframes bellswing{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  .bellg{animation:bellswing 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:top center}
+  @keyframes yarnwig{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+  .yarn{animation:yarnwig 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+  @keyframes notefloat{0%{opacity:0;transform:translateY(4px)}25%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+  .note1{animation:notefloat 3s ease-out infinite;transform-box:fill-box}
+  .note2{animation:notefloat 3s 1.5s ease-out infinite;transform-box:fill-box}
+  @keyframes sunbreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .sun{animation:sunbreathe 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+
+  .ep { background:var(--card); border:1px solid var(--line); border-radius:14px;
+        margin-bottom:14px; overflow:hidden; }
+  .ep-head { display:flex; justify-content:space-between; align-items:center;
+             padding:14px 16px; cursor:pointer; }
+  .ep-head .t b { font-size:1.0rem; }
+  .ep-head .t small { display:block; color:var(--sub); margin-top:2px; }
+  .ep-head .done { font-size:1.3rem; }
+  .ep-body { display:none; padding:0 16px 16px; }
+  .ep.open .ep-body { display:block; }
+  .player { position:relative; width:100%; padding-top:56.25%; border-radius:10px; overflow:hidden; background:#000; }
+  .player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  .pwbox { margin-top:14px; background:var(--accent-soft); border-radius:10px; padding:14px; }
+  .pwbox label { font-size:0.9rem; font-weight:600; }
+  .pwrow { display:flex; gap:8px; margin-top:8px; }
+  .pwrow input { flex:1; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:1rem; }
+  .pwrow button { background:var(--accent); color:#fff; border:0; border-radius:8px;
+                  padding:10px 16px; font-size:0.95rem; cursor:pointer;
+                  white-space:nowrap; flex:0 0 auto; }  /* 폰에서 "확/인"으로 쪼개지던 것 */
+  .pwmsg { margin-top:8px; font-size:0.9rem; min-height:1.2em; }
+  .pwmsg.ok { color:var(--ok); font-weight:700; }
+  .pwmsg.no { color:#c62828; }
+  /* 정답 뒤 "다음에 할 일" — 페이지에만 치면 원장님은 모른다(2026-08-11 채널 불일치 수리) */
+  .pwsend { margin-top:8px; padding:10px 12px; border-radius:10px;
+            background:#fff8e1; border:1px solid #ffe082; color:#5d4037;
+            font-weight:400; line-height:1.5; }
+  .pwsend b { color:#e65100; }
+  .pwsend small { display:block; margin-top:4px; color:#8d6e63; font-size:0.85em; }
+  .pwnote { margin-top:12px; color:var(--sub); font-size:0.85rem; }
+  /* 그날만 있는 숙제·도전 안내(diary_data 의 note). 암호와 달리 카톡으로만 잡히는 채널이라
+     영상 밖에도 한 번 더 적어둔다(2026-08-12 36번 ㄷ 도전). */
+  .epnote { margin-top:12px; padding:10px 12px; border-radius:10px;
+            background:#f1f8e9; border:1px solid #c5e1a5; color:#33691e;
+            font-size:0.92rem; line-height:1.5; }
+  .epnote b { color:#2e7d32; }
+
+  footer { text-align:center; margin-top:26px; }
+  footer a { color:var(--sub); font-size:0.85rem; text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📔 신수학 수학일기장</h1>
+    <p>매일 한 편, 오늘의 복습. 완료할 때마다 고양이 방에 <b>새 선물</b>이 도착해요.</p>
+  </header>
+
+  <div class="roomcard">
+    <div class="roomhead">
+      <b>🐾 나의 냥이룸</b>
+      <small id="streakLine">완료 0일</small>
+    </div>
+    <div style="position:relative">
+    <svg class="roomsvg" viewBox="0 0 360 250" role="img" aria-label="내 고양이 방">
+      <rect x="0" y="0" width="360" height="176" fill="#F6EFE3"/>
+      <rect x="0" y="176" width="360" height="74" fill="#EAD9BC"/>
+      <g>
+        <rect x="252" y="26" width="74" height="56" rx="6" fill="#CDE8F5" stroke="#C9B896" stroke-width="3"/>
+        <path d="M289,26 v56 M252,54 h74" stroke="#C9B896" stroke-width="2.5"/>
+        <circle class="sun" cx="272" cy="42" r="8" fill="#FAC775"/>
+      </g>
+      <g id="item18" style="display:none">
+        <ellipse cx="172" cy="226" rx="142" ry="17" fill="#EADFF1"/>
+        <ellipse cx="172" cy="226" rx="118" ry="11.5" fill="none" stroke="#CEBBE0" stroke-width="2" stroke-dasharray="6 5"/>
+      </g>
+      <ellipse cx="130" cy="219" rx="46" ry="7" fill="#3A2E28" opacity="0.10"/>
+      <g id="item2" style="display:none">
+        <ellipse cx="130" cy="224" rx="56" ry="13" fill="#F4B8C8"/>
+        <ellipse cx="130" cy="222" rx="43" ry="9" fill="#F9D3DD"/>
+      </g>
+      <g transform="translate(55,88) scale(0.6)">
+        <g id="jumper">
+        <g class="bobber">
+          <g class="tail"><path d="M64,176 C26,180 20,146 42,136 C30,152 40,168 68,162 Z" fill="#E8975A"/>
+            <g id="fur-tail" style="display:none">
+              <rect x="28" y="141" width="8" height="16" rx="4" fill="#C97635" transform="rotate(24 32 149)"/>
+              <rect x="42" y="152" width="8" height="15" rx="4" fill="#C97635" transform="rotate(50 46 159)"/>
+            </g>
+          </g>
+          <path d="M67,74 Q62,32 100,44 Q80,54 77,74 Z" fill="#F7B980"/>
+          <path d="M76,66 Q75,45 93,50 Q81,56 82,66 Z" fill="#F58E8E"/>
+          <path d="M173,74 Q178,32 140,44 Q160,54 163,74 Z" fill="#F7B980"/>
+          <path d="M164,66 Q165,45 147,50 Q159,56 158,66 Z" fill="#F58E8E"/>
+          <ellipse cx="120" cy="160" rx="64" ry="48" fill="#F7B980"/>
+          <circle cx="120" cy="98" r="57" fill="#F7B980"/>
+          <rect x="103" y="45" width="7" height="14" rx="3.5" fill="#E8975A"/>
+          <rect x="116" y="41" width="8" height="19" rx="4" fill="#E8975A"/>
+          <rect x="130" y="45" width="7" height="14" rx="3.5" fill="#E8975A"/>
+          <g id="fur-back" style="display:none">
+            <rect x="58" y="136" width="18" height="7" rx="3.5" fill="#E8975A" transform="rotate(-14 67 139)"/>
+            <rect x="56" y="150" width="16" height="7" rx="3.5" fill="#E8975A" transform="rotate(-10 64 153)"/>
+            <rect x="166" y="136" width="18" height="7" rx="3.5" fill="#E8975A" transform="rotate(14 175 139)"/>
+          </g>
+          <ellipse cx="120" cy="176" rx="34" ry="24" fill="#FFF3E4"/>
+          <ellipse cx="120" cy="112" rx="26" ry="17" fill="#FFF3E4"/>
+          <g id="fur-chest" style="display:none">
+            <path d="M120,174 C111,164 116,155 120,161 C124,155 129,164 120,174 Z" fill="#F58E8E"/>
+          </g>
+          <g class="eye"><circle cx="95" cy="95" r="5.6" fill="#3A2E28"/><circle id="hl1" cx="97" cy="93" r="1.9" fill="#fff"/></g>
+          <g class="eye"><circle cx="145" cy="95" r="5.6" fill="#3A2E28"/><circle id="hl2" cx="147" cy="93" r="1.9" fill="#fff"/></g>
+          <path d="M116,104 Q120,109 124,104 Q120,101 116,104" fill="#F58E8E"/>
+          <path id="mouth" d="M111,110 Q115.5,116 120,110 Q124.5,116 129,110" fill="none" stroke="#3A2E28" stroke-width="2.2" stroke-linecap="round"/>
+          <ellipse id="bl1" cx="80" cy="108" rx="8" ry="5" fill="#F9A8A8" opacity=".75"/>
+          <ellipse id="bl2" cx="160" cy="108" rx="8" ry="5" fill="#F9A8A8" opacity=".75"/>
+          <path d="M54,96 L76,99 M54,108 L76,105" stroke="#E5CDB6" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M186,96 L164,99 M186,108 L164,105" stroke="#E5CDB6" stroke-width="1.6" stroke-linecap="round"/>
+          <g id="acc7" style="display:none"><path d="M86,142 Q120,158 154,142" stroke="#E24B4A" stroke-width="8" fill="none" stroke-linecap="round"/><g class="bellg"><circle cx="120" cy="156" r="6.5" fill="#FAC775" stroke="#BA7517" stroke-width="1.4"/><path d="M120,156 v4" stroke="#BA7517" stroke-width="1.4"/></g></g>
+          <g id="acc14" style="display:none"><path d="M158,36 l16,-9 l-3,16 Z" fill="#ED93B1"/><path d="M158,36 l-13,11 l16,3 Z" fill="#ED93B1"/><circle cx="158" cy="37" r="3.4" fill="#D4537E"/></g>
+          <g id="acc21" style="display:none"><path d="M86,140 Q120,156 154,140" stroke="#378ADD" stroke-width="10" fill="none" stroke-linecap="round"/><rect x="130" y="146" width="11" height="24" rx="5" fill="#378ADD"/><path d="M132,166 v4 M136,166 v4 M140,166 v4" stroke="#B5D4F4" stroke-width="1.6"/></g>
+          <g id="acc30" style="display:none" transform="translate(0,19)"><g class="popt"><path d="M101,30 L107,10 L115,24 L120,7 L125,24 L133,10 L139,30 Q120,36 101,30 Z" fill="#FAC775" stroke="#BA7517" stroke-width="1.6" stroke-linejoin="round"/><circle cx="107" cy="10" r="2.6" fill="#EF9F27"/><circle cx="120" cy="7" r="2.6" fill="#EF9F27"/><circle cx="133" cy="10" r="2.6" fill="#EF9F27"/></g></g>
+          <g id="aura" style="display:none" fill="#FAC775">
+            <path class="tw"  transform="translate(58,40)"  d="M0,-7 L1.8,-1.8 L7,0 L1.8,1.8 L0,7 L-1.8,1.8 L-7,0 L-1.8,-1.8 Z"/>
+            <path class="tw2" transform="translate(184,58)" d="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"/>
+            <path class="tw3" transform="translate(70,168)" d="M0,-5 L1.3,-1.3 L5,0 L1.3,1.3 L0,5 L-1.3,1.3 L-5,0 L-1.3,-1.3 Z"/>
+          </g>
+          <ellipse cx="94" cy="202" rx="17" ry="11" fill="#F7B980"/>
+          <ellipse cx="146" cy="202" rx="17" ry="11" fill="#F7B980"/>
+          <path d="M90,197 v8 M98,197 v8 M142,197 v8 M150,197 v8" stroke="#E8975A" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+        </g>
+      </g>
+      <g id="item1" style="display:none">
+        <ellipse cx="208" cy="224" rx="15" ry="6.5" fill="#85B7EB"/>
+        <ellipse cx="208" cy="222" rx="10" ry="3.8" fill="#FFFFFF"/>
+      </g>
+      <g id="item3" style="display:none">
+        <g class="yarn">
+        <circle cx="250" cy="218" r="11" fill="#AFA9EC"/>
+        <path d="M241,215 a11 11 0 0 1 18,2 M242,222 a11 11 0 0 0 16,-1" stroke="#7F77DD" stroke-width="1.8" fill="none"/>
+        </g>
+        <path d="M260,224 q9,3 13,-2" stroke="#7F77DD" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      </g>
+      <g id="item5" style="display:none" transform="translate(292,218)"><g class="popt">
+        <ellipse cx="0" cy="0" rx="17" ry="6" fill="#FFFFFF" stroke="#C9B896" stroke-width="1.5"/>
+        <path d="M-9,-6 Q0,-13 9,-6 Q0,1 -9,-6 Z" fill="#5DCAA5"/>
+        <path d="M8,-6 L15,-11 L15,-1 Z" fill="#1D9E75"/>
+        <circle cx="-5" cy="-7" r="1.2" fill="#04342C"/>
+      </g></g>
+      <g id="item9" style="display:none" transform="translate(330,222)"><g class="popt">
+        <circle cx="0" cy="-18" r="8.5" fill="#97C459"/>
+        <circle cx="-8" cy="-10" r="6.5" fill="#97C459"/>
+        <circle cx="8" cy="-10" r="6.5" fill="#97C459"/>
+        <path d="M-11,-4 h22 l-4,15 h-14 Z" fill="#D85A30"/>
+      </g></g>
+      <g id="item12" style="display:none" transform="translate(44,52)"><g class="popt">
+        <rect x="-18" y="-22" width="36" height="44" rx="4" fill="#FFF8EC" stroke="#BA7517" stroke-width="3"/>
+        <path d="M0,8 C-11,-3 -4,-13 0,-6 C4,-13 11,-3 0,8 Z" fill="#ED93B1"/>
+      </g></g>
+      <g id="item25" style="display:none">
+        <rect x="16" y="120" width="52" height="6" rx="3" fill="#C9A87C"/>
+        <rect x="26" y="99" width="26" height="21" rx="3" fill="#D4537E"/>
+        <rect x="26" y="99" width="26" height="6" rx="3" fill="#B23A63"/>
+        <circle cx="60" cy="94" r="3" fill="#72243E"/>
+        <path d="M63,94 V81 q6,2 0,6" stroke="#72243E" stroke-width="1.8" fill="none"/>
+        <g class="note1"><circle cx="76" cy="88" r="2.6" fill="#D4537E"/><path d="M78.5,88 V77 q5,2 0,5" stroke="#D4537E" stroke-width="1.6" fill="none"/></g>
+        <g class="note2"><circle cx="88" cy="94" r="2.2" fill="#993556"/><path d="M90,94 V85 q4,1.6 0,4" stroke="#993556" stroke-width="1.4" fill="none"/></g>
+      </g>
+      <g id="hearts" style="display:none">
+        <path class="heart" d="M176,86 c-6,-7 -1,-13 3,-8 c4,-5 9,1 3,8 l-3,3 Z" fill="#ED93B1"/>
+        <path class="heart" style="animation-delay:.25s" d="M200,70 c-5,-6 -1,-11 2.5,-7 c3.5,-4 7.5,1 2.5,7 l-2.5,2.5 Z" fill="#D4537E"/>
+      </g>
+    </svg>
+    <div id="giftfx"></div>
+    </div>
+    <div class="nextline" id="nextLine">첫 완료를 하면 우유 그릇이 도착해요</div>
+    <div class="chips" id="chips"></div>
+    <div class="nextline" style="margin-top:4px">🐈 고양이도 자라요 — 5일 반짝눈 · 7일 꼬리무늬 · 12일 등무늬 · 21일 가슴 하트 · 30일 황금빛</div>
+    <div id="adminbox" style="display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
+      <div style="font-size:0.85rem;color:var(--sub);margin-bottom:6px">
+        🔑 원장 모드 — 열람 기록이 남지 않습니다. 슬라이더로 보상 진행을 미리 볼 수 있어요.
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input type="range" id="pvslider" min="0" max="30" step="1" value="0" autocomplete="off" style="flex:1">
+        <span id="pvlabel" style="font-size:0.85rem;min-width:74px;text-align:right">실제 기록</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="list"></div>
+
+  <footer><a id="readerLink" href="index.html">📚 유형 강의 리더로 가기</a></footer>
+</div>
+
+<script src="diary_data.js"></script>
+<script>
+// ── 열람 기록 비콘 — 리더(index.html)와 동일한 구글 폼 재사용 ──
+const LOG = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse",
+  코드: "entry.1580342508", 내용: "entry.1507722106"
+};
+const SID = new URLSearchParams(location.search).get('s') || '';
+// 원장 전용 코드 — 열람 기록을 남기지 않고(학생 통계 오염 방지) 미리보기 도구를 띄운다.
+const ADMINS = ['wonjang'];
+const IS_ADMIN = ADMINS.includes(SID);
+const _logged = new Set();
+function logView(label) {
+  if (!SID || IS_ADMIN || _logged.has(label)) return;
+  _logged.add(label);
+  const body = new URLSearchParams();
+  body.append(LOG.코드, SID);
+  body.append(LOG.내용, label);
+  fetch(LOG.action, { method:'POST', mode:'no-cors', body }).catch(()=>{});
+}
+if (SID) {
+  logView('(일기장 열기)');
+  document.getElementById('readerLink').href = 'index.html?s=' + encodeURIComponent(SID);
+}
+
+// ── 완료 기록 (이 기기 localStorage) ──
+const KEY = 'diary_done_' + (SID || 'anon');
+function loadDone() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } }
+function saveDone(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+
+// ── 꾸미기 아이템: [완료 일수, 이름, SVG id] ──
+const ITEMS = [
+  [1,  '우유 그릇',   'item1'],
+  [2,  '푹신 방석',   'item2'],
+  [3,  '털실 뭉치',   'item3'],
+  [5,  '생선 간식',   'item5'],
+  [7,  '방울 목걸이', 'acc7'],
+  [9,  '화분',        'item9'],
+  [12, '추억 액자',   'item12'],
+  [15, '리본',        'acc14'],
+  [18, '꽃무늬 러그', 'item18'],
+  [21, '목도리',      'acc21'],
+  [25, '오르골',      'item25'],
+  [30, '황금 왕관',   'acc30'],
+];
+
+let _preview = null;   // 원장 미리보기 일수 (null이면 실제 기록)
+let _shownN = null;    // 직전 렌더의 완료 일수 — 증가분만 팝 연출
+
+function _pop(g) {
+  if (!g) return;
+  // transform 속성이 있는 그룹은 CSS 애니메이션이 위치를 덮어쓰므로 내부 .popt 래퍼에 건다
+  const t = g.querySelector(':scope > .popt') || g;
+  t.classList.remove('newitem'); void t.getBBox(); t.classList.add('newitem');
+}
+function catJump() { const j = document.getElementById('jumper'); j.classList.remove('catjump'); void j.getBBox(); j.classList.add('catjump'); }
+
+function renderRoom() {
+  const done = loadDone();
+  const days = Object.keys(done).map(Number);
+  const n = (_preview === null) ? days.length : _preview;
+  // 연속 일수: 완료한 에피소드의 date가 이어진 길이(주말 하루 건너뜀 허용)
+  let streak = 0;
+  const dates = days.map(d => (DIARY.find(e=>e.day===d)||{}).date).filter(Boolean).sort();
+  for (let i = dates.length - 1; i >= 0; i--) {
+    if (i === dates.length - 1) { streak = 1; continue; }
+    if ((new Date(dates[i+1]) - new Date(dates[i])) / 86400000 <= 2) streak++; else break;
+  }
+  document.getElementById('streakLine').textContent = (_preview !== null)
+    ? `미리보기 ${n}일`
+    : `완료 ${n}일${streak >= 2 ? ` · 🔥${streak}일 연속` : ''}`;
+  const prev = _shownN;
+  for (const [d, , id] of ITEMS)
+    document.getElementById(id).style.display = (n >= d) ? '' : 'none';
+  // 새로 생긴 것들 팝 + 고양이 점프 (첫 렌더는 조용히)
+  if (prev !== null && n > prev) {
+    ITEMS.filter(([d]) => d > prev && d <= n)
+         .forEach(([, , id]) => _pop(document.getElementById(id)));
+    [[7,'fur-tail'],[12,'fur-back'],[21,'fur-chest'],[30,'aura']]
+      .filter(([d]) => d > prev && d <= n)
+      .forEach(([, id]) => _pop(document.getElementById(id)));
+    catJump();
+  }
+  _shownN = n;
+  // 고양이 성장 단계 — 크기 대신 생김새가 변한다
+  const spark = n >= 5;
+  ['hl1','hl2'].forEach(id => document.getElementById(id).setAttribute('r', spark ? '2.7' : '1.9'));
+  document.getElementById('mouth').setAttribute('stroke-width', spark ? '2.8' : '2.2');
+  ['bl1','bl2'].forEach(id => document.getElementById(id).setAttribute('opacity', spark ? '0.95' : '0.75'));
+  document.getElementById('fur-tail').style.display  = n >= 7  ? '' : 'none';
+  document.getElementById('fur-back').style.display  = n >= 12 ? '' : 'none';
+  document.getElementById('fur-chest').style.display = n >= 21 ? '' : 'none';
+  document.getElementById('aura').style.display      = n >= 30 ? '' : 'none';
+  const next = ITEMS.find(i => i[0] > n);
+  document.getElementById('nextLine').textContent = next
+    ? `다음 선물: ${next[1]} (${next[0] - n}일 남음)`
+    : '모든 선물 도착! 방이 가득 찼어요';
+  document.getElementById('chips').innerHTML = ITEMS.map(([d, name]) =>
+    `<div class="chip${n >= d ? ' on' : ''}">${name}<br>${d}일</div>`).join('');
+}
+
+function popHearts() {
+  const h = document.getElementById('hearts');
+  h.style.display = 'none';
+  void h.getBoundingClientRect();
+  h.style.display = '';
+  setTimeout(() => { h.style.display = 'none'; }, 1700);
+}
+
+function markDone(day) {
+  const d = loadDone();
+  if (d[day]) return false;
+  const nBefore = Object.keys(d).length;
+  d[day] = true; saveDone(d);
+  renderRoom(); popHearts();
+  const won = ITEMS.filter(it => it[0] > nBefore && it[0] <= nBefore + 1);
+  if (won.length) giftFx(won.map(it => it[1]));
+  return true;
+}
+
+function giftFx(names, i = 0) {
+  const fx = document.getElementById('giftfx');
+  if (i >= names.length) { fx.style.display = 'none'; fx.innerHTML = ''; return; }
+  fx.style.display = 'flex';
+  fx.innerHTML = `<div class="gwrap"><div class="gbox">🎁</div><div class="gname">✨ ${names[i]} 획득!</div></div>`;
+  setTimeout(() => giftFx(names, i + 1), 2000);
+}
+
+// ── 에피소드 렌더 ──
+async function sha256(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function render() {
+  const done = loadDone();
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  [...DIARY].sort((a,b)=>b.day-a.day).forEach(ep => {
+    const el = document.createElement('div');
+    el.className = 'ep';
+    el.innerHTML = `
+      <div class="ep-head">
+        <div class="t"><b>${ep.day}일차 · ${ep.topic}</b><small>${ep.date}</small></div>
+        <div class="done">${done[ep.day] ? '✅' : '▶️'}</div>
+      </div>
+      <div class="ep-body">
+        <div class="player" data-yt="${ep.youtube}"></div>
+        ${ep.note ? `<div class="epnote">${ep.note}</div>` : ''}
+        ${ep.pw ? `
+        <div class="pwbox">
+          <label>🔑 오늘의 암호</label>
+          <div class="pwrow">
+            <input type="text" placeholder="영상 끝에서 알려준 암호" autocomplete="off">
+            <button>확인</button>
+          </div>
+          <div class="pwmsg"></div>
+        </div>` : `
+        <div class="pwnote">이 회차는 암호가 없어요 — 영상을 열면 완료로 기록돼요.</div>`}
+      </div>`;
+    const head = el.querySelector('.ep-head');
+    head.addEventListener('click', () => {
+      const opening = !el.classList.contains('open');
+      document.querySelectorAll('.ep.open').forEach(o => o.classList.remove('open'));
+      if (opening) {
+        el.classList.add('open');
+        const p = el.querySelector('.player');
+        if (!p.querySelector('iframe')) {
+          p.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.dataset.yt}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        }
+        logView(`일기장${ep.day}일차 열람`);
+        if (!ep.pw && markDone(ep.day)) el.querySelector('.done').textContent = '✅';
+      }
+    });
+    if (ep.pw) {
+      const input = el.querySelector('.pwrow input');
+      const btn = el.querySelector('.pwrow button');
+      const msg = el.querySelector('.pwmsg');
+      const submit = async () => {
+        const v = input.value.trim().toLowerCase().replace(/\s+/g,'');
+        if (!v) return;
+        if (await sha256(v) === ep.pw) {
+          // v는 해시가 일치했을 때만 쓰이므로 곧 "그날의 실제 암호" 문자열이다(임의 입력 아님).
+          msg.innerHTML = '⭕ 정답! 냥이룸에 선물이 도착했어요'
+            + '<div class="pwsend">📩 이제 <b>선생님께 카톡으로 「' + v + '」</b> 보내주면 커피 기프티콘!'
+            + '<small>여기에만 치면 선생님은 네가 푼 걸 몰라요. 꼭 카톡도 보내줘 🙂</small></div>';
+          msg.className = 'pwmsg ok';
+          logView(`일기장${ep.day}일차 암호⭕`);
+          markDone(ep.day);
+          el.querySelector('.done').textContent = '✅';
+        } else {
+          msg.textContent = '❌ 다시 한번 — 영상 마지막을 확인해봐';
+          msg.className = 'pwmsg no';
+          logView(`일기장${ep.day}일차 암호❌:${v.slice(0,20)}`);
+        }
+      };
+      btn.addEventListener('click', submit);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    }
+    list.appendChild(el);
+  });
+}
+render();
+renderRoom();
+
+if (IS_ADMIN) {
+  const box = document.getElementById('adminbox');
+  const sl = document.getElementById('pvslider');
+  const lb = document.getElementById('pvlabel');
+  box.style.display = '';
+  sl.value = Object.keys(loadDone()).length;
+  lb.textContent = '실제 기록';
+  sl.addEventListener('input', () => {
+    _preview = +sl.value;
+    lb.textContent = `${_preview}일 시점`;
+    renderRoom();
+  });
+}
+</script>
+</body>
+</html>
