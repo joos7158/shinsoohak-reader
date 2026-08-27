@@ -32,6 +32,17 @@
   .nav { margin-bottom:12px; } .nav a { color:var(--accent); font-weight:bold; text-decoration:none; font-size:.88rem; margin-right:14px; }
   .note { color:#888; font-size:.8rem; margin-top:16px; line-height:1.6; }
   .empty { color:#888; padding:24px 0; text-align:center; }
+  /* ── 🎯 시험대비 퀘스트 카드 (2026-08-27) ── */
+  .quest{border:1px solid #e3dcc8;background:linear-gradient(180deg,#fffdf7,#fbf7ec)}
+  .qhead{font-weight:800;font-size:1.02rem;color:#7a1f2b;display:flex;align-items:center;gap:8px}
+  .qdday{font-size:.78rem;background:#7a1f2b;color:#fff;border-radius:8px;padding:2px 8px}
+  .qbarwrap{height:10px;background:#eee5d2;border-radius:6px;margin:10px 0 6px;overflow:hidden}
+  .qbar{height:100%;background:linear-gradient(90deg,#c0533a,#e0a24a);border-radius:6px;transition:width .8s ease}
+  .qstat{font-size:.86rem;color:#666}
+  .qsub{margin-top:10px;font-size:.78rem;font-weight:700;color:#9a8a6a}
+  .qgoal{font-size:.86rem;padding:4px 0;color:#444}
+  .qgoal.qdone{color:#2f7a4f}
+  .qunit{font-size:.74rem;color:#999;margin-right:4px}
   /* ── 2026-08-25: 세 칸(오늘 / 복습 대기 / 도구함) + 고해소 버튼 ── */
   .sect { margin:22px 0 8px; font-size:1.02rem; font-weight:bold; display:flex; align-items:center; gap:8px; }
   .sect .cnt { font-size:.8rem; color:#888; font-weight:normal; }
@@ -74,6 +85,7 @@
 <div id="app"></div>
 
 <script src="me_data.js"></script>
+<script src="me_quests.js"></script>
 <script>
 const SID = new URLSearchParams(location.search).get('s') || '';
 // 2026-08-13 — 이 페이지의 열쇠(SID)는 긴 토큰으로 바뀌었다. 리더(index.html)는 여전히
@@ -146,6 +158,28 @@ const app = document.getElementById('app');
 const esc = s => String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const choicesHtml = arr => `<div class="choices">${(arr||[]).map(c=>`<div>${esc(c)}</div>`).join('')}</div>`;
 
+// 🎯 시험대비 퀘스트 (2026-08-27 원장) — exam_prep_rail 이 만든 me_quests.js 를 읽는다.
+//   설계 원칙: 결핍 명세서 금지 — 오답 횟수·날짜·전체 미달 목록을 절대 보여주지 않는다.
+//   보여주는 것: 진행률(정복/전체) + 이번 주 목표 몇 개 + 최근에 잡은 유형(⭕ 맛보기).
+function questHtml(){
+  const Q = (window.ME_QUESTS||{})[SID];
+  if (!Q || !Q.total) return '';
+  const pct = Math.round(Q.done / Q.total * 100);
+  const dd = (Q.dday === 0) ? 'D-DAY' : (Q.dday > 0 ? `D-${Q.dday}` : '');
+  const goals = (Q.goals||[]).map(g =>
+    `<div class="qgoal">⬜ <span class="qunit">${esc(g.u)}</span> ${esc(g.n)}</div>`).join('');
+  const recent = (Q.recent||[]).map(g =>
+    `<div class="qgoal qdone">⭕ <span class="qunit">${esc(g.u)}</span> ${esc(g.n)}</div>`).join('');
+  return `
+  <div class="card quest">
+    <div class="qhead">🎯 ${esc(Q.school||'')} 시험까지 잡을 유형 ${dd?`<span class="qdday">${dd}</span>`:''}</div>
+    <div class="qbarwrap"><div class="qbar" style="width:${pct}%"></div></div>
+    <div class="qstat">시험 범위 정복 <b>${Q.done} / ${Q.total}</b> 유형</div>
+    ${recent? `<div class="qsub">최근에 잡은 유형</div>${recent}` : ''}
+    ${goals? `<div class="qsub">이번 주 목표 — 처방지에서 만나면 잡아보자</div>${goals}` : ''}
+  </div>`;
+}
+
 function render(){
   const D = (window.ME_DATA||{})[SID];
   RC = (D && D.리더코드) || (SID.length <= 6 ? SID : '');
@@ -181,6 +215,8 @@ function render(){
       <div class="kpi">복습 대기 <b>${wait.length}개</b></div>
       <div class="kpi">🧰 도구함 <b>${box.length}개</b></div>
     </div>
+
+    ${questHtml()}
 
     <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
     ${list.length? list.map((o,i)=>card(o,'t'+i)).join('')
