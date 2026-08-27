@@ -60,6 +60,12 @@
   .tool .nm { font-size:.93rem; }
   .tool .ck { color:var(--accent); font-weight:bold; font-size:.85rem; white-space:nowrap; }
   .due { font-size:.78rem; color:#a0761d; background:#fdf6e3; border:1px solid #eadfb8; border-radius:6px; padding:2px 8px; }
+  /* 💡 5단계 힌트 (2026-08-27 원장 "단계별로 해결할 수 있는 방법") — 한 번에 다 안 보여준다 */
+  .hstep { border-left:3px solid #f0b429; background:#fffaf0; border-radius:0 10px 10px 0; padding:10px 14px; margin-top:8px; }
+  .hstep .hh { font-size:.78rem; font-weight:bold; color:#a0761d; margin-bottom:4px; }
+  .hstep .hb { font-size:.93rem; line-height:1.7; }
+  button.hbtn { margin-top:10px; background:#fff; color:#a0761d; border:1px solid #f0d48a; border-radius:8px; padding:9px 14px; font-weight:bold; font-size:.88rem; cursor:pointer; font-family:inherit; }
+  button.hbtn:hover { background:#fffbe9; }
   /* 📡 못 보낸 질문 배너 — 조용히 사라지는 질문을 만들지 않는다 (2026-08-25) */
   .pending { background:#fdf6e3; border:1px solid #eadfb8; color:#8a6d00; border-radius:8px; padding:9px 13px; font-size:.85rem; margin:8px 0 12px; line-height:1.55; }
 </style>
@@ -242,6 +248,35 @@ function pickAns(id, chosen, mark, el){
   }
   if (window.renderMathInElement) renderMathInElement(vd, {delimiters:[{left:'$',right:'$',display:false}]});
 }
+// 💡 5단계 힌트 — 2026-08-27 원장 "개별적으로 세부적으로 5단계 힌트, 단계별로 해결".
+//   한 단계씩만 열린다(스스로 생각할 틈을 남기는 게 핵심). 어느 단계까지 열었는지
+//   열람 로그(💡힌트N)로 남는다 — 아이가 몇 단계에서 풀리는지가 다음 힌트 톤의 데이터다.
+//   힌트에 정답은 없다 — 5단계까지 봐도 안 풀리면 '정답 확인'과 🙋질문이 그 아래 있다.
+const HINT_LB = ['🧭 1단계 · 방향','📐 2단계 · 개념','👣 3단계 · 첫걸음','⛰️ 4단계 · 고비','🏁 5단계 · 마무리 직전'];
+function hintHtml(o, i){
+  const hs = o.힌트 || [];
+  if (!hs.length) return '';
+  return `<div id="hw_${i}">
+    ${hs.map((h,k)=>`<div class="hstep" id="hs_${i}_${k}" style="display:none">
+      <div class="hh">${HINT_LB[k]||('💡 힌트 '+(k+1))}</div><div class="hb">${esc(h)}</div></div>`).join('')}
+    <button class="hbtn" id="hb_${i}" onclick="hintNext('${i}',${hs.length})">💡 막혔으면 힌트 보기 <span>(1/${hs.length})</span></button>
+  </div>`;
+}
+function hintNext(i, total){
+  const btn = document.getElementById('hb_'+i);
+  if (!btn) return;
+  const k = +(btn.dataset.k||0);
+  const el = document.getElementById('hs_'+i+'_'+k);
+  if (!el) return;
+  el.style.display = 'block';
+  if (window.renderMathInElement) renderMathInElement(el, {
+    delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+  const t = (document.getElementById('ty_'+i)||{}).textContent || '';
+  logAct('💡힌트'+(k+1)+' '+t);
+  btn.dataset.k = k+1;
+  if (k+1 >= total) btn.style.display = 'none';
+  else btn.querySelector('span').textContent = '('+(k+2)+'/'+total+')';
+}
 // 🙋 고해소 — 원장 2026-08-25 "가림막 있고 언제든 질문해도 되는 시스템".
 //   ① 글을 안 써도 된다(버튼만 눌러도 그 문항이 선생님께 간다) ② 다른 친구 화면엔 안 뜬다
 //   ③ 보낸 뒤엔 "선생님이 답해줄 거예요"만 뜬다 — 답을 재촉하거나 읽음 표시를 두지 않는다.
@@ -334,6 +369,7 @@ function card(o,i){
     <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요</div>
     <div class="problem">${esc(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
+    ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
     <details style="margin-top:8px"><summary>아까 틀린 문제 다시 보기</summary>
       <div class="slot-body">${원문}</div>
@@ -380,6 +416,7 @@ function waitCard(o,i){
     <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
     ${o.유사 ? `<div class="problem">${esc(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
+    ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
     : `<div class="sub">문제를 준비 중이에요 — 강의로 먼저 복습해 볼까요?</div>`}
     ${lecBtn}
