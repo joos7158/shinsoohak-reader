@@ -257,8 +257,13 @@ function noticeHtml(){
     }
   } catch(e){ return ''; }
   const ua = navigator.userAgent;
-  const pre = ua.includes('KAKAOTALK') ? '오른쪽 아래 <b>⋮ → 다른 브라우저로 열기</b> 한 뒤, ' : '';
-  const how = /iPhone|iPad/.test(ua) ? '공유 버튼(□↑) → <b>홈 화면에 추가</b>' : '메뉴(⋮) → <b>홈 화면에 추가</b>';
+  const ios = /iPhone|iPad/.test(ua);
+  // 카톡 인앱은 OS마다 나가는 길이 다르다 — 아이폰 카톡엔 ⋮가 없고 공유판에 "Safari로 열기"가
+  // 있다(2026-08-28 원장 실기기 스크린샷으로 확인). 안드로이드 카톡은 ⋮ → 다른 브라우저로 열기.
+  const pre = ua.includes('KAKAOTALK')
+    ? (ios ? '공유 버튼 → <b>Safari로 열기</b>를 누른 다음, ' : '오른쪽 아래 <b>⋮ → 다른 브라우저로 열기</b> 한 뒤, ')
+    : '';
+  const how = ios ? '공유 버튼(□↑) → <b>홈 화면에 추가</b>' : '메뉴(⋮) → <b>홈 화면에 추가</b>';
   return `<div class="notice a2hs"><button onclick="try{localStorage.setItem('me_a2hs','1')}catch(e){};this.parentElement.remove()">닫기 ✕</button>
     📱 ${pre}${how} 해두면 다음부터 <b>앱처럼 한 번에</b> 열려요!</div>`;
 }
