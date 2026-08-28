@@ -1732,7 +1732,12 @@ window.ME_DATA = {
     "내답": "blank",
     "유사": null,
     "강의": null,
-    "답변": []
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1_0_OOePl6z8BaHVb3fcAZfl9Mwvk2epL/view\n질문 ①② 둘 다 이 영상 하나에 있어",
+      "at": "2026-08-28"
+     }
+    ]
    }
   ],
   "복습대기": [
