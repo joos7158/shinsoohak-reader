@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신수학 — 오늘 과제 해설</title>
+<style>
+  :root {
+    --bg:#faf7f2; --card:#ffffff; --ink:#2b2620; --sub:#8a8074;
+    --accent:#b5541c; --accent-soft:#f6e3d3; --line:#e8e0d4; --ok:#2e7d32;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI','Malgun Gothic',sans-serif; background:var(--bg); color:var(--ink); }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
+  header { text-align:center; padding:18px 0 6px; }
+  header h1 { font-size:1.35rem; letter-spacing:-0.5px; }
+  header p { color:var(--sub); font-size:0.85rem; margin-top:5px; line-height:1.5; }
+
+  .q { background:var(--card); border:1px solid var(--line); border-radius:14px;
+       margin:12px 0; overflow:hidden; }
+  .q-head { display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; }
+  .q-no { flex:none; width:32px; height:32px; border-radius:9px; background:var(--accent-soft);
+          color:#712B13; font-weight:700; font-size:0.92rem; display:flex;
+          align-items:center; justify-content:center; }
+  .q-mid { flex:1; min-width:0; }
+  .q-title { font-size:0.94rem; font-weight:600; line-height:1.35; }
+  .q-sub { color:var(--sub); font-size:0.78rem; margin-top:3px; }
+  .q-at { flex:none; color:var(--accent); font-weight:700; font-size:0.85rem; }
+  .q.open .q-head { border-bottom:1px solid var(--line); }
+
+  .player { display:none; }
+  .q.open .player { display:block; }
+  .player .frame { position:relative; width:100%; padding-top:56.25%; background:#000; }
+  .player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  .chapters { padding:10px 14px 14px; }
+  .chapters b { font-size:0.8rem; color:var(--sub); display:block; margin-bottom:6px; }
+  .ch { display:flex; gap:8px; padding:6px 8px; border-radius:8px; cursor:pointer;
+        font-size:0.84rem; line-height:1.35; }
+  .ch:hover { background:#f4f0e8; }
+  .ch.cur { background:var(--accent-soft); font-weight:600; }
+  .ch-t { flex:none; color:var(--accent); font-variant-numeric:tabular-nums; }
+
+  .empty { background:var(--card); border:1px solid var(--line); border-radius:14px;
+           padding:22px 18px; text-align:center; color:var(--sub); font-size:0.9rem; line-height:1.6; }
+  .tip { margin-top:18px; color:var(--sub); font-size:0.8rem; text-align:center; line-height:1.6; }
+  footer { text-align:center; margin-top:26px; }
+  footer a { color:var(--accent); font-size:0.85rem; text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎬 오늘 과제 해설</h1>
+    <p id="lead">틀린 문제 옆의 번호를 눌러 보세요.<br>그 문제를 설명한 <b>바로 그 지점</b>부터 재생됩니다.</p>
+  </header>
+
+  <div id="list"></div>
+
+  <p class="tip">영상이 딱 맞지 않으면 아래 <b>목차</b>에서 옆 구간을 눌러 보세요.<br>
+     끝까지 볼 필요 없습니다 — 막힌 데만 보면 됩니다.</p>
+
+  <footer><a id="diaryLink" href="diary.html">📔 수학일기장으로 가기</a></footer>
+</div>
+
+<script src="lecture_data.js"></script>
+<script>
+// ── 열람 기록 비콘 — 리더(index.html)·일기장(diary.html)과 동일한 구글 폼 재사용 ──
+const LOG = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse",
+  코드: "entry.1580342508", 내용: "entry.1507722106"
+};
+const P = new URLSearchParams(location.search);
+const SID = P.get('s') || '';
+// 원장 전용 코드 — 열람 기록을 남기지 않는다(학생 통계 오염 방지, 08-07 hd8x 사고).
+const ADMINS = ['wonjang'];
+const IS_ADMIN = ADMINS.includes(SID);
+const _logged = new Set();
+function logView(label) {
+  if (!SID || IS_ADMIN || _logged.has(label)) return;
+  _logged.add(label);
+  const body = new URLSearchParams();
+  body.append(LOG.코드, SID);
+  body.append(LOG.내용, label);
+  fetch(LOG.action, { method:'POST', mode:'no-cors', body }).catch(()=>{});
+}
+
+const LEC = window.LECTURES || {};
+function mmss(s) { s = s|0; return (s/60|0) + ':' + String(s%60).padStart(2,'0'); }
+
+// p=번호:영상id:초  (시험지 1장 = QR 1개. 문항마다 QR 을 박으면 축소 인쇄에서 스캔이 안 된다)
+const items = (P.get('p') || '').split(',').filter(Boolean).map(function (raw) {
+  const a = raw.split(':');
+  return { no: a[0] || '?', vid: a[1] || '', t: parseInt(a[2] || '0', 10) || 0 };
+}).filter(function (x) { return /^[A-Za-z0-9_-]{11}$/.test(x.vid); });
+
+const listEl = document.getElementById('list');
+if (SID) {
+  document.getElementById('diaryLink').href = 'diary.html?s=' + encodeURIComponent(SID);
+  logView('(과제해설 열기)');
+}
+
+if (!items.length) {
+  listEl.innerHTML = '<div class="empty">이 주소에는 해설이 담겨 있지 않습니다.<br>' +
+                     '시험지에 인쇄된 QR을 다시 찍어 주세요.</div>';
+} else {
+  items.forEach(function (it, idx) {
+    const lec = LEC[it.vid] || { unit: '강의', ch: [] };
+    // 챕터 목록에서 이 지점의 제목을 찾는다(정확히 일치하는 start, 없으면 직전 챕터)
+    let title = '', cur = -1;
+    (lec.ch || []).forEach(function (c, i) {
+      if (c[0] <= it.t) { title = c[1]; cur = i; }
+    });
+    if (!title) title = lec.unit;
+
+    const el = document.createElement('div');
+    el.className = 'q';
+    el.innerHTML =
+      '<div class="q-head">' +
+        '<div class="q-no">' + it.no + '</div>' +
+        '<div class="q-mid">' +
+          '<div class="q-title"></div>' +
+          '<div class="q-sub"></div>' +
+        '</div>' +
+        '<div class="q-at">▶ ' + mmss(it.t) + '</div>' +
+      '</div>' +
+      '<div class="player"><div class="frame"></div>' +
+        '<div class="chapters"><b>이 강의 목차</b><div class="chlist"></div></div>' +
+      '</div>';
+    el.querySelector('.q-title').textContent = title;
+    el.querySelector('.q-sub').textContent = lec.unit + (lec.date ? ' · ' + lec.date : '');
+
+    // 목차 — 매칭이 어긋나도 아이가 스스로 옆 구간으로 갈 수 있게 전체를 띄운다
+    const chl = el.querySelector('.chlist');
+    (lec.ch || []).forEach(function (c, i) {
+      const row = document.createElement('div');
+      row.className = 'ch' + (i === cur ? ' cur' : '');
+      const t = document.createElement('span'); t.className = 'ch-t'; t.textContent = mmss(c[0]);
+      const n = document.createElement('span'); n.textContent = c[1];
+      row.appendChild(t); row.appendChild(n);
+      row.addEventListener('click', function (e) {
+        e.stopPropagation();
+        play(el, it, c[0], c[1]);
+        chl.querySelectorAll('.ch').forEach(function (x) { x.classList.remove('cur'); });
+        row.classList.add('cur');
+      });
+      chl.appendChild(row);
+    });
+
+    el.querySelector('.q-head').addEventListener('click', function () {
+      if (el.classList.contains('open')) { el.classList.remove('open'); return; }
+      document.querySelectorAll('.q.open').forEach(function (o) { o.classList.remove('open'); });
+      el.classList.add('open');
+      if (!el.querySelector('iframe')) play(el, it, it.t, title);
+    });
+    listEl.appendChild(el);
+    if (idx === 0) { el.classList.add('open'); play(el, it, it.t, title); }
+  });
+}
+
+function play(el, it, start, label) {
+  // youtube-nocookie — 학교·자녀보호 구글계정에 걸린 학생도 재생된다(08-07 계정차단 대응)
+  const src = 'https://www.youtube-nocookie.com/embed/' + it.vid +
+              '?start=' + (start|0) + '&rel=0&autoplay=1';
+  el.querySelector('.frame').innerHTML =
+    '<iframe src="' + src + '" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+  el.classList.add('open');
+  logView(it.no + '번 해설 재생 · ' + (label || '') + ' @' + mmss(start));
+}
+</script>
+</body>
+</html>
