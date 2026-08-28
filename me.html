@@ -222,6 +222,17 @@ function schoolHtml(){
 function footHtml(){
   return `<div class="foot"><img src="logo.png" alt="신수학학원"><div>신수학학원</div></div>`;
 }
+// 💬 답 본문 — 🎬 답장 영상(2026-08-28 의무 루틴)이 링크로 오면 버튼으로 살린다.
+//   esc() 만 거치면 URL 이 죽은 글자라 아이가 눌러볼 수 없다. 링크는 답장영상 루틴이
+//   붙인 것만 오므로(원장 손) 첫 URL 하나만 버튼으로 뽑고 나머지는 그대로 글로.
+function replyBody(t){
+  t = String(t||'');
+  const m = t.match(/https?:\/\/[^\s"'<>]+/);
+  if (!m) return `<div class="rb">${esc(t)}</div>`;
+  const rest = t.replace(m[0], '').replace(/🎬 답장 영상:\s*/,'').trim();
+  return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
+    <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px">🎬 선생님 답장 영상 보기</a>`;
+}
 function render(){
   const D = (window.ME_DATA||{})[SID];
   RC = (D && D.리더코드) || (SID.length <= 6 ? SID : '');
@@ -393,7 +404,7 @@ function freeAskHtml(D){
   const rp = (D && D.자유답변) || [];
   const reply = rp.map(r => `<div class="reply">
       <div class="rh">💬 선생님 답</div>
-      <div class="rb">${esc(r.답||'')}</div>
+      ${replyBody(r.답)}
       ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
     </div>`).join('');
   return `<div class="sect">🙋 그 밖에 궁금한 것</div>
@@ -471,7 +482,7 @@ function actsHtml(i, o){
   const rp = (o && o.답변) || [];
   const reply = rp.map(r => `<div class="reply">
       <div class="rh">💬 선생님 답</div>
-      <div class="rb">${esc(r.답||'')}</div>
+      ${replyBody(r.답)}
       ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
     </div>`).join('');
   return `${reply}
