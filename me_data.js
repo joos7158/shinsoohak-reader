@@ -740,7 +740,12 @@ window.ME_DATA = {
      "answer": "④"
     },
     "강의": null,
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/11EaSiJujTox_oEcEG1mZpZAgCDauabi4/view",
+      "at": "2026-08-28"
+     }
+    ],
     "힌트": [
      "AC의 중점 M을 잡고, 삼각형 GAC 안에서 GM이 중선 역할을 한다는 걸 그림으로 정리해봐.",
      "파푸스의 중선정리: 꼭짓점에서 중선 $\\overline{GM}$을 그으면 $\\overline{GA}^2 + \\overline{GC}^2 = 2(\\overline{GM}^2 + \\overline{MC}^2)$이 성립해.",
@@ -971,6 +976,12 @@ window.ME_DATA = {
      "$\\overline{GM} = \\dfrac{1}{2}\\overline{BG}$로 $GM$의 값을 가장 먼저 구하는 것부터 시작해봐.",
      "이제 삼각형 $GAC$에서 $M$이 $\\overline{AC}$의 중점이고 $GM$이 중선이야. 삼각형 전체 $ABC$에 정리를 바로 쓰려 하면 복잡해지니까, 삼각형 $GAC$에 파푸스 중선정리 $\\overline{GA}^2 + \\overline{GC}^2 = 2(\\overline{GM}^2 + \\overline{MC}^2)$를 적용해봐.",
      "$\\overline{MC}^2$을 구했으면, $M$이 $\\overline{AC}$의 중점이라는 사실에서 $\\overline{AC} = 2\\overline{MC}$임을 이용해서 마지막 계산만 하면 돼."
+    ],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/11EaSiJujTox_oEcEG1mZpZAgCDauabi4/view",
+      "at": "2026-08-28"
+     }
     ]
    }
   ],
@@ -2392,7 +2403,12 @@ window.ME_DATA = {
     "다음": "2026-08-17",
     "마지막오답": "2026-08-12",
     "강의": null,
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/11EaSiJujTox_oEcEG1mZpZAgCDauabi4/view",
+      "at": "2026-08-28"
+     }
+    ],
     "유사": {
      "stem": "삼각형  $ABC$\n의 무게중심이다.  ${\\overline{AG}} =5$\n,  ${\\overline{BG}} =6$\n,  ${\\overline{CG}} =7$\n일 때, 변  $AC$\n의 길이는?",
      "choices": [
