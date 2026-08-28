@@ -8,99 +8,126 @@
 <!-- manifest 에 start_url 을 일부러 안 둔다(2026-08-28) — 두면 설치된 앱이 토큰 없는 주소로
      열린다. 아이폰 홈화면 앱은 사파리와 저장소가 분리라 localStorage 복원도 못 받는다.
      start_url 이 없으면 "설치한 그 페이지"(?s=토큰 포함)가 시작 주소가 되어 양쪽 다 안전. -->
-<meta name="theme-color" content="#2e7d32">
+<meta name="theme-color" content="#3182f6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="신수학학원">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { --ink:#1a1a1a; --accent:#2e7d32; --red:#c62828; --line:#e0e0e0; }
+  /* 🎨 2026-08-28 원장 "토스 형태로" — 정본: Desktop\99_보관\기타\DESIGN.md (oh-my-design Toss/TDS,
+     검증 2026-07-11). 토큰: primary #3182f6 · surface #f2f4f6 · fg #191f28 · muted #8b95a1 ·
+     weak CTA #e8f3ff/#1b64da · danger #e42939 · radius 8~16(버튼)/20(카드) · 플랫(그림자 금지).
+     폰트: Toss Product Sans는 재배포 불가 → Pretendard(무료 대체) + 시스템 폴백.
+     변수명(--accent 등)은 옛 이름 유지 — JS 템플릿이 참조하므로 값만 토스로 재지정. */
+  :root { --ink:#191f28; --body:#4e5968; --muted:#8b95a1; --accent:#3182f6; --accent-h:#2272eb;
+          --ok:#14ae5c; --red:#e42939; --line:#e5e8eb; --surface:#f2f4f6;
+          --weak:#e8f3ff; --weakfg:#1b64da; }
   * { box-sizing:border-box; }
-  body { font-family:'Malgun Gothic',sans-serif; color:var(--ink); max-width:720px; margin:0 auto; padding:16px; background:#fafafa; }
-  h1 { font-size:1.2rem; margin:4px 0 2px; }
-  .sub { color:#666; font-size:.85rem; margin-bottom:14px; }
-  .dash { background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:16px; display:flex; gap:20px; flex-wrap:wrap; box-shadow:0 1px 4px rgba(0,0,0,.06); }
-  .dash .kpi { font-size:.9rem; } .dash .kpi b { color:var(--accent); font-size:1.05rem; }
-  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
-  .badge { background:var(--accent); color:#fff; border-radius:6px; padding:2px 10px; font-size:.78rem; font-weight:bold; }
-  /* overflow-x — 폰(375px)에서 긴 한 줄 수식이 잘려 조건이 사라지는 것을 막는다.
-     현재 문항은 전부 줄바꿈되지만(08-25 실측 잘림 0건) 더 긴 식이 올 수 있다. */
-  .problem { font-size:1.03rem; line-height:1.8; margin:10px 0 12px; overflow-x:auto; }
-  .choices { display:flex; flex-direction:column; gap:4px; margin:6px 0 12px; font-size:.98rem; }
-  .ans-row { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0; }
-  .pill { border-radius:8px; padding:5px 12px; font-size:.85rem; font-weight:bold; }
-  .pill.mine { background:#fdeaea; color:var(--red); border:1px solid #f3c0c0; }
-  .pill.correct { background:#e7f4ea; color:var(--accent); border:1px solid #bfe0c8; }
-  details { border:1px solid var(--line); border-radius:8px; margin-top:8px; overflow:hidden; }
-  summary { cursor:pointer; padding:10px 14px; font-weight:bold; background:#f5f5f5; }
-  .slot-body { padding:12px 16px; line-height:1.8; }
-  a.btn, button.btn { display:inline-block; margin-top:10px; background:var(--accent); color:#fff; border:0; border-radius:8px; padding:9px 16px; font-weight:bold; font-size:.9rem; text-decoration:none; cursor:pointer; }
-  .nav { margin-bottom:12px; } .nav a { color:var(--accent); font-weight:bold; text-decoration:none; font-size:.88rem; margin-right:14px; }
-  .note { color:#888; font-size:.8rem; margin-top:16px; line-height:1.6; }
-  .empty { color:#888; padding:24px 0; text-align:center; }
-  /* ── 🎯 시험대비 퀘스트 카드 (2026-08-27) ── */
-  .quest{border:1px solid #e3dcc8;background:linear-gradient(180deg,#fffdf7,#fbf7ec)}
-  .qhead{font-weight:800;font-size:1.02rem;color:#7a1f2b;display:flex;align-items:center;gap:8px}
-  .qdday{font-size:.78rem;background:#7a1f2b;color:#fff;border-radius:8px;padding:2px 8px}
-  .qbarwrap{height:10px;background:#eee5d2;border-radius:6px;margin:10px 0 6px;overflow:hidden}
-  .qbar{height:100%;background:linear-gradient(90deg,#c0533a,#e0a24a);border-radius:6px;transition:width .8s ease}
-  .qstat{font-size:.86rem;color:#666}
-  .qsub{margin-top:10px;font-size:.78rem;font-weight:700;color:#9a8a6a}
-  .qgoal{font-size:.86rem;padding:4px 0;color:#444}
-  .qgoal.qdone{color:#2f7a4f}
-  .qunit{font-size:.74rem;color:#999;margin-right:4px}
-  /* ── 2026-08-25: 세 칸(오늘 / 복습 대기 / 도구함) + 고해소 버튼 ── */
-  .sect { margin:22px 0 8px; font-size:1.02rem; font-weight:bold; display:flex; align-items:center; gap:8px; }
-  .sect .cnt { font-size:.8rem; color:#888; font-weight:normal; }
-  .sect .why { font-size:.78rem; color:#999; font-weight:normal; }
-  .pick { border:1px solid var(--line); border-radius:8px; padding:9px 13px; cursor:pointer; background:#fff; text-align:left; font-size:.98rem; font-family:inherit; color:inherit; }
+  body { font-family:'Pretendard Variable',Pretendard,-apple-system,'Malgun Gothic',sans-serif;
+         color:var(--ink); max-width:720px; margin:0 auto; padding:16px 16px 32px; background:var(--surface); }
+  h1 { font-size:1.35rem; font-weight:700; letter-spacing:-.4px; margin:6px 0 4px; }
+  .sub { color:var(--muted); font-size:.88rem; line-height:1.6; margin-bottom:16px; }
+  .dash { background:#fff; border-radius:20px; padding:16px 20px; margin-bottom:12px;
+          display:flex; gap:22px; flex-wrap:wrap; }
+  .dash .kpi { font-size:.8rem; color:var(--muted); display:flex; flex-direction:column; gap:2px; }
+  .dash .kpi b { color:var(--ink); font-size:1.15rem; font-weight:700; letter-spacing:-.3px; }
+  .card { background:#fff; border-radius:20px; padding:20px; margin-bottom:12px; }
+  .badge { background:var(--weak); color:var(--weakfg); border-radius:8px; padding:3px 10px;
+           font-size:.78rem; font-weight:600; }
+  /* overflow-x — 폰(375px)에서 긴 한 줄 수식이 잘려 조건이 사라지는 것을 막는다. */
+  .problem { font-size:1.02rem; line-height:1.8; margin:12px 0; overflow-x:auto; color:var(--ink); }
+  .choices { display:flex; flex-direction:column; gap:6px; margin:6px 0 12px; font-size:.97rem; color:var(--body); }
+  .ans-row { display:flex; gap:8px; flex-wrap:wrap; margin:6px 0; }
+  .pill { border-radius:8px; padding:6px 12px; font-size:.84rem; font-weight:600; }
+  .pill.mine { background:#fdebec; color:var(--red); }
+  .pill.correct { background:#e6f6ed; color:#0e8a49; }
+  details { border-radius:12px; margin-top:8px; overflow:hidden; background:var(--surface); }
+  summary { cursor:pointer; padding:12px 16px; font-weight:600; font-size:.92rem; color:var(--body); }
+  .slot-body { padding:4px 16px 14px; line-height:1.8; color:var(--body); }
+  a.btn, button.btn { display:inline-block; margin-top:10px; background:var(--weak); color:var(--weakfg);
+    border:0; border-radius:12px; padding:12px 18px; font-weight:600; font-size:.92rem;
+    text-decoration:none; cursor:pointer; font-family:inherit; }
+  a.btn:active, button.btn:active { background:#d8eafe; }
+  .nav { margin-bottom:12px; } .nav a { color:var(--weakfg); font-weight:600; text-decoration:none;
+    font-size:.85rem; margin-right:6px; background:#fff; border-radius:10px; padding:7px 12px; display:inline-block; }
+  .note { color:var(--muted); font-size:.8rem; margin-top:18px; line-height:1.7; text-align:center; }
+  .empty { color:var(--muted); padding:24px 0; text-align:center; line-height:1.7; }
+  /* ── 🎯 시험대비 퀘스트 카드 ── */
+  .quest{}
+  .qhead{font-weight:700;font-size:1.02rem;color:var(--ink);display:flex;align-items:center;gap:8px;letter-spacing:-.3px}
+  .qdday{font-size:.76rem;background:var(--accent);color:#fff;border-radius:8px;padding:3px 9px;font-weight:700}
+  .qbarwrap{height:8px;background:var(--surface);border-radius:6px;margin:14px 0 8px;overflow:hidden}
+  .qbar{height:100%;background:var(--accent);border-radius:6px;transition:width .8s ease}
+  .qstat{font-size:.86rem;color:var(--muted)} .qstat b{color:var(--ink)}
+  .qsub{margin-top:12px;font-size:.78rem;font-weight:700;color:var(--muted)}
+  .qgoal{font-size:.88rem;padding:5px 0;color:var(--body)}
+  .qgoal.qdone{color:#0e8a49}
+  .qunit{font-size:.74rem;color:var(--muted);margin-right:4px}
+  /* ── 세 칸(오늘 / 복습 대기 / 도구함) ── */
+  .sect { margin:24px 4px 10px; font-size:1.05rem; font-weight:700; letter-spacing:-.3px;
+          display:flex; align-items:center; gap:8px; }
+  .sect .cnt { font-size:.8rem; color:var(--muted); font-weight:400; }
+  .sect .why { font-size:.78rem; color:var(--muted); font-weight:400; }
+  .pick { border:1px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer;
+          background:#fff; text-align:left; font-size:.96rem; font-family:inherit; color:var(--body); }
   .pick:hover { border-color:var(--accent); }
-  .pick.ok { background:#e7f4ea; border-color:var(--accent); font-weight:bold; }
-  .pick.no { background:#fdeaea; border-color:#f3c0c0; }
-  .pick[disabled] { cursor:default; opacity:.75; }
-  .verdict { margin:8px 0 2px; font-size:.92rem; font-weight:bold; }
-  .verdict.ok { color:var(--accent); } .verdict.no { color:var(--red); }
-  .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); }
-  button.ask { background:#fff; color:#7a5c00; border:1px solid #e0cf8a; border-radius:8px; padding:9px 14px; font-weight:bold; font-size:.88rem; cursor:pointer; font-family:inherit; }
-  button.ask:hover { background:#fffbe9; }
-  button.ask.sent { background:#fff8e1; color:#8a6d00; border-color:#e6d9a3; cursor:default; }
+  .pick.ok { background:#e6f6ed; border-color:#bfe6cf; color:#0e8a49; font-weight:600; }
+  .pick.no { background:#fdebec; border-color:#f6c6ca; }
+  .pick[disabled] { cursor:default; opacity:.8; }
+  .verdict { margin:10px 0 2px; font-size:.92rem; font-weight:600; }
+  .verdict.ok { color:#0e8a49; } .verdict.no { color:var(--red); }
+  .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; padding-top:14px; border-top:1px solid var(--surface); }
+  button.ask { background:var(--surface); color:var(--body); border:0; border-radius:12px;
+    padding:12px 16px; font-weight:600; font-size:.88rem; cursor:pointer; font-family:inherit; }
+  button.ask:active { background:#e5e8eb; }
+  button.ask.sent { color:var(--muted); cursor:default; }
   .askbox { margin-top:10px; display:none; }
-  .askbox textarea { width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-family:inherit; font-size:.92rem; resize:vertical; min-height:56px; }
-  .askbox .hint { color:#999; font-size:.78rem; margin:4px 0 6px; line-height:1.55; }
-  /* 💬 선생님 답 (2026-08-25) — 질문이 투고함으로 끝나지 않게. 답이 오면 카드 안에 남는다. */
-  .reply { margin-top:12px; border-left:3px solid var(--accent); background:#f3f8f4; border-radius:0 10px 10px 0; padding:11px 14px; }
+  .askbox textarea { width:100%; border:1.5px solid var(--line); border-radius:12px; padding:12px 14px;
+    font-family:inherit; font-size:.92rem; resize:vertical; min-height:56px; background:#fff; }
+  .askbox textarea:focus { outline:none; border-color:var(--accent); }
+  .askbox .hint { color:var(--muted); font-size:.8rem; margin:6px 0; line-height:1.6; }
+  /* 💬 선생님 답 */
+  .reply { margin-top:12px; background:var(--surface); border-radius:12px; padding:13px 16px; }
   .reply + .reply { margin-top:8px; }
-  .reply .rh { font-size:.8rem; font-weight:bold; color:var(--accent); margin-bottom:5px; }
-  .reply .rb { font-size:.93rem; line-height:1.65; white-space:pre-wrap; word-break:break-word; }
-  .reply .rt { font-size:.74rem; color:#8aa08f; margin-top:6px; }
-  .tool { background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 15px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-  .tool .nm { font-size:.93rem; }
-  .tool .ck { color:var(--accent); font-weight:bold; font-size:.85rem; white-space:nowrap; }
-  .due { font-size:.78rem; color:#a0761d; background:#fdf6e3; border:1px solid #eadfb8; border-radius:6px; padding:2px 8px; }
-  /* 💡 5단계 힌트 (2026-08-27 원장 "단계별로 해결할 수 있는 방법") — 한 번에 다 안 보여준다 */
-  .hstep { border-left:3px solid #f0b429; background:#fffaf0; border-radius:0 10px 10px 0; padding:10px 14px; margin-top:8px; }
-  .hstep .hh { font-size:.78rem; font-weight:bold; color:#a0761d; margin-bottom:4px; }
-  .hstep .hb { font-size:.93rem; line-height:1.7; }
-  button.hbtn { margin-top:10px; background:#fff; color:#a0761d; border:1px solid #f0d48a; border-radius:8px; padding:9px 14px; font-weight:bold; font-size:.88rem; cursor:pointer; font-family:inherit; }
-  button.hbtn:hover { background:#fffbe9; }
-  /* 📡 못 보낸 질문 배너 — 조용히 사라지는 질문을 만들지 않는다 (2026-08-25) */
-  .pending { background:#fdf6e3; border:1px solid #eadfb8; color:#8a6d00; border-radius:8px; padding:9px 13px; font-size:.85rem; margin:8px 0 12px; line-height:1.55; }
-  /* 📱 설치 안내 · 👀 학부모 미리보기 (2026-08-28) */
-  .notice { border-radius:10px; padding:10px 13px; font-size:.86rem; line-height:1.6; margin-bottom:12px; }
-  .notice.a2hs { background:#e8f1ec; border:1px solid #bcd8c6; color:#1e5631; }
-  .notice.a2hs button { float:right; border:0; background:none; color:#7aa98a; font-size:.8rem; cursor:pointer; padding:2px 4px; }
-  .notice.demo { background:#eef2f7; border:1px solid #c9d6ea; color:#2b4a9b; }
-  /* 🏫 학교 카드 (2026-08-28 원장 승인) — 우리 학교 급식·시험 D-day. 매일 바뀌는 콘텐츠라
-     채점이 없는 날에도 열 이유가 된다. 데이터=school_feed.js (build_school_feed.py) */
-  .school { border-color:#d7dff0; background:linear-gradient(180deg,#fbfcff,#f3f6fc); }
-  .school .sh { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:bold; font-size:.98rem; }
-  .school .dd { font-size:.78rem; background:#2b4a9b; color:#fff; border-radius:8px; padding:2px 8px; }
-  .school .meal { font-size:.9rem; color:#444; line-height:1.7; margin-top:6px; }
-  .school .meal b { color:#2b4a9b; }
-  .foot { text-align:center; margin:26px 0 8px; color:#aaa; font-size:.75rem; }
-  .foot img { width:110px; display:block; margin:0 auto 4px; opacity:.85; }
+  .reply .rh { font-size:.78rem; font-weight:700; color:var(--weakfg); margin-bottom:5px; }
+  .reply .rb { font-size:.93rem; line-height:1.7; color:var(--body); white-space:pre-wrap; word-break:break-word; }
+  .reply .rt { font-size:.74rem; color:var(--muted); margin-top:6px; }
+  .tool { background:#fff; border-radius:16px; padding:14px 18px; margin-bottom:8px;
+          display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .tool .nm { font-size:.93rem; color:var(--ink); font-weight:600; }
+  .tool .ck { color:#0e8a49; font-weight:600; font-size:.84rem; white-space:nowrap; }
+  .tool .ck a { color:var(--weakfg); }
+  .due { font-size:.76rem; color:var(--muted); background:var(--surface); border-radius:8px; padding:3px 9px; }
+  /* 💡 5단계 힌트 */
+  .hstep { background:var(--weak); border-radius:12px; padding:12px 15px; margin-top:8px; }
+  .hstep .hh { font-size:.78rem; font-weight:700; color:var(--weakfg); margin-bottom:4px; }
+  .hstep .hb { font-size:.93rem; line-height:1.75; color:var(--ink); }
+  button.hbtn { margin-top:10px; background:var(--weak); color:var(--weakfg); border:0; border-radius:12px;
+    padding:12px 16px; font-weight:600; font-size:.88rem; cursor:pointer; font-family:inherit; }
+  button.hbtn:active { background:#d8eafe; }
+  /* 📡 못 보낸 질문 배너 */
+  .pending { background:#fff; border:1.5px solid var(--line); color:var(--body); border-radius:12px;
+    padding:12px 15px; font-size:.85rem; margin:8px 0 12px; line-height:1.6; }
+  /* 📱 설치 안내 · 👀 학부모 미리보기 */
+  .notice { border-radius:16px; padding:14px 16px; font-size:.87rem; line-height:1.65; margin-bottom:12px; }
+  .notice.a2hs { background:var(--weak); color:var(--weakfg); }
+  .notice.a2hs b { color:#0f56c9; }
+  .notice.a2hs button { float:right; border:0; background:none; color:var(--weakfg); opacity:.7;
+    font-size:.8rem; cursor:pointer; padding:2px 4px; font-family:inherit; }
+  .notice.demo { background:#fff; color:var(--body); border:1.5px solid var(--line); }
+  /* 🏫 학교 카드 */
+  .school {}
+  .school .sh { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:700;
+    font-size:1rem; letter-spacing:-.3px; }
+  .school .dd { font-size:.76rem; background:var(--accent); color:#fff; border-radius:8px;
+    padding:3px 9px; font-weight:700; }
+  .school .meal { font-size:.9rem; color:var(--body); line-height:1.7; margin-top:8px; }
+  .school .meal b { color:var(--weakfg); }
+  .foot { text-align:center; margin:28px 0 8px; color:var(--muted); font-size:.75rem; }
+  .foot img { width:96px; display:block; margin:0 auto 4px; opacity:.8; }
 </style>
 </head>
 <body>
@@ -347,7 +374,7 @@ function reviewCard(r){
   const seg=r.강의;
   const lec = seg? rbtn('▶ 강의 다시보기', `#u${seg[0]}q${seg[1]}`) : '';
   return `<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 18px">
-    <span class="badge" style="background:#eef2f7;color:#2b4a9b">${esc(r.유형)}</span>${lec}</div>`;
+    <span class="badge">${esc(r.유형)}</span>${lec}</div>`;
 }
 // ── 유사문제 자가채점 + 고해소 버튼 (2026-08-25) ──────────────────
 //  🔴 왜 자가채점인가: 원장 지시대로 "이해했어요"만 눌러서 도구함으로 보내면 안 된다.
@@ -559,7 +586,7 @@ function waitCard(o,i){
   const 단계말 = ['처음 다시 보는 거예요','한 번 맞혔던 유형이에요','두 번 맞혔어요 — 이번이 마지막 확인!'][o.단계] || '';
   return `
   <div class="card">
-    <span class="badge" id="ty_${i}" style="background:#eef2f7;color:#2b4a9b">${esc(o.유형)}</span>
+    <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     <span class="due">${esc(o.마지막오답||'')}에 틀림</span>
     <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
     ${o.유사 ? `<div class="problem">${esc(o.유사.stem)}</div>
