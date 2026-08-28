@@ -680,8 +680,11 @@ function renderDetail(U, i) {
            <div class="choices">${(s.선지||[]).map(c => `<span>${c}</span>`).join('')}</div>`
         : `<div class="problem slot-empty">${V.textbook} ${s.쪽}쪽 · ${s.문항}${isConcept?'':'번'} (교재를 펴 놓고 들으세요)</div>`}
       ${V.youtube
+        /* enablejsapi=1 은 origin 없이는 유튜브가 재생을 막는다(오류 153 "플레이어 구성 오류",
+           2025 정책. 2026-08-28 실측 — 재생 버튼은 뜨는데 눌러도 시작이 안 되는 증상).
+           file:// 에서는 origin 이 "null" 이라 붙이면 오히려 죽는다 → http 일 때만. */
         ? `<iframe id="ytplayer" class="player" allowfullscreen
-             src="https://www.youtube-nocookie.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0&enablejsapi=1"></iframe>
+             src="https://www.youtube-nocookie.com/embed/${V.youtube}?start=${s.start}&end=${s.end}&rel=0&enablejsapi=1${location.origin.startsWith('http')?'&origin='+encodeURIComponent(location.origin):''}"></iframe>
            <div class="speed-row"><span class="speed-label">배속</span>
              ${[0.75,1,1.25,1.5,2].map(r=>`<button class="speed-btn${r===1?' active':''}" onclick="setSpeed(${r},this)">${r}x</button>`).join('')}
            </div>`
