@@ -160,8 +160,11 @@ if (!items.length) {
 
 function play(el, it, start, label) {
   // youtube-nocookie — 학교·자녀보호 구글계정에 걸린 학생도 재생된다(08-07 계정차단 대응)
+  // origin — 2025 유튜브 정책: 없으면 임베드가 오류 153("플레이어 구성 오류")으로 죽는다
+  //   (리더 index.html에서 08-28 실측·수리한 것과 같은 원인. file:// 은 origin이 "null"이라 제외).
   const src = 'https://www.youtube-nocookie.com/embed/' + it.vid +
-              '?start=' + (start|0) + '&rel=0&autoplay=1';
+              '?start=' + (start|0) + '&rel=0&autoplay=1' +
+              (location.origin.startsWith('http') ? '&origin=' + encodeURIComponent(location.origin) : '');
   el.querySelector('.frame').innerHTML =
     '<iframe src="' + src + '" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
   el.classList.add('open');
