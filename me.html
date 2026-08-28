@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나의 오답노트 — 신수학</title>
 <link rel="manifest" href="manifest.json">
+<!-- manifest 에 start_url 을 일부러 안 둔다(2026-08-28) — 두면 설치된 앱이 토큰 없는 주소로
+     열린다. 아이폰 홈화면 앱은 사파리와 저장소가 분리라 localStorage 복원도 못 받는다.
+     start_url 이 없으면 "설치한 그 페이지"(?s=토큰 포함)가 시작 주소가 되어 양쪽 다 안전. -->
 <meta name="theme-color" content="#2e7d32">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="신수학학원">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>

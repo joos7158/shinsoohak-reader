@@ -1,8 +1,7 @@
 {
-  "name": "신수학 나의 오답노트",
-  "short_name": "신수학",
-  "description": "신수학학원 재원생 개인 페이지 — 오답노트·급식·시험 D-day",
-  "start_url": "./me.html",
+  "name": "신수학학원",
+  "short_name": "신수학학원",
+  "description": "신수학학원 재원생 개인 페이지 — 오답노트·급식·시험 D-day·선생님 답장",
   "scope": "./",
   "display": "standalone",
   "background_color": "#fafafa",
