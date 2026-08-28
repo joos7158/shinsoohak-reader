@@ -79,6 +79,15 @@
   button.hbtn:hover { background:#fffbe9; }
   /* 📡 못 보낸 질문 배너 — 조용히 사라지는 질문을 만들지 않는다 (2026-08-25) */
   .pending { background:#fdf6e3; border:1px solid #eadfb8; color:#8a6d00; border-radius:8px; padding:9px 13px; font-size:.85rem; margin:8px 0 12px; line-height:1.55; }
+  /* 🏫 학교 카드 (2026-08-28 원장 승인) — 우리 학교 급식·시험 D-day. 매일 바뀌는 콘텐츠라
+     채점이 없는 날에도 열 이유가 된다. 데이터=school_feed.js (build_school_feed.py) */
+  .school { border-color:#d7dff0; background:linear-gradient(180deg,#fbfcff,#f3f6fc); }
+  .school .sh { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:bold; font-size:.98rem; }
+  .school .dd { font-size:.78rem; background:#2b4a9b; color:#fff; border-radius:8px; padding:2px 8px; }
+  .school .meal { font-size:.9rem; color:#444; line-height:1.7; margin-top:6px; }
+  .school .meal b { color:#2b4a9b; }
+  .foot { text-align:center; margin:26px 0 8px; color:#aaa; font-size:.75rem; }
+  .foot img { width:110px; display:block; margin:0 auto 4px; opacity:.85; }
 </style>
 </head>
 <body>
@@ -86,6 +95,7 @@
 
 <script src="me_data.js"></script>
 <script src="me_quests.js"></script>
+<script src="school_feed.js"></script>
 <script>
 const SID = new URLSearchParams(location.search).get('s') || '';
 // 2026-08-13 — 이 페이지의 열쇠(SID)는 긴 토큰으로 바뀌었다. 리더(index.html)는 여전히
@@ -180,6 +190,38 @@ function questHtml(){
   </div>`;
 }
 
+// 🏫 학교 카드 — 2026-08-28 원장 승인(공개 repo에 토큰↔학교 결합 생김을 알고 승인).
+//   급식·D-day 는 학생이 학교를 고르지 않아도 자기 학교 것이 그냥 뜬다(명단 정본에 이미 있으니까).
+//   D-day 정본 = master CSV 시험일(원장 확정값). 급식은 NEIS, 오늘 없으면(주말·방학) 다음 급식.
+function schoolHtml(){
+  const F = window.SCHOOL_FEED || {};
+  const T = (F.tokens||{})[SID];
+  if (!T) return '';
+  const meals = ((F.schools||{})[T.s]||{}).meals || {};
+  const now = new Date();
+  const ymd = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  let dd = null;
+  (T.exams||[]).forEach(e=>{
+    const t = Math.round((new Date(e.d) - new Date(ymd(now))) / 864e5);
+    if (t >= 0 && t <= 60 && (!dd || t < dd.t)) dd = {t, label:e.label};
+  });
+  const ddHtml = dd ? `<span class="dd">${esc(dd.label)} ${dd.t===0?'D-DAY':'D-'+dd.t}</span>` : '';
+  let mealHtml = '';
+  for (let k = 0; k <= 7; k++){
+    const d = new Date(now); d.setDate(d.getDate()+k);
+    const m = meals[ymd(d)];
+    if (m){
+      const when = k===0 ? '오늘 급식' : `다음 급식 (${d.getMonth()+1}/${d.getDate()} ${'일월화수목금토'[d.getDay()]})`;
+      mealHtml = `<div class="meal">🍚 <b>${esc(when)}</b> — ${m.map(esc).join(' · ')}</div>`;
+      break;
+    }
+  }
+  if (!ddHtml && !mealHtml) return '';
+  return `<div class="card school"><div class="sh">🏫 ${esc(T.s)} ${ddHtml}</div>${mealHtml}</div>`;
+}
+function footHtml(){
+  return `<div class="foot"><img src="logo.png" alt="신수학학원"><div>신수학학원</div></div>`;
+}
 function render(){
   const D = (window.ME_DATA||{})[SID];
   RC = (D && D.리더코드) || (SID.length <= 6 ? SID : '');
@@ -191,9 +233,11 @@ function render(){
   if (D.대기) {
     app.innerHTML = `<div class="nav">${rlink('▶ 유형별 강의')}</div>
       <h1>📕 나의 오답노트</h1>
+      ${schoolHtml()}
       <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>
       <div id="pending" class="pending" style="display:none"></div>
-      ${freeAskHtml(D)}`;   /* 채점 전에도 물어볼 수 있어야 한다 (2026-08-25 (나)) */
+      ${freeAskHtml(D)}
+      ${footHtml()}`;   /* 채점 전에도 물어볼 수 있어야 한다 (2026-08-25 (나)) */
     renderPending(qGet().length);
     flushQueue(renderPending);
     return;
@@ -216,6 +260,7 @@ function render(){
       <div class="kpi">🧰 도구함 <b>${box.length}개</b></div>
     </div>
 
+    ${schoolHtml()}
     ${questHtml()}
 
     <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
@@ -233,7 +278,8 @@ function render(){
     ${(D.복습&&D.복습.length)? `<div class="sect">📺 시험 대비 복습 강의</div>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
     ${freeAskHtml(D)}
     <div class="note">신수학 재원생 전용 · 이 페이지는 <b>나만</b> 볼 수 있어요.<br>
-      질문한 건 선생님만 봅니다 — 틀린 걸 부끄러워하지 않아도 돼요.</div>`;
+      질문한 건 선생님만 봅니다 — 틀린 걸 부끄러워하지 않아도 돼요.</div>
+    ${footHtml()}`;
   if (window.renderMathInElement) renderMathInElement(app, {
     delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
   // 지난번에 못 보낸 질문이 있으면 지금 조용히 다시 보낸다(아이가 다시 쓸 필요 없다).
