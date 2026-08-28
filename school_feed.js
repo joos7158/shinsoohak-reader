@@ -286,6 +286,19 @@ window.SCHOOL_FEED = {
   "QymwTX87H7xSJtAsB2q4jg": {
    "s": "신일중",
    "exams": []
+  },
+  "demo": {
+   "s": "오마중학교",
+   "exams": [
+    {
+     "d": "2026-10-01",
+     "label": "2학기 중간고사"
+    },
+    {
+     "d": "2026-11-20",
+     "label": "2학기 기말고사"
+    }
+   ]
   }
  },
  "schools": {

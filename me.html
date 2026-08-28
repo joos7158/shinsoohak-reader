@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나의 오답노트 — 신수학</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2e7d32">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
@@ -79,6 +82,11 @@
   button.hbtn:hover { background:#fffbe9; }
   /* 📡 못 보낸 질문 배너 — 조용히 사라지는 질문을 만들지 않는다 (2026-08-25) */
   .pending { background:#fdf6e3; border:1px solid #eadfb8; color:#8a6d00; border-radius:8px; padding:9px 13px; font-size:.85rem; margin:8px 0 12px; line-height:1.55; }
+  /* 📱 설치 안내 · 👀 학부모 미리보기 (2026-08-28) */
+  .notice { border-radius:10px; padding:10px 13px; font-size:.86rem; line-height:1.6; margin-bottom:12px; }
+  .notice.a2hs { background:#e8f1ec; border:1px solid #bcd8c6; color:#1e5631; }
+  .notice.a2hs button { float:right; border:0; background:none; color:#7aa98a; font-size:.8rem; cursor:pointer; padding:2px 4px; }
+  .notice.demo { background:#eef2f7; border:1px solid #c9d6ea; color:#2b4a9b; }
   /* 🏫 학교 카드 (2026-08-28 원장 승인) — 우리 학교 급식·시험 D-day. 매일 바뀌는 콘텐츠라
      채점이 없는 날에도 열 이유가 된다. 데이터=school_feed.js (build_school_feed.py) */
   .school { border-color:#d7dff0; background:linear-gradient(180deg,#fbfcff,#f3f6fc); }
@@ -97,7 +105,16 @@
 <script src="me_quests.js"></script>
 <script src="school_feed.js"></script>
 <script>
-const SID = new URLSearchParams(location.search).get('s') || '';
+// 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
+//   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
+//   🔴 demo(학부모 미리보기)는 기억하지 않는다 — 아이 폰에서 미리보기를 열었다가
+//   자기 토큰이 demo 로 덮이면 앱 아이콘이 남의집 구경 화면이 돼버린다.
+let SID = new URLSearchParams(location.search).get('s') || '';
+try {
+  if (SID && SID !== 'demo') localStorage.setItem('me_sid', SID);
+  else if (!SID) SID = localStorage.getItem('me_sid') || '';
+} catch(e) {}
+const IS_DEMO = (SID === 'demo');
 // 2026-08-13 — 이 페이지의 열쇠(SID)는 긴 토큰으로 바뀌었다. 리더(index.html)는 여전히
 // 4자 코드로 학생을 식별하므로, 강의 링크에는 데이터에 실려온 리더코드를 쓴다.
 // 옛 4자 코드로 들어온 경우(demo 등)는 SID 를 그대로 쓴다.
@@ -108,7 +125,7 @@ function rbtn(label, hash){ const u = rurl(hash); return u ? `<a class="btn" hre
 // 열람 기록 비콘 (리더와 동일 폼)
 const LOG = { action:"https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse", 코드:"entry.1580342508", 내용:"entry.1507722106" };
 const _logged = new Set();
-function logView(label){ if(!SID||_logged.has(label))return; _logged.add(label);
+function logView(label){ if(!SID||IS_DEMO||_logged.has(label))return; _logged.add(label);
   const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
   fetch(LOG.action,{method:'POST',mode:'no-cors',body:b}).catch(()=>{}); }
 // 🔴 2026-08-25 — 아이 행동(질문·정복)도 **같은 폼**으로 남긴다. 이 페이지는 GitHub Pages(정적)라
@@ -125,6 +142,7 @@ function qGet(){ try { return JSON.parse(localStorage.getItem(QKEY)||'[]'); } ca
 function qSet(a){ try { localStorage.setItem(QKEY, JSON.stringify(a.slice(-30))); } catch(e){} }
 function qAdd(label){ const a=qGet(); a.push({label, at:new Date().toISOString().slice(0,16)}); qSet(a); }
 function postLog(label){
+  if (IS_DEMO) return Promise.resolve();   // 미리보기는 열람로그·질문 시트를 더럽히지 않는다
   const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
   return fetch(LOG.action,{method:'POST',mode:'no-cors',body:b});
 }
@@ -222,6 +240,23 @@ function schoolHtml(){
 function footHtml(){
   return `<div class="foot"><img src="logo.png" alt="신수학학원"><div>신수학학원</div></div>`;
 }
+// 📱 상단 안내 — 학부모 미리보기(demo) 또는 홈 화면 설치 유도(진짜 학생, 1회 닫으면 끝).
+//   카톡 인앱 브라우저는 "홈 화면에 추가"가 없어서 브라우저로 나가는 단계부터 알려준다.
+function noticeHtml(){
+  if (IS_DEMO) return `<div class="notice demo">👀 <b>학부모 미리보기</b> — 실제 학생이 아닌 <b>가상 예시 화면</b>입니다.<br>
+    재원생은 이 자리에 본인의 오답·유사문제·단계별 힌트·선생님 답장(영상)이 담깁니다.</div>`;
+  try {
+    if (!SID || localStorage.getItem('me_a2hs') === '1') return '';
+    if (matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      localStorage.setItem('me_a2hs','1'); return '';   // 이미 앱으로 열었다 — 다시 안 띄움
+    }
+  } catch(e){ return ''; }
+  const ua = navigator.userAgent;
+  const pre = ua.includes('KAKAOTALK') ? '오른쪽 아래 <b>⋮ → 다른 브라우저로 열기</b> 한 뒤, ' : '';
+  const how = /iPhone|iPad/.test(ua) ? '공유 버튼(□↑) → <b>홈 화면에 추가</b>' : '메뉴(⋮) → <b>홈 화면에 추가</b>';
+  return `<div class="notice a2hs"><button onclick="try{localStorage.setItem('me_a2hs','1')}catch(e){};this.parentElement.remove()">닫기 ✕</button>
+    📱 ${pre}${how} 해두면 다음부터 <b>앱처럼 한 번에</b> 열려요!</div>`;
+}
 // 💬 답 본문 — 🎬 답장 영상(2026-08-28 의무 루틴)이 링크로 오면 버튼으로 살린다.
 //   esc() 만 거치면 URL 이 죽은 글자라 아이가 눌러볼 수 없다. 링크는 답장영상 루틴이
 //   붙인 것만 오므로(원장 손) 첫 URL 하나만 버튼으로 뽑고 나머지는 그대로 글로.
@@ -242,7 +277,7 @@ function render(){
   }
   logView('오답노트 열기');
   if (D.대기) {
-    app.innerHTML = `<div class="nav">${rlink('▶ 유형별 강의')}</div>
+    app.innerHTML = `${noticeHtml()}<div class="nav">${rlink('▶ 유형별 강의')}</div>
       <h1>📕 나의 오답노트</h1>
       ${schoolHtml()}
       <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>
@@ -258,7 +293,7 @@ function render(){
   //   ① 오늘 틀린 것 ② 복습 대기(예전에 틀리고 아직 정복 못 한 것 — 빌더가 다시 물을 때가 된
   //   것만 3개 올려준다) ③ 내 도구함(정복 완료, 접혀 있지만 언제든 다시 열림).
   const list = D.오답||[], wait = D.복습대기||[], box = D.도구함||[];
-  app.innerHTML = `
+  app.innerHTML = `${noticeHtml()}
     <div class="nav">${rlink('▶ 유형별 강의')}<a href="#">🔄 새로고침</a></div>
     <h1>📕 나의 오답노트</h1>
     <div id="pending" class="pending" style="display:none"></div>
@@ -378,6 +413,11 @@ function askOpen(id){
   if (b) b.style.display = b.style.display==='block' ? 'none' : 'block';
 }
 function askSend(id, btn){
+  if (IS_DEMO){   // 미리보기 — 보내는 척하면 학부모가 "전달됐다"고 오해한다. 정직하게.
+    const bx = document.getElementById('ab_'+id);
+    if (bx) bx.innerHTML = '<div class="hint">👀 미리보기 화면이라 실제로 전송되지는 않아요. 아이 화면에서는 선생님께 바로 전달됩니다.</div>';
+    return;
+  }
   const ta = document.getElementById('at_'+id);
   const t = (document.getElementById('ty_'+id)||{}).textContent || '';
   const memo = ta && ta.value.trim() ? ' — ' + ta.value.trim().slice(0,120) : '';
@@ -424,6 +464,11 @@ function freeAskHtml(D){
     </div>`;
 }
 function freeSend(btn){
+  if (IS_DEMO){
+    const bx = document.getElementById('ab_free');
+    if (bx) bx.innerHTML = '<div class="hint">👀 미리보기 화면이라 실제로 전송되지는 않아요. 아이 화면에서는 선생님께 바로 전달됩니다.</div>';
+    return;
+  }
   const ta = document.getElementById('at_free');
   const v = ta ? ta.value.trim() : '';
   if (!v) {                       // 빈 전송 차단 — 문항이 안 붙으니 내용이 없으면 못 읽는다
