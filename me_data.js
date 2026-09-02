@@ -832,7 +832,12 @@ window.ME_DATA = {
      "answer": "⑤"
     },
     "강의": null,
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1Rdl2o1yiq__MsoNEp0OzyJdMB6waIQtm/view",
+      "at": "2026-09-03"
+     }
+    ],
     "힌트": [
      "$\\angle APB = 45°$가 원주각임을 이용해서 세 점 A, B, P를 지나는 원의 반지름을 먼저 구하고, 그다음 중심 C의 좌표를 찾는 순서로 정리해보자.",
      "사인 법칙 $\\frac{AB}{\\sin(\\angle APB)} = 2R$ 을 쓰면 현의 길이만으로 반지름 $R$을 바로 구할 수 있어 — 이 공식 기억나?",
@@ -1278,7 +1283,12 @@ window.ME_DATA = {
      "answer": "⑤"
     },
     "강의": null,
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1Rdl2o1yiq__MsoNEp0OzyJdMB6waIQtm/view",
+      "at": "2026-09-03"
+     }
+    ],
     "힌트": [
      "좌표평면에 A, B를 찍고, ∠APB = 45°라는 원주각 정보로 원의 반지름을 먼저 구하는 방향으로 접근해보자.",
      "사인법칙 $AB = 2R\\sin(\\angle APB)$를 기억해? 원주각과 변의 관계로 반지름 $R$을 바로 구할 수 있어.",
