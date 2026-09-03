@@ -66,6 +66,16 @@
   .qgoal{font-size:.88rem;padding:5px 0;color:var(--body)}
   .qgoal.qdone{color:#0e8a49}
   .qunit{font-size:.74rem;color:var(--muted);margin-right:4px}
+  /* ── 📅 Final 플랜 카드 ── */
+  .fproutine{margin:10px 0 6px;font-size:.84rem;color:var(--body);background:var(--surface);border-radius:10px;padding:8px 10px}
+  .fpweek{border-top:1px solid var(--line);padding:8px 0}
+  .fpweek summary{cursor:pointer;font-size:.9rem;color:var(--ink);list-style:none}
+  .fpweek summary::-webkit-details-marker{display:none}
+  .fpdate{font-size:.76rem;color:var(--muted);margin-left:4px}
+  .fpnow{font-size:.7rem;background:var(--accent);color:#fff;border-radius:8px;padding:2px 7px;margin-left:6px;font-weight:700}
+  .fpdone{font-size:.7rem;color:#0e8a49;margin-left:6px;font-weight:700}
+  .fpfocus{font-size:.82rem;color:var(--body);margin-top:3px}
+  .fpitem{font-size:.84rem;color:var(--body);padding:4px 0 0 6px;line-height:1.5}
   /* ── 세 칸(오늘 / 복습 대기 / 도구함) ── */
   .sect { margin:24px 4px 10px; font-size:1.05rem; font-weight:700; letter-spacing:-.3px;
           display:flex; align-items:center; gap:8px; }
@@ -136,6 +146,7 @@
 
 <script src="me_data.js"></script>
 <script src="me_quests.js"></script>
+<script src="me_final_plan.js"></script>
 <script src="school_feed.js"></script>
 <script>
 // 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
@@ -288,6 +299,32 @@ function questHtml(){
   </div>`;
 }
 
+// 📅 Final 플랜 카드 (2026-09-03 원장) — final_plan.py 가 만든 me_final_plan.js 를 읽는다.
+//   결핍 명세서 금지 원칙 동일: 오답 수·등급명 없음. 이번 단계만 펼치고 나머지는 접어 둔다.
+function finalPlanHtml(){
+  const P = (window.ME_FINAL_PLAN||{})[SID];
+  if (!P || !(P.weeks||[]).length) return '';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const ymd = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const t = ymd(today);
+  let cur = P.weeks.findIndex(w => w.from <= t && t <= w.to);
+  if (cur < 0) cur = (t < P.weeks[0].from) ? 0 : P.weeks.length - 1;
+  const md = s => (s||'').slice(5).replace('-','/');
+  const weeks = P.weeks.map((w,i) => {
+    const todo = (w.todo||[]).map(x => `<div class="fpitem">▫ ${esc(x)}</div>`).join('');
+    const open = (i === cur) ? ' open' : '';
+    const tag = (i === cur) ? '<span class="fpnow">지금</span>' : (i < cur ? '<span class="fpdone">완료</span>' : '');
+    return `<details class="fpweek"${open}><summary><b>${esc(w.label)}</b> <span class="fpdate">${md(w.from)}~${md(w.to)}</span> ${tag}
+      <div class="fpfocus">${esc(w.focus)}</div></summary>${todo}</details>`;
+  }).join('');
+  return `
+  <div class="card fplan">
+    <div class="qhead">📅 ${esc(P.school||'')} 시험까지 단계별 플랜</div>
+    <div class="fproutine">🃏 ${esc(P.routine||'')}</div>
+    ${weeks}
+  </div>`;
+}
+
 // 🏫 학교 카드 — 2026-08-28 원장 승인(공개 repo에 토큰↔학교 결합 생김을 알고 승인).
 //   급식·D-day 는 학생이 학교를 고르지 않아도 자기 학교 것이 그냥 뜬다(명단 정본에 이미 있으니까).
 //   D-day 정본 = master CSV 시험일(원장 확정값). 급식은 NEIS, 오늘 없으면(주말·방학) 다음 급식.
@@ -393,6 +430,7 @@ function render(){
 
     ${schoolHtml()}
     ${questHtml()}
+    ${finalPlanHtml()}
 
     <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
     ${list.length? list.map((o,i)=>card(o,'t'+i)).join('')
