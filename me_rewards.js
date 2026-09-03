@@ -4,7 +4,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -13,7 +13,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -22,7 +22,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -31,7 +31,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -40,7 +40,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -49,7 +49,7 @@ window.ME_REWARDS = {
   "stamps": 1,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
    "두 점을 지나는 직선의 방정식"
@@ -60,7 +60,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -69,7 +69,7 @@ window.ME_REWARDS = {
   "stamps": 1,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-29"
   ],
@@ -80,7 +80,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -89,7 +89,7 @@ window.ME_REWARDS = {
   "stamps": 1,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-28"
   ],
@@ -100,7 +100,7 @@ window.ME_REWARDS = {
   "stamps": 2,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-30"
   ],
@@ -113,7 +113,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -122,7 +122,7 @@ window.ME_REWARDS = {
   "stamps": 3,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-29",
    "2026-09-01"
@@ -136,7 +136,7 @@ window.ME_REWARDS = {
   "stamps": 2,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-09-01"
   ],
@@ -149,7 +149,7 @@ window.ME_REWARDS = {
   "stamps": 2,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-28"
   ],
@@ -162,7 +162,7 @@ window.ME_REWARDS = {
   "stamps": 4,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-28"
   ],
@@ -177,7 +177,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -186,7 +186,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -195,7 +195,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -204,7 +204,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -213,7 +213,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -222,7 +222,7 @@ window.ME_REWARDS = {
   "stamps": 1,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
    "유리함수와 무리함수의 그래프 (교점 존재 조건)"
@@ -233,7 +233,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -242,7 +242,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -251,7 +251,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
@@ -260,7 +260,7 @@ window.ME_REWARDS = {
   "stamps": 0,
   "redeemed": 0,
   "per": 10,
-  "gift": "선생님이 준비한 선물",
+  "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
   "today": "2026-09-04"
