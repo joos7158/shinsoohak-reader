@@ -81,6 +81,8 @@
           display:flex; align-items:center; gap:8px; }
   .sect .cnt { font-size:.8rem; color:var(--muted); font-weight:400; }
   .sect .why { font-size:.78rem; color:var(--muted); font-weight:400; }
+  .sect.today { color:var(--accent); margin-top:8px; }
+  .sect.today + .card { border:2px solid var(--accent); }
   .pick { border:1px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer;
           background:#fff; text-align:left; font-size:.96rem; font-family:inherit; color:var(--body); }
   .pick:hover { border-color:var(--accent); }
@@ -388,7 +390,7 @@ function replyBody(t){
   if (!m) return `<div class="rb">${esc(t)}</div>`;
   const rest = t.replace(m[0], '').replace(/🎬 답장 영상:\s*/,'').trim();
   return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
-    <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px">🎬 선생님 답장 영상 보기</a>`;
+    <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문')">🎬 선생님 답장 영상 보기</a>`;
 }
 function render(){
   const D = (window.ME_DATA||{})[SID];
@@ -415,6 +417,19 @@ function render(){
   //   ① 오늘 틀린 것 ② 복습 대기(예전에 틀리고 아직 정복 못 한 것 — 빌더가 다시 물을 때가 된
   //   것만 3개 올려준다) ③ 내 도구함(정복 완료, 접혀 있지만 언제든 다시 열림).
   const list = D.오답||[], wait = D.복습대기||[], box = D.도구함||[];
+  // ⭐ 오늘 이거 하나 (2026-09-04 원장) — 실측: 열기 135회 vs 유사문제 풀기 15회. 열고 나서
+  //   할 게 안 보이니 닫는다. 그래서 첫 화면 = 유사문제 있는 카드 **딱 하나**(오늘 오답 > 복습대기,
+  //   이 기기에서 이미 맞힌 건 건너뜀). 나머지는 그 아래 그대로. 맞히든 틀리든 내일 되짚기 종이에
+  //   그 유형이 나온다(러너 배선) — "내가 한 게 내일 나온다"를 아이가 보게 하는 것이 목적.
+  const _mem = memGet();
+  let todayId = '', todayHtml = '';
+  for (let i=0; i<list.length && !todayId; i++) if (list[i].유사 && !_mem['ok_t'+i]) todayId = 't'+i;
+  for (let i=0; i<wait.length && !todayId; i++) if (wait[i].유사 && !_mem['ok_w'+i]) todayId = 'w'+i;
+  if (todayId){
+    const isT = todayId[0]==='t', k = +todayId.slice(1);
+    todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">· 5분이면 돼요. 맞히면 내일 종이에서 한 번 더 확인해요</span></div>
+      ${isT ? card(list[k], todayId) : waitCard(wait[k], todayId)}`;
+  }
   app.innerHTML = `${noticeHtml()}
     <div class="nav">${rlink('▶ 유형별 강의')}<a href="#">🔄 새로고침</a></div>
     <h1>📕 나의 오답노트</h1>
@@ -432,13 +447,15 @@ function render(){
     ${questHtml()}
     ${finalPlanHtml()}
 
+    ${todayHtml}
+
     <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
-    ${list.length? list.map((o,i)=>card(o,'t'+i)).join('')
-      : `<div class="card" style="text-align:center"><div style="font-size:1.05rem;font-weight:bold;color:var(--accent)">오늘은 틀린 게 없어요</div><div class="sub" style="margin-top:6px">아래 복습 대기만 한 번 확인해 볼까요?</div></div>`}
+    ${list.length? list.map((o,i)=>(todayId==='t'+i)?'':card(o,'t'+i)).join('') + (todayId&&todayId[0]==='t'&&list.length===1?`<div class="card" style="text-align:center;color:var(--muted);font-size:.9rem">오늘 틀린 건 위에 있는 하나뿐이에요</div>`:'')
+      : `<div class="card" style="text-align:center"><div style="font-size:1.05rem;font-weight:bold;color:var(--accent)">오늘은 틀린 게 없어요</div><div class="sub" style="margin-top:6px">위에 있는 하나만 확인해 볼까요?</div></div>`}
 
     ${wait.length? `<div class="sect">🔁 복습 대기 <span class="cnt">${wait.length}개</span>
       <span class="why">· 예전에 틀린 유형이에요. 다시 볼 때가 됐어요</span></div>
-      ${wait.map((o,i)=>waitCard(o,'w'+i)).join('')}`:''}
+      ${wait.map((o,i)=>(todayId==='w'+i)?'':waitCard(o,'w'+i)).join('')}`:''}
 
     ${box.length? `<div class="sect">🧰 내 도구함 <span class="cnt">${box.length}개</span>
       <span class="why">· 세 번 연속 맞힌 유형이에요. 언제든 다시 열어볼 수 있어요</span></div>
@@ -489,12 +506,12 @@ function pickAns(id, chosen, mark, el){
   const t = (document.getElementById('ty_'+id)||{}).textContent || '';
   if (ok){
     vd.className = 'verdict ok';
-    vd.textContent = '✅ 맞았어요 — 이 유형은 이제 손에 잡혔네요!';
+    vd.textContent = '✅ 맞았어요 — 내일 되짚기 종이에서 한 번 더 확인해요. 거기서도 맞히면 도구함으로!';
     logAct('정복 ⭕ ' + t);
     memSet('ok_'+id, 1);
   } else {
     vd.className = 'verdict no';
-    vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 강의를 한 번 보고 다시 오면 돼요.';
+    vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 내일 되짚기에 이 단원이 나와요. 강의 한 번 보고 가면 돼요.';
     logAct('재도전 ❌ ' + t);
   }
   if (window.renderMathInElement) renderMathInElement(vd, {delimiters:[{left:'$',right:'$',display:false}]});
