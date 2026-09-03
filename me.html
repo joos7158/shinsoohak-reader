@@ -130,6 +130,22 @@
   .notice.a2hs button { float:right; border:0; background:none; color:var(--weakfg); opacity:.7;
     font-size:.8rem; cursor:pointer; padding:2px 4px; font-family:inherit; }
   .notice.demo { background:#fff; color:var(--body); border:1.5px solid var(--line); }
+  /* ── 🎁 도장판 (2026-09-04 원장 "보상 시스템") ── */
+  .rw{}
+  .rwhead{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:1.02rem;letter-spacing:-.3px}
+  .rwhead .cnt{font-size:.86rem;color:var(--muted);font-weight:600}
+  .rwgrid{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 8px}
+  .st{width:34px;height:34px;border-radius:50%;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#fff;transition:transform .25s}
+  .st.on{background:var(--accent);border:2px solid var(--accent)}
+  .st.gold{background:#f5b301;border:2px solid #f5b301}
+  .st.new{animation:stpop .5s ease}
+  @keyframes stpop{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+  .rwmsg{font-size:.9rem;color:var(--body);line-height:1.6}
+  .rwmsg.ready{background:#fff7e0;color:#8a5a00;border-radius:12px;padding:10px 14px;font-weight:700}
+  .rwhow{font-size:.78rem;color:var(--muted);margin-top:8px;line-height:1.6}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;
+    border-radius:14px;padding:12px 18px;font-weight:700;font-size:.95rem;z-index:9;animation:tst 2.4s ease forwards}
+  @keyframes tst{0%{opacity:0;transform:translate(-50%,12px)}12%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0}}
   /* 🏫 학교 카드 */
   .school {}
   .school .sh { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:700;
@@ -150,6 +166,7 @@
 <script src="me_quests.js"></script>
 <script src="me_final_plan.js"></script>
 <script src="school_feed.js"></script>
+<script src="me_rewards.js"></script>
 <script>
 // 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
 //   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
@@ -390,7 +407,53 @@ function replyBody(t){
   if (!m) return `<div class="rb">${esc(t)}</div>`;
   const rest = t.replace(m[0], '').replace(/🎬 답장 영상:\s*/,'').trim();
   return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
-    <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문')">🎬 선생님 답장 영상 보기</a>`;
+    <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문');stampToday()">🎬 선생님 답장 영상 보기</a>`;
+}
+// ── 🎁 도장판 (2026-09-04 원장 "보상 시스템 — 채워지면 실물 선물") ──────────────
+//   🔵 오늘 me 에서 뭔가 했다(자가채점·힌트 끝·영상·질문) = 하루 1개 · ⭐ 종이에서 3번 맞혀 도구함 = 유형마다 1개.
+//   10개 = 선물(원장이 실물로). 정본은 me_rewards.py 가 밤에 집계(me_rewards.js) — 여기선 **오늘치 1개만**
+//   즉시 보여준다(localStorage). 내일 정본이 따라오면 그 자리는 정본 값으로 대체된다.
+//   다른 아이와 비교 없음 — 자기 판만.
+function _rw(){ return (window.ME_REWARDS||{})[SID] || null; }
+function _stampKey(){ return 'me_stamp_' + SID + '_' + new Date().toISOString().slice(0,10); }
+function _rwCount(R){
+  const base = R.stamps - R.redeemed*R.per;
+  let pend = 0;
+  try { if (!IS_DEMO && localStorage.getItem(_stampKey()) && !(R.days||[]).includes(R.today) && !(R.days||[]).includes(new Date().toISOString().slice(0,10))) pend = 1; } catch(e){}
+  return {cur: base + pend, pend};
+}
+function rewardHtml(){
+  const R = _rw(); if (!R) return '';
+  const {cur, pend} = _rwCount(R), per = R.per||10;
+  const gold = (R.gold||[]).length, filled = Math.min(cur, per);
+  const goldOn = Math.min(gold, filled);           // 앞칸부터 ⭐ 로 채워 보여준다(개수만 의미)
+  const cells = Array.from({length:per}, (_,k)=>{
+    const on = k < filled, g = k < goldOn, isNew = pend && k === filled-1;
+    return `<div class="st ${on?(g?'gold':'on'):''} ${isNew?'new':''}">${on?(g?'★':'✓'):''}</div>`; }).join('');
+  const left = per - cur;
+  const msg = cur >= per
+    ? `<div class="rwmsg ready">🎁 선물 받을 수 있어요! 학원에서 선생님께 이 화면을 보여주세요.<br><span style="font-weight:400">${esc(R.gift||'선생님이 준비한 선물')}</span></div>`
+    : `<div class="rwmsg">${left}개만 더 모으면 <b>🎁 ${esc(R.gift||'선생님이 준비한 선물')}</b>${R.redeemed?` · 지금까지 받은 선물 ${R.redeemed}개`:''}</div>`;
+  return `<div class="card rw" id="reward">
+    <div class="rwhead"><span>🎁 내 도장판</span><span class="cnt">${Math.min(cur,per)} / ${per}</span></div>
+    <div class="rwgrid">${cells}</div>
+    ${msg}
+    <div class="rwhow">🔵 오늘 이거 하나 풀기 = 하루 1개 (맞아도 틀려도) · ⭐ 종이 시험에서 세 번 맞혀 도구함에 넣기 = 유형마다 1개</div>
+  </div>`;
+}
+function toast(t){ const d=document.createElement('div'); d.className='toast'; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2500); }
+// 오늘 첫 행동에 도장 1개 — 같은 날 두 번째부터는 조용히(상한 1개).
+function stampToday(){
+  const R = _rw(); if (!R || IS_DEMO) return;
+  const today = new Date().toISOString().slice(0,10);
+  try {
+    if ((R.days||[]).includes(today) || localStorage.getItem(_stampKey())) return;
+    localStorage.setItem(_stampKey(), '1');
+  } catch(e){ return; }
+  const el = document.getElementById('reward');
+  if (el) el.outerHTML = rewardHtml();
+  const {cur} = _rwCount(R);
+  toast(cur >= (R.per||10) ? '🎁 도장판 완성! 선생님께 보여주세요' : '🔵 도장 +1');
 }
 function render(){
   const D = (window.ME_DATA||{})[SID];
@@ -442,6 +505,7 @@ function render(){
       <div class="kpi">복습 대기 <b>${wait.length}개</b></div>
       <div class="kpi">🧰 도구함 <b>${box.length}개</b></div>
     </div>
+    ${rewardHtml()}
 
     ${schoolHtml()}
     ${questHtml()}
@@ -514,6 +578,7 @@ function pickAns(id, chosen, mark, el){
     vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 내일 되짚기에 이 단원이 나와요. 강의 한 번 보고 가면 돼요.';
     logAct('재도전 ❌ ' + t);
   }
+  stampToday();
   if (window.renderMathInElement) renderMathInElement(vd, {delimiters:[{left:'$',right:'$',display:false}]});
 }
 // 💡 5단계 힌트 — 2026-08-27 원장 "개별적으로 세부적으로 5단계 힌트, 단계별로 해결".
@@ -542,7 +607,7 @@ function hintNext(i, total){
   const t = (document.getElementById('ty_'+i)||{}).textContent || '';
   logAct('💡힌트'+(k+1)+' '+t);
   btn.dataset.k = k+1;
-  if (k+1 >= total) btn.style.display = 'none';
+  if (k+1 >= total) { btn.style.display = 'none'; stampToday(); }
   else btn.querySelector('span').textContent = '('+(k+2)+'/'+total+')';
 }
 // 🙋 고해소 — 원장 2026-08-25 "가림막 있고 언제든 질문해도 되는 시스템".
@@ -572,6 +637,7 @@ function askSend(id, btn){
       if (btn) btn.disabled = false;
       return;
     }
+    stampToday();
     logAct('🙋질문 ' + t + memo + (had ? ' [사진]' : ''), function(ok){
       memSet('ask_'+id, 1);
       if (box) box.innerHTML = ok
