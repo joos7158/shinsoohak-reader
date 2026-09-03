@@ -98,7 +98,12 @@ window.ME_DATA = {
      0,
      0
     ],
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1XOebnnaf7-rSsAUCUFrAMacp8G6aaeOs/view?usp=drivesdk\n09-03 답장영상 1편 3:10 (아폴로니우스 원·외분점)",
+      "at": "2026-09-03"
+     }
+    ],
     "힌트": [
      "점 P의 자취가 어떤 도형인지 파악하기 위해, $PA:PB=2:1$ 조건을 좌표 $a,b$로 식 세워 정리해보자.",
      "거리의 비는 $PA=2\\cdot PB$로 쓰고 양변을 제곱하면 루트 없이 다룰 수 있어.",
