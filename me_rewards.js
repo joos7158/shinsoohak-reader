@@ -258,11 +258,13 @@ window.ME_REWARDS = {
   "today": "2026-09-04"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
-  "days": [],
+  "days": [
+   "2026-09-04"
+  ],
   "gold": [],
   "today": "2026-09-04"
  },
