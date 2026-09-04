@@ -133,12 +133,13 @@ window.ME_REWARDS = {
   "today": "2026-09-04"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [
-   "2026-09-01"
+   "2026-09-01",
+   "2026-09-04"
   ],
   "gold": [
    "곡선 위의 한 점에서의 접선 방정식"
