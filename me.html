@@ -82,6 +82,7 @@
   .sect .cnt { font-size:.8rem; color:var(--muted); font-weight:400; }
   .sect .why { font-size:.78rem; color:var(--muted); font-weight:400; }
   .sect.today { color:var(--accent); margin-top:8px; }
+  .src { font-size:.76rem; color:var(--muted); font-weight:500; }
   .sect.today + .card { border:2px solid var(--accent); }
   .pick { border:1px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer;
           background:#fff; text-align:left; font-size:.96rem; font-family:inherit; color:var(--body); }
@@ -717,6 +718,7 @@ function card(o,i){
   // 유사문제를 펼쳐서 맨 위에 두고, 이미 학원에서 고친 원문·내 답·정답은 접어서 아래로 내린다.
   // (✗ 표시가 페이지 첫 화면에 서 있지 않게 하는 뜻도 있다)
   const 원문 = `
+    ${o.문제.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.문제.출처)}</span></div>`:''}
     <div class="problem">${esc(o.문제.stem)}</div>
     ${choicesHtml(o.문제.choices)}
     <div class="ans-row">
@@ -727,7 +729,7 @@ function card(o,i){
   <div class="card">
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     ${o.유사 ? `
-    <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요</div>
+    <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요${o.유사.출처?` <span class="src">· ${esc(o.유사.출처)}</span>`:''}</div>
     <div class="problem">${esc(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
@@ -776,7 +778,7 @@ function waitCard(o,i){
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     <span class="due">${esc(o.마지막오답||'')}에 틀림</span>
     <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
-    ${o.유사 ? `<div class="problem">${esc(o.유사.stem)}</div>
+    ${o.유사 ? `${o.유사.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.유사.출처)}</span></div>`:''}<div class="problem">${esc(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
