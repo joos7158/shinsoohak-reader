@@ -165,6 +165,14 @@
   .tbox .tqi + .tqi { margin-top:8px; border-top:1px solid #f0d9a0; padding-top:6px; }
   .tbox textarea { width:100%; min-height:90px; box-sizing:border-box; border:1px solid #d9c27a; border-radius:8px; padding:8px; font:inherit; }
   .reply.live { border-left:3px solid #2f6fed; }
+  .bogi { margin:10px 0; border:1.5px solid var(--ink, #222); border-radius:6px; padding:10px 12px 8px; position:relative; background:#fff; }
+  .bogi .bt { position:absolute; top:-11px; left:12px; background:#fff; padding:0 6px; font-size:.8rem; font-weight:700; letter-spacing:.2em; }
+  .bogi .bi { line-height:1.75; padding:2px 0; }
+  .bogi .bi + .bi { border-top:1px dashed #e3e3e3; }
+  .rimg { max-width:100%; display:block; border:1px solid #ddd; border-radius:8px; margin-top:6px; background:#fff; }
+  .ptools { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .pbtn { font:inherit; font-size:.82rem; padding:6px 10px; border:1px solid #d9c27a; background:#fff; border-radius:8px; cursor:pointer; }
+  .pen canvas { touch-action:none; border:1px solid #d9c27a; border-radius:8px; background:#fff; display:block; width:100%; }
   .jump-note { background:#fff6dc; border:1px solid #e0a020; border-radius:12px; padding:10px 12px; margin:0 0 12px; font-size:.9rem; }
   .jump-note.miss { background:#fde8e8; border-color:#d9534f; }
 </style>
@@ -420,10 +428,32 @@ function noticeHtml(){
 // 💬 답 본문 — 🎬 답장 영상(2026-08-28 의무 루틴)이 링크로 오면 버튼으로 살린다.
 //   esc() 만 거치면 URL 이 죽은 글자라 아이가 눌러볼 수 없다. 링크는 답장영상 루틴이
 //   붙인 것만 오므로(원장 손) 첫 URL 하나만 버튼으로 뽑고 나머지는 그대로 글로.
+// 📦 합답형 <보기> 박스 (2026-09-07 원장 "아이들이 한 눈에 보게") — stem 의 <보기> 이후를 ㄱ/ㄴ/ㄷ 줄로 쪼개 박스로.
+//   수식은 esc 뒤 KaTeX auto-render 가 그대로 처리한다. <보기> 가 없으면 옛 그대로.
+function stemHtml(stem){
+  const t = String(stem||'');
+  // 문장 속 "<보기>에서 옳은 것…" 은 건너뛰고, 바로 뒤에 ㄱ. 이 오는 <보기> 만 박스 시작점으로 잡는다
+  const i = t.search(/[<〈＜]\s*보\s*기\s*[>〉＞]\s*(?=ㄱ\s*[.．)])/);
+  if (i < 0) return esc(t);
+  const head = t.slice(0, i).trim();
+  let body = t.slice(i).replace(/^[<〈＜]\s*보\s*기\s*[>〉＞]\s*/, '').trim();
+  // 보기 뒤에 붙는 꼬리 문장(예: "...것은?")은 드묾 — ㄱ~ㅁ 항목만 박스, 나머지는 아래로
+  const parts = body.split(/(?=(?:^|\s)[ㄱㄴㄷㄹㅁㅂ]\s*[.．)]\s*)/).map(x=>x.trim()).filter(Boolean);
+  const items = parts.filter(p => /^[ㄱㄴㄷㄹㅁㅂ]\s*[.．)]/.test(p));
+  const tail = parts.filter(p => !/^[ㄱㄴㄷㄹㅁㅂ]\s*[.．)]/.test(p)).join(' ');
+  if (!items.length) return esc(t);
+  return `${head?esc(head):''}
+    <div class="bogi"><div class="bt">보기</div>${items.map(p=>`<div class="bi">${esc(p.replace(/^([ㄱㄴㄷㄹㅁㅂ])\s*[.．)]\s*/, '$1. '))}</div>`).join('')}</div>${tail?`<div>${esc(tail)}</div>`:''}`;
+}
 function replyBody(t){
   t = String(t||'');
+  // ✍ 손글씨/사진 답 (2026-09-07) — 원장이 갤럭시 펜으로 쓴 그림. 누르면 크게.
+  let img = '';
+  const im = t.match(/✍IMG\s+(https?:\/\/\S+)/);
+  if (im){ img = `<a href="${esc(im[1])}" target="_blank" rel="noopener"><img class="rimg" src="${esc(im[1])}" alt="선생님 손글씨 답" loading="lazy"></a>`; t = t.replace(im[0], '').trim(); }
+  if (img && !t) return img;
   const m = t.match(/https?:\/\/[^\s"'<>]+/);
-  if (!m) return `<div class="rb">${esc(t)}</div>`;
+  if (!m) return `<div class="rb">${esc(t)}</div>` + img;
   const rest = t.replace(m[0], '').replace(/🎬 답장 영상:\s*/,'').trim();
   return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
     <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문');stampToday()">🎬 선생님 답장 영상 보기</a>`;
@@ -769,7 +799,24 @@ function teacherTools(el, key, h){
   box.className = 'tbox';
   box.innerHTML = `<div class="th">🙋 아이가 물은 것</div><div class="tq" id="tq_${el.id}">불러오는 중…</div>
     <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">· 글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
-    <textarea id="tr_${el.id}" placeholder="예) ㄱ은 기울기 곱이 -1이면 수직이 맞아. ㄴ은 m이 어떤 값일 때 교점이 없는지 봐봐 — 그 점이 빠지면 완전한 원이 아니야."></textarea>
+    <textarea id="tr_${el.id}" placeholder="글로 써도 되고, 아래 ✍ 펜으로 써도 돼요 (둘 다 가능)"></textarea>
+    <div class="ptools">
+      <button class="pbtn" onclick="penOpen('${el.id}')">✍ 펜으로 쓰기</button>
+      <label class="pbtn">📎 사진/파일 붙이기<input type="file" accept="image/*" style="display:none" onchange="penFile('${el.id}', this)"></label>
+    </div>
+    <div class="pen" id="pw_${el.id}" style="display:none">
+      <div class="ptools">
+        <button class="pbtn" onclick="penColor('${el.id}','#1a1a1a')">⚫ 검정</button>
+        <button class="pbtn" onclick="penColor('${el.id}','#d32f2f')">🔴 빨강</button>
+        <button class="pbtn" onclick="penColor('${el.id}','#1565c0')">🔵 파랑</button>
+        <button class="pbtn" onclick="penUndo('${el.id}')">↶ 되돌리기</button>
+        <button class="pbtn" onclick="penClear('${el.id}')">🧹 지우기</button>
+        <button class="pbtn" onclick="penMore('${el.id}')">⬇ 칸 늘리기</button>
+      </div>
+      <canvas></canvas>
+      <div class="hint">S펜·손가락 모두 돼요. 펜을 쓰는 동안 손바닥은 무시해요.</div>
+    </div>
+    <div class="hint" id="pf_${el.id}"></div>
     <button class="btn" onclick="teacherSend('${el.id}','${esc(key)}')">답 보내기</button><div class="hint" id="trs_${el.id}"></div>`;
   const acts = el.querySelector('.acts');
   if (acts) el.insertBefore(box, acts); else el.appendChild(box);
@@ -785,16 +832,80 @@ function teacherTools(el, key, h){
                              : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
   }).catch(()=>{ const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
 }
+// ── ✍ 펜 캔버스 (2026-09-07 원장 "갤럭시 노트와 바로 연동") — 카톡 링크를 갤럭시에서 열고 S펜으로 바로 쓴다.
+//    포인터 이벤트: pen/mouse 는 항상, touch 는 펜을 한 번이라도 쓴 뒤엔 무시(손바닥). 필압으로 굵기.
+const PEN = {}, PEN_FILE = {};
+function penOpen(cid){
+  const wrap = document.getElementById('pw_'+cid); if (!wrap) return;
+  wrap.style.display = wrap.style.display==='none' ? 'block' : 'none';
+  if (wrap.dataset.init) return; wrap.dataset.init = '1';
+  const cv = wrap.querySelector('canvas'), dpr = Math.min(window.devicePixelRatio||1, 2);
+  const st = PEN[cid] = {cv, ctx:null, W: Math.max(wrap.clientWidth-2, 300), H: 480, dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.6, penSeen:false};
+  penSize(st);
+  const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top, e.pressure||0.5]; };
+  cv.addEventListener('pointerdown', e => {
+    if (e.pointerType==='pen') st.penSeen = true;
+    if (e.pointerType==='touch' && st.penSeen) return;
+    e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch(x){}
+    st.cur = {color:st.color, width:st.width, pts:[pos(e)]}; st.strokes.push(st.cur);
+  });
+  cv.addEventListener('pointermove', e => {
+    if (!st.cur) return; e.preventDefault();
+    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+    const from = st.cur.pts.length;
+    (evs.length ? evs : [e]).forEach(ev => st.cur.pts.push(pos(ev)));
+    penDraw(st, st.cur, from);
+  });
+  const up = () => { st.cur = null; };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
+}
+function penSize(st){
+  const c = st.cv; c.width = st.W*st.dpr; c.height = st.H*st.dpr; c.style.width = st.W+'px'; c.style.height = st.H+'px';
+  st.ctx = c.getContext('2d'); st.ctx.setTransform(1,0,0,1,0,0); st.ctx.scale(st.dpr, st.dpr);
+  st.ctx.lineCap = 'round'; st.ctx.lineJoin = 'round';
+  penRedraw(st);
+}
+function penDraw(st, s, from){
+  const ctx = st.ctx; ctx.strokeStyle = s.color;
+  for (let i=Math.max(from,1); i<s.pts.length; i++){
+    const a=s.pts[i-1], b=s.pts[i]; ctx.lineWidth = s.width*(0.5+b[2]);
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+  }
+  if (s.pts.length === 1){ const p=s.pts[0]; ctx.fillStyle=s.color; ctx.beginPath(); ctx.arc(p[0],p[1],s.width*0.6,0,6.3); ctx.fill(); }
+}
+function penRedraw(st){ const c=st.ctx; c.fillStyle='#fff'; c.fillRect(0,0,st.W,st.H); st.strokes.forEach(s=>penDraw(st,s,1)); }
+function penUndo(cid){ const st=PEN[cid]; if(!st) return; st.strokes.pop(); penRedraw(st); }
+function penClear(cid){ const st=PEN[cid]; if(!st) return; st.strokes=[]; penRedraw(st); }
+function penColor(cid,c){ const st=PEN[cid]; if(st) st.color=c; }
+function penMore(cid){ const st=PEN[cid]; if(!st) return; st.H += 240; penSize(st); }
+function penImage(cid){ const st=PEN[cid]; return (st && st.strokes.length) ? st.cv.toDataURL('image/png') : ''; }
+// 📎 갤럭시 노트/삼성 노트에서 내보낸 사진 붙이기 — 긴변 1600px JPEG 로 줄여서 보낸다
+function penFile(cid, input){
+  const f = input.files && input.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { const im = new Image(); im.onload = () => {
+    const k = Math.min(1, 1600/Math.max(im.width, im.height));
+    const c = document.createElement('canvas'); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k);
+    const x = c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height);
+    PEN_FILE[cid] = c.toDataURL('image/jpeg', 0.85);
+    const p = document.getElementById('pf_'+cid); if (p) p.innerHTML = '📎 붙임: ' + esc(f.name) + ' <a href="#" onclick="delete PEN_FILE[\'' + cid + '\'];this.parentNode.textContent=\'\';return false">✕ 떼기</a>';
+  }; im.src = rd.result; };
+  rd.readAsDataURL(f); input.value = '';
+}
 function teacherSend(cid, key){
   const ta = document.getElementById('tr_'+cid), st = document.getElementById('trs_'+cid);
   const text = ta ? ta.value.trim() : '';
-  if (!text) { if (st) st.textContent = '내용을 적어주세요.'; return; }
+  const img = penImage(cid) || PEN_FILE[cid] || '';
+  if (!text && !img) { if (st) st.textContent = '글을 적거나 ✍ 펜으로 써주세요.'; return; }
   if (!RKEY) { if (st) st.textContent = '답장 열쇠가 없어요 — 카톡/메일의 링크(&k=)로 다시 열어주세요.'; return; }
   const ty = (document.querySelector('#'+cid+' .badge')||{}).textContent || (key==='free' ? '자유질문' : '');
   if (st) st.textContent = '보내는 중…';
-  const payload = JSON.stringify({ admin:'reply', k:RKEY, t:SID, card:key, type:ty, text });
+  const payload = JSON.stringify({ admin:'reply', k:RKEY, t:SID, card:key, type:ty, text, img });
   fetch(QPHOTO, { method:'POST', body: payload }).then(r=>r.text()).then(res=>{
-    if (res === 'ok') { if (st) st.innerHTML = '✅ 올라갔어요. 아이가 오답노트를 열면 이 카드 안에 <b>💬 선생님 답</b>으로 보여요.'; if (ta) ta.value = ''; }
+    if (res === 'ok') {
+      if (st) st.innerHTML = '✅ 올라갔어요' + (img ? ' (손글씨/사진 포함)' : '') + '. 아이가 오답노트를 열면 이 카드 안에 <b>💬 선생님 답</b>으로 보여요.';
+      if (ta) ta.value = ''; penClear(cid); delete PEN_FILE[cid]; const p = document.getElementById('pf_'+cid); if (p) p.textContent = '';
+    }
     else if (st) st.textContent = '⚠ 서버가 거절했어요: ' + res;
   }).catch(()=>{
     // 응답을 못 읽는 환경(CORS) — 한 번 더 no-cors 로 보내고 "확인 불가"로 알린다
@@ -837,7 +948,7 @@ function card(o,i){
   // (✗ 표시가 페이지 첫 화면에 서 있지 않게 하는 뜻도 있다)
   const 원문 = `
     ${o.문제.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.문제.출처)}</span></div>`:''}
-    <div class="problem">${esc(o.문제.stem)}</div>
+    <div class="problem">${stemHtml(o.문제.stem)}</div>
     ${choicesHtml(o.문제.choices)}
     <div class="ans-row">
       <span class="pill mine">${(o.내답==='blank'||!o.내답)?'무응답 (안 풂)':'내가 고른 답: '+esc(o.내답)} ✗</span>
@@ -848,7 +959,7 @@ function card(o,i){
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     ${o.유사 ? `
     <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요${o.유사.출처?` <span class="src">· ${esc(o.유사.출처)}</span>`:''}</div>
-    <div class="problem">${esc(o.유사.stem)}</div>
+    <div class="problem">${stemHtml(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
@@ -896,7 +1007,7 @@ function waitCard(o,i){
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     <span class="due">${esc(o.마지막오답||'')}에 틀림</span>
     <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
-    ${o.유사 ? `${o.유사.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.유사.출처)}</span></div>`:''}<div class="problem">${esc(o.유사.stem)}</div>
+    ${o.유사 ? `${o.유사.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.유사.출처)}</span></div>`:''}<div class="problem">${stemHtml(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
