@@ -761,6 +761,8 @@ function jumpTo(q){
 // ── 👨‍🏫 원장 휴대폰 답장 (2026-09-07 원장 "카톡으로 질문 확인하고 바로 답 줄 수 있는 형태") ──
 //   카드 안에 ① 아이가 쓴 질문 전문(시트에서 읽음) ② 답 보내기 칸. 답은 Apps Script '답변' 탭에 쌓이고
 //   아이 페이지가 열릴 때 liveReplies() 가 카드에 붙인다. 아이 화면엔 "💬 선생님 답" 으로만 보인다.
+// 시트 시각은 Date 문자열("Mon Sep 07 2026 10:09:35 GMT+0900 (...)")로 올 수 있다 → 9/7 10:09
+function fmtAt(s){ const d = new Date(s); return isNaN(d) ? String(s||'') : (d.getMonth()+1)+'/'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
 function teacherTools(el, key, h){
   const ty = (el.querySelector('.badge')||{}).textContent || '';
   const box = document.createElement('div');
@@ -779,7 +781,7 @@ function teacherTools(el, key, h){
     }).reverse();
     const tq = document.getElementById('tq_'+el.id);
     if (!tq) return;
-    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(q.at)}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}</div>`).join('')
+    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}</div>`).join('')
                              : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
   }).catch(()=>{ const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
 }
@@ -815,7 +817,7 @@ function liveReplies(){
       if (!el) return;
       if ([...el.querySelectorAll('.reply .rb, .reply a')].some(x => (x.textContent||'').trim() === r.text.trim() || (x.href && r.text.indexOf(x.href) >= 0))) return;
       const d = document.createElement('div'); d.className = 'reply live';
-      d.innerHTML = `<div class="rh">💬 선생님 답</div>${replyBody(r.text)}<div class="rt">${esc(r.at)}</div>`;
+      d.innerHTML = `<div class="rh">💬 선생님 답</div>${replyBody(r.text)}<div class="rt">${esc(fmtAt(r.at))}</div>`;
       const acts = el.querySelector('.acts'); if (acts) el.insertBefore(d, acts); else el.appendChild(d);
       n++; if (!firstEl) firstEl = el;
     });
