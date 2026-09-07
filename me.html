@@ -175,6 +175,7 @@
   #board { position:fixed; inset:0; z-index:9999; background:#fff; display:flex; flex-direction:column; touch-action:none; overscroll-behavior:none; }
   #board .btb { display:flex; flex-wrap:wrap; gap:4px; padding:6px 8px; background:#fff6dc; border-bottom:1px solid #e0a020; align-items:center; }
   #board .btb .pbtn { padding:6px 8px; font-size:.85rem; }
+  .pbtn.on { background:#e0a020; color:#fff; border-color:#e0a020; }
   #board .bwrap { flex:1; overflow:hidden; position:relative; touch-action:none; }
   #board .bwrap canvas { touch-action:none; display:block; }
   #board .bmsg { position:absolute; top:12px; left:12px; background:#fff6dc; border:1px solid #e0a020; border-radius:8px; padding:6px 10px; font-size:.9rem; z-index:2; }
@@ -820,6 +821,7 @@ function teacherTools(el, key, h){
         <button class="pbtn" onclick="penColor('${el.id}','#1a1a1a')">⚫ 검정</button>
         <button class="pbtn" onclick="penColor('${el.id}','#d32f2f')">🔴 빨강</button>
         <button class="pbtn" onclick="penColor('${el.id}','#1565c0')">🔵 파랑</button>
+        <button class="pbtn" data-eraser="${el.id}" onclick="penEraser('${el.id}')">🧽 지우개</button>
         <button class="pbtn" onclick="penUndo('${el.id}')">↶ 되돌리기</button>
         <button class="pbtn" onclick="penClear('${el.id}')">🧹 지우기</button>
         <button class="pbtn" onclick="penMore('${el.id}')">⬇ 칸 늘리기</button>
@@ -858,17 +860,29 @@ function penSize(st){
   const c = st.cv; c.width = st.W*st.dpr; c.height = st.H*st.dpr; c.style.width = st.W+'px'; c.style.height = st.H+'px';
   st.ctx = c.getContext('2d'); st.ctx.setTransform(1,0,0,1,0,0); st.ctx.scale(st.dpr, st.dpr);
   st.ctx.lineCap = 'round'; st.ctx.lineJoin = 'round';
+  // 🧽 잉크 레이어 — 지우개는 여기만 깎는다(문제 그림은 main 에서 따로 깐다)
+  st.ink = document.createElement('canvas'); st.ink.width = c.width; st.ink.height = c.height;
+  st.ictx = st.ink.getContext('2d'); st.ictx.scale(st.dpr, st.dpr); st.ictx.lineCap = 'round'; st.ictx.lineJoin = 'round';
   penRedraw(st);
 }
-function penDraw(st, s, from){
-  const ctx = st.ctx; ctx.strokeStyle = s.color;
-  for (let i=Math.max(from,1); i<s.pts.length; i++){
-    const a=s.pts[i-1], b=s.pts[i]; ctx.lineWidth = s.width*(0.5+b[2]);
-    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
-  }
-  if (s.pts.length === 1){ const p=s.pts[0]; ctx.fillStyle=s.color; ctx.beginPath(); ctx.arc(p[0],p[1],s.width*0.6,0,6.3); ctx.fill(); }
+function penComposite(st){ const c=st.ctx; c.globalCompositeOperation='source-over'; c.fillStyle='#fff'; c.fillRect(0,0,st.W,st.H); if (st.bg) c.drawImage(st.bg, 0, 0, st.bgW, st.bgH); c.drawImage(st.ink, 0, 0, st.ink.width, st.ink.height, 0, 0, st.W, st.H); }
+function penEraser(cid, on){ const st=PEN[cid]; if(!st) return; st.eraser = (on===undefined) ? !st.eraser : !!on; document.querySelectorAll('[data-eraser="'+cid+'"]').forEach(b => b.classList.toggle('on', st.eraser)); }
+function penDraw(st, s, from, live){
+  // 잉크 레이어에 그린다. 펜은 main 에도 바로 겹쳐 그려 가볍게, 지우개는 잉크만 깎고 main 을 다시 합성한다.
+  const targets = s.erase ? [st.ictx] : (live ? [st.ictx, st.ctx] : [st.ictx]);
+  targets.forEach(ctx => {
+    ctx.globalCompositeOperation = s.erase ? 'destination-out' : 'source-over';
+    ctx.strokeStyle = s.erase ? '#000' : s.color; ctx.fillStyle = ctx.strokeStyle;
+    for (let i=Math.max(from,1); i<s.pts.length; i++){
+      const a=s.pts[i-1], b=s.pts[i]; ctx.lineWidth = s.erase ? s.width : s.width*(0.5+b[2]);
+      ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+    }
+    if (s.pts.length === 1){ const p=s.pts[0]; ctx.beginPath(); ctx.arc(p[0],p[1],s.erase ? s.width/2 : s.width*0.6,0,6.3); ctx.fill(); }
+    ctx.globalCompositeOperation = 'source-over';
+  });
+  if (s.erase && live) penComposite(st);
 }
-function penRedraw(st){ const c=st.ctx; c.fillStyle='#fff'; c.fillRect(0,0,st.W,st.H); if (st.bg) c.drawImage(st.bg, 0, 0, st.bgW, st.bgH); st.strokes.forEach(s=>penDraw(st,s,1)); }
+function penRedraw(st){ st.ictx.clearRect(0,0,st.W,st.H); st.strokes.forEach(s=>penDraw(st,s,1,false)); penComposite(st); }
 function penBind(st){   // 포인터 필기 공용(작은 펜 칸·전체화면 판서)
   const cv = st.cv;
   const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top, e.pressure||0.5]; };
@@ -876,14 +890,17 @@ function penBind(st){   // 포인터 필기 공용(작은 펜 칸·전체화면 
     if (e.pointerType==='pen') st.penSeen = true;
     if (e.pointerType==='touch' && st.penSeen) return;
     e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch(x){}
-    st.cur = {color:st.color, width:st.width, pts:[pos(e)]}; st.strokes.push(st.cur);
+    // S펜 뒤 버튼(button 5 / buttons&32) 을 누르고 쓰면 그 획만 지우개
+    const er = st.eraser || (e.pointerType==='pen' && ((e.buttons & 32) || e.button === 5));
+    st.cur = {color:st.color, width: er ? st.eraserW || 26 : st.width, erase: er, pts:[pos(e)]}; st.strokes.push(st.cur);
+    penDraw(st, st.cur, 1, true);
   });
   cv.addEventListener('pointermove', e => {
     if (!st.cur) return; e.preventDefault();
     const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
     const from = st.cur.pts.length;
     (evs.length ? evs : [e]).forEach(ev => st.cur.pts.push(pos(ev)));
-    penDraw(st, st.cur, from);
+    penDraw(st, st.cur, from, true);
   });
   const up = () => { st.cur = null; };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
@@ -915,8 +932,9 @@ async function boardOpen(cid, key){
       <button class="pbtn" onclick="penColor('board','#d32f2f')">🔴</button>
       <button class="pbtn" onclick="penColor('board','#1565c0')">🔵</button>
       <button class="pbtn" onclick="boardWidth(-1)">가늘게</button><button class="pbtn" onclick="boardWidth(1)">굵게</button>
+      <button class="pbtn" data-eraser="board" onclick="penEraser('board')">🧽 지우개</button>
       <button class="pbtn" onclick="penUndo('board')">↶</button>
-      <button class="pbtn" onclick="boardClearInk()">🧹</button>
+      <button class="pbtn" onclick="boardClearInk()">🧹 전체</button>
       <span style="flex:1"></span>
       <button class="pbtn" onclick="boardScroll(-1)">▲</button><button class="pbtn" onclick="boardScroll(1)">▼</button>
       <button class="pbtn" onclick="penMore('board')">＋여백</button>
@@ -966,7 +984,7 @@ function boardClose(){
 }
 function penUndo(cid){ const st=PEN[cid]; if(!st) return; st.strokes.pop(); penRedraw(st); }
 function penClear(cid){ const st=PEN[cid]; if(!st) return; st.strokes=[]; penRedraw(st); }
-function penColor(cid,c){ const st=PEN[cid]; if(st) st.color=c; }
+function penColor(cid,c){ const st=PEN[cid]; if(st){ st.color=c; penEraser(cid,false); } }
 function penMore(cid){ const st=PEN[cid]; if(!st) return; st.H += 240; penSize(st); }
 function penImage(cid){ const st=PEN[cid]; return (st && st.strokes.length) ? st.cv.toDataURL('image/png') : ''; }
 // 📎 갤럭시 노트/삼성 노트에서 내보낸 사진 붙이기 — 긴변 1600px JPEG 로 줄여서 보낸다
