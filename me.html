@@ -172,6 +172,16 @@
   .rimg { max-width:100%; display:block; border:1px solid #ddd; border-radius:8px; margin-top:6px; background:#fff; }
   .ptools { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
   .pbtn { font:inherit; font-size:.82rem; padding:6px 10px; border:1px solid #d9c27a; background:#fff; border-radius:8px; cursor:pointer; }
+  #board { position:fixed; inset:0; z-index:9999; background:#fff; display:flex; flex-direction:column; touch-action:none; overscroll-behavior:none; }
+  #board .btb { display:flex; flex-wrap:wrap; gap:4px; padding:6px 8px; background:#fff6dc; border-bottom:1px solid #e0a020; align-items:center; }
+  #board .btb .pbtn { padding:6px 8px; font-size:.85rem; }
+  #board .bwrap { flex:1; overflow:hidden; position:relative; touch-action:none; }
+  #board .bwrap canvas { touch-action:none; display:block; }
+  #board .bmsg { position:absolute; top:12px; left:12px; background:#fff6dc; border:1px solid #e0a020; border-radius:8px; padding:6px 10px; font-size:.9rem; z-index:2; }
+  html.board-on, html.board-on body { overflow:hidden !important; height:100%; overscroll-behavior:none; }
+  .bp-host { position:fixed; left:-10000px; top:0; background:#fff; padding:12px; font-size:19px; line-height:1.75; color:#111; }
+  .bp-host .bp-h { font-weight:700; margin:10px 0 4px; color:#8a5a00; }
+  .bp-host .choices { font-size:18px; }
   .pen canvas { touch-action:none; border:1px solid #d9c27a; border-radius:8px; background:#fff; display:block; width:100%; }
   .jump-note { background:#fff6dc; border:1px solid #e0a020; border-radius:12px; padding:10px 12px; margin:0 0 12px; font-size:.9rem; }
   .jump-note.miss { background:#fde8e8; border-color:#d9534f; }
@@ -801,7 +811,8 @@ function teacherTools(el, key, h){
     <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">· 글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
     <textarea id="tr_${el.id}" placeholder="글로 써도 되고, 아래 ✍ 펜으로 써도 돼요 (둘 다 가능)"></textarea>
     <div class="ptools">
-      <button class="pbtn" onclick="penOpen('${el.id}')">✍ 펜으로 쓰기</button>
+      <button class="pbtn" style="background:#8a5a00;color:#fff;border-color:#8a5a00" onclick="boardOpen('${el.id}','${esc(key)}')">🖊 전체화면 판서 (녹화용)</button>
+      <button class="pbtn" onclick="penOpen('${el.id}')">✍ 작은 펜 칸</button>
       <label class="pbtn">📎 사진/파일 붙이기<input type="file" accept="image/*" style="display:none" onchange="penFile('${el.id}', this)"></label>
     </div>
     <div class="pen" id="pw_${el.id}" style="display:none">
@@ -840,8 +851,26 @@ function penOpen(cid){
   wrap.style.display = wrap.style.display==='none' ? 'block' : 'none';
   if (wrap.dataset.init) return; wrap.dataset.init = '1';
   const cv = wrap.querySelector('canvas'), dpr = Math.min(window.devicePixelRatio||1, 2);
-  const st = PEN[cid] = {cv, ctx:null, W: Math.max(wrap.clientWidth-2, 300), H: 480, dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.6, penSeen:false};
-  penSize(st);
+  const st = PEN[cid] = {cv, ctx:null, W: Math.max(wrap.clientWidth-2, 300), H: 480, dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.6, penSeen:false, bg:null};
+  penSize(st); penBind(st);
+}
+function penSize(st){
+  const c = st.cv; c.width = st.W*st.dpr; c.height = st.H*st.dpr; c.style.width = st.W+'px'; c.style.height = st.H+'px';
+  st.ctx = c.getContext('2d'); st.ctx.setTransform(1,0,0,1,0,0); st.ctx.scale(st.dpr, st.dpr);
+  st.ctx.lineCap = 'round'; st.ctx.lineJoin = 'round';
+  penRedraw(st);
+}
+function penDraw(st, s, from){
+  const ctx = st.ctx; ctx.strokeStyle = s.color;
+  for (let i=Math.max(from,1); i<s.pts.length; i++){
+    const a=s.pts[i-1], b=s.pts[i]; ctx.lineWidth = s.width*(0.5+b[2]);
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+  }
+  if (s.pts.length === 1){ const p=s.pts[0]; ctx.fillStyle=s.color; ctx.beginPath(); ctx.arc(p[0],p[1],s.width*0.6,0,6.3); ctx.fill(); }
+}
+function penRedraw(st){ const c=st.ctx; c.fillStyle='#fff'; c.fillRect(0,0,st.W,st.H); if (st.bg) c.drawImage(st.bg, 0, 0, st.bgW, st.bgH); st.strokes.forEach(s=>penDraw(st,s,1)); }
+function penBind(st){   // 포인터 필기 공용(작은 펜 칸·전체화면 판서)
+  const cv = st.cv;
   const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top, e.pressure||0.5]; };
   cv.addEventListener('pointerdown', e => {
     if (e.pointerType==='pen') st.penSeen = true;
@@ -859,21 +888,82 @@ function penOpen(cid){
   const up = () => { st.cur = null; };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
 }
-function penSize(st){
-  const c = st.cv; c.width = st.W*st.dpr; c.height = st.H*st.dpr; c.style.width = st.W+'px'; c.style.height = st.H+'px';
-  st.ctx = c.getContext('2d'); st.ctx.setTransform(1,0,0,1,0,0); st.ctx.scale(st.dpr, st.dpr);
-  st.ctx.lineCap = 'round'; st.ctx.lineJoin = 'round';
-  penRedraw(st);
+// ── 🖊 전체화면 판서 (2026-09-07 원장 "쓰는 동안 화면이 움직이고 문제 위에 못 쓴다") ──
+//   화면 전체를 고정 오버레이로 덮고(페이지 스크롤 잠금), 맨 위에 문제 그림을 깐 큰 캔버스에 쓴다.
+//   탭 화면 녹화를 켜고 이 화면에서 설명하면 영상이 된다. 위아래 이동은 ▲▼ 버튼(펜·손바닥으로는 안 움직임).
+let BOARD = null;
+function cardData(key){
+  const D = (window.ME_DATA||{})[SID] || {}; const dot = key.indexOf('.');
+  const k = dot>0 ? key.slice(0,dot) : key, h = dot>0 ? key.slice(dot+1) : '';
+  const list = k[0]==='w' ? (D.복습대기||[]) : (D.오답||[]); const i = +k.slice(1);
+  if (list[i] && (!h || h4(list[i].유형)===h)) return list[i];
+  return [...(D.오답||[]), ...(D.복습대기||[])].find(o => h4(o.유형)===h) || null;
 }
-function penDraw(st, s, from){
-  const ctx = st.ctx; ctx.strokeStyle = s.color;
-  for (let i=Math.max(from,1); i<s.pts.length; i++){
-    const a=s.pts[i-1], b=s.pts[i]; ctx.lineWidth = s.width*(0.5+b[2]);
-    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+function loadScript(src){ return new Promise((ok, no) => { if (document.querySelector('script[src="'+src+'"]')) return ok(); const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+function boardProblemHtml(o){
+  if (!o) return '<div>문제 데이터를 못 찾았어요</div>';
+  const one = (t, p) => p ? `<div class="bp-h">${t}</div><div class="problem">${stemHtml(p.stem)}</div>${choicesHtml(p.choices)}` : '';
+  return `<div class="badge">${esc(o.유형)}</div>` + one('🔁 유사문제', o.유사) + one('✗ 틀린 문제' + (o.내답?` (내 답 ${esc(o.내답)} / 정답 ${esc((o.문제||{}).answer||'')})`:''), o.문제);
+}
+async function boardOpen(cid, key){
+  if (BOARD) return;
+  const o = cardData(key);
+  const W = Math.min(window.innerWidth, 1400), dpr = Math.min(window.devicePixelRatio||1, 2);
+  const ov = document.createElement('div'); ov.id = 'board';
+  ov.innerHTML = `<div class="btb">
+      <button class="pbtn" onclick="penColor('board','#1a1a1a')">⚫</button>
+      <button class="pbtn" onclick="penColor('board','#d32f2f')">🔴</button>
+      <button class="pbtn" onclick="penColor('board','#1565c0')">🔵</button>
+      <button class="pbtn" onclick="boardWidth(-1)">가늘게</button><button class="pbtn" onclick="boardWidth(1)">굵게</button>
+      <button class="pbtn" onclick="penUndo('board')">↶</button>
+      <button class="pbtn" onclick="boardClearInk()">🧹</button>
+      <span style="flex:1"></span>
+      <button class="pbtn" onclick="boardScroll(-1)">▲</button><button class="pbtn" onclick="boardScroll(1)">▼</button>
+      <button class="pbtn" onclick="penMore('board')">＋여백</button>
+      <button class="pbtn" style="background:#2e7d32;color:#fff;border-color:#2e7d32" onclick="boardAttach('${cid}')">💾 답으로 붙이기</button>
+      <button class="pbtn" onclick="boardClose()">✕ 닫기</button>
+    </div><div class="bwrap"><div class="bmsg">문제 그림 준비 중…</div><canvas></canvas></div>`;
+  document.body.appendChild(ov);
+  document.documentElement.classList.add('board-on');
+  try { if (ov.requestFullscreen) await ov.requestFullscreen(); } catch(e) {}
+  const cv = ov.querySelector('canvas');
+  const st = PEN['board'] = BOARD = {cv, ctx:null, W, H: Math.max(window.innerHeight*2, 1400), dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.8, penSeen:false, bg:null, bgW:0, bgH:0, cid, key};
+  penSize(st); penBind(st);
+  // 문제 그림 — 화면 폭에 맞춰 html2canvas 로 찍는다. 실패하면 글자만이라도 깐다.
+  const host = document.createElement('div'); host.className = 'bp-host'; host.style.width = (W-24)+'px';
+  host.innerHTML = boardProblemHtml(o); document.body.appendChild(host);
+  try {
+    if (window.renderMathInElement) renderMathInElement(host, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false});
+    await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+    const shot = await html2canvas(host, {scale: dpr, backgroundColor:'#fff', logging:false, useCORS:true});
+    st.bg = shot;
+    st.bgW = W; st.bgH = shot.height/dpr * (W/(shot.width/dpr));
+  } catch(e) {
+    const c = document.createElement('canvas'); c.width = W; c.height = 400; const x = c.getContext('2d');
+    x.fillStyle='#fff'; x.fillRect(0,0,W,400); x.fillStyle='#111'; x.font='18px sans-serif';
+    const txt = o ? [o.유형, ...(o.유사?[o.유사.stem, ...(o.유사.choices||[])]:[]), ...(o.문제?['[틀린 문제] '+o.문제.stem, ...(o.문제.choices||[])]:[])] : ['문제 데이터 없음'];
+    let y = 30; txt.join('\n').replace(/\$/g,'').split('\n').forEach(line => { for (let i=0; i<line.length; i+=Math.floor(W/11)) { x.fillText(line.slice(i, i+Math.floor(W/11)), 12, y); y += 26; } });
+    st.bg = c; st.bgW = W; st.bgH = Math.min(400, y+10);
   }
-  if (s.pts.length === 1){ const p=s.pts[0]; ctx.fillStyle=s.color; ctx.beginPath(); ctx.arc(p[0],p[1],s.width*0.6,0,6.3); ctx.fill(); }
+  host.remove();
+  if (st.H < st.bgH + 900) { st.H = st.bgH + 900; penSize(st); } else penRedraw(st);
+  const m = ov.querySelector('.bmsg'); if (m) m.remove();
 }
-function penRedraw(st){ const c=st.ctx; c.fillStyle='#fff'; c.fillRect(0,0,st.W,st.H); st.strokes.forEach(s=>penDraw(st,s,1)); }
+function boardWidth(d){ const st=PEN['board']; if (st) st.width = Math.max(1.2, Math.min(9, st.width + d*0.8)); }
+function boardClearInk(){ const st=PEN['board']; if (!st) return; if (!confirm('필기를 모두 지울까요? (문제 그림은 남아요)')) return; st.strokes=[]; penRedraw(st); }
+function boardScroll(d){ const w = document.querySelector('#board .bwrap'); if (w) w.scrollBy({top: d*Math.round(window.innerHeight*0.6), behavior:'smooth'}); }
+function boardAttach(cid){
+  const st = PEN['board']; if (!st) return;
+  PEN_FILE[cid] = st.cv.toDataURL('image/png');
+  const p = document.getElementById('pf_'+cid); if (p) p.innerHTML = '🖊 판서 그림이 붙었어요 — 아래 <b>답 보내기</b>를 누르면 아이에게 갑니다. <a href="#" onclick="delete PEN_FILE[\'' + cid + '\'];this.parentNode.textContent=\'\';return false">✕ 떼기</a>';
+  boardClose();
+}
+function boardClose(){
+  const ov = document.getElementById('board'); if (ov) ov.remove();
+  document.documentElement.classList.remove('board-on');
+  try { if (document.fullscreenElement) document.exitFullscreen(); } catch(e) {}
+  delete PEN['board']; BOARD = null;
+}
 function penUndo(cid){ const st=PEN[cid]; if(!st) return; st.strokes.pop(); penRedraw(st); }
 function penClear(cid){ const st=PEN[cid]; if(!st) return; st.strokes=[]; penRedraw(st); }
 function penColor(cid,c){ const st=PEN[cid]; if(st) st.color=c; }
