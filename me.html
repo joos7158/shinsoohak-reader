@@ -158,6 +158,9 @@
   .foot { text-align:center; margin:28px 0 10px; color:var(--body); font-size:1rem; font-weight:700; letter-spacing:-.3px; }
   .foot img { width:160px; display:block; margin:0 auto 8px; opacity:.95;
     mix-blend-mode:multiply; /* 로고 PNG의 흰 배경을 회색 캔버스에 녹인다 */ }
+  .card.jump { outline:3px solid #e0a020; outline-offset:2px; }
+  .jump-note { background:#fff6dc; border:1px solid #e0a020; border-radius:12px; padding:10px 12px; margin:0 0 12px; font-size:.9rem; }
+  .jump-note.miss { background:#fde8e8; border-color:#d9534f; }
 </style>
 </head>
 <body>
@@ -173,9 +176,15 @@
 //   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
 //   🔴 demo(학부모 미리보기)는 기억하지 않는다 — 아이 폰에서 미리보기를 열었다가
 //   자기 토큰이 demo 로 덮이면 앱 아이콘이 남의집 구경 화면이 돼버린다.
-let SID = new URLSearchParams(location.search).get('s') || '';
+const QS = new URLSearchParams(location.search);
+let SID = QS.get('s') || '';
+// 👨‍🏫 2026-09-07 원장 — 질문 알림의 링크로 원장이 아이 카드를 바로 본다.
+//   ?v=t : 열람·행동 로그를 남기지 않고, 이 폰에 아이 토큰을 기억하지도 않는다(원장 폰이 아이 페이지로 굳지 않게).
+//   ?q=t2.a3f1 : 카드 키(위치.유형해시) — 그 카드로 점프해 접힌 원문·정답까지 펼친다. 카드가 재배치됐으면 유형해시로 다시 찾는다.
+const TEACHER = QS.get('v') === 't';
+const JUMP = QS.get('q') || '';
 try {
-  if (SID && SID !== 'demo') localStorage.setItem('me_sid', SID);
+  if (SID && SID !== 'demo' && !TEACHER) localStorage.setItem('me_sid', SID);
   else if (!SID) SID = localStorage.getItem('me_sid') || '';
 } catch(e) {}
 const IS_DEMO = (SID === 'demo');
@@ -189,7 +198,7 @@ function rbtn(label, hash){ const u = rurl(hash); return u ? `<a class="btn" hre
 // 열람 기록 비콘 (리더와 동일 폼)
 const LOG = { action:"https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse", 코드:"entry.1580342508", 내용:"entry.1507722106" };
 const _logged = new Set();
-function logView(label){ if(!SID||IS_DEMO||_logged.has(label))return; _logged.add(label);
+function logView(label){ if(!SID||IS_DEMO||TEACHER||_logged.has(label))return; _logged.add(label);
   const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
   fetch(LOG.action,{method:'POST',mode:'no-cors',body:b}).catch(()=>{}); }
 // 🔴 2026-08-25 — 아이 행동(질문·정복)도 **같은 폼**으로 남긴다. 이 페이지는 GitHub Pages(정적)라
@@ -206,7 +215,7 @@ function qGet(){ try { return JSON.parse(localStorage.getItem(QKEY)||'[]'); } ca
 function qSet(a){ try { localStorage.setItem(QKEY, JSON.stringify(a.slice(-30))); } catch(e){} }
 function qAdd(label){ const a=qGet(); a.push({label, at:new Date().toISOString().slice(0,16)}); qSet(a); }
 function postLog(label){
-  if (IS_DEMO) return Promise.resolve();   // 미리보기는 열람로그·질문 시트를 더럽히지 않는다
+  if (IS_DEMO || TEACHER) return Promise.resolve();   // 미리보기·선생님 보기는 열람로그·질문 시트를 더럽히지 않는다
   const b=new URLSearchParams(); b.append(LOG.코드,SID); b.append(LOG.내용,label);
   return fetch(LOG.action,{method:'POST',mode:'no-cors',body:b});
 }
@@ -264,7 +273,7 @@ function phOnPick(inp){
 function phSend(id, label, done){
   // 붙인 사진이 있으면 웹앱으로 전송 → done(사진전송ok, 사진있었나)
   const img = _php[id];
-  if (!img || !QPHOTO || IS_DEMO) { done(true, false); return; }
+  if (!img || !QPHOTO || IS_DEMO || TEACHER) { done(true, false); return; }
   fetch(QPHOTO, { method:'POST', mode:'no-cors',
                   headers:{'Content-Type':'text/plain;charset=utf-8'},
                   body: JSON.stringify({ t:SID, label:label, img:img }) })
@@ -639,7 +648,10 @@ function askSend(id, btn){
       return;
     }
     stampToday();
-    logAct('🙋질문 ' + t + memo + (had ? ' [사진]' : ''), function(ok){
+    // 🔗 2026-09-07 — 「유형」으로 감싸고 끝에 [카드:키]를 붙인다. Apps Script(알림_일기장암호_오답질문.gs)가
+    //   이 키로 원장 확인용 링크(?s=토큰&q=키&v=t)를 만든다. 유형명 안에 '—'가 있어도(예: 자취 — 원) 깨지지 않게 「」로 경계.
+    //   파서 3곳 동기: .gs parseAsk_ · MathDNA/me_questions.py parse_row · me_signals.py kind_of
+    logAct('🙋질문 「' + t + '」' + memo + (had ? ' [사진]' : '') + ' [카드:' + ckey(id, t) + ']', function(ok){
       memSet('ask_'+id, 1);
       if (box) box.innerHTML = ok
         ? '<div class="hint">✅ 선생님께 전달됐어요' + (had ? ' (사진도 함께)' : '') + '. 답을 준비해서 알려주실 거예요.</div>'
@@ -663,7 +675,7 @@ function freeAskHtml(D){
       ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
     </div>`).join('');
   return `<div class="sect">🙋 그 밖에 궁금한 것</div>
-    <div class="card">
+    <div class="card" id="card_free">
       <div class="sub" style="margin:0 0 8px">위에 없는 것도 괜찮아요 — 숙제, 수업에서 놓친 부분,
         혼자 풀다 막힌 문제. 무엇이든 물어보세요.</div>
       ${reply}
@@ -710,6 +722,32 @@ function freeSend(btn){
   });
 }
 
+// 🔗 카드 키 = 위치(t2/w0) + '.' + 유형명 4자리 해시. 위치는 채점마다 바뀌므로 해시로 재탐색한다.
+function h4(str){ let h=5381; for (const ch of String(str||'')) h=((h*33)^ch.codePointAt(0))>>>0; return ('000'+(h%65536).toString(16)).slice(-4); }
+function ckey(i, ty){ return i + '.' + h4(ty); }
+function jumpTo(q){
+  if (!q) return;
+  const dot = q.indexOf('.');
+  const key = dot>0 ? q.slice(0,dot) : q, h = dot>0 ? q.slice(dot+1) : '';
+  let el = document.getElementById('card_'+key);
+  if (el && h && el.dataset.h !== h) el = null;                       // 그 자리에 다른 카드가 와 있으면
+  if (!el && h) el = document.querySelector('.card[data-h="'+h+'"]');  // 같은 유형 카드를 다시 찾는다
+  const note = document.createElement('div');
+  note.className = 'jump-note';
+  if (el){
+    el.classList.add('jump');
+    if (TEACHER) el.querySelectorAll('details').forEach(d => { d.open = true; });   // 원문·정답·힌트 다 펼침
+    note.innerHTML = (TEACHER ? '👨‍🏫 선생님 확인용 화면 — 아이가 물어본 카드로 이동했어요. 여기서 누른 건 아이 기록에 남지 않아요. ' : '🔗 물어봤던 카드로 이동했어요 ')
+      + '<a href="#" data-to="' + el.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 카드로 다시 이동</a>';
+    app.insertBefore(note, app.firstChild);
+    // 페이지가 길고(1만 px+) 늦게 그려지는 조각(수식·이미지)이 있어 한 번으로는 밀린다 — 세 번 맞춘다.
+    [300, 1200, 2600].forEach(ms => setTimeout(()=>{ try { el.scrollIntoView({block:'start'}); } catch(e){} }, ms));
+  } else {
+    note.textContent = '⚠ 질문한 카드를 지금 목록에서 찾지 못했어요 — 그 뒤 채점으로 오답노트가 갱신됐을 수 있어요. 열람기록 시트의 질문 행(유형명)으로 확인해 주세요.';
+    note.classList.add('miss');
+    app.insertBefore(note, app.firstChild);
+  }
+}
 function card(o,i){
   const seg = o.강의;
   const lecBtn = seg ? rbtn('▶ 이 유형 강의 다시보기', `#u${seg[0]}q${seg[1]}`) : '';
@@ -726,7 +764,7 @@ function card(o,i){
       <span class="pill correct">정답: ${esc(o.문제.answer)} ✓</span>
     </div>`;
   return `
-  <div class="card">
+  <div class="card" id="card_${i}" data-h="${h4(o.유형)}">
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     ${o.유사 ? `
     <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요${o.유사.출처?` <span class="src">· ${esc(o.유사.출처)}</span>`:''}</div>
@@ -774,7 +812,7 @@ function waitCard(o,i){
   const lecBtn = seg ? rbtn('▶ 이 유형 강의 다시보기', `#u${seg[0]}q${seg[1]}`) : '';
   const 단계말 = ['처음 다시 보는 거예요','한 번 맞혔던 유형이에요','두 번 맞혔어요 — 이번이 마지막 확인!'][o.단계] || '';
   return `
-  <div class="card">
+  <div class="card" id="card_${i}" data-h="${h4(o.유형)}">
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
     <span class="due">${esc(o.마지막오답||'')}에 틀림</span>
     <div class="sub" style="margin:8px 0 2px">${esc(단계말)}</div>
@@ -796,7 +834,7 @@ function boxCard(o){
     <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
-document.addEventListener('DOMContentLoaded', render);
+document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); });
 </script>
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
