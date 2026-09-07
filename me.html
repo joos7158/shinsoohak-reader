@@ -159,6 +159,12 @@
   .foot img { width:160px; display:block; margin:0 auto 8px; opacity:.95;
     mix-blend-mode:multiply; /* 로고 PNG의 흰 배경을 회색 캔버스에 녹인다 */ }
   .card.jump { outline:3px solid #e0a020; outline-offset:2px; }
+  .tbox { margin-top:12px; background:#fff6dc; border:1px dashed #e0a020; border-radius:12px; padding:12px 14px; }
+  .tbox .th { font-size:.85rem; font-weight:700; color:#8a5a00; margin-bottom:6px; }
+  .tbox .tq { font-size:.92rem; line-height:1.6; white-space:pre-wrap; word-break:break-word; }
+  .tbox .tqi + .tqi { margin-top:8px; border-top:1px solid #f0d9a0; padding-top:6px; }
+  .tbox textarea { width:100%; min-height:90px; box-sizing:border-box; border:1px solid #d9c27a; border-radius:8px; padding:8px; font:inherit; }
+  .reply.live { border-left:3px solid #2f6fed; }
   .jump-note { background:#fff6dc; border:1px solid #e0a020; border-radius:12px; padding:10px 12px; margin:0 0 12px; font-size:.9rem; }
   .jump-note.miss { background:#fde8e8; border-color:#d9534f; }
 </style>
@@ -181,7 +187,10 @@ let SID = QS.get('s') || '';
 // 👨‍🏫 2026-09-07 원장 — 질문 알림의 링크로 원장이 아이 카드를 바로 본다.
 //   ?v=t : 열람·행동 로그를 남기지 않고, 이 폰에 아이 토큰을 기억하지도 않는다(원장 폰이 아이 페이지로 굳지 않게).
 //   ?q=t2.a3f1 : 카드 키(위치.유형해시) — 그 카드로 점프해 접힌 원문·정답까지 펼친다. 카드가 재배치됐으면 유형해시로 다시 찾는다.
-const TEACHER = QS.get('v') === 't';
+// 💬 &k=답장열쇠 — 카톡 알림 링크에 실려 온다. 있으면 선생님 보기 + "답 보내기" 칸. 원장 폰에만 기억한다.
+let RKEY = QS.get('k') || '';
+const TEACHER = QS.get('v') === 't' || !!RKEY;
+try { if (RKEY) localStorage.setItem('me_rkey', RKEY); else if (TEACHER) RKEY = localStorage.getItem('me_rkey') || ''; } catch(e) {}
 const JUMP = QS.get('q') || '';
 try {
   if (SID && SID !== 'demo' && !TEACHER) localStorage.setItem('me_sid', SID);
@@ -737,6 +746,7 @@ function jumpTo(q){
   if (el){
     el.classList.add('jump');
     if (TEACHER) el.querySelectorAll('details').forEach(d => { d.open = true; });   // 원문·정답·힌트 다 펼침
+    if (TEACHER) teacherTools(el, key, h);
     note.innerHTML = (TEACHER ? '👨‍🏫 선생님 확인용 화면 — 아이가 물어본 카드로 이동했어요. 여기서 누른 건 아이 기록에 남지 않아요. ' : '🔗 물어봤던 카드로 이동했어요 ')
       + '<a href="#" data-to="' + el.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 카드로 다시 이동</a>';
     app.insertBefore(note, app.firstChild);
@@ -747,6 +757,74 @@ function jumpTo(q){
     note.classList.add('miss');
     app.insertBefore(note, app.firstChild);
   }
+}
+// ── 👨‍🏫 원장 휴대폰 답장 (2026-09-07 원장 "카톡으로 질문 확인하고 바로 답 줄 수 있는 형태") ──
+//   카드 안에 ① 아이가 쓴 질문 전문(시트에서 읽음) ② 답 보내기 칸. 답은 Apps Script '답변' 탭에 쌓이고
+//   아이 페이지가 열릴 때 liveReplies() 가 카드에 붙인다. 아이 화면엔 "💬 선생님 답" 으로만 보인다.
+function teacherTools(el, key, h){
+  const ty = (el.querySelector('.badge')||{}).textContent || '';
+  const box = document.createElement('div');
+  box.className = 'tbox';
+  box.innerHTML = `<div class="th">🙋 아이가 물은 것</div><div class="tq" id="tq_${el.id}">불러오는 중…</div>
+    <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">· 글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
+    <textarea id="tr_${el.id}" placeholder="예) ㄱ은 기울기 곱이 -1이면 수직이 맞아. ㄴ은 m이 어떤 값일 때 교점이 없는지 봐봐 — 그 점이 빠지면 완전한 원이 아니야."></textarea>
+    <button class="btn" onclick="teacherSend('${el.id}','${esc(key)}')">답 보내기</button><div class="hint" id="trs_${el.id}"></div>`;
+  const acts = el.querySelector('.acts');
+  if (acts) el.insertBefore(box, acts); else el.appendChild(box);
+  if (!QPHOTO) return;
+  fetch(QPHOTO + '?t=' + encodeURIComponent(SID) + '&mode=questions&_=' + Date.now()).then(r=>r.json()).then(j=>{
+    const qs = (j.questions||[]).filter(q => {
+      const s = q.text || '';
+      return key === 'free' ? s.indexOf('🙋자유질문') === 0 : (s.indexOf('[카드:'+key) >= 0 || (h && s.indexOf('[카드:') < 0 && s.indexOf(ty) >= 0));
+    }).reverse();
+    const tq = document.getElementById('tq_'+el.id);
+    if (!tq) return;
+    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(q.at)}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}</div>`).join('')
+                             : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
+  }).catch(()=>{ const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
+}
+function teacherSend(cid, key){
+  const ta = document.getElementById('tr_'+cid), st = document.getElementById('trs_'+cid);
+  const text = ta ? ta.value.trim() : '';
+  if (!text) { if (st) st.textContent = '내용을 적어주세요.'; return; }
+  if (!RKEY) { if (st) st.textContent = '답장 열쇠가 없어요 — 카톡/메일의 링크(&k=)로 다시 열어주세요.'; return; }
+  const ty = (document.querySelector('#'+cid+' .badge')||{}).textContent || (key==='free' ? '자유질문' : '');
+  if (st) st.textContent = '보내는 중…';
+  const payload = JSON.stringify({ admin:'reply', k:RKEY, t:SID, card:key, type:ty, text });
+  fetch(QPHOTO, { method:'POST', body: payload }).then(r=>r.text()).then(res=>{
+    if (res === 'ok') { if (st) st.innerHTML = '✅ 올라갔어요. 아이가 오답노트를 열면 이 카드 안에 <b>💬 선생님 답</b>으로 보여요.'; if (ta) ta.value = ''; }
+    else if (st) st.textContent = '⚠ 서버가 거절했어요: ' + res;
+  }).catch(()=>{
+    // 응답을 못 읽는 환경(CORS) — 한 번 더 no-cors 로 보내고 "확인 불가"로 알린다
+    fetch(QPHOTO, { method:'POST', mode:'no-cors', body: payload }).then(()=>{ if (st) st.textContent = '📡 보냈어요(응답 확인 불가). 아이 페이지를 새로고침해 확인해 주세요.'; })
+      .catch(()=>{ if (st) st.textContent = '❌ 전송 실패 — 인터넷 연결을 확인해 주세요.'; });
+  });
+}
+// 아이 페이지 — 답변 탭의 답을 카드에 붙인다 (정적 me_data 의 답변과 별개, 글 기준 중복 제거)
+function liveReplies(){
+  if (!SID || IS_DEMO || !QPHOTO || SID.length < 12) return;
+  fetch(QPHOTO + '?t=' + encodeURIComponent(SID) + '&mode=replies&_=' + Date.now()).then(r=>r.json()).then(j=>{
+    const rs = j.replies || []; let n = 0, firstEl = null;
+    rs.forEach(r => {
+      let el = null;
+      if (r.card === 'free') el = document.getElementById('card_free');
+      else {
+        const dot = (r.card||'').indexOf('.'), hh = dot > 0 ? r.card.slice(dot+1) : h4(r.type);
+        el = document.querySelector('.card[data-h="'+hh+'"]') || document.querySelector('.card[data-h="'+h4(r.type)+'"]');
+      }
+      if (!el) return;
+      if ([...el.querySelectorAll('.reply .rb, .reply a')].some(x => (x.textContent||'').trim() === r.text.trim() || (x.href && r.text.indexOf(x.href) >= 0))) return;
+      const d = document.createElement('div'); d.className = 'reply live';
+      d.innerHTML = `<div class="rh">💬 선생님 답</div>${replyBody(r.text)}<div class="rt">${esc(r.at)}</div>`;
+      const acts = el.querySelector('.acts'); if (acts) el.insertBefore(d, acts); else el.appendChild(d);
+      n++; if (!firstEl) firstEl = el;
+    });
+    if (n && !TEACHER && !JUMP) {
+      const note = document.createElement('div'); note.className = 'jump-note';
+      note.innerHTML = '💬 선생님 답이 ' + n + '개 있어요 <a href="#" data-to="' + firstEl.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 보러 가기</a>';
+      app.insertBefore(note, app.firstChild);
+    }
+  }).catch(()=>{});
 }
 function card(o,i){
   const seg = o.강의;
@@ -834,7 +912,7 @@ function boxCard(o){
     <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
-document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); });
+document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); liveReplies(); });
 </script>
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
