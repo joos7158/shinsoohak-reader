@@ -1,6 +1,6 @@
 // build_school_feed.py 생성 — 학교 카드(급식·D-day). 이름·점수 없음(학교명은 2026-08-28 원장 승인).
 window.SCHOOL_FEED = {
- "updated": "2026-09-05",
+ "updated": "2026-09-07",
  "tokens": {
   "GJSwV5R8jDgHJD6W-IODzg": {
    "s": "가좌고",
