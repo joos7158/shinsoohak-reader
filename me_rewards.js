@@ -150,7 +150,7 @@ window.ME_REWARDS = {
   "today": "2026-09-07"
  },
  "oDUG17HlPyQHIEK4B065dw": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -158,7 +158,8 @@ window.ME_REWARDS = {
    "2026-08-28"
   ],
   "gold": [
-   "평균값 정리를 만족하는 상수 c 구하기"
+   "평균값 정리를 만족하는 상수 c 구하기",
+   "함수의 증가와 감소"
   ],
   "today": "2026-09-07"
  },
@@ -252,12 +253,14 @@ window.ME_REWARDS = {
   "today": "2026-09-07"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
-  "gold": [],
+  "gold": [
+   "곡선 위의 한 점에서의 접선 방정식"
+  ],
   "today": "2026-09-07"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
