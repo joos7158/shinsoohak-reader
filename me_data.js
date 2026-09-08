@@ -2231,7 +2231,12 @@ window.ME_DATA = {
      2,
      4
     ],
-    "답변": []
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1u_DU_3p0Nnzx2UEqYRsZId1ZJoVGu1PT/view",
+      "at": "2026-09-09"
+     }
+    ]
    },
    {
     "유형": "사잇값 정리로 방정식의 실근 존재",
@@ -2548,7 +2553,12 @@ window.ME_DATA = {
      2,
      4
     ],
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/1u_DU_3p0Nnzx2UEqYRsZId1ZJoVGu1PT/view",
+      "at": "2026-09-09"
+     }
+    ],
     "힌트": [
      "ㄱ은 $|x|$를 $x$로 교체하는 것, ㄴ은 분자 유리화, ㄷ은 켤레식 곱하기로 각각 접근하는 방향으로 정리해보자.",
      "$x<0$이면 $|x|=-x$야 — 특히 $x\\to -\\infty$일 때 이 변환이 계산의 핵심이야.",
