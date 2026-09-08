@@ -3064,5 +3064,9 @@ window.ME_DATA = {
    }
   ],
   "자유답변": []
+ },
+ "l9KiHOI2ZJ1aRbdFn8vIgQ": {
+  "대기": true,
+  "리더코드": ""
  }
 };
