@@ -101,12 +101,13 @@ window.ME_REWARDS = {
   "today": "2026-09-08"
  },
  "haOPA17TodCIFf0HoU8z3A": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [
-   "2026-08-30"
+   "2026-08-30",
+   "2026-09-08"
   ],
   "gold": [
    "극대와 극소(극값 구하기)"
