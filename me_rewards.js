@@ -68,13 +68,14 @@ window.ME_REWARDS = {
   "today": "2026-09-08"
  },
  "Z83nVYQ26xYl7HEmvvEYaQ": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-29",
-   "2026-09-07"
+   "2026-09-07",
+   "2026-09-08"
   ],
   "gold": [],
   "today": "2026-09-08"
@@ -271,6 +272,15 @@ window.ME_REWARDS = {
   "days": [
    "2026-09-04"
   ],
+  "gold": [],
+  "today": "2026-09-08"
+ },
+ "l9KiHOI2ZJ1aRbdFn8vIgQ": {
+  "stamps": 0,
+  "redeemed": 0,
+  "per": 10,
+  "gift": "편의점 5천원 기프티콘",
+  "days": [],
   "gold": [],
   "today": "2026-09-08"
  },
