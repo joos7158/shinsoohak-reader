@@ -121,6 +121,20 @@
   button.hbtn { margin-top:10px; background:var(--weak); color:var(--weakfg); border:0; border-radius:12px;
     padding:12px 16px; font-weight:600; font-size:.88rem; cursor:pointer; font-family:inherit; }
   button.hbtn:active { background:#d8eafe; }
+  /* 📝 서술형이라면 — 2026-09-09 원장 파일럿. 내 풀이가 어디까지 맞게 갔나(학교 서술형 채점 방식) */
+  .seosul { background:#fff8e6; border:1px solid #f1dfae; border-radius:12px; padding:12px 14px; margin:8px 0 10px; }
+  .seosul .so-h { font-size:.82rem; font-weight:800; color:#8a5a00; margin-bottom:6px; }
+  .seosul .so-say { font-size:.93rem; line-height:1.7; color:var(--ink); margin-bottom:8px; }
+  .seosul .so-lad { display:flex; flex-direction:column; gap:4px; margin:6px 0; }
+  .seosul .so-rung { display:flex; gap:8px; align-items:flex-start; font-size:.9rem; line-height:1.55; padding:5px 8px; border-radius:8px; }
+  .seosul .so-rung.ok { background:#e9f7ec; color:#1f6b35; }
+  .seosul .so-rung.no { background:#fdecec; color:#8c2b2b; }
+  .seosul .so-rung b { flex:0 0 auto; }
+  .seosul .so-miss { font-size:.9rem; line-height:1.65; margin-top:8px; padding:8px 10px; background:#fff; border-left:4px solid #e2a400; border-radius:6px; }
+  .seosul .so-trap { font-size:.86rem; line-height:1.6; margin-top:6px; color:#7a4b00; }
+  .seosul details { margin-top:8px; background:transparent; }
+  .seosul summary { font-size:.86rem; color:#8a5a00; cursor:pointer; }
+  .seosul img { width:100%; border:1px solid #e5d9b8; border-radius:8px; margin-top:6px; background:#fff; }
   /* 📡 못 보낸 질문 배너 */
   .pending { background:#fff; border:1.5px solid var(--line); color:var(--body); border-radius:12px;
     padding:12px 15px; font-size:.85rem; margin:8px 0 12px; line-height:1.6; }
@@ -595,6 +609,7 @@ function render(){
   // 지난번에 못 보낸 질문이 있으면 지금 조용히 다시 보낸다(아이가 다시 쓸 필요 없다).
   renderPending(qGet().length);
   flushQueue(renderPending);
+  watchSeosul();   // 📝 서술형 사다리가 화면에 보이면 열람 로그
 }
 
 function reviewCard(r){
@@ -645,6 +660,31 @@ function pickAns(id, chosen, mark, el){
 //   한 단계씩만 열린다(스스로 생각할 틈을 남기는 게 핵심). 어느 단계까지 열었는지
 //   열람 로그(💡힌트N)로 남는다 — 아이가 몇 단계에서 풀리는지가 다음 힌트 톤의 데이터다.
 //   힌트에 정답은 없다 — 5단계까지 봐도 안 풀리면 '정답 확인'과 🙋질문이 그 아래 있다.
+// 📝 서술형이라면 — 2026-09-09 원장 파일럿 "채점에 근거한 서술형 과정이 아이에게 의미가 있다".
+//   원장이 첨삭지에서 동의 체크한 카드만 온다(gen_me_seosul.py 게이트). 점수 분수는 싣지 않는다 —
+//   ✓/✗ 칸으로 "여기까지는 점수"만 보여준다. 원본(원장 빨간펜 첨삭지 카드)은 접어 두고, 열면 로그.
+//   열람 측정: 사다리가 화면에 실제로 보였을 때 한 번(📝서술형 유형), 원본을 열면 또 한 번(✍️원본 유형).
+function seosulHtml(o, i){
+  const s = o.서술형; if (!s || !s.칸 || !s.칸.length) return '';
+  const lad = s.칸.map((r,k)=>`<div class="so-rung ${r.ok?'ok':'no'}"><b>${r.ok?'✓':'✗'} ${k+1}칸</b><span>${esc(r.s)}</span></div>`).join('');
+  const last = s.칸.reduce((m,r,k)=> r.ok ? k+1 : m, 0);
+  const upto = last ? `${last}칸까지는 점수예요` : `첫 칸부터 다시 써보자`;
+  return `<div class="seosul" id="so_${i}" data-ty="${esc(o.유형)}">
+    <div class="so-h">📝 서술형이라면 — 내 풀이, 어디까지 갔나 <span style="font-weight:500;color:#a67c1a">· ${upto}</span></div>
+    <div class="so-say">${esc(s.말)}</div>
+    <div class="so-lad">${lad}</div>
+    ${s.빠진?`<div class="so-miss">✍️ ${esc(s.빠진)}</div>`:''}
+    ${s.주의?`<div class="so-trap">⚠️ ${esc(s.주의)}</div>`:''}
+    ${s.원본?`<details ontoggle="if(this.open)logAct('✍️원본 '+this.closest('.seosul').dataset.ty)"><summary>선생님이 직접 첨삭한 원본 보기</summary><img loading="lazy" src="${esc(s.원본)}" alt="선생님 첨삭"></details>`:''}
+  </div>`;
+}
+function watchSeosul(){
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.intersectionRatio >= 0.6) { logView('📝서술형 ' + e.target.dataset.ty); io.unobserve(e.target); }
+  }), {threshold:[0.6]});
+  document.querySelectorAll('.seosul').forEach(el => io.observe(el));
+}
 const HINT_LB = ['🧭 1단계 · 방향','📐 2단계 · 개념','👣 3단계 · 첫걸음','⛰️ 4단계 · 고비','🏁 5단계 · 마무리 직전'];
 function hintHtml(o, i){
   const hs = o.힌트 || [];
@@ -1065,6 +1105,7 @@ function card(o,i){
   return `
   <div class="card" id="card_${i}" data-h="${h4(o.유형)}">
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
+    ${seosulHtml(o, i)}
     ${o.유사 ? `
     <div class="sub" style="margin:6px 0 2px">🔁 같은 유형, 다른 문제 — 하나만 골라보세요${o.유사.출처?` <span class="src">· ${esc(o.유사.출처)}</span>`:''}</div>
     <div class="problem">${stemHtml(o.유사.stem)}</div>
