@@ -68,7 +68,7 @@ window.ME_REWARDS = {
   "today": "2026-09-09"
  },
  "Z83nVYQ26xYl7HEmvvEYaQ": {
-  "stamps": 4,
+  "stamps": 5,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -78,7 +78,9 @@ window.ME_REWARDS = {
    "2026-09-08",
    "2026-09-09"
   ],
-  "gold": [],
+  "gold": [
+   "두 접점을 지나는 직선 (극선)"
+  ],
   "today": "2026-09-09"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
@@ -257,13 +259,14 @@ window.ME_REWARDS = {
   "today": "2026-09-09"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
-  "stamps": 1,
+  "stamps": 2,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
-   "곡선 위의 한 점에서의 접선 방정식"
+   "곡선 위의 한 점에서의 접선 방정식",
+   "평균값 정리를 만족하는 상수 c 구하기"
   ],
   "today": "2026-09-09"
  },
