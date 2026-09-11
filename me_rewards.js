@@ -68,7 +68,7 @@ window.ME_REWARDS = {
   "today": "2026-09-11"
  },
  "Z83nVYQ26xYl7HEmvvEYaQ": {
-  "stamps": 6,
+  "stamps": 8,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -80,7 +80,9 @@ window.ME_REWARDS = {
    "2026-09-11"
   ],
   "gold": [
-   "두 접점을 지나는 직선 (극선)"
+   "두 접점을 지나는 직선 (극선)",
+   "원의 접선 — 원 위의 한 점이 주어진 경우",
+   "연산 조건의 포함 관계 번역"
   ],
   "today": "2026-09-11"
  },
@@ -158,7 +160,7 @@ window.ME_REWARDS = {
   "today": "2026-09-11"
  },
  "oDUG17HlPyQHIEK4B065dw": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -167,12 +169,13 @@ window.ME_REWARDS = {
   ],
   "gold": [
    "평균값 정리를 만족하는 상수 c 구하기",
-   "함수의 증가와 감소"
+   "함수의 증가와 감소",
+   "합성함수의 연속성"
   ],
   "today": "2026-09-11"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
-  "stamps": 4,
+  "stamps": 5,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -182,7 +185,8 @@ window.ME_REWARDS = {
   "gold": [
    "조건부확률",
    "이항정리의 활용 (나머지·근삿값)",
-   "부등식의 해의 개수 (여유변수)"
+   "부등식의 해의 개수 (여유변수)",
+   "파스칼 삼각형·조합 항등식"
   ],
   "today": "2026-09-11"
  },
@@ -261,14 +265,15 @@ window.ME_REWARDS = {
   "today": "2026-09-11"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
    "곡선 위의 한 점에서의 접선 방정식",
-   "평균값 정리를 만족하는 상수 c 구하기"
+   "평균값 정리를 만족하는 상수 c 구하기",
+   "연속함수의 성질 적용"
   ],
   "today": "2026-09-11"
  },
