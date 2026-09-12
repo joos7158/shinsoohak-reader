@@ -3368,7 +3368,12 @@ window.ME_DATA = {
      0,
      7
     ],
-    "답변": [],
+    "답변": [
+     {
+      "답": "🎬 답장 영상: https://drive.google.com/file/d/13i8QBsNBa-qGjAcrHeFuiz_TN_vv3L3_/view",
+      "at": "2026-09-12"
+     }
+    ],
     "유사": {
      "stem": "직선 $l$이 $x$축 및 $y$축과 만나는 점을 각각 $A$, $B$라 할 때, $\\overline{AB}=1$이라 한다. 선분 $AB$를 사등분하는 세 점 중 $A$에 가장 가까운 점을 $P$, $B$에 가장 가까운 점을 $Q$라 할 때, $\\overline{OP}^{2}+\\overline{OQ}^{2}$의 값은?",
      "choices": [
