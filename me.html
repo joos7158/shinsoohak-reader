@@ -207,6 +207,17 @@
   .newdot { display:inline-block; background:var(--red); color:#fff; font-size:.7rem; font-weight:700;
             padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:middle; }
   .reply.isnew { box-shadow:0 0 0 2px rgba(228,41,57,.28); }
+  /* 🎬 카드 안 영상 플레이어 (2026-09-13) — 드라이브로 튕겨 나가지 않게 */
+  .vwrap { position:relative; margin-top:8px; border-radius:12px; overflow:hidden; background:#000;
+           aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; }
+  .vwrap img.vthumb { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  .vwrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vwrap .vplay { position:relative; z-index:2; background:rgba(0,0,0,.62); color:#fff; border:0;
+                  border-radius:999px; padding:12px 20px; font-size:1rem; font-weight:700;
+                  font-family:inherit; cursor:pointer; }
+  .vwrap .vplay:active { background:rgba(0,0,0,.8); }
+  .vsub { font-size:.76rem; color:var(--muted); margin-top:5px; }
+  .vsub a { color:var(--muted); }
 </style>
 </head>
 <body>
@@ -487,7 +498,19 @@ function replyBody(t){
   const m = t.match(/https?:\/\/[^\s"'<>]+/);
   if (!m) return `<div class="rb">${esc(t)}</div>` + img;
   const rest = t.replace(m[0], '').replace(/🎬 답장 영상:\s*/,'').trim();
-  return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
+  const head = rest ? `<div class="rb">${esc(rest)}</div>` : '';
+  // 🎬 2026-09-13 원장 "다운로드를 해야 봐진다" — 드라이브 /view 를 폰에서 열면 앱으로 튕기거나
+  //   다운로드를 시킨다. 파일은 멀쩡하다(익명으로 /preview 열면 재생됨). 그래서 **카드 안에서** 튼다.
+  const dv = m[0].match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  if (dv) return head + `
+    <div class="vwrap" data-id="${esc(dv[1])}">
+      <img class="vthumb" src="https://drive.google.com/thumbnail?id=${esc(dv[1])}&sz=w800" alt="" loading="lazy"
+           onerror="this.style.display='none'">
+      <button class="vplay" onclick="vplay(this)">▶ 영상 보기</button>
+    </div>
+    <div class="vsub">안 보이면 <a href="${esc(m[0])}" target="_blank" rel="noopener"
+      onclick="logAct('🎬영상(드라이브) '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문');stampToday()">드라이브에서 열기</a></div>` + img;
+  return `${head}
     <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문');stampToday()">🎬 선생님 답장 영상 보기</a>`;
 }
 // ── 🔴 새 답장 알림 (2026-09-13 원장 "아이가 올라와 있는 걸 확인 가능한 형태인가") ─────
@@ -609,6 +632,18 @@ document.addEventListener('click', function(e){
   const a = e.target && e.target.closest && e.target.closest('.reply a');
   if (a) newSeen(a.closest('.reply'));
 });
+
+// ▶ 누르면 그 자리에서 재생. iframe 을 미리 깔지 않는 이유 = 무겁고, 열람 측정(🎬영상)이
+//   "아이가 실제로 눌렀다"는 뜻을 유지해야 한다(08-21 답장영상 파일럿 판정 기준).
+function vplay(btn){
+  const w = btn.closest('.vwrap'); if (!w) return;
+  const ty = ((w.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent || '자유질문';
+  logAct('🎬영상 ' + ty);
+  stampToday();
+  const rp = w.closest('.reply'); if (rp) newSeen(rp);
+  w.innerHTML = '<iframe src="https://drive.google.com/file/d/' + w.dataset.id +
+    '/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+}
 
 // ── 🎁 도장판 (2026-09-04 원장 "보상 시스템 — 채워지면 실물 선물") ──────────────
 //   🔵 오늘 me 에서 뭔가 했다(자가채점·힌트 끝·영상·질문) = 하루 1개 · ⭐ 종이에서 3번 맞혀 도구함 = 유형마다 1개.
