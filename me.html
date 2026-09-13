@@ -521,6 +521,25 @@ function replyBody(t){
 //   · 읽음 = 그 답이 화면에 60% 이상 1.2초 머물면. 스크롤로 스쳐 지나가면 안 지워진다.
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
+// 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
+const BUILD = '20260913-195131';
+// 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
+//   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
+//   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
+//   → 열릴 때 자기 주소를 캐시 무시로 한 번 받아 표식을 비교하고, 다르면 **세션당 한 번만** 새로고침.
+//   cache:'reload' 가 HTTP 캐시를 갱신해 두므로 이어지는 reload 는 새 파일을 받는다.
+//   🔴 쿼리스트링을 붙이지 않는다 — 붙이면 별개 캐시 엔트리가 되어 원래 주소의 캐시가 안 갱신된다.
+function checkBuild(){
+  if (IS_DEMO) return;
+  try { if (sessionStorage.getItem('me_build_reloaded')) return; } catch(e){}   // 무한 새로고침 방지
+  fetch(location.pathname, { cache: 'reload' }).then(r => r.text()).then(function(t){
+    const m = t.match(/const BUILD = '([^']+)'/);
+    if (!m || m[1] === BUILD) return;                       // 같은 버전이면 아무 일도 없다
+    try { sessionStorage.setItem('me_build_reloaded', m[1]); } catch(e){}
+    location.reload();
+  }).catch(function(){});
+}
+
 const SEEN = 'me_seen_' + SID;
 function seenGet(){ try { return JSON.parse(localStorage.getItem(SEEN) || '[]'); } catch(e){ return []; } }
 function seenAdd(sig){
@@ -1335,7 +1354,7 @@ function boxCard(o){
     <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
-document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); markNew(); liveReplies(); refreshData(); });
+document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); markNew(); liveReplies(); refreshData(); checkBuild(); });
 </script>
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
