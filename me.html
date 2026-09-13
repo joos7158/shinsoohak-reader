@@ -200,6 +200,13 @@
   .pen canvas { touch-action:none; border:1px solid #d9c27a; border-radius:8px; background:#fff; display:block; width:100%; }
   .jump-note { background:#fff6dc; border:1px solid #e0a020; border-radius:12px; padding:10px 12px; margin:0 0 12px; font-size:.9rem; }
   .jump-note.miss { background:#fde8e8; border-color:#d9534f; }
+  /* 🔴 새 답장 알림 (2026-09-13) — 답이 카드 안에만 있어 아이가 못 찾던 것을 표면으로 끌어올린다 */
+  .jump-note.new-note { background:var(--weak); border-color:var(--accent); color:var(--ink); }
+  .newchip { display:inline-block; background:var(--red); color:#fff; font-size:.68rem; font-weight:800;
+             letter-spacing:.04em; padding:1px 6px; border-radius:999px; margin-left:6px; vertical-align:middle; }
+  .newdot { display:inline-block; background:var(--red); color:#fff; font-size:.7rem; font-weight:700;
+            padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:middle; }
+  .reply.isnew { box-shadow:0 0 0 2px rgba(228,41,57,.28); }
 </style>
 </head>
 <body>
@@ -483,6 +490,107 @@ function replyBody(t){
   return `${rest?`<div class="rb">${esc(rest)}</div>`:''}
     <a class="btn" href="${esc(m[0])}" target="_blank" rel="noopener" style="margin-top:6px" onclick="logAct('🎬영상 '+((this.closest('.card')||{querySelector:()=>null}).querySelector('.badge')||{}).textContent||'자유질문');stampToday()">🎬 선생님 답장 영상 보기</a>`;
 }
+// ── 🔴 새 답장 알림 (2026-09-13 원장 "아이가 올라와 있는 걸 확인 가능한 형태인가") ─────
+//   그동안 답은 카드 **안에만** 남았다(actsHtml 주석 그대로) — 아이가 그 문항 카드까지
+//   들어가야 발견했다. 그래서 원장이 매번 카톡으로 "올렸어" 를 손으로 보내야 했다. 그 손을 없앤다.
+//   · NEW 판정 = 최근 14일 안에 달린 답 중, 이 기기에서 아직 눈앞에 지나가지 않은 것.
+//     (14일 게이트의 뜻 = 배선 첫날 옛날 답이 한꺼번에 NEW 로 터지지 않게)
+//   · 읽음 = 그 답이 화면에 60% 이상 1.2초 머물면. 스크롤로 스쳐 지나가면 안 지워진다.
+//   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
+//   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
+const SEEN = 'me_seen_' + SID;
+function seenGet(){ try { return JSON.parse(localStorage.getItem(SEEN) || '[]'); } catch(e){ return []; } }
+function seenAdd(sig){
+  if (!sig || IS_DEMO) return;
+  try { const a = seenGet(); if (a.includes(sig)) return; a.push(sig);
+        localStorage.setItem(SEEN, JSON.stringify(a.slice(-300))); } catch(e){}
+}
+function replySig(text, at){ return h4(String(at||'').slice(0,10)) + h4(String(text||'').slice(0,80)); }
+function isFresh(at){
+  const d = new Date(at);                       // "2026-09-13" 도, 시트의 Date 문자열도 받는다
+  if (isNaN(d)) return false;                   // 날짜를 모르는 답은 NEW 로 올리지 않는다(안전측)
+  const gap = Date.now() - d.getTime();
+  return gap < 14*864e5 && gap > -864e5;        // 미래 날짜(시계 어긋남)도 튕겨낸다
+}
+function replyAttr(text, at){
+  return 'data-sig="' + replySig(text, at) + '"' + (isFresh(at) ? ' data-fresh="1"' : '');
+}
+function newSeen(el){
+  if (!el || !el.classList || !el.classList.contains('isnew')) return;
+  seenAdd(el.dataset.sig);
+  el.classList.remove('isnew');
+  const chip = el.querySelector('.newchip'); if (chip) chip.remove();
+  const card = el.closest('.card');
+  if (card && !card.querySelector('.reply.isnew')){ const d = card.querySelector('.newdot'); if (d) d.remove(); }
+  newBar();
+}
+let _newObs;
+function _obs(){
+  if (_newObs !== undefined) return _newObs;
+  if (!('IntersectionObserver' in window)) { _newObs = null; return null; }
+  const timers = new WeakMap();
+  _newObs = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio >= 0.6){
+        if (!timers.has(e.target))
+          timers.set(e.target, setTimeout(function(){ _newObs.unobserve(e.target); newSeen(e.target); }, 1200));
+      } else {
+        const t = timers.get(e.target); if (t){ clearTimeout(t); timers.delete(e.target); }
+      }
+    });
+  }, { threshold: [0, 0.6, 1] });
+  return _newObs;
+}
+function markNew(){
+  if (TEACHER || !SID) return;
+  const seen = seenGet();
+  document.querySelectorAll('.reply').forEach(function(el){
+    const sig = el.dataset.sig;
+    if (!sig || el.dataset.fresh !== '1' || seen.includes(sig) || el.classList.contains('isnew')) return;
+    el.classList.add('isnew');
+    _shown.add(sig);
+    const rh = el.querySelector('.rh');
+    if (rh && !rh.querySelector('.newchip')) rh.insertAdjacentHTML('beforeend', ' <span class="newchip">NEW</span>');
+    const card = el.closest('.card'), badge = card && card.querySelector('.badge');
+    if (badge && !card.querySelector('.newdot')) badge.insertAdjacentHTML('afterend', ' <span class="newdot">💬 새 답장</span>');
+    const ob = _obs(); if (ob) ob.observe(el);
+  });
+  newBar();
+}
+function newBar(){
+  const old = document.getElementById('newbar'); if (old) old.remove();
+  if (TEACHER) return;
+  const els = [].slice.call(document.querySelectorAll('.reply.isnew'));
+  if (!els.length) return;
+  const vid = els.some(function(el){ return (el.textContent || '').indexOf('🎬') >= 0; });
+  const first = els[0].closest('.card') || els[0];
+  if (!first.id) first.id = 'newtarget';
+  const bar = document.createElement('div');
+  bar.id = 'newbar'; bar.className = 'jump-note new-note';
+  bar.innerHTML = (vid ? '🎬 <b>선생님 답장 영상</b>이 왔어요!' : '💬 <b>선생님 답</b>이 ' + els.length + '개 왔어요!')
+    + ' <a href="#" data-to="' + first.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 보러 가기</a>';
+  app.insertBefore(bar, app.firstChild);
+}
+// 🛟 폴백 — 관찰자가 안 도는 환경이 실재한다(2026-09-13 검증: 탭이 그려지지 않으면
+//   IntersectionObserver 콜백이 아예 오지 않는다). 그러면 NEW 가 영영 안 지워진다.
+//   그래서 **이번 방문에 띄운 NEW 는 페이지를 떠날 때 읽은 것으로 확정**한다.
+//   3초 미만 체류는 제외 — 잘못 눌러 열었다 닫은 경우까지 지워버리지 않게.
+const _shown = new Set();
+const _openedAt = Date.now();
+function flushShown(){
+  if (Date.now() - _openedAt < 3000) return;
+  _shown.forEach(seenAdd);
+  _shown.clear();
+}
+window.addEventListener('pagehide', flushShown);
+document.addEventListener('visibilitychange', function(){ if (document.hidden) flushShown(); });
+
+// 답 안의 버튼(🎬 영상 보기 등)을 누르면 그 순간 읽은 것으로 — 1.2초를 기다릴 필요가 없다.
+document.addEventListener('click', function(e){
+  const a = e.target && e.target.closest && e.target.closest('.reply a');
+  if (a) newSeen(a.closest('.reply'));
+});
+
 // ── 🎁 도장판 (2026-09-04 원장 "보상 시스템 — 채워지면 실물 선물") ──────────────
 //   🔵 오늘 me 에서 뭔가 했다(자가채점·힌트 끝·영상·질문) = 하루 1개 · ⭐ 종이에서 3번 맞혀 도구함 = 유형마다 1개.
 //   10개 = 선물(원장이 실물로). 정본은 me_rewards.py 가 밤에 집계(me_rewards.js) — 여기선 **오늘치 1개만**
@@ -759,7 +867,7 @@ function askSend(id, btn){
 //   답장은 유형이 없으므로 `_자유` 키로 쌓이고 D.자유답변 으로 내려온다.
 function freeAskHtml(D){
   const rp = (D && D.자유답변) || [];
-  const reply = rp.map(r => `<div class="reply">
+  const reply = rp.map(r => `<div class="reply" ${replyAttr(r.답, r.at)}>
       <div class="rh">💬 선생님 답</div>
       ${replyBody(r.답)}
       ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
@@ -1076,15 +1184,14 @@ function liveReplies(){
       if (!el) return;
       if ([...el.querySelectorAll('.reply .rb, .reply a')].some(x => (x.textContent||'').trim() === r.text.trim() || (x.href && r.text.indexOf(x.href) >= 0))) return;
       const d = document.createElement('div'); d.className = 'reply live';
+      d.dataset.sig = replySig(r.text, r.at); if (isFresh(r.at)) d.dataset.fresh = '1';
       d.innerHTML = `<div class="rh">💬 선생님 답</div>${replyBody(r.text)}<div class="rt">${esc(fmtAt(r.at))}</div>`;
       const acts = el.querySelector('.acts'); if (acts) el.insertBefore(d, acts); else el.appendChild(d);
       n++; if (!firstEl) firstEl = el;
     });
-    if (n && !TEACHER && !JUMP) {
-      const note = document.createElement('div'); note.className = 'jump-note';
-      note.innerHTML = '💬 선생님 답이 ' + n + '개 있어요 <a href="#" data-to="' + firstEl.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 보러 가기</a>';
-      app.insertBefore(note, app.firstChild);
-    }
+    // 2026-09-13 — 옛 배너는 live 답만, 그것도 읽었는지 상관없이 매번 떴다.
+    //   이제 정적 답(🎬 영상 포함)까지 한 배너가 맡는다 → markNew() 하나로 통일.
+    if (n) markNew();
   }).catch(()=>{});
 }
 function card(o,i){
@@ -1128,7 +1235,7 @@ function actsHtml(i, o){
   //   답은 카드 **안에** 남는다(따로 알림을 보내지 않는다 — 아이가 열었을 때 거기 있으면 된다).
   //   여러 번 주고받을 수 있게 배열로 받는다.
   const rp = (o && o.답변) || [];
-  const reply = rp.map(r => `<div class="reply">
+  const reply = rp.map(r => `<div class="reply" ${replyAttr(r.답, r.at)}>
       <div class="rh">💬 선생님 답</div>
       ${replyBody(r.답)}
       ${r.at?`<div class="rt">${esc(r.at)}</div>`:''}
@@ -1174,7 +1281,7 @@ function boxCard(o){
     <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
-document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); liveReplies(); });
+document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); markNew(); liveReplies(); });
 </script>
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
