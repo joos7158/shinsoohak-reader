@@ -571,6 +571,25 @@ function newBar(){
     + ' <a href="#" data-to="' + first.id + '" onclick="document.getElementById(this.dataset.to).scrollIntoView({block:&quot;start&quot;});return false">▼ 보러 가기</a>';
   app.insertBefore(bar, app.firstChild);
 }
+// 🔄 데이터 캐시 우회 (2026-09-13 실측) — GitHub Pages 가 me_data.js 를 max-age=600 으로
+//   준다. 그래서 답을 붙이고 **10분 안**에 아이가 열면 브라우저가 옛 데이터를 써서
+//   방금 붙인 🎬 영상도 NEW 배지도 안 보인다("영상 없는데요?"). 붙이자마자 카톡을 보내는
+//   흐름에선 이게 곧 사고다. → 열 때 원본을 한 번만 다시 받아, **내 것이 달라졌을 때만**
+//   조용히 다시 그린다. 같으면 아무 일도 일어나지 않는다(대부분의 방문).
+function refreshData(){
+  if (!SID || IS_DEMO) return;
+  fetch('me_data.js?_=' + Date.now(), { cache: 'reload' }).then(r => r.text()).then(function(t){
+    const m = t.match(/window\.ME_DATA = (\{[\s\S]*\});?\s*$/);
+    if (!m) return;
+    let d; try { d = JSON.parse(m[1]); } catch(e){ return; }
+    const before = JSON.stringify((window.ME_DATA||{})[SID] || null);
+    const after  = JSON.stringify(d[SID] || null);
+    if (before === after) return;                 // 달라진 게 없으면 화면을 건드리지 않는다
+    window.ME_DATA = d;
+    render(); jumpTo(JUMP); markNew(); liveReplies();
+  }).catch(function(){});
+}
+
 // 🛟 폴백 — 관찰자가 안 도는 환경이 실재한다(2026-09-13 검증: 탭이 그려지지 않으면
 //   IntersectionObserver 콜백이 아예 오지 않는다). 그러면 NEW 가 영영 안 지워진다.
 //   그래서 **이번 방문에 띄운 NEW 는 페이지를 떠날 때 읽은 것으로 확정**한다.
@@ -1281,7 +1300,7 @@ function boxCard(o){
     <span class="ck">✅ 손에 잡힘${seg? ' · '+rlink('강의 다시보기', `#u${seg[0]}q${seg[1]}`):''}</span>
   </div>`;
 }
-document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); markNew(); liveReplies(); });
+document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP); markNew(); liveReplies(); refreshData(); });
 </script>
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
