@@ -178,13 +178,14 @@ window.ME_REWARDS = {
   "today": "2026-09-17"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
-  "stamps": 6,
+  "stamps": 7,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [
    "2026-08-28",
-   "2026-09-11"
+   "2026-09-11",
+   "2026-09-17"
   ],
   "gold": [
    "조건부확률",
@@ -303,6 +304,15 @@ window.ME_REWARDS = {
   "days": [
    "2026-09-14"
   ],
+  "gold": [],
+  "today": "2026-09-17"
+ },
+ "UQ43f7baq7LRh0t_2B4m7Q": {
+  "stamps": 0,
+  "redeemed": 0,
+  "per": 10,
+  "gift": "편의점 5천원 기프티콘",
+  "days": [],
   "gold": [],
   "today": "2026-09-17"
  },
