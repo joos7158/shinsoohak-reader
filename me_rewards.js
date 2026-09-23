@@ -1,14 +1,16 @@
 // me_rewards.py 생성 — 🎁 도장판(토큰 키, 이름 없음). 손대지 말 것.
 window.ME_REWARDS = {
  "GJSwV5R8jDgHJD6W-IODzg": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
   "stamps": 2,
@@ -22,7 +24,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "ULMoQiY8ATCj02ubEQ9Wjg": {
   "stamps": 0,
@@ -32,7 +34,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "8dW63wQ5S0IMxsxKPoFVxw": {
   "stamps": 1,
@@ -44,7 +46,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "_YkG-WNQNVqGNwdtybRA0Q": {
   "stamps": 0,
@@ -54,7 +56,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 3,
@@ -69,20 +71,22 @@ window.ME_REWARDS = {
    "두 점을 지나는 직선의 방정식"
   ],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "mzsdyDG658RvaW4ZeG2qsA": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "Z83nVYQ26xYl7HEmvvEYaQ": {
-  "stamps": 13,
+  "stamps": 15,
   "redeemed": 1,
   "per": 10,
   "gift": "문화상품권 5천원",
@@ -101,23 +105,28 @@ window.ME_REWARDS = {
   "gold": [
    "두 접점을 지나는 직선 (극선)",
    "원의 접선 — 원 위의 한 점이 주어진 경우",
-   "연산 조건의 포함 관계 번역"
+   "연산 조건의 포함 관계 번역",
+   "삼각형의 중점 조건 활용 (꼭짓점·무게중심 복원)"
   ],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "FiX91SBiihqTfUL-dwMElg": {
-  "stamps": 1,
+  "stamps": 2,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -125,8 +134,10 @@ window.ME_REWARDS = {
    "2026-08-28"
   ],
   "gold": [],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "stamps": 6,
@@ -145,7 +156,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "stamps": 0,
@@ -155,10 +166,10 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "98XssE27H04rd7StETOaYQ": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -169,11 +180,13 @@ window.ME_REWARDS = {
   "gold": [
    "다항함수의 도함수 구하기"
   ],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -184,8 +197,10 @@ window.ME_REWARDS = {
   "gold": [
    "곡선 위의 한 점에서의 접선 방정식"
   ],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "oDUG17HlPyQHIEK4B065dw": {
   "stamps": 5,
@@ -203,10 +218,10 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
-  "stamps": 12,
+  "stamps": 13,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -216,7 +231,8 @@ window.ME_REWARDS = {
    "2026-09-17",
    "2026-09-18",
    "2026-09-21",
-   "2026-09-22"
+   "2026-09-22",
+   "2026-09-23"
   ],
   "gold": [
    "조건부확률",
@@ -227,7 +243,7 @@ window.ME_REWARDS = {
    "방정식·부등식 조건의 확률"
   ],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "L-0jFQ2UTmnO4308juedZw": {
   "stamps": 1,
@@ -239,7 +255,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
   "stamps": 0,
@@ -249,17 +265,19 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "HvtR5tsgR_p5hq3lWwUEwA": {
   "stamps": 0,
@@ -269,7 +287,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 1,
@@ -281,7 +299,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "jBg85unLXRkRSPBO_KSSSQ": {
   "stamps": 1,
@@ -293,7 +311,7 @@ window.ME_REWARDS = {
    "유리함수와 무리함수의 그래프 (교점 존재 조건)"
   ],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 1,
@@ -305,7 +323,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "FcrEQVl16vghX2b7HzpjQw": {
   "stamps": 0,
@@ -315,10 +333,10 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -328,8 +346,10 @@ window.ME_REWARDS = {
    "평균값 정리를 만족하는 상수 c 구하기",
    "연속함수의 성질 적용"
   ],
-  "scan": [],
-  "today": "2026-09-22"
+  "scan": [
+   "2026-09-23"
+  ],
+  "today": "2026-09-23"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
   "stamps": 6,
@@ -346,7 +366,7 @@ window.ME_REWARDS = {
   ],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "l9KiHOI2ZJ1aRbdFn8vIgQ": {
   "stamps": 1,
@@ -358,7 +378,7 @@ window.ME_REWARDS = {
   ],
   "gold": [],
   "scan": [],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 1,
@@ -370,7 +390,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  },
  "demo": {
   "stamps": 6,
@@ -381,6 +401,6 @@ window.ME_REWARDS = {
   "gold": [
    "(예시) 두 점 사이의 거리"
   ],
-  "today": "2026-09-22"
+  "today": "2026-09-23"
  }
 };
