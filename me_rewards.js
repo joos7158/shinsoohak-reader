@@ -381,7 +381,7 @@ window.ME_REWARDS = {
   "today": "2026-10-02"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
-  "stamps": 9,
+  "stamps": 10,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -391,7 +391,8 @@ window.ME_REWARDS = {
    "2026-09-14",
    "2026-09-16",
    "2026-09-19",
-   "2026-09-21"
+   "2026-09-21",
+   "2026-10-02"
   ],
   "gold": [],
   "scan": [
