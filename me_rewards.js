@@ -238,9 +238,9 @@ window.ME_REWARDS = {
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
   "stamps": 17,
-  "redeemed": 0,
+  "redeemed": 1,
   "per": 10,
-  "gift": "편의점 5천원 기프티콘",
+  "gift": "문화상품권 5천원",
   "days": [
    "2026-08-28",
    "2026-09-11",
