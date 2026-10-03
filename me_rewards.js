@@ -12,7 +12,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-23"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
   "stamps": 3,
@@ -27,7 +27,7 @@ window.ME_REWARDS = {
    "2026-09-22",
    "2026-09-26"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "ULMoQiY8ATCj02ubEQ9Wjg": {
   "stamps": 0,
@@ -37,7 +37,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "8dW63wQ5S0IMxsxKPoFVxw": {
   "stamps": 2,
@@ -50,7 +50,7 @@ window.ME_REWARDS = {
    "2026-09-22",
    "2026-09-29"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "_YkG-WNQNVqGNwdtybRA0Q": {
   "stamps": 0,
@@ -60,7 +60,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 4,
@@ -77,7 +77,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-29"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "mzsdyDG658RvaW4ZeG2qsA": {
   "stamps": 2,
@@ -90,7 +90,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "Z83nVYQ26xYl7HEmvvEYaQ": {
   "stamps": 17,
@@ -120,7 +120,7 @@ window.ME_REWARDS = {
    "2026-09-26",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
   "stamps": 2,
@@ -133,7 +133,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "FiX91SBiihqTfUL-dwMElg": {
   "stamps": 2,
@@ -147,7 +147,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-23"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "stamps": 7,
@@ -167,7 +167,7 @@ window.ME_REWARDS = {
    "2026-09-22",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "stamps": 1,
@@ -179,7 +179,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-30"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "98XssE27H04rd7StETOaYQ": {
   "stamps": 5,
@@ -197,7 +197,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 5,
@@ -215,7 +215,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-26"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "oDUG17HlPyQHIEK4B065dw": {
   "stamps": 6,
@@ -234,7 +234,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
   "stamps": 17,
@@ -264,7 +264,7 @@ window.ME_REWARDS = {
    "2026-09-28",
    "2026-09-29"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "L-0jFQ2UTmnO4308juedZw": {
   "stamps": 1,
@@ -276,7 +276,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-22"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
   "stamps": 0,
@@ -286,7 +286,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
   "stamps": 2,
@@ -299,7 +299,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "HvtR5tsgR_p5hq3lWwUEwA": {
   "stamps": 0,
@@ -309,7 +309,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 4,
@@ -324,7 +324,7 @@ window.ME_REWARDS = {
    "2026-09-29",
    "2026-10-01"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "jBg85unLXRkRSPBO_KSSSQ": {
   "stamps": 1,
@@ -336,7 +336,7 @@ window.ME_REWARDS = {
    "유리함수와 무리함수의 그래프 (교점 존재 조건)"
   ],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 2,
@@ -349,7 +349,7 @@ window.ME_REWARDS = {
    "2026-09-22",
    "2026-09-29"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "FcrEQVl16vghX2b7HzpjQw": {
   "stamps": 0,
@@ -359,7 +359,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
   "stamps": 7,
@@ -378,13 +378,13 @@ window.ME_REWARDS = {
    "2026-09-30",
    "2026-10-02"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
   "stamps": 10,
-  "redeemed": 0,
+  "redeemed": 1,
   "per": 10,
-  "gift": "편의점 5천원 기프티콘",
+  "gift": "문화상품권 5천원",
   "days": [
    "2026-09-04",
    "2026-09-11",
@@ -400,7 +400,7 @@ window.ME_REWARDS = {
    "2026-09-28",
    "2026-10-02"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "l9KiHOI2ZJ1aRbdFn8vIgQ": {
   "stamps": 1,
@@ -412,7 +412,7 @@ window.ME_REWARDS = {
   ],
   "gold": [],
   "scan": [],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 5,
@@ -429,7 +429,7 @@ window.ME_REWARDS = {
    "2026-09-29",
    "2026-10-01"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  },
  "demo": {
   "stamps": 6,
@@ -440,6 +440,6 @@ window.ME_REWARDS = {
   "gold": [
    "(예시) 두 점 사이의 거리"
   ],
-  "today": "2026-10-02"
+  "today": "2026-10-03"
  }
 };
