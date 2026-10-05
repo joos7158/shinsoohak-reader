@@ -63,7 +63,7 @@ window.ME_REWARDS = {
   "today": "2026-10-05"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
-  "stamps": 4,
+  "stamps": 5,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -75,7 +75,8 @@ window.ME_REWARDS = {
    "두 점을 지나는 직선의 방정식"
   ],
   "scan": [
-   "2026-09-29"
+   "2026-09-29",
+   "2026-10-05"
   ],
   "today": "2026-10-05"
  },
