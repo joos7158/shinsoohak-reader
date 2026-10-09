@@ -218,6 +218,40 @@
   .vwrap .vplay:active { background:rgba(0,0,0,.8); }
   .vsub { font-size:.76rem; color:var(--muted); margin-top:5px; }
   .vsub a { color:var(--muted); }
+  /* ── 🎨 2026-10-09 다듬기 (원장 "디자인도 이쁘게") — 다른 학원 앱에서 본 규칙 다섯:
+     ①강조색 하나(파랑) ②따뜻한 바탕+흰 카드+넓은 여백 ③글자 3단(굵은 제목·본문·회색 안내)
+     ④상태칩=옅은 바탕+같은 계열 진한 글자 ⑤첫 화면=할 일 하나. 기능·로그·JS 로직 무수정, 순서와 모양만. */
+  :root { --surface:#f6f5f1; --line:#ebe8e1; }
+  body { padding:18px 16px 40px; }
+  .card, .dash, .tool { border:1px solid #efece5; }
+  .nav { display:flex; gap:6px; flex-wrap:wrap; }
+  .nav a { margin:0; border:1px solid #efece5; }
+  .hero { background:#fff; border:1px solid #efece5; border-radius:24px; padding:20px 20px 16px; margin-bottom:12px; }
+  .hero h1 { margin:0; font-size:1.4rem; }
+  .hero .hsay { color:var(--muted); font-size:.86rem; line-height:1.6; margin:6px 0 14px; }
+  .hero .hsay b { color:var(--body); }
+  .hero .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .hero .k { background:var(--surface); border-radius:14px; padding:10px 6px; text-align:center; }
+  .hero .k span { display:block; font-size:.72rem; color:var(--muted); }
+  .hero .k b { display:block; font-size:1.05rem; font-weight:700; color:var(--ink); margin-top:2px;
+               white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hero .k.unit b { font-size:.84rem; line-height:1.55; }
+  .sect { flex-wrap:wrap; row-gap:2px; }
+  .sect .why { flex-basis:100%; padding-left:2px; }
+  .sect.today { font-size:1.12rem; margin-top:4px; }
+  .sect.today + .card { border:2px solid var(--accent); box-shadow:0 6px 20px rgba(49,130,246,.10); }
+  .pick { padding:14px 16px; font-size:1rem; border-radius:14px; transition:border-color .15s, background .15s; }
+  .pick:active { background:var(--weak); }
+  .choices { gap:8px; }
+  details summary { list-style:none; display:flex; align-items:center; justify-content:space-between; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::after { content:'›'; font-size:1.2rem; color:var(--muted); transition:transform .2s; }
+  details[open] > summary::after { transform:rotate(90deg); }
+  .badge { border-radius:999px; padding:4px 11px; }
+  .rwgrid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; justify-items:center; margin:14px 0 12px; }
+  .st { width:40px; height:40px; font-size:1.05rem; }
+  .rwhead .cnt { background:var(--weak); color:var(--weakfg); border-radius:999px; padding:3px 10px; font-weight:700; }
+  .rwhow { background:var(--surface); border-radius:12px; padding:8px 12px; }
 </style>
 </head>
 <body>
@@ -522,7 +556,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20260913-195131';
+const BUILD = '20261009-122026';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -745,39 +779,40 @@ function render(){
   for (let i=0; i<wait.length && !todayId; i++) if (wait[i].유사 && !_mem['ok_w'+i]) todayId = 'w'+i;
   if (todayId){
     const isT = todayId[0]==='t', k = +todayId.slice(1);
-    todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">· 5분이면 돼요. 맞히면 내일 종이에서 한 번 더 확인해요</span></div>
+    todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">5분이면 돼요. 맞히면 내일 종이에서 한 번 더 확인해요</span></div>
       ${isT ? card(list[k], todayId) : waitCard(wait[k], todayId)}`;
   }
   app.innerHTML = `${noticeHtml()}
     <div class="nav">${rlink('▶ 유형별 강의')}<a href="#">🔄 새로고침</a></div>
-    <h1>📕 나의 오답노트</h1>
     <div id="pending" class="pending" style="display:none"></div>
-    <div class="sub">틀린 문제를 유사문제로 다시 풀고, 막히면 그 유형 강의를 바로 볼 수 있어요.<br>
-      모르겠으면 <b>언제든</b> 아래 버튼으로 물어보세요 — 다른 친구에게는 안 보여요.</div>
-    <div class="dash">
-      <div class="kpi">진도 <b>${esc(D.진도)}</b></div>
-      <div class="kpi">오늘 <b>${list.length}개</b></div>
-      <div class="kpi">복습 대기 <b>${wait.length}개</b></div>
-      <div class="kpi">🧰 도구함 <b>${box.length}개</b></div>
+    <div class="hero">
+      <h1>📕 나의 오답노트</h1>
+      <div class="hsay">틀린 문제는 다른 문제로 한 번 더. 모르겠으면 <b>언제든</b> 물어보세요 — 선생님만 봐요.</div>
+      <div class="kpis">
+        <div class="k unit"><span>진도</span><b>${esc(D.진도)}</b></div>
+        <div class="k"><span>오늘</span><b>${list.length}</b></div>
+        <div class="k"><span>복습 대기</span><b>${wait.length}</b></div>
+        <div class="k"><span>🧰 도구함</span><b>${box.length}</b></div>
+      </div>
     </div>
+    <!-- 🎨 2026-10-09 순서: 할 일(⭐) → 도장판 → 학교·플랜 → 목록. 아이 화면 원칙 "다음에 뭘 할지"가 맨 위 -->
+    ${todayHtml}
     ${rewardHtml()}
 
     ${schoolHtml()}
     ${questHtml()}
     ${finalPlanHtml()}
 
-    ${todayHtml}
-
     <div class="sect">📕 오늘 틀린 것 <span class="cnt">${list.length}개</span></div>
     ${list.length? list.map((o,i)=>(todayId==='t'+i)?'':card(o,'t'+i)).join('') + (todayId&&todayId[0]==='t'&&list.length===1?`<div class="card" style="text-align:center;color:var(--muted);font-size:.9rem">오늘 틀린 건 위에 있는 하나뿐이에요</div>`:'')
       : `<div class="card" style="text-align:center"><div style="font-size:1.05rem;font-weight:bold;color:var(--accent)">오늘은 틀린 게 없어요</div><div class="sub" style="margin-top:6px">위에 있는 하나만 확인해 볼까요?</div></div>`}
 
     ${wait.length? `<div class="sect">🔁 복습 대기 <span class="cnt">${wait.length}개</span>
-      <span class="why">· 예전에 틀린 유형이에요. 다시 볼 때가 됐어요</span></div>
+      <span class="why">예전에 틀린 유형이에요. 다시 볼 때가 됐어요</span></div>
       ${wait.map((o,i)=>(todayId==='w'+i)?'':waitCard(o,'w'+i)).join('')}`:''}
 
     ${box.length? `<div class="sect">🧰 내 도구함 <span class="cnt">${box.length}개</span>
-      <span class="why">· 세 번 연속 맞힌 유형이에요. 언제든 다시 열어볼 수 있어요</span></div>
+      <span class="why">세 번 연속 맞힌 유형이에요. 언제든 다시 열어볼 수 있어요</span></div>
       ${box.map(o=>boxCard(o)).join('')}`:''}
 
     ${(D.복습&&D.복습.length)? `<div class="sect">📺 시험 대비 복습 강의</div>${D.복습.map(r=>reviewCard(r)).join('')}`:''}
@@ -1030,7 +1065,7 @@ function teacherTools(el, key, h){
   const box = document.createElement('div');
   box.className = 'tbox';
   box.innerHTML = `<div class="th">🙋 아이가 물은 것</div><div class="tq" id="tq_${el.id}">불러오는 중…</div>
-    <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">· 글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
+    <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
     <textarea id="tr_${el.id}" placeholder="글로 써도 되고, 아래 ✍ 펜으로 써도 돼요 (둘 다 가능)"></textarea>
     <div class="ptools">
       <button class="pbtn" style="background:#8a5a00;color:#fff;border-color:#8a5a00" onclick="boardOpen('${el.id}','${esc(key)}')">🖊 전체화면 판서 (녹화용)</button>
