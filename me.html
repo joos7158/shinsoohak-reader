@@ -390,6 +390,16 @@ function renderPending(n){
 const MEM = 'me_'+SID;
 function memGet(){ try { return JSON.parse(localStorage.getItem(MEM)||'{}'); } catch(e){ return {}; } }
 function memSet(k,v){ try { const m=memGet(); m[k]=v; localStorage.setItem(MEM,JSON.stringify(m)); } catch(e){} }
+// 🔑 맞힌 문제 기억 키 = **문항** 기준 (2026-10-10 점검). 예전엔 목록 위치('ok_t0'·'ok_w0')로 기억해서
+//   카드가 새 문제로 바뀌어도 그 자리를 '맞힘'으로 보고 ⭐ 오늘 이거 하나에서 빼 버렸다.
+//   빌더가 준 문항 ID(유사.id) 우선, 없으면 문제 본문+정답 해시. 옛 위치 키는 어느 문제였는지 몰라 옮기지 않는다.
+function okKey(o){
+  const u = o && o.유사; if (!u) return '';
+  if (u.id) return 'okq_' + u.id;
+  let h = 5381; for (const ch of String(u.stem||'') + '|' + String(u.answer||'')) h = ((h*33) ^ ch.codePointAt(0)) >>> 0;
+  return 'okh_' + h.toString(36);
+}
+const OK_KEY = {};   // 화면 id(t0·w0) → 문항 키. render 가 채우고 pickAns 가 쓴다.
 
 const app = document.getElementById('app');
 // 🔴🔴 2026-08-13 — 여기가 String() 캐스트뿐이라 **아무것도 이스케이프하지 않았다.**
@@ -556,7 +566,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261009-122026';
+const BUILD = '20261010-200038';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -775,8 +785,10 @@ function render(){
   //   그 유형이 나온다(러너 배선) — "내가 한 게 내일 나온다"를 아이가 보게 하는 것이 목적.
   const _mem = memGet();
   let todayId = '', todayHtml = '';
-  for (let i=0; i<list.length && !todayId; i++) if (list[i].유사 && !_mem['ok_t'+i]) todayId = 't'+i;
-  for (let i=0; i<wait.length && !todayId; i++) if (wait[i].유사 && !_mem['ok_w'+i]) todayId = 'w'+i;
+  list.forEach((o,i)=>{ OK_KEY['t'+i] = okKey(o); });
+  wait.forEach((o,i)=>{ OK_KEY['w'+i] = okKey(o); });
+  for (let i=0; i<list.length && !todayId; i++) if (list[i].유사 && !_mem[OK_KEY['t'+i]]) todayId = 't'+i;
+  for (let i=0; i<wait.length && !todayId; i++) if (wait[i].유사 && !_mem[OK_KEY['w'+i]]) todayId = 'w'+i;
   if (todayId){
     const isT = todayId[0]==='t', k = +todayId.slice(1);
     todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">5분이면 돼요. 맞히면 내일 종이에서 한 번 더 확인해요</span></div>
@@ -863,7 +875,7 @@ function pickAns(id, chosen, mark, el){
     vd.className = 'verdict ok';
     vd.textContent = '✅ 맞았어요 — 내일 되짚기 종이에서 한 번 더 확인해요. 거기서도 맞히면 도구함으로!';
     logAct('정복 ⭕ ' + t);
-    memSet('ok_'+id, 1);
+    if (OK_KEY[id]) memSet(OK_KEY[id], 1);
   } else {
     vd.className = 'verdict no';
     vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 내일 되짚기에 이 단원이 나와요. 강의 한 번 보고 가면 돼요.';
