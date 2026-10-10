@@ -566,7 +566,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261010-200038';
+const BUILD = '20261010-200229';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -781,8 +781,8 @@ function render(){
   const list = D.오답||[], wait = D.복습대기||[], box = D.도구함||[];
   // ⭐ 오늘 이거 하나 (2026-09-04 원장) — 실측: 열기 135회 vs 유사문제 풀기 15회. 열고 나서
   //   할 게 안 보이니 닫는다. 그래서 첫 화면 = 유사문제 있는 카드 **딱 하나**(오늘 오답 > 복습대기,
-  //   이 기기에서 이미 맞힌 건 건너뜀). 나머지는 그 아래 그대로. 맞히든 틀리든 내일 되짚기 종이에
-  //   그 유형이 나온다(러너 배선) — "내가 한 게 내일 나온다"를 아이가 보게 하는 것이 목적.
+  //   이 기기에서 이미 맞힌 건 건너뜀). 나머지는 그 아래 그대로. 2026-10-10: '내일 종이에 나온다'는 실제 배선보다 강한
+  //   약속이라(틀린 단원만 우선, 보장 아님) 안내를 '다음 수업에서 선생님이 확인'으로 바꿨다.
   const _mem = memGet();
   let todayId = '', todayHtml = '';
   list.forEach((o,i)=>{ OK_KEY['t'+i] = okKey(o); });
@@ -791,7 +791,7 @@ function render(){
   for (let i=0; i<wait.length && !todayId; i++) if (wait[i].유사 && !_mem[OK_KEY['w'+i]]) todayId = 'w'+i;
   if (todayId){
     const isT = todayId[0]==='t', k = +todayId.slice(1);
-    todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">5분이면 돼요. 맞히면 내일 종이에서 한 번 더 확인해요</span></div>
+    todayHtml = `<div class="sect today">⭐ 오늘 이거 하나 <span class="why">5분이면 돼요. 다음 수업에서 선생님이 한 번 더 확인해요</span></div>
       ${isT ? card(list[k], todayId) : waitCard(wait[k], todayId)}`;
   }
   app.innerHTML = `${noticeHtml()}
@@ -873,12 +873,12 @@ function pickAns(id, chosen, mark, el){
   const t = (document.getElementById('ty_'+id)||{}).textContent || '';
   if (ok){
     vd.className = 'verdict ok';
-    vd.textContent = '✅ 맞았어요 — 내일 되짚기 종이에서 한 번 더 확인해요. 거기서도 맞히면 도구함으로!';
+    vd.textContent = '✅ 맞았어요 — 다음 수업에서 선생님이 한 번 더 확인해요. 그때도 혼자 풀리면 진짜 내 것!';
     logAct('정복 ⭕ ' + t);
     if (OK_KEY[id]) memSet(OK_KEY[id], 1);
   } else {
     vd.className = 'verdict no';
-    vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 내일 되짚기에 이 단원이 나와요. 강의 한 번 보고 가면 돼요.';
+    vd.textContent = '아직 헷갈리는구나 — 괜찮아요. 강의 한 번 보고, 막힌 곳은 다음 수업에서 선생님이랑 같이 봐요.';
     logAct('재도전 ❌ ' + t);
   }
   stampToday();
