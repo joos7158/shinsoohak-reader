@@ -252,9 +252,27 @@
   .st { width:40px; height:40px; font-size:1.05rem; }
   .rwhead .cnt { background:var(--weak); color:var(--weakfg); border-radius:999px; padding:3px 10px; font-weight:700; }
   .rwhow { background:var(--surface); border-radius:12px; padding:8px 12px; }
+
+  .academy-brand { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:4px 0 16px; margin-bottom:18px; border-bottom:1px solid #d6c4ac; }
+  .academy-logo { display:block; position:relative; width:160px; height:82px; overflow:hidden; flex:0 0 160px; mix-blend-mode:multiply; }
+  .academy-logo img { position:absolute; width:316px; height:auto; max-width:none; left:-80px; top:-72px; }
+  .academy-brand-copy { text-align:right; color:#87663b; line-height:1.6; }
+  .academy-brand-copy strong { display:block; font-size:14px; font-weight:700; }
+  .academy-brand-copy span { display:block; font-size:11px; color:#887e73; }
+  @media(max-width:420px) {
+    .academy-brand { gap:10px; padding-bottom:12px; margin-bottom:14px; }
+    .academy-logo { width:128px; height:66px; flex-basis:128px; }
+    .academy-logo img { width:253px; left:-64px; top:-58px; }
+    .academy-brand-copy strong { font-size:12px; }
+    .academy-brand-copy span { font-size:10px; }
+  }
 </style>
 </head>
 <body>
+<header class="academy-brand" aria-label="신수학학원">
+  <span class="academy-logo"><img src="logo.png" alt="신수학학원 — 수학의 신, 신선생의 신신당부!" width="843" height="597" fetchpriority="high"></span>
+  <div class="academy-brand-copy"><strong>나의 공부 기록</strong><span>과제 · 오답노트 · 성장</span></div>
+</header>
 <div id="app"></div>
 
 <script src="me_data.js"></script>
@@ -573,7 +591,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261011-214211';
+const BUILD = '20261011-215426';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
