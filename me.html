@@ -262,6 +262,7 @@
 <script src="me_final_plan.js"></script>
 <script src="school_feed.js"></script>
 <script src="me_rewards.js"></script>
+<script src="question-photo.js?v=20261011"></script>
 <script>
 // 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
 //   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
@@ -566,7 +567,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261011-191453';
+const BUILD = '20261011-203613';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1110,7 +1111,7 @@ function teacherTools(el, key, h){
     }).reverse();
     const tq = document.getElementById('tq_'+el.id);
     if (!tq) return;
-    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}</div>`).join('')
+    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}${window.QuestionPhoto ? window.QuestionPhoto.html(q) : ''}</div>`).join('')
                              : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
   }).catch(()=>{ const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
 }
