@@ -263,6 +263,7 @@
 <script src="school_feed.js"></script>
 <script src="me_rewards.js"></script>
 <script src="question-photo.js?v=20261011-board"></script>
+<script src="board-recorder.js?v=20261011-r1"></script>
 <script>
 // 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
 //   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
@@ -567,7 +568,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261011-205333';
+const BUILD = '20261011-211933';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1082,7 +1083,7 @@ function teacherTools(el, key, h){
     <div class="th" style="margin-top:10px">💬 아이에게 답 보내기 <span class="why">글 또는 영상 링크. 아이가 오답노트를 열면 이 카드 안에 보여요</span></div>
     <textarea id="tr_${el.id}" placeholder="글로 써도 되고, 아래 ✍ 펜으로 써도 돼요 (둘 다 가능)"></textarea>
     <div class="ptools">
-      <button class="pbtn" style="background:#8a5a00;color:#fff;border-color:#8a5a00" onclick="boardOpen('${el.id}','${esc(key)}')">🖊 전체화면 판서 (녹화용)</button>
+      <button class="pbtn" style="background:#8a5a00;color:#fff;border-color:#8a5a00" onclick="boardOpen('${el.id}','${esc(key)}')">🖊 전체화면 판서 · 음성 녹화</button>
       <button class="pbtn" onclick="penOpen('${el.id}')">✍ 작은 펜 칸</button>
       <label class="pbtn">📎 사진/파일 붙이기<input type="file" accept="image/*" style="display:none" onchange="penFile('${el.id}', this)"></label>
     </div>
@@ -1221,6 +1222,7 @@ async function boardOpen(cid, key, selectedPhoto){
   const cv = ov.querySelector('canvas');
   const st = PEN['board'] = BOARD = {cv, ctx:null, W, H: Math.max(window.innerHeight*2, 1400), dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.8, penSeen:false, bg:null, bgW:0, bgH:0, cid, key};
   penSize(st); penBind(st);
+  window.BoardRecorder?.mount(st);
   st.resizeObserver = new ResizeObserver(()=>{
     if (BOARD!==st) return;
     const width=Math.min(ov.querySelector('.bwrap').clientWidth,1400);
@@ -1278,12 +1280,14 @@ function boardWidth(d){ const st=PEN['board']; if (st) st.width = Math.max(1.2, 
 function boardClearInk(){ const st=PEN['board']; if (!st) return; if (!confirm('필기를 모두 지울까요? (문제 그림은 남아요)')) return; st.strokes=[]; penRedraw(st); }
 function boardScroll(d){ const w = document.querySelector('#board .bwrap'); if (w) w.scrollBy({top: d*Math.round(window.innerHeight*0.6), behavior:'smooth'}); }
 function boardAttach(cid){
+  if(window.BoardRecorder?.busy()){ window.BoardRecorder.beforeClose(); return; }
   const st = PEN['board']; if (!st) return;
   PEN_FILE[cid] = st.cv.toDataURL('image/png');
   const p = document.getElementById('pf_'+cid); if (p) p.innerHTML = '🖊 판서 그림이 붙었어요 — 아래 <b>답 보내기</b>를 누르면 아이에게 갑니다. <a href="#" onclick="delete PEN_FILE[\'' + cid + '\'];this.parentNode.textContent=\'\';return false">✕ 떼기</a>';
   boardClose();
 }
 function boardClose(){
+  if(window.BoardRecorder && !window.BoardRecorder.beforeClose()) return;
   if(BOARD?.resizeObserver) BOARD.resizeObserver.disconnect();
   const ov = document.getElementById('board'); if (ov) ov.remove();
   document.documentElement.classList.remove('board-on');
