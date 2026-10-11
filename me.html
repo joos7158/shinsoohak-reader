@@ -567,7 +567,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261011-203613';
+const BUILD = '20261011-204911';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1109,11 +1109,13 @@ function teacherTools(el, key, h){
       const s = q.text || '';
       return key === 'free' ? s.indexOf('🙋자유질문') === 0 : (s.indexOf('[카드:'+key) >= 0 || (h && s.indexOf('[카드:') < 0 && s.indexOf(ty) >= 0));
     }).reverse();
+    el.dataset.questionPhoto = (qs.find(q=>window.QuestionPhoto?.drivePhoto(q.photo))||{}).photo || '';
     const tq = document.getElementById('tq_'+el.id);
     if (!tq) return;
-    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}${window.QuestionPhoto ? window.QuestionPhoto.html(q) : ''}</div>`).join('')
+    tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}${window.QuestionPhoto ? window.QuestionPhoto.html(q, el.id, key) : ''}</div>`).join('')
                              : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
-  }).catch(()=>{ const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
+  }).catch(()=>{ el.dataset.questionPhoto = (qs.find(q=>window.QuestionPhoto?.drivePhoto(q.photo))||{}).photo || '';
+    const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
 }
 // ── ✍ 펜 캔버스 (2026-09-07 원장 "갤럭시 노트와 바로 연동") — 카톡 링크를 갤럭시에서 열고 S펜으로 바로 쓴다.
 //    포인터 이벤트: pen/mouse 는 항상, touch 는 펜을 한 번이라도 쓴 뒤엔 무시(손바닥). 필압으로 굵기.
@@ -1192,7 +1194,7 @@ function boardProblemHtml(o){
   const one = (t, p) => p ? `<div class="bp-h">${t}</div><div class="problem">${stemHtml(p.stem)}</div>${choicesHtml(p.choices)}` : '';
   return `<div class="badge">${esc(o.유형)}</div>` + one('🔁 유사문제', o.유사) + one('✗ 틀린 문제' + (o.내답?` (내 답 ${esc(o.내답)} / 정답 ${esc((o.문제||{}).answer||'')})`:''), o.문제);
 }
-async function boardOpen(cid, key){
+async function boardOpen(cid, key, selectedPhoto){
   if (BOARD) return;
   const o = cardData(key);
   const W = Math.min(window.innerWidth, 1400), dpr = Math.min(window.devicePixelRatio||1, 2);
@@ -1217,6 +1219,28 @@ async function boardOpen(cid, key){
   const cv = ov.querySelector('canvas');
   const st = PEN['board'] = BOARD = {cv, ctx:null, W, H: Math.max(window.innerHeight*2, 1400), dpr, strokes:[], cur:null, color:'#1a1a1a', width:2.8, penSeen:false, bg:null, bgW:0, bgH:0, cid, key};
   penSize(st); penBind(st);
+  const photo = selectedPhoto || document.getElementById(cid)?.dataset.questionPhoto;
+  if (photo) {
+    try {
+      if (!RKEY) throw new Error('사진 판서는 원장 답장 링크로 열어주세요. 질문 알림의 답장 링크를 이용해 주세요.');
+      const drive = window.QuestionPhoto.drivePhoto(photo);
+      if (!drive) throw new Error('사진 주소를 확인할 수 없어요.');
+      const photoId = drive.view.split('/d/')[1].split('/')[0];
+      const response = await fetch(QPHOTO+'?mode=photo&t='+encodeURIComponent(SID)+'&k='+encodeURIComponent(RKEY)+'&id='+encodeURIComponent(photoId),{cache:'no-store',referrerPolicy:'no-referrer'});
+      const data = await response.json();
+      if (!data.image || !/^data:image\/(jpeg|png|webp|gif);base64,/.test(data.image)) throw new Error('사진을 가져오지 못했어요. 원장 답장 링크와 사진 접근 권한을 확인해 주세요.');
+      const img = await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('사진을 읽을 수 없어요.'));im.src=data.image;});
+      if (BOARD!==st) return;
+      st.bg=img;st.bgW=W;st.bgH=img.naturalHeight*W/img.naturalWidth;
+      st.H=Math.max(st.H,st.bgH+600);penSize(st);
+      ov.querySelector('.bmsg')?.remove();
+    } catch(error) {
+      if (BOARD!==st) return;
+      ov.querySelector('.bmsg').textContent=error.message;
+      ov.querySelector('[onclick^="boardAttach"]').disabled=true;
+    }
+    return;
+  }
   // 문제 그림 — 화면 폭에 맞춰 html2canvas 로 찍는다. 실패하면 글자만이라도 깐다.
   const host = document.createElement('div'); host.className = 'bp-host'; host.style.width = (W-24)+'px';
   host.innerHTML = boardProblemHtml(o); document.body.appendChild(host);
