@@ -82,7 +82,7 @@
     if(panel){panel.querySelector('video').pause();panel.hidden=true;}
     const s=session={board,mic:null,stream:null,recorder:null,chunks:[],bytes:0};label();status('마이크 사용을 허용해 주세요.');
     try{
-      s.mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
+      s.mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false},video:false});
       if(session!==s){cleanup(s);return;}
       const wrap=document.querySelector('#board .bwrap'),out=document.createElement('canvas');
       const rect=wrap.getBoundingClientRect(),scale=Math.min(1,1280/rect.width,1440/rect.height);
@@ -95,7 +95,7 @@
         ctx.drawImage(board.cv,r.x,r.y,r.width,r.height,dx+r.left*k,dy+r.top*k,r.cssW*k,r.cssH*k);
       };
       paint();s.stream=out.captureStream(15);s.mic.getAudioTracks().forEach(t=>s.stream.addTrack(t));
-      const type=mimeType(MediaRecorder);s.recorder=new MediaRecorder(s.stream,{...(type?{mimeType:type}:{}),videoBitsPerSecond:1800000,audioBitsPerSecond:64000});
+      const type=mimeType(MediaRecorder);s.recorder=new MediaRecorder(s.stream,{...(type?{mimeType:type}:{}),videoBitsPerSecond:1800000,audioBitsPerSecond:128000});
       s.recorder.ondataavailable=e=>{if(e.data.size){s.chunks.push(e.data);s.bytes+=e.data.size;if(s.bytes>=100*1024*1024)stop('파일 크기 한도에 도달해 녹화를 마쳤어요.');}};
       s.recorder.onerror=()=>{s.error=true;stop('녹화가 중단됐어요. 남아 있는 영상을 확인해 주세요.');};
       s.recorder.onstop=async()=>{
