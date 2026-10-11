@@ -263,7 +263,7 @@
 <script src="school_feed.js"></script>
 <script src="me_rewards.js"></script>
 <script src="question-photo.js?v=20261011-board"></script>
-<script src="board-recorder.js?v=20261011-r1"></script>
+<script src="board-recorder.js?v=20261011-r2"></script>
 <script>
 // 📱 2026-08-28 원장 승인 — "앱처럼": 한 번 열면 토큰을 이 폰에 기억해서, 다음부터는
 //   홈 화면 아이콘(주소만 열어도)으로 자기 페이지가 바로 뜬다. 복구 경로 = 오답노트 표지 QR.
@@ -534,8 +534,13 @@ function stemHtml(stem){
   return `${head?esc(head):''}
     <div class="bogi"><div class="bt">보기</div>${items.map(p=>`<div class="bi">${esc(p.replace(/^([ㄱㄴㄷㄹㅁㅂ])\s*[.．)]\s*/, '$1. '))}</div>`).join('')}</div>${tail?`<div>${esc(tail)}</div>`:''}`;
 }
+async function playRecordedReply(button,id){
+  await window.BoardRecorder.playReply(button,{endpoint:QPHOTO,token:SID,id});
+}
 function replyBody(t){
   t = String(t||'');
+  const privateVideo=t.match(/🎬VIDEO ([\w-]{10,200})/);
+  if(privateVideo)return `<div class="rb">${esc(t.replace(privateVideo[0],'').trim())}</div><div class="private-video"><button class="btn" onclick="playRecordedReply(this,'${privateVideo[1]}')">▶ 풀이 영상 보기</button></div>`;
   // ✍ 손글씨/사진 답 (2026-09-07) — 원장이 갤럭시 펜으로 쓴 그림. 누르면 크게.
   let img = '';
   const im = t.match(/✍IMG\s+(https?:\/\/\S+)/);
@@ -568,7 +573,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261011-211933';
+const BUILD = '20261011-213214';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1281,6 +1286,7 @@ function boardClearInk(){ const st=PEN['board']; if (!st) return; if (!confirm('
 function boardScroll(d){ const w = document.querySelector('#board .bwrap'); if (w) w.scrollBy({top: d*Math.round(window.innerHeight*0.6), behavior:'smooth'}); }
 function boardAttach(cid){
   if(window.BoardRecorder?.busy()){ window.BoardRecorder.beforeClose(); return; }
+  if(window.BoardRecorder?.hasResult()){ window.BoardRecorder.attach(cid); return; }
   const st = PEN['board']; if (!st) return;
   PEN_FILE[cid] = st.cv.toDataURL('image/png');
   const p = document.getElementById('pf_'+cid); if (p) p.innerHTML = '🖊 판서 그림이 붙었어요 — 아래 <b>답 보내기</b>를 누르면 아이에게 갑니다. <a href="#" onclick="delete PEN_FILE[\'' + cid + '\'];this.parentNode.textContent=\'\';return false">✕ 떼기</a>';
@@ -1312,26 +1318,31 @@ function penFile(cid, input){
   }; im.src = rd.result; };
   rd.readAsDataURL(f); input.value = '';
 }
-function teacherSend(cid, key){
-  const ta = document.getElementById('tr_'+cid), st = document.getElementById('trs_'+cid);
-  const text = ta ? ta.value.trim() : '';
-  const img = penImage(cid) || PEN_FILE[cid] || '';
-  if (!text && !img) { if (st) st.textContent = '글을 적거나 ✍ 펜으로 써주세요.'; return; }
-  if (!RKEY) { if (st) st.textContent = '답장 열쇠가 없어요 — 카톡/메일의 링크(&k=)로 다시 열어주세요.'; return; }
-  const ty = (document.querySelector('#'+cid+' .badge')||{}).textContent || (key==='free' ? '자유질문' : '');
-  if (st) st.textContent = '보내는 중…';
-  const payload = JSON.stringify({ admin:'reply', k:RKEY, t:SID, card:key, type:ty, text, img });
-  fetch(QPHOTO, { method:'POST', body: payload }).then(r=>r.text()).then(res=>{
-    if (res === 'ok') {
-      if (st) st.innerHTML = '✅ 올라갔어요' + (img ? ' (손글씨/사진 포함)' : '') + '. 아이가 오답노트를 열면 이 카드 안에 <b>💬 선생님 답</b>으로 보여요.';
-      if (ta) ta.value = ''; penClear(cid); delete PEN_FILE[cid]; const p = document.getElementById('pf_'+cid); if (p) p.textContent = '';
-    }
-    else if (st) st.textContent = '⚠ 서버가 거절했어요: ' + res;
-  }).catch(()=>{
-    // 응답을 못 읽는 환경(CORS) — 한 번 더 no-cors 로 보내고 "확인 불가"로 알린다
-    fetch(QPHOTO, { method:'POST', mode:'no-cors', body: payload }).then(()=>{ if (st) st.textContent = '📡 보냈어요(응답 확인 불가). 아이 페이지를 새로고침해 확인해 주세요.'; })
-      .catch(()=>{ if (st) st.textContent = '❌ 전송 실패 — 인터넷 연결을 확인해 주세요.'; });
-  });
+const REPLY_SENDING = new Set();
+async function teacherSend(cid, key){
+  if(REPLY_SENDING.has(cid))return;
+  const ta=document.getElementById('tr_'+cid),st=document.getElementById('trs_'+cid);
+  const text=ta?ta.value.trim():'';
+  const img=penImage(cid)||PEN_FILE[cid]||'';
+  const hasVideo=window.BoardRecorder?.has(cid);
+  if(!text&&!img&&!hasVideo){if(st)st.textContent='글, 필기 또는 녹화 영상을 붙여주세요.';return;}
+  if(!RKEY){if(st)st.textContent='원장 답장 링크로 다시 열어주세요.';return;}
+  REPLY_SENDING.add(cid);
+  try{
+    if(st)st.textContent=hasVideo?'🎬 영상 올리는 중… 이 화면을 닫지 마세요.':'보내는 중…';
+    const video=await window.BoardRecorder?.encoded(cid);
+    const ty=(document.querySelector('#'+cid+' .badge')||{}).textContent||(key==='free'?'자유질문':'');
+    const payload=JSON.stringify({admin:'reply',k:RKEY,t:SID,card:key,type:ty,text,img,...(video||{})});
+    const response=await fetch(QPHOTO,{method:'POST',body:payload});
+    const res=await response.text();
+    if(res!=='ok')throw new Error('서버 응답: '+res.slice(0,120));
+    if(st)st.textContent='✅ '+(video?'영상 답장이':'답장이')+' 올라갔어요. 학생 오답노트의 선생님 답에서 볼 수 있어요.';
+    if(ta)ta.value='';penClear(cid);delete PEN_FILE[cid];window.BoardRecorder?.clear(cid);
+    const p=document.getElementById('pf_'+cid);if(p)p.replaceChildren();
+    liveReplies();
+  }catch(error){
+    if(st)st.textContent='⚠ 전송 완료를 확인하지 못했어요. 첨부는 보관돼 있습니다. 학생 답을 확인한 뒤 다시 보내주세요. '+(error.message||'');
+  }finally{REPLY_SENDING.delete(cid);}
 }
 // 아이 페이지 — 답변 탭의 답을 카드에 붙인다 (정적 me_data 의 답변과 별개, 글 기준 중복 제거)
 function liveReplies(){
