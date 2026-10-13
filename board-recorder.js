@@ -1,7 +1,7 @@
 /* Records only the visible teaching canvas and an explicitly enabled microphone. */
 (function(root){
   'use strict';
-  const MIME_TYPES=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'];
+  const MIME_TYPES=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
   function mimeType(Recorder){return MIME_TYPES.find(t=>Recorder.isTypeSupported(t))||'';}
   function crop(canvas,wrap){
     const c=canvas.getBoundingClientRect(), w=wrap.getBoundingClientRect();
