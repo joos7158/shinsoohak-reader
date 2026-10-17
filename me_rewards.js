@@ -252,9 +252,9 @@ window.ME_REWARDS = {
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
   "stamps": 24,
-  "redeemed": 1,
+  "redeemed": 2,
   "per": 10,
-  "gift": "문화상품권 5천원",
+  "gift": "문화상품권 1만원",
   "days": [
    "2026-09-11",
    "2026-09-17",
