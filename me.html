@@ -267,6 +267,7 @@
     .academy-brand-copy span { font-size:10px; }
   }
 </style>
+<link rel="stylesheet" href="question-inbox.css?v=20261017">
 </head>
 <body>
 <header class="academy-brand" aria-label="신수학학원">
@@ -591,7 +592,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261016-000630';
+const BUILD = '20261017-120133';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1138,7 +1139,7 @@ function teacherTools(el, key, h){
     if (!tq) return;
     tq.innerHTML = qs.length ? qs.map(q => `<div class="tqi"><span class="rt">${esc(fmtAt(q.at))}</span><br>${esc(q.text.replace(/\s*\[카드:[^\]]+\]\s*$/, '').replace(/^🙋(자유)?질문\s*/, ''))}${window.QuestionPhoto ? window.QuestionPhoto.html(q, el.id, key) : ''}</div>`).join('')
                              : '<span class="why">이 카드로 들어온 질문 글이 시트에 없어요 (버튼만 눌렀거나, 아직 시트 반영 전).</span>';
-  }).catch(()=>{ el.dataset.questionPhoto = (qs.find(q=>window.QuestionPhoto?.drivePhoto(q.photo))||{}).photo || '';
+  }).catch(()=>{ el.dataset.questionPhoto = '';
     const tq = document.getElementById('tq_'+el.id); if (tq) tq.innerHTML = '<span class="why">질문 글을 못 불러왔어요 — 카톡/메일의 문구로 봐주세요.</span>'; });
 }
 // ── ✍ 펜 캔버스 (2026-09-07 원장 "갤럭시 노트와 바로 연동") — 카톡 링크를 갤럭시에서 열고 S펜으로 바로 쓴다.
@@ -1479,11 +1480,13 @@ document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP)
 <!-- 📷 질문 사진 파일선택 — 모바일에선 카메라/갤러리 선택창이 뜬다 (askbox 공용) -->
 <input type="file" id="qphoto_file" accept="image/*" style="display:none" onchange="phOnPick(this)">
 <!-- student-home-live -->
+<script src="question-inbox-core.js?v=20261017"></script>
+<script src="question-inbox.js?v=20261017"></script>
 <script src="student-home-core.js?v=20261016"></script>
 <script src="student-home-persona.js?v=20261016"></script>
 <script src="student-home-cat.js?v=20261016"></script>
 <script src="student-home-feed.js?v=20261011"></script>
-<script src="student-home.js?v=20261016"></script>
+<script src="student-home.js?v=20261017-inbox"></script>
 </body>
 </html>
 
