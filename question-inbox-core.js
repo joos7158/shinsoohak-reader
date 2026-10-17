@@ -11,6 +11,24 @@
     return 'q-'+a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0');
   }
   function tagAnswer(id,text){return /^q-[a-f0-9]{16}$/.test(id)?`[질문ID:${id}]\n${answerText(text)}`:String(text||'');}
+  function replyId(r){return 'r-'+questionId({at:r.at,text:r.text??r.답??''}).slice(2);}
+  function coalesceQuestions(questions){
+    const photoOnly=q=>/^🙋(?:자유)?질문사진\s/.test(String(q.text||''));
+    const body=q=>clean(q.text).replace(/\s*(?:\[사진\]|📷)\s*$/,'').replace(/[「」]/g,'').replace(/\s+/g,' ').trim();
+    const photos=questions.filter(photoOnly),texts=questions.filter(q=>!photoOnly(q)),used=new Set();
+    const candidates=p=>texts.filter(q=>{
+      const delta=time(q.at)-time(p.at),pb=body(p),qb=body(q);
+      return /\[사진\]/.test(q.text||'')&&!!p.photo&&time(q.at)&&time(p.at)&&delta>=0&&delta<=120000&&pb&&
+        (/^🙋자유질문/.test(p.text)===/^🙋자유질문/.test(q.text))&&(qb===pb||(String(clean(p.text).replace(/\s*📷\s*$/,'')).length>=120&&qb.startsWith(pb)));
+    });
+    const result=texts.map(q=>{
+      const matches=photos.filter(p=>{const cs=candidates(p);return cs.length===1&&cs[0]===q;});
+      if(matches.length!==1)return {...q};
+      const p=matches[0];used.add(p);
+      return {...q,photo:q.photo||p.photo,questionAliases:[...(q.questionAliases||[]),questionId(p)],photoRecord:p};
+    });
+    return result.concat(photos.filter(p=>!used.has(p)).map(p=>({...p})));
+  }
   function build(cards,questions,replies){
     const groups=new Map();
     function identity(key,title){
@@ -42,22 +60,27 @@
       return g;
     }).sort((a,b)=>b.updated-a.updated);
   }
-  function problems(cards,questions,replies){
-    const grouped=build(cards,questions,replies),rows=[],byId=new Map(),unlinked=[];
+  function problems(cards,questions,replies,links={}){
+    const grouped=build(cards,coalesceQuestions(questions),replies),rows=[],byId=new Map(),unlinked=[];
     grouped.forEach(g=>g.questions.forEach(q=>{
       const id=questionId(q);if(byId.has(id))return;
       const key=(q.rawText.match(/\[카드:([^\]]+)\]/)||[])[1]||(g.id==='free'?'free':g.card?.key||g.id);
       const row={...g,id,groupId:g.id,questions:[q],replies:[],replyKey:key,question:q,updated:time(q.at),unlinked:false,uncertain:false};
-      byId.set(id,row);rows.push(row);
+      byId.set(id,row);(q.questionAliases||[]).forEach(alias=>byId.set(alias,row));rows.push(row);
     }));
     grouped.forEach(g=>{
       const own=rows.filter(r=>r.groupId===g.id),loose=[];
       g.replies.forEach(r=>{
-        const explicit=answerId(r.text),target=explicit?byId.get(explicit):null;
-        if(target){target.replies.push(r);return;}
+        const explicit=answerId(r.text),reviewed=links[replyId(r)],ids=explicit?[explicit]:Array.isArray(reviewed)?reviewed:[];
+        if(ids.length){
+          const targets=[...new Set(ids.map(id=>byId.get(id)))];
+          if(targets.every(Boolean)){targets.forEach(target=>{if(!target.replies.some(old=>replyId(old)===replyId(r)))target.replies.push(r);});return;}
+          loose.push(r);return;
+        }
         // Historical answers have only a card/type key. Never guess between multiple questions.
-        const only=own.length===1?own[0]:null;
-        if(!explicit&&only&&time(r.at)&&time(only.question.at)&&time(r.at)>=time(only.question.at)){only.replies.push(r);return;}
+        const eligible=own.filter(q=>time(q.question.at)&&time(r.at)&&time(q.question.at)<=time(r.at));
+        const only=eligible.length===1?eligible[0]:null;
+        if(only){only.replies.push(r);return;}
         loose.push(r);
       });
       if(loose.length){
@@ -68,5 +91,5 @@
     rows.forEach(r=>{r.replies.sort((a,b)=>time(a.at)-time(b.at));r.waiting=!r.replies.length&&!r.uncertain;r.updated=Math.max(r.updated,...r.replies.map(a=>time(a.at)));});
     return {items:rows.sort((a,b)=>b.updated-a.updated),unlinked:unlinked.sort((a,b)=>b.updated-a.updated)};
   }
-  return {build,problems,time,clean,questionId,answerId,answerText,tagAnswer};
+  return {build,problems,coalesceQuestions,time,clean,questionId,replyId,answerId,answerText,tagAnswer};
 });
