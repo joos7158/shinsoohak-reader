@@ -455,9 +455,9 @@ window.ME_REWARDS = {
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 12,
-  "redeemed": 0,
+  "redeemed": 1,
   "per": 10,
-  "gift": "편의점 5천원 기프티콘",
+  "gift": "문화상품권 5천원",
   "days": [],
   "gold": [
    "부등식"
