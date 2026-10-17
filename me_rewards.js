@@ -15,7 +15,7 @@ window.ME_REWARDS = {
   "today": "2026-10-17"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -25,7 +25,8 @@ window.ME_REWARDS = {
   ],
   "scan": [
    "2026-09-22",
-   "2026-09-26"
+   "2026-09-26",
+   "2026-10-17"
   ],
   "today": "2026-10-17"
  },
@@ -391,7 +392,7 @@ window.ME_REWARDS = {
   "today": "2026-10-17"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
-  "stamps": 13,
+  "stamps": 14,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -411,7 +412,8 @@ window.ME_REWARDS = {
    "2026-10-09",
    "2026-10-10",
    "2026-10-13",
-   "2026-10-14"
+   "2026-10-14",
+   "2026-10-17"
   ],
   "today": "2026-10-17"
  },
@@ -454,7 +456,7 @@ window.ME_REWARDS = {
   "today": "2026-10-17"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
-  "stamps": 12,
+  "stamps": 13,
   "redeemed": 1,
   "per": 10,
   "gift": "문화상품권 5천원",
@@ -473,7 +475,8 @@ window.ME_REWARDS = {
    "2026-10-10",
    "2026-10-12",
    "2026-10-14",
-   "2026-10-16"
+   "2026-10-16",
+   "2026-10-17"
   ],
   "today": "2026-10-17"
  },
