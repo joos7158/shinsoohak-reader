@@ -592,7 +592,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261026-075813';
+const BUILD = '20261028-205130';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -1501,10 +1501,10 @@ document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP)
 <script src="question-inbox-links.js?v=20261017-repair1"></script>
 <script src="question-inbox.js?v=20261017-repair1"></script>
 <script src="student-home-core.js?v=20261016"></script>
-<script src="student-home-persona.js?v=20261026"></script>
-<script src="student-home-cat.js?v=20261026"></script>
+<script src="student-home-persona.js?v=20261028"></script>
+<script src="student-home-cat.js?v=20261028"></script>
 <script src="student-home-feed.js?v=20261011"></script>
-<script src="student-home.js?v=20261017-inbox"></script>
+<script src="student-home.js?v=20261028"></script>
 </body>
 </html>
 

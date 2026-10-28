@@ -14,6 +14,6 @@ body.student-home-active{--ink:#574c53;--muted:#8a7a81;--pink:#e999ae;--line:#ef
 @keyframes sh-tail{50%{transform:rotate(-7deg)}}@keyframes sh-tassel{50%{transform:rotate(6deg)}}@keyframes sh-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}@keyframes sh-hop{40%{transform:translateY(-8px)}}
 @media(prefers-reduced-motion:reduce){.cute-room .kitten-tail,.cute-room .kitten-tassel,.cute-room .kitten-eye,.cute-room.is-happy .kitten{animation:none}}
 /* 2026-10-15 그림 고양이 — 숨쉬듯 살짝 */
-.cute-room .kitten-photo{transform-box:fill-box;transform-origin:50% 100%;animation:sh-breathe 3.4s ease-in-out infinite}
+.cute-room .kitten-character{transform-origin:200px 275px;animation:sh-breathe 3.4s ease-in-out infinite}
 @keyframes sh-breathe{50%{transform:scale(1.018,1.028)}}
-@media(prefers-reduced-motion:reduce){.cute-room .kitten-photo{animation:none}}
+@media(prefers-reduced-motion:reduce){.cute-room .kitten-character{animation:none}}

@@ -3,6 +3,20 @@
    이전 그림은 student-home-cat.js.bak_20261015_doctorcat */
 window.CuteCat = {
   _n: 0,
+  // Photo attachments use body landmarks, separately from the SVG fallback.
+  // Coordinates are in the room viewBox; happy sprites have their own entries.
+  PHOTO_ATTACHMENTS: {
+    doctor: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    doctor_happy: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    detective: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    detective_happy: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    builder: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    builder_happy: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    idea: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    idea_happy: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    time: {neck:[200,192], ear:[259,83], crown:[200,56]},
+    time_happy: {neck:[200,192], ear:[259,83], crown:[200,56]},
+  },
   // 성격별 고양이 — 오답 성향 판독(student_home_persona.py)으로 고름. 아이 화면엔 이 이름만 나간다.
   PERSONAS: {
     doctor:   {name:'박사냥', icon:'🎓', hold:'오답노트와 연필', lines:['어서 와! 오늘은 뭐부터 해볼까?','틀린 문제는 보물이야. 같이 열어 보자!','오답노트 한 장이면 오늘 공부 반은 끝!'], happy:'골골골… 같이 있으니까 좋다 ♡'},
@@ -37,11 +51,22 @@ window.CuteCat = {
     const pid = this.persona(personaId), P = this.PERSONAS[pid];
     const photo = window.STUDENT_HOME_PERSONA?.images?.[pid];
     const up = ['detective','idea','time'].includes(pid);
-    // 그림 모드: 상 아이템을 그림 속 나비넥타이 자리(anchors, 배경 지우기 때 계산)에 0.8배로 붙인다
-    const akey = happy && window.STUDENT_HOME_PERSONA?.images?.[pid+'_happy'] ? pid+'_happy' : pid;   // 웃는 그림은 자리가 조금 달라 그 그림 기준점 사용
-    const anchor = window.STUDENT_HOME_PERSONA?.anchors?.[akey] || window.STUDENT_HOME_PERSONA?.anchors?.[pid] || [200, 200];
+    const akey = happy && window.STUDENT_HOME_PERSONA?.images?.[pid+'_happy'] ? pid+'_happy' : pid;
+    const points = this.PHOTO_ATTACHMENTS[akey];
+    const attach = id => {
+      if (!photo) return '';
+      const spec = {
+        bell:[points.neck, .8, [200,200]],
+        scarf:[points.neck, .8, [200,200]],
+        ribbon:[points.ear, .72, [261,112]],
+        crown:[points.crown, .8, [200,80]],
+      }[id];
+      if (!spec) return '';
+      const [at,scale,origin] = spec;
+      return ` transform="translate(${at[0]} ${at[1]}) scale(${scale}) translate(${-origin[0]} ${-origin[1]})"`;
+    };
     const show=id=>rewards.accessory===id||rewards.decorations.includes(id);
-    const layer=(id,part,svg)=>`<g data-cat="${part}" ${show(id)?'':'hidden="hidden" style="display:none"'}>${svg}</g>`;
+    const layer=(id,part,svg)=>`<g data-cat="${part}"${attach(id)} ${show(id)?'':'hidden="hidden" style="display:none"'}>${svg.replaceAll('${u}',u)}</g>`;
     const tie = !show('bell') && !show('scarf');
     const cap = !show('crown');
     const eye = (x) => happy
@@ -81,7 +106,7 @@ window.CuteCat = {
     <ellipse cx="202" cy="268" rx="96" ry="15" fill="#c9bce2" opacity=".55"/>
     ${layer('rug','item18','<ellipse cx="201" cy="266" rx="166" ry="28" fill="#e5f0df"/><ellipse cx="201" cy="266" rx="149" ry="20" fill="none" stroke="#b9d6b3" stroke-width="3" stroke-dasharray="5 8"/>')}
     ${layer('cushion','item2','<ellipse cx="200" cy="262" rx="92" ry="24" fill="#eba6be"/><ellipse cx="200" cy="257" rx="88" ry="21" fill="#ffd0df"/><path d="M130 258q70 17 140 0" fill="none" stroke="#f4b5cb" stroke-width="2"/>')}
-    <g class="kitten">
+    <g class="kitten"><g class="kitten-character">
       ${photo?`<image class="kitten-photo" href="${(happy&&window.STUDENT_HOME_PERSONA.images[pid+'_happy'])||photo}" x="80" y="30" width="240" height="245" preserveAspectRatio="xMidYMax meet"/>`:''}
       <g class="kitten-svg" ${photo?'hidden="hidden" style="display:none"':''}>
       <g class="kitten-tail">
@@ -151,13 +176,13 @@ window.CuteCat = {
         <circle cx="200" cy="60" r="4.5" fill="#f7cf6a"/>
       </g>`:''}
       </g>
-      <g class="kitten-acc" filter="url(#soft${u})" ${photo?`transform="translate(${anchor[0]} ${anchor[1]+10}) scale(.8) translate(-200 -200)"`:''}>
+      <g class="kitten-acc" filter="url(#soft${u})">
       ${layer('bell','acc7','<path d="M160 191q40 15 80 0" stroke="#9d86d4" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M162 189q38 13 76 0" stroke="#cbbcf0" stroke-width="3.5" fill="none" stroke-linecap="round"/><g class="bellg"><circle cx="200" cy="205" r="11" fill="url(#gold${u})" stroke="#c9963f" stroke-width="1.5"/><path d="M195 208h10m-5 0v5" stroke="#ac8856" stroke-width="2"/><circle cx="197" cy="201" r="2.5" fill="#fff3ce"/></g>')}
       ${layer('ribbon','acc14','<path d="M262 108q-34-32-32 1q0 14 31 7q32 14 28-6q-2-19-27-2" fill="#ed99b3" stroke="#d783a0" stroke-width="2"/><path d="M240 104q8 6 18 6M282 104q-8 6-18 6" stroke="#c86f8f" stroke-width="2" fill="none" opacity=".6"/><ellipse cx="241" cy="98" rx="5" ry="3" fill="#fff" opacity=".55" transform="rotate(-25 241 98)"/><ellipse cx="278" cy="99" rx="4" ry="2.5" fill="#fff" opacity=".45"/><circle cx="261" cy="112" r="8" fill="#f7bccf" stroke="#d783a0" stroke-width="1.5"/><circle cx="258" cy="109" r="2.5" fill="#fff" opacity=".7"/>')}
       ${layer('scarf','acc21','<path d="M158 192q42 18 84 0" fill="none" stroke="#8fc9c0" stroke-width="15" stroke-linecap="round"/><path d="M226 201v26" stroke="#8fc9c0" stroke-width="16" stroke-linecap="round"/><path d="M219 223h14" stroke="#d6f0e8" stroke-width="4"/><path d="M160 196q40 16 80 0" stroke="#6fb0a6" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/><path d="M168 186q32 12 64 0" stroke="#c6ece4" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="3 5"/><path d="M226 206v14" stroke="#b5e3da" stroke-width="3" stroke-dasharray="3 4"/>')}
-            <g ${photo?'transform="translate(0 -58)"':''}>${layer('crown','acc30','<path d="M171 80l-8-31 23 16 14-28 14 28 23-16-8 31z" fill="url(#gold${u})" stroke="#c9963f" stroke-width="2"/><rect x="170" y="74" width="60" height="7" rx="3" fill="#e9b04f"/><circle cx="200" cy="68" r="5" fill="#f58fb0" stroke="#fff" stroke-width="1"/><circle cx="183" cy="74" r="3" fill="#7fd8bd"/><circle cx="217" cy="74" r="3" fill="#8fb8f0"/><path d="M178 60l4 12" stroke="#fff6d6" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>')}</g>
+      ${layer('crown','acc30','<path d="M171 80l-8-31 23 16 14-28 14 28 23-16-8 31z" fill="url(#gold${u})" stroke="#c9963f" stroke-width="2"/><rect x="170" y="74" width="60" height="7" rx="3" fill="#e9b04f"/><circle cx="200" cy="68" r="5" fill="#f58fb0" stroke="#fff" stroke-width="1"/><circle cx="183" cy="74" r="3" fill="#7fd8bd"/><circle cx="217" cy="74" r="3" fill="#8fb8f0"/><path d="M178 60l4 12" stroke="#fff6d6" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>')}
       </g>
-    </g>
+    </g></g>
     ${layer('bowl','item1','<ellipse cx="91" cy="265" rx="25" ry="8" fill="#b5cfe4"/><path d="M65 255h52l-5 11q-22 9-43-1z" fill="#abc6e2"/><ellipse cx="91" cy="255" rx="26" ry="8" fill="#e6f2ff"/><ellipse cx="91" cy="255" rx="20" ry="5" fill="#fffdf3"/>')}
     ${layer('yarn','item3','<circle cx="336" cy="265" r="17" fill="#b9a5dd"/><path d="M325 253q3 18 23 20m-30-6q20-17 28-10m-11-8q-4 19 10 30q15 10 28-2" stroke="#957ebe" stroke-width="2" fill="none"/>')}
     ${layer('fish','item5','<g transform="translate(48 220) rotate(-12)"><ellipse rx="18" ry="9" fill="#f3b1ab"/><path d="M15 0l12-9v18z" fill="#f3b1ab"/><circle cx="-10" cy="-2" r="2" fill="#806664"/></g>')}

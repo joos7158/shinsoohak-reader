@@ -8,7 +8,7 @@
     const hash=[...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');
     let feed=window.STUDENT_HOME_FEED,record=feed.students?.[hash];const persona=window.CuteCat.persona(window.STUDENT_HOME_PERSONA?.students?.[hash]),PER=window.CuteCat.PERSONAS[persona];
     if(!record||!Array.isArray(record.homework)||!record.attendance)return; // fail open to the original page for ineligible/missing data
-    const css=document.createElement('link');css.rel='stylesheet';css.href='student-home.css?v=20261016';
+    const css=document.createElement('link');css.rel='stylesheet';css.href='student-home.css?v=20261028';
     await new Promise((resolve,reject)=>{css.onload=resolve;css.onerror=reject;document.head.append(css);});
     const C=window.StudentHomeCore,legacy=document.getElementById('app'),key='student_home_live_'+SID;const MY_ITEMS=C.itemsFor(persona);
     const read=k=>{try{return localStorage.getItem(k);}catch{return null;}};
