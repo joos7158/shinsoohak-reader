@@ -538,23 +538,27 @@ window.ME_REWARDS = {
   "today": "2026-11-04"
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
+  "scan": [
+   "2026-11-04"
+  ],
   "today": "2026-11-04"
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
-  "stamps": 0,
+  "stamps": 1,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [],
-  "scan": [],
+  "scan": [
+   "2026-11-04"
+  ],
   "today": "2026-11-04"
  },
  "demo": {
