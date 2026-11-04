@@ -4104,5 +4104,13 @@ window.ME_DATA = {
  "aG8aMT-yg-zPFfl5YqoAVw": {
   "대기": true,
   "리더코드": ""
+ },
+ "-y2XKWWWXqVLfhP2QgYBxg": {
+  "대기": true,
+  "리더코드": ""
+ },
+ "H-U7NmlUs5ml7lFC0Dtvgw": {
+  "대기": true,
+  "리더코드": ""
  }
 };
