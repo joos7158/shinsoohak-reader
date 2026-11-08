@@ -9,7 +9,7 @@
   const fresh=r=>!TEACHER&&isFresh(r.at)&&!seenGet().includes(replySig(r.text,r.at));
   const status=g=>g.replies.length?(g.replies.some(fresh)?'새 답변':'답변 있음'):g.uncertain?'연결 확인 필요':'답변 대기';
   function mount(){
-    if(panel||typeof SID==='undefined'||!SID||!window.ME_DATA?.[SID]||!C)return !!panel;
+    if(panel||typeof SID==='undefined'||!SID||!window.ME_DATA?.[SID]||window.ME_DATA[SID].닫힘||!C)return !!panel; /* 🔒 2026-11-08 휴원·퇴원생은 질문함도 닫는다 */
     const app=document.getElementById('app');if(!app)return false;
     panel=document.createElement('section');panel.id='question-inbox';panel.hidden=true;panel.setAttribute('aria-label','문제별 질문과 답변');app.before(panel);
     entry=document.createElement('button');entry.className='qi-entry';entry.textContent='✉ 문제별 질문 · 답변 확인';entry.onclick=()=>{const nav=document.querySelector('#student-home-nav [data-tab="questions"]');if(nav)nav.click();else setVisible(true);};app.before(entry);
