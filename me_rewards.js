@@ -31,39 +31,6 @@ window.ME_REWARDS = {
   ],
   "today": "2026-11-08"
  },
- "ULMoQiY8ATCj02ubEQ9Wjg": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
-  "today": "2026-11-08"
- },
- "8dW63wQ5S0IMxsxKPoFVxw": {
-  "stamps": 2,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [
-   "2026-09-22",
-   "2026-09-29"
-  ],
-  "today": "2026-11-08"
- },
- "_YkG-WNQNVqGNwdtybRA0Q": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
-  "today": "2026-11-08"
- },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 8,
   "redeemed": 0,
@@ -97,36 +64,6 @@ window.ME_REWARDS = {
    "2026-09-28",
    "2026-10-14",
    "2026-10-16"
-  ],
-  "today": "2026-11-08"
- },
- "Z83nVYQ26xYl7HEmvvEYaQ": {
-  "stamps": 17,
-  "redeemed": 1,
-  "per": 10,
-  "gift": "문화상품권 5천원",
-  "days": [
-   "2026-08-29",
-   "2026-09-07",
-   "2026-09-08",
-   "2026-09-09",
-   "2026-09-11",
-   "2026-09-14",
-   "2026-09-16",
-   "2026-09-18",
-   "2026-09-19",
-   "2026-09-22"
-  ],
-  "gold": [
-   "두 접점을 지나는 직선 (극선)",
-   "원의 접선 — 원 위의 한 점이 주어진 경우",
-   "연산 조건의 포함 관계 번역",
-   "삼각형의 중점 조건 활용 (꼭짓점·무게중심 복원)"
-  ],
-  "scan": [
-   "2026-09-23",
-   "2026-09-26",
-   "2026-09-28"
   ],
   "today": "2026-11-08"
  },
@@ -198,25 +135,6 @@ window.ME_REWARDS = {
   ],
   "today": "2026-11-08"
  },
- "98XssE27H04rd7StETOaYQ": {
-  "stamps": 6,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [
-   "2026-08-29",
-   "2026-09-01"
-  ],
-  "gold": [
-   "다항함수의 도함수 구하기"
-  ],
-  "scan": [
-   "2026-09-23",
-   "2026-09-28",
-   "2026-10-17"
-  ],
-  "today": "2026-11-08"
- },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 11,
   "redeemed": 0,
@@ -238,27 +156,6 @@ window.ME_REWARDS = {
    "2026-10-16",
    "2026-10-21",
    "2026-10-24"
-  ],
-  "today": "2026-11-08"
- },
- "oDUG17HlPyQHIEK4B065dw": {
-  "stamps": 8,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [
-   "2026-08-28",
-   "2026-09-25",
-   "2026-10-11"
-  ],
-  "gold": [
-   "평균값 정리를 만족하는 상수 c 구하기",
-   "함수의 증가와 감소",
-   "합성함수의 연속성"
-  ],
-  "scan": [
-   "2026-09-22",
-   "2026-10-17"
   ],
   "today": "2026-11-08"
  },
@@ -340,16 +237,6 @@ window.ME_REWARDS = {
   ],
   "today": "2026-11-08"
  },
- "HvtR5tsgR_p5hq3lWwUEwA": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
-  "today": "2026-11-08"
- },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 14,
   "redeemed": 1,
@@ -375,18 +262,6 @@ window.ME_REWARDS = {
   ],
   "today": "2026-11-08"
  },
- "jBg85unLXRkRSPBO_KSSSQ": {
-  "stamps": 1,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [
-   "유리함수와 무리함수의 그래프 (교점 존재 조건)"
-  ],
-  "scan": [],
-  "today": "2026-11-08"
- },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 7,
   "redeemed": 0,
@@ -403,16 +278,6 @@ window.ME_REWARDS = {
    "2026-10-17",
    "2026-10-29"
   ],
-  "today": "2026-11-08"
- },
- "FcrEQVl16vghX2b7HzpjQw": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
   "today": "2026-11-08"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
@@ -472,18 +337,6 @@ window.ME_REWARDS = {
    "2026-10-22",
    "2026-10-24"
   ],
-  "today": "2026-11-08"
- },
- "l9KiHOI2ZJ1aRbdFn8vIgQ": {
-  "stamps": 1,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [
-   "2026-09-14"
-  ],
-  "gold": [],
-  "scan": [],
   "today": "2026-11-08"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {

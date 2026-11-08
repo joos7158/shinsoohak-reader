@@ -28,19 +28,6 @@ window.SCHOOL_FEED = {
     }
    ]
   },
-  "ULMoQiY8ATCj02ubEQ9Wjg": {
-   "s": "정발고",
-   "exams": [
-    {
-     "d": "2026-09-29",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-11-30",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
   "haOPA17TodCIFf0HoU8z3A": {
    "s": "정발고",
    "exams": [
@@ -63,19 +50,6 @@ window.SCHOOL_FEED = {
     },
     {
      "d": "2026-11-30",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
-  "8dW63wQ5S0IMxsxKPoFVxw": {
-   "s": "백신고",
-   "exams": [
-    {
-     "d": "2026-09-30",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-11-23",
      "label": "2학기 기말고사"
     }
    ]
@@ -106,19 +80,6 @@ window.SCHOOL_FEED = {
     }
    ]
   },
-  "_YkG-WNQNVqGNwdtybRA0Q": {
-   "s": "김포외고",
-   "exams": [
-    {
-     "d": "2026-10-13",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-12-10",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
   "mzsdyDG658RvaW4ZeG2qsA": {
    "s": "대화고",
    "exams": [
@@ -128,19 +89,6 @@ window.SCHOOL_FEED = {
     },
     {
      "d": "2026-12-14",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
-  "Z83nVYQ26xYl7HEmvvEYaQ": {
-   "s": "일산대진고",
-   "exams": [
-    {
-     "d": "2026-09-29",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-12-21",
      "label": "2학기 기말고사"
     }
    ]
@@ -184,19 +132,6 @@ window.SCHOOL_FEED = {
     }
    ]
   },
-  "oDUG17HlPyQHIEK4B065dw": {
-   "s": "안곡고",
-   "exams": [
-    {
-     "d": "2026-09-30",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-12-07",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
   "FiX91SBiihqTfUL-dwMElg": {
    "s": "사우고",
    "exams": [
@@ -219,19 +154,6 @@ window.SCHOOL_FEED = {
     },
     {
      "d": "2026-12-02",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
-  "98XssE27H04rd7StETOaYQ": {
-   "s": "저동고",
-   "exams": [
-    {
-     "d": "2026-10-13",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-12-07",
      "label": "2학기 기말고사"
     }
    ]
@@ -262,19 +184,6 @@ window.SCHOOL_FEED = {
     }
    ]
   },
-  "l9KiHOI2ZJ1aRbdFn8vIgQ": {
-   "s": "주엽고",
-   "exams": [
-    {
-     "d": "2026-10-06",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-12-07",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
   "Bt0Gethtb19ScZineAI9AQ": {
    "s": "한수중학교",
    "exams": [
@@ -284,19 +193,6 @@ window.SCHOOL_FEED = {
     },
     {
      "d": "2026-11-26",
-     "label": "2학기 기말고사"
-    }
-   ]
-  },
-  "jBg85unLXRkRSPBO_KSSSQ": {
-   "s": "오마중학교",
-   "exams": [
-    {
-     "d": "2026-10-01",
-     "label": "2학기 중간고사"
-    },
-    {
-     "d": "2026-11-20",
      "label": "2학기 기말고사"
     }
    ]
