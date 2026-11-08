@@ -4106,12 +4106,143 @@ window.ME_DATA = {
   "리더코드": ""
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
-  "대기": true,
-  "리더코드": ""
+  "진도": "도형의 닮음",
+  "상태": "few",
+  "오답": [
+   {
+    "유형": "닮은 도형의 넓이와 부피의 비",
+    "문제": {
+     "stem": "오른쪽 그림과 같은\n$\\triangle \\mathrm{ABC}$에서 $\\overline{\\mathrm{BC}} \\parallel \\overline{\\mathrm{DE}}$이고 $\\overline{\\mathrm{AD}} =6\\,\\mathrm{cm}$, $\\overline{\\mathrm{BD}} =4\\,\\mathrm{cm}$이다. $\\triangle \\mathrm{ADE}$의 넓이가\n$15\\,\\mathrm{cm} ^{2}$일 때, $\\triangle \\mathrm{ABC}$의 넓이는?\n⟦FIG:fullsrc_4b5db6cd1ff7dc615c39.png⟧",
+     "choices": [
+      "① $35\\,\\mathrm{cm}^2$",
+      "② $\\frac{110}{3}\\,\\mathrm{cm}^2$",
+      "③ $40\\,\\mathrm{cm}^2$",
+      "④ $\\frac{125}{3}\\,\\mathrm{cm}^2$",
+      "⑤ $45\\,\\mathrm{cm}^2$"
+     ],
+     "answer": "④",
+     "id": "mfull_dcb88a9b5f9b06"
+    },
+    "내답": "③",
+    "유사": {
+     "stem": "구 모양의 풍선에 서서히 바람을 넣어 지름의 길이가 처음 풍선의 $\\frac{4}{3}$인 구가 되도록 하였더니 부피가 $1728 {cm}^{3}$이었다. 처음 풍선의 부피는?",
+     "choices": [
+      "① $1296 {cm}^{3}$",
+      "② $972 {cm}^{3}$",
+      "③ $4096 {cm}^{3}$",
+      "④ $2304 {cm}^{3}$",
+      "⑤ $729 {cm}^{3}$"
+     ],
+     "answer": "⑤",
+     "id": "var_mcloud_87f0fe02fe93d2_20261104_1"
+    },
+    "강의": null,
+    "답변": []
+   }
+  ],
+  "복습대기": [],
+  "도구함": [],
+  "리더코드": "",
+  "복습": [],
+  "자유답변": []
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
-  "대기": true,
-  "리더코드": ""
+  "진도": "도형의 닮음",
+  "상태": "many",
+  "오답": [
+   {
+    "유형": "닮음을 이용한 길이 구하기",
+    "문제": {
+     "stem": "오른쪽 그림은 직사각형 모양의\n종이 $\\mathrm{ABCD}$를 대각선 $\\mathrm{BD}$를 접\n는 선으로 하여 접은 것이다.\n${\\overline{\\mathrm{AD} }}$와 ${\\overline{\\mathrm{BE} }}$의 교점을 $\\mathrm{P}$라 하고\n${\\overline{\\mathrm{AB} }}=6 {cm }, {\\overline{\\mathrm{BC} }}=8 {cm }$,\n${\\overline{\\mathrm{BD} }}=10 {cm }$일 때, ${\\overline{\\mathrm{PD} }}$의 길이는?\n⟦FIG:midcloud_9e8d7739895bd25a9405.png⟧",
+     "choices": [
+      "① $6 {cm }$",
+      "② $\\frac{25}{4} {cm }$",
+      "③ $\\frac{13}{2} {cm }$",
+      "④ $\\frac{27}{4} {cm }$",
+      "⑤ $7 {cm }$"
+     ],
+     "answer": "②",
+     "id": "mcloud_06b76c2018cc02"
+    },
+    "내답": "①",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "직각삼각형의 닮음",
+    "문제": {
+     "stem": "오른쪽 그림에서 ${\\overline{\\mathrm{AC} }} \\perp {\\overline{\\mathrm{BD} }}$,\n${\\overline{\\mathrm{AB} }} \\perp {\\overline{\\mathrm{DE} }}$이고 점 $\\mathrm{C}$는 ${\\overline{\\mathrm{BD} }}$의 중점, 점 $\\mathrm{P}$는 ${\\overline{\\mathrm{AC} }}$와 ${\\overline{\\mathrm{DE} }}$의 교점이다. ${\\overline{\\mathrm{BC} }}=16 {cm }, {\\overline{\\mathrm{PC} }}=12 {cm }$일 때, ${\\overline{\\mathrm{AP} }}$의 길이는?\n⟦FIG:midcloud_bc37c81e40d5525cc999.png⟧",
+     "choices": [
+      "① $\\frac{26}{3} {cm }$",
+      "② $9 {cm }$",
+      "③ $\\frac{28}{3} {cm }$",
+      "④ $\\frac{29}{3} {cm }$",
+      "⑤ $10 {cm }$"
+     ],
+     "answer": "③",
+     "id": "mcloud_f621796664b805"
+    },
+    "내답": "②",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "닮은 도형의 넓이와 부피의 비",
+    "문제": {
+     "stem": "오른쪽 그림과 같은\n$\\triangle \\mathrm{ABC}$에서 $\\overline{\\mathrm{BC}} \\parallel \\overline{\\mathrm{DE}}$이고 $\\overline{\\mathrm{AD}} =6\\,\\mathrm{cm}$, $\\overline{\\mathrm{BD}} =4\\,\\mathrm{cm}$이다. $\\triangle \\mathrm{ADE}$의 넓이가\n$15\\,\\mathrm{cm} ^{2}$일 때, $\\triangle \\mathrm{ABC}$의 넓이는?\n⟦FIG:fullsrc_4b5db6cd1ff7dc615c39.png⟧",
+     "choices": [
+      "① $35\\,\\mathrm{cm}^2$",
+      "② $\\frac{110}{3}\\,\\mathrm{cm}^2$",
+      "③ $40\\,\\mathrm{cm}^2$",
+      "④ $\\frac{125}{3}\\,\\mathrm{cm}^2$",
+      "⑤ $45\\,\\mathrm{cm}^2$"
+     ],
+     "answer": "④",
+     "id": "mfull_dcb88a9b5f9b06"
+    },
+    "내답": "①",
+    "유사": {
+     "stem": "구 모양의 풍선에 서서히 바람을 넣어 지름의 길이가 처음 풍선의 $\\frac{4}{3}$인 구가 되도록 하였더니 부피가 $1728 {cm}^{3}$이었다. 처음 풍선의 부피는?",
+     "choices": [
+      "① $1296 {cm}^{3}$",
+      "② $972 {cm}^{3}$",
+      "③ $4096 {cm}^{3}$",
+      "④ $2304 {cm}^{3}$",
+      "⑤ $729 {cm}^{3}$"
+     ],
+     "answer": "⑤",
+     "id": "var_mcloud_87f0fe02fe93d2_20261104_1"
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "닮음의 뜻과 대응관계",
+    "문제": {
+     "stem": "다음 중 닮음에 대한 설명으로 옳지 않은 것은?",
+     "choices": [
+      "① 모든 직각이등변삼각형은 닮은 도형이다.",
+      "② 모든 정팔면체는 닮은 도형이다.",
+      "③ 한 예각의 크기가 같은 두 직각삼각형은 닮은 도형이다.",
+      "④ 둘레의 길이의 비가 $1:2$인 두 사각형은 닮은 도형이다.",
+      "⑤ 두 닮은 입체도형에서 대응하는 모서리의 길이의 비는 닮음비와 같다."
+     ],
+     "answer": "④",
+     "id": "mfull_0ebaa04db2133d"
+    },
+    "내답": "②",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   }
+  ],
+  "복습대기": [],
+  "도구함": [],
+  "리더코드": "",
+  "복습": [],
+  "자유답변": []
  },
  "8bPDj77vIvmNSOpRs3PzVQ": {
   "대기": true,
