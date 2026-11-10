@@ -15,13 +15,14 @@ window.ME_REWARDS = {
   "today": "2026-11-10"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
-  "stamps": 5,
+  "stamps": 6,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
-   "서로 같은 함수"
+   "서로 같은 함수",
+   "유리함수의 역함수(함숫값 조건)"
   ],
   "scan": [
    "2026-09-22",
@@ -99,7 +100,7 @@ window.ME_REWARDS = {
   "today": "2026-11-10"
  },
  "haOPA17TodCIFf0HoU8z3A": {
-  "stamps": 9,
+  "stamps": 10,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
@@ -110,7 +111,8 @@ window.ME_REWARDS = {
   "gold": [
    "극대와 극소(극값 구하기)",
    "최대·최소의 활용(도형·실생활)",
-   "평균값 정리를 만족하는 상수 c 구하기"
+   "평균값 정리를 만족하는 상수 c 구하기",
+   "접선의 방정식(넓이 구하기)"
   ],
   "scan": [
    "2026-09-22",
@@ -121,13 +123,14 @@ window.ME_REWARDS = {
   "today": "2026-11-10"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
-  "stamps": 3,
+  "stamps": 4,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
-   "정적분을 포함한 등식(구간이 상수)"
+   "정적분을 포함한 등식(구간이 상수)",
+   "방정식의 실근의 개수(그래프로 세기)"
   ],
   "scan": [
    "2026-09-30",
