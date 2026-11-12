@@ -12,7 +12,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-23"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
   "stamps": 6,
@@ -30,7 +30,7 @@ window.ME_REWARDS = {
    "2026-10-17",
    "2026-10-22"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 8,
@@ -51,7 +51,7 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-28"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "mzsdyDG658RvaW4ZeG2qsA": {
   "stamps": 4,
@@ -66,7 +66,7 @@ window.ME_REWARDS = {
    "2026-10-14",
    "2026-10-16"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
   "stamps": 5,
@@ -82,7 +82,7 @@ window.ME_REWARDS = {
    "2026-10-16",
    "2026-10-21"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "FiX91SBiihqTfUL-dwMElg": {
   "stamps": 3,
@@ -97,7 +97,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-10-13"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "stamps": 10,
@@ -120,7 +120,7 @@ window.ME_REWARDS = {
    "2026-10-10",
    "2026-10-13"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "stamps": 4,
@@ -136,7 +136,7 @@ window.ME_REWARDS = {
    "2026-09-30",
    "2026-10-13"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 11,
@@ -160,10 +160,10 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-24"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
-  "stamps": 47,
+  "stamps": 48,
   "redeemed": 2,
   "per": 10,
   "gift": "문화상품권 1만원",
@@ -194,14 +194,15 @@ window.ME_REWARDS = {
    "여사건의 확률 (적어도)",
    "확률의 덧셈정리",
    "순열·조합을 이용한 확률",
-   "사건의 독립과 종속 판정"
+   "사건의 독립과 종속 판정",
+   "표준화하여 미지수(m·σ·경계값) 구하기"
   ],
   "scan": [
    "2026-09-28",
    "2026-09-29",
    "2026-10-07"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "L-0jFQ2UTmnO4308juedZw": {
   "stamps": 3,
@@ -215,7 +216,7 @@ window.ME_REWARDS = {
    "2026-10-13",
    "2026-11-05"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
   "stamps": 0,
@@ -225,7 +226,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
   "stamps": 2,
@@ -238,7 +239,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 15,
@@ -263,7 +264,7 @@ window.ME_REWARDS = {
    "2026-11-07",
    "2026-11-10"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 8,
@@ -282,7 +283,7 @@ window.ME_REWARDS = {
    "2026-10-29",
    "2026-11-10"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
   "stamps": 17,
@@ -311,7 +312,7 @@ window.ME_REWARDS = {
    "2026-10-24",
    "2026-10-26"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
   "stamps": 18,
@@ -341,7 +342,7 @@ window.ME_REWARDS = {
    "2026-10-22",
    "2026-10-24"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 20,
@@ -368,7 +369,7 @@ window.ME_REWARDS = {
    "2026-10-31",
    "2026-11-06"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "1Qlq0AOK91srR56Do-v28g": {
   "stamps": 0,
@@ -378,7 +379,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "two5_UoBGrOoKWv6uWq5-w": {
   "stamps": 1,
@@ -390,7 +391,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-10-24"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "aG8aMT-yg-zPFfl5YqoAVw": {
   "stamps": 4,
@@ -405,20 +406,22 @@ window.ME_REWARDS = {
    "2026-11-05",
    "2026-11-10"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
-  "gold": [],
+  "gold": [
+   "삼각형의 무게중심과 선분의 길이"
+  ],
   "scan": [
    "2026-11-04",
    "2026-11-06"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
   "stamps": 2,
@@ -431,7 +434,7 @@ window.ME_REWARDS = {
    "2026-11-04",
    "2026-11-06"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "8bPDj77vIvmNSOpRs3PzVQ": {
   "stamps": 1,
@@ -443,7 +446,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-11-10"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  },
  "demo": {
   "stamps": 6,
@@ -454,6 +457,6 @@ window.ME_REWARDS = {
   "gold": [
    "(예시) 두 점 사이의 거리"
   ],
-  "today": "2026-11-11"
+  "today": "2026-11-12"
  }
 };
