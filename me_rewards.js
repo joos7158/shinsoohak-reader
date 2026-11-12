@@ -12,7 +12,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-09-23"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
   "stamps": 6,
@@ -30,7 +30,7 @@ window.ME_REWARDS = {
    "2026-10-17",
    "2026-10-22"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 8,
@@ -51,7 +51,7 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-28"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "mzsdyDG658RvaW4ZeG2qsA": {
   "stamps": 4,
@@ -66,7 +66,7 @@ window.ME_REWARDS = {
    "2026-10-14",
    "2026-10-16"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
   "stamps": 5,
@@ -82,7 +82,7 @@ window.ME_REWARDS = {
    "2026-10-16",
    "2026-10-21"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "FiX91SBiihqTfUL-dwMElg": {
   "stamps": 3,
@@ -97,7 +97,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-10-13"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "stamps": 10,
@@ -120,7 +120,7 @@ window.ME_REWARDS = {
    "2026-10-10",
    "2026-10-13"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "stamps": 4,
@@ -136,7 +136,7 @@ window.ME_REWARDS = {
    "2026-09-30",
    "2026-10-13"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 11,
@@ -160,7 +160,7 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-24"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
   "stamps": 48,
@@ -202,7 +202,7 @@ window.ME_REWARDS = {
    "2026-09-29",
    "2026-10-07"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "L-0jFQ2UTmnO4308juedZw": {
   "stamps": 3,
@@ -216,7 +216,7 @@ window.ME_REWARDS = {
    "2026-10-13",
    "2026-11-05"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
   "stamps": 0,
@@ -226,7 +226,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
   "stamps": 2,
@@ -239,7 +239,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 15,
@@ -264,7 +264,7 @@ window.ME_REWARDS = {
    "2026-11-07",
    "2026-11-10"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 8,
@@ -283,7 +283,7 @@ window.ME_REWARDS = {
    "2026-10-29",
    "2026-11-10"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
   "stamps": 17,
@@ -312,7 +312,7 @@ window.ME_REWARDS = {
    "2026-10-24",
    "2026-10-26"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
   "stamps": 18,
@@ -342,7 +342,7 @@ window.ME_REWARDS = {
    "2026-10-22",
    "2026-10-24"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 20,
@@ -369,7 +369,7 @@ window.ME_REWARDS = {
    "2026-10-31",
    "2026-11-06"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "1Qlq0AOK91srR56Do-v28g": {
   "stamps": 0,
@@ -379,7 +379,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "two5_UoBGrOoKWv6uWq5-w": {
   "stamps": 1,
@@ -391,7 +391,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-10-24"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "aG8aMT-yg-zPFfl5YqoAVw": {
   "stamps": 4,
@@ -406,7 +406,7 @@ window.ME_REWARDS = {
    "2026-11-05",
    "2026-11-10"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
   "stamps": 3,
@@ -421,7 +421,7 @@ window.ME_REWARDS = {
    "2026-11-04",
    "2026-11-06"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
   "stamps": 2,
@@ -434,7 +434,7 @@ window.ME_REWARDS = {
    "2026-11-04",
    "2026-11-06"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "8bPDj77vIvmNSOpRs3PzVQ": {
   "stamps": 1,
@@ -446,7 +446,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-11-10"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  },
  "demo": {
   "stamps": 6,
@@ -457,6 +457,6 @@ window.ME_REWARDS = {
   "gold": [
    "(예시) 두 점 사이의 거리"
   ],
-  "today": "2026-11-12"
+  "today": "2026-11-13"
  }
 };
