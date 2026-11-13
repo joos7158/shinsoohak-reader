@@ -409,13 +409,14 @@ window.ME_REWARDS = {
   "today": "2026-11-13"
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
-  "stamps": 4,
+  "stamps": 5,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
-   "삼각형의 무게중심과 선분의 길이"
+   "삼각형의 무게중심과 선분의 길이",
+   "삼각형과 사각형의 중점을 연결한 도형"
   ],
   "scan": [
    "2026-11-04",
