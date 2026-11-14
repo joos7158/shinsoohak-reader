@@ -247,6 +247,10 @@
   details summary::-webkit-details-marker { display:none; }
   details summary::after { content:'›'; font-size:1.2rem; color:var(--muted); transition:transform .2s; }
   details[open] > summary::after { transform:rotate(90deg); }
+  /* 📖 해설 (2026-11-14) */
+  .solx .sol-body { font-size:.98rem; line-height:1.95; overflow-x:auto; }
+  .solx .sol-body .katex-display { margin:.5em 0; }
+  .sol-none { margin:8px 0 0; font-size:.86rem; color:var(--muted); }
   .badge { border-radius:999px; padding:4px 11px; }
   .rwgrid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; justify-items:center; margin:14px 0 12px; }
   .st { width:40px; height:40px; font-size:1.05rem; }
@@ -594,7 +598,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261108-212714';
+const BUILD = '20261114-135927';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -949,6 +953,36 @@ function watchSeosul(){
     if (e.intersectionRatio >= 0.6) { logView('📝서술형 ' + e.target.dataset.ty); io.unobserve(e.target); }
   }), {threshold:[0.6]});
   document.querySelectorAll('.seosul').forEach(el => io.observe(el));
+}
+// 📖 해설 — 2026-11-14 원장 "오답노트 프로그램에 해설을 붙여서, 안 되면 그거라도 활용하게".
+//   정답 확인 바로 아래에 접어 둔다. 힌트를 먼저 보라고 막지 않는다(무엇을 열었는지만 남긴다).
+//   펼치면 열람 로그 `📖해설 <유형> · 닮은문제|틀린문제` 가 한 번 남는다 — 누가 해설까지 갔는지가 확인 자료다.
+//   해설 문자열에는 `$` 가 없다(빌더가 \(…\)·\[…\] 로 바꿔 보낸다) → 전역 렌더($$·$)는 건드리지 않고 여기서 따로 그린다.
+//   KaTeX 가 못 그리는 해설(1만 건에 3건)은 붉은 원문 대신 안내 문구로 바꾸고 `📖해설깨짐` 으로 남긴다.
+//   `해설종이` = 문제집·교과서 출처라 공개 페이지에 못 싣는 문항 → 종이 오답노트를 가리킨다.
+function solHtml(p, ty, where){
+  if (!p) return '';
+  if (p.해설) return `<details class="solx" style="margin-top:8px" data-ty="${esc(ty||'')}" data-wh="${where}" ontoggle="solOpen(this)">
+      <summary>📖 해설 보기</summary><div class="slot-body sol-body">${esc(p.해설).replace(/\n/g,'<br>')}</div></details>`;
+  if (p.해설종이) return `<div class="sol-none">📖 이 문제의 해설은 종이 오답노트 맨 뒤에 있어요.</div>`;
+  return '';
+}
+function solOpen(el){
+  if (!el.open || el.dataset.done) return;
+  el.dataset.done = '1';
+  const body = el.querySelector('.sol-body');
+  let broken = false;
+  if (window.renderMathInElement) {
+    renderMathInElement(body, {delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}], throwOnError:false});
+    broken = !!body.querySelector('.katex-error');
+  }
+  const tag = (el.dataset.ty||'') + ' · ' + (el.dataset.wh==='w' ? '틀린문제' : '닮은문제');
+  if (broken) {
+    body.innerHTML = '이 해설은 화면에서 수식이 깨져서 정리 중이에요. 아래 🙋 버튼으로 물어봐 주세요.';
+    logAct('📖해설깨짐 ' + tag);
+  } else {
+    logAct('📖해설 ' + tag);
+  }
 }
 const HINT_LB = ['🧭 1단계 · 방향','📐 2단계 · 개념','👣 3단계 · 첫걸음','⛰️ 4단계 · 고비','🏁 5단계 · 마무리 직전'];
 function hintHtml(o, i){
@@ -1445,7 +1479,8 @@ function card(o,i){
     <div class="ans-row">
       <span class="pill mine">${(o.내답==='blank'||!o.내답)?'무응답 (안 풂)':'내가 고른 답: '+esc(o.내답)} ✗</span>
       <span class="pill correct">정답: ${esc(o.문제.answer)} ✓</span>
-    </div>`;
+    </div>
+    ${solHtml(o.문제, o.유형, 'w')}`;
   return `
   <div class="card" id="card_${i}" data-h="${h4(o.유형)}">
     <span class="badge" id="ty_${i}">${esc(o.유형)}</span>
@@ -1456,6 +1491,7 @@ function card(o,i){
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
     <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
+    ${solHtml(o.유사, o.유형, 's')}
     <details style="margin-top:8px"><summary>아까 틀린 문제 다시 보기</summary>
       <div class="slot-body">${원문}</div>
     </details>`
@@ -1503,7 +1539,8 @@ function waitCard(o,i){
     ${o.유사 ? `${o.유사.출처?`<div class="sub" style="margin:4px 0 0"><span class="src">· ${esc(o.유사.출처)}</span></div>`:''}<div class="problem">${stemHtml(o.유사.stem)}</div>
     ${pickHtml(o.유사.choices, o.유사.answer, i)}
     ${hintHtml(o, i)}
-    <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>`
+    <details style="margin-top:8px"><summary>정답 확인</summary><div class="slot-body">${esc(o.유사.answer)}</div></details>
+    ${solHtml(o.유사, o.유형, 's')}`
     : `<div class="sub">문제를 준비 중이에요 — 강의로 먼저 복습해 볼까요?</div>`}
     ${lecBtn}
     ${actsHtml(i, o)}
