@@ -1,6 +1,6 @@
 // build_school_feed.py 생성 — 학교 카드(급식·D-day). 이름·점수 없음(학교명은 2026-08-28 원장 승인).
 window.SCHOOL_FEED = {
- "updated": "2026-11-14",
+ "updated": "2026-11-16",
  "tokens": {
   "GJSwV5R8jDgHJD6W-IODzg": {
    "s": "가좌고",
@@ -279,11 +279,21 @@ window.SCHOOL_FEED = {
   },
   "8bPDj77vIvmNSOpRs3PzVQ": {
    "s": "세원고",
-   "exams": []
+   "exams": [
+    {
+     "d": "2026-12-14",
+     "label": "2학기 기말고사"
+    }
+   ]
   },
   "ntn2FOM1mnEsfIw-T-0Z5Q": {
    "s": "대화중",
-   "exams": []
+   "exams": [
+    {
+     "d": "2026-11-20",
+     "label": "2학기 기말고사"
+    }
+   ]
   },
   "demo": {
    "s": "오마중학교",
