@@ -66,60 +66,13 @@ window.ME_DATA = {
   ]
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
-  "진도": "무리함수",
+  "진도": "유리함수",
   "상태": "many",
   "오답": [
    {
-    "유형": "분모의 유리화(간단히 하기)",
+    "유형": "유리함수 y=k/x의 그래프",
     "문제": {
-     "stem": "임의의 두 양수 $a, b$ 에 대하여 $\\displaystyle \\frac{1}{a+\\sqrt{a b}}+\\frac{1}{b+\\sqrt{a b}}$ 을 간단히 하면?",
-     "choices": [
-      "① $\\sqrt{a}-\\sqrt{b}$",
-      "② $\\sqrt{a}+\\sqrt{b}$",
-      "③ $\\sqrt{a b}$",
-      "④ $\\displaystyle \\frac{1}{\\sqrt{a b}}$",
-      "⑤ $\\displaystyle \\frac{1}{\\sqrt{a}+\\sqrt{b}}$"
-     ],
-     "answer": "④",
-     "id": "tb_60ac41ef2a",
-     "해설종이": true
-    },
-    "내답": "blank",
-    "유사": {
-     "stem": "임의의 양수 $x$에 대하여 $\\displaystyle \\frac{4}{\\sqrt{ x+4} - \\sqrt{ x+2}}$를 간단히 한 것은?",
-     "choices": [
-      "①  $1$",
-      "②  $2$",
-      "③  $4$",
-      "④  $2( \\sqrt{ x+4}+ \\sqrt{ x+2})$",
-      "⑤  $\\displaystyle \\frac{2}{\\sqrt{ x+4} + \\sqrt{ x+2}}$"
-     ],
-     "answer": "④",
-     "id": "ngd_5cd5d08d50",
-     "출처": "압구정고 기출 2022",
-     "해설": "분모를 유리화하기 위해 켤레식 \\(\\sqrt{x+4}+\\sqrt{x+2}\\) 를 분자·분모에 곱한다.\n\\[\\frac{4}{\\sqrt{x+4}-\\sqrt{x+2}} \\times \\frac{\\sqrt{x+4}+\\sqrt{x+2}}{\\sqrt{x+4}+\\sqrt{x+2}}\\]\n분모는 합차 공식으로 정리하면:\n\\[(\\sqrt{x+4})^2 - (\\sqrt{x+2})^2 = (x+4)-(x+2) = 2\\]\n따라서:\n\\[\\frac{4(\\sqrt{x+4}+\\sqrt{x+2})}{2} = 2(\\sqrt{x+4}+\\sqrt{x+2})\\]\n따라서 정답은 ④ 이다."
-    },
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "유리함수에서 삼각형의 넓이",
-    "문제": {
-     "stem": "함수 $\\displaystyle y=\\frac{2}{x}$의 제 $1$사분면 위의 점 $\\mathrm{A}$에서 $x$축과 $y$축에 평행한 직선을 그어 $\\displaystyle y=\\frac{k}{x}$ $(k>0)$와 만나는 점을 각각 $\\mathrm{B}$, $\\mathrm{C}$라고 하자. $\\triangle \\mathrm{ABC}$의 넓이가 $9$일 때, 상수 $k$의 값은?",
-     "choices": [
-      "① 5",
-      "② 7",
-      "③ 8",
-      "④ 9",
-      "⑤ 11"
-     ],
-     "answer": "③",
-     "id": "var_ngd_653e84a2e0_20260802_2",
-     "해설": "\\(\\displaystyle y=\\frac{2}{x}\\) 위 제1사분면의 점 \\(\\mathrm{A}\\)를 \\(\\displaystyle \\mathrm{A}=\\left(t,\\,\\frac{2}{t}\\right)\\) \\((t>0)\\)으로 놓는다. 수평선 \\(\\displaystyle y=\\frac{2}{t}\\)과 \\(\\displaystyle y=\\frac{k}{x}\\)의 교점 \\(\\mathrm{B}\\)는 \\(\\displaystyle \\frac{2}{t}=\\frac{k}{x}\\)에서 \\(\\displaystyle x=\\frac{kt}{2}\\)이므로 \\(\\displaystyle \\mathrm{B}=\\left(\\frac{kt}{2},\\,\\frac{2}{t}\\right)\\)이고, 수직선 \\(x=t\\)와의 교점은 \\(\\displaystyle \\mathrm{C}=\\left(t,\\,\\frac{k}{t}\\right)\\)이다. 두 변의 길이 \\(\\displaystyle \\overline{\\mathrm{AB}}=\\frac{kt}{2}-t=\\frac{t(k-2)}{2}\\), \\(\\displaystyle \\overline{\\mathrm{AC}}=\\frac{k}{t}-\\frac{2}{t}=\\frac{k-2}{t}\\)로부터 넓이는 \\(\\displaystyle \\frac{1}{2}\\cdot\\frac{t(k-2)}{2}\\cdot\\frac{k-2}{t}=\\frac{(k-2)^2}{4}=9\\)이므로 \\((k-2)^2=36\\), \\(k>0\\)에서 \\(k-2=6\\), \\(k=8\\)."
-    },
-    "내답": "④",
-    "유사": {
-     "stem": "유리함수 $\\displaystyle y= \\frac{2}{x}$ ($x>0$) 위의 점 $\\displaystyle \\mathrm{P} \\left(k, \\frac{2}{k} \\right)$에서 접하는 직선이 $x, y$축과 만나는 점을 각각 $\\mathrm{A}, \\mathrm{B}$라고 하자. 원점 $\\mathrm{O}$에 대하여 삼각형 $\\mathrm{OAB}$의 넓이를 $S(k)$라 할 때, <보기>에서 항상 옳은 것만을 있는 대로 고른 것은?\n\n<보기>\nㄱ. $k=1$일 때 접선의 기울기는 $-2$이다.\nㄴ. $k=1$일 때 삼각형 $\\mathrm{OAB}$의 넓이 $S(1)$의 값은 $4$이다.\nㄷ. $1\\le k \\le 5$에서 $S(k)=4$를 만족하는 자연수 $k$는 $3$개다.",
+     "stem": "함수 $\\displaystyle f(x) = \\frac{k}{x}$ ($k \\ne 0$)에 대하여 <보기>에서 옳은 것만을 있는 대로 고른 것은? \\n ㄱ. 함수 $y = f(x)$의 그래프는 원점에 대하여 대칭이다. ㄴ. $|k|$의 값이 클수록 곡선 $y = f(x)$는 원점에 가까워진다. ㄷ. 함수 $f(x)$의 역함수는 $\\displaystyle y = \\frac{k}{x}$이다.",
      "choices": [
       "① ㄱ",
       "② ㄱ, ㄴ",
@@ -127,48 +80,151 @@ window.ME_DATA = {
       "④ ㄴ, ㄷ",
       "⑤ ㄱ, ㄴ, ㄷ"
      ],
-     "answer": "②",
-     "id": "ngd_gs_2a808e01fb",
+     "answer": "③",
+     "id": "ngd_gs_92b64a8bc4",
      "출처": "학교 기출(족보)",
-     "해설": "\\(\\displaystyle y=\\dfrac{2}{x}\\)에서 \\(\\displaystyle y'=-\\dfrac{2}{x^2}\\)이므로 점 \\(\\displaystyle \\mathrm{P}\\left(k,\\dfrac{2}{k}\\right)\\)에서의 접선의 기울기는 \\(\\displaystyle -\\dfrac{2}{k^2}\\)이다.\n\\(k=1\\)일 때 기울기는 \\(-2\\)이므로 ㄱ은 옳다.\n접선의 방정식은\n\\[y-\\dfrac{2}{k}=-\\dfrac{2}{k^2}(x-k)\\]\n\\(x=0\\)을 대입하면 \\(\\displaystyle y=\\dfrac{2}{k}+\\dfrac{2}{k}=\\dfrac{4}{k}\\)이므로 \\(\\displaystyle \\mathrm{B}\\left(0,\\dfrac{4}{k}\\right)\\).\n\\(y=0\\)을 대입하면 \\(\\displaystyle -\\dfrac{2}{k}=-\\dfrac{2}{k^2}(x-k)\\)에서 \\(x=2k\\)이므로 \\(\\mathrm{A}(2k,0)\\).\n따라서\n\\[S(k)=\\dfrac{1}{2}\\cdot 2k\\cdot \\dfrac{4}{k}=4\\]\n즉 \\(S(k)\\)는 \\(k\\)의 값에 관계없이 항상 \\(4\\)이다.\n\\(k=1\\)일 때 \\(S(1)=4\\)이므로 ㄴ은 옳다.\n\\(1\\le k\\le 5\\)인 모든 자연수 \\(k=1,2,3,4,5\\)에 대해 항상 \\(S(k)=4\\)이므로 만족하는 자연수 \\(k\\)는 \\(5\\)개이다. 따라서 ㄷ은 옳지 않다.\nㄱ, ㄴ만 항상 옳으므로 따라서 정답은 ② 이다."
+     "해설": "ㄱ. 함수 \\(\\displaystyle f \\left(x \\right)= \\frac{k}{x}\\)에서 점근선의 방정식은 \\(x=0 , y=0\\)이므로 \\(y=f \\left(x \\right)\\)의 그래프는 원점에 대하여 대칭이다. (참)\nㄴ. \\(\\left| k \\right|\\)의 값이 클수록 곡선 \\(y=f \\left(x \\right)\\)는 원점에서 멀어진다. (거짓)\nㄷ. \\(\\displaystyle y= \\frac{k}{x}\\)에서 \\(xy=k\\), \\(\\displaystyle x= \\frac{k}{y}\\) \\(\\therefore\\)\\(\\displaystyle f ^{-1} \\left(x \\right)= \\frac{k}{x}\\) (참)\n이상에서 옳은 것은 ㄱ, ㄷ이다."
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "유리함수 $\\displaystyle y = \\frac{k}{x}$ ($k \\ne 0$)의 그래프에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은? \\n ㄱ. 정의역과 치역은 실수 전체의 집합이다. ㄴ. $k > 0$이면 그래프는 제1사분면, 제3사분면에 있다. ㄷ. $y$축에 대하여 대칭이다. ㄹ. $|k|$의 값이 클수록 그래프는 원점에서 멀어진다. ㅁ. 점근선은 $x$축과 $y$축이다.",
+     "choices": [
+      "① ㄱ",
+      "② ㄴ, ㅁ",
+      "③ ㄴ, ㄷ",
+      "④ ㄱ, ㄷ, ㄹ",
+      "⑤ ㄴ, ㄹ, ㅁ"
+     ],
+     "answer": "⑤",
+     "id": "ngd_gs_20b4cfe900",
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ, 정의역은 \\(0\\)을 제외한 실수 전체 집합니다.\nㄷ. \\(y=x\\)에 의한 선대칭, \\((0, 0)\\)에 의한 점대칭이다.\nㄱ과 ㄷ을 제외한 ㄴ. ㄹ. ㅁ.은 참"
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "유리함수의 그래프(좌표가 정수인 점)",
+    "문제": {
+     "stem": "함수 $\\displaystyle y=\\frac{12}{2x-4}$의 그래프 위의 점 중 $x$좌표, $y$좌표가 모두 정수인 점의 개수는?",
+     "choices": [
+      "①  $2$",
+      "②  $4$",
+      "③  $6$",
+      "④  $8$",
+      "⑤  $10$"
+     ],
+     "answer": "④",
+     "id": "ngd_47bd7a5546",
+     "출처": "효문고 기출 2022",
+     "해설": "\\(\\displaystyle y=\\dfrac{12}{2x-4}=\\dfrac{6}{x-2}\\) 로 변형된다.\n\\(x,y\\) 가 모두 정수이려면 \\(x-2\\) 가 \\(6\\) 의 약수여야 한다.\n\\(6\\) 의 약수는 \\(\\pm1, \\pm2, \\pm3, \\pm6\\) 으로 총 \\(8\\) 개이다.\n\\(x-2\\) 가 이 각각의 값을 가질 때마다 \\(x\\) 가 정수로 하나씩 정해지고, 그에 대응하는 \\(\\displaystyle y=\\dfrac{6}{x-2}\\) 도 정수로 하나씩 정해진다.\n따라서 조건을 만족하는 점 \\((x,y)\\) 는 \\(8\\) 개이다.\n따라서 정답은 ④ 이다."
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "함수 $\\displaystyle y= \\frac{8x-9}{4x+3}$의 그래프 위의 점 중 $x, y$좌표가 모두 정수인 점의 개수는?",
+     "choices": [
+      "①  $2$\n개",
+      "②  $3$\n개",
+      "③  $4$\n개",
+      "④  $5$\n개",
+      "⑤  $6$\n개"
+     ],
+     "answer": "③",
+     "id": "ngd_d5f7319513",
+     "출처": "선덕고 기출 2020",
+     "해설": "\\(\\displaystyle y=\\frac{8x-9}{4x+3}\\) 를 변형하면 \\(8x-9 = 2(4x+3) - 15\\) 이므로\n\\(\\displaystyle y = 2 - \\frac{15}{4x+3}\\)\n\\(x, y\\) 가 모두 정수이려면 \\(4x+3\\) 이 \\(15\\) 의 약수이어야 한다.\n\\(15\\) 의 약수는 \\(\\pm1, \\pm3, \\pm5, \\pm15\\) 이다. \\(4x+3=d\\) 라 하면 \\(\\displaystyle x=\\frac{d-3}{4}\\) 가 정수이어야 한다.\n\\(d=1\\): \\(\\displaystyle x=-\\frac{1}{2}\\) (제외)\n\\(d=-1\\): \\(x=-1\\) (정수)\n\\(d=3\\): \\(x=0\\) (정수)\n\\(d=-3\\): \\(\\displaystyle x=-\\frac{3}{2}\\) (제외)\n\\(d=5\\): \\(\\displaystyle x=\\frac{1}{2}\\) (제외)\n\\(d=-5\\): \\(x=-2\\) (정수)\n\\(d=15\\): \\(x=3\\) (정수)\n\\(d=-15\\): \\(\\displaystyle x=-\\frac{9}{2}\\) (제외)\n따라서 정수 \\(x\\) 의 값은 \\(x=-2,-1,0,3\\) 의 \\(4\\) 개이고, 각각에 대응하는 \\(y\\) 도 모두 정수이다.\n따라서 정답은 ③ \\(4\\)개 이다."
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "유리함수와 거리(거리의 합 최솟값)",
+    "문제": {
+     "stem": "함수 $\\displaystyle y= \\frac{18}{2x-3}$ $\\displaystyle (x > \\frac{3}{2})$의 그래프와 직선 $y= -x-3$이 있다. 함수 $y=f(x)$의 그래프 위의 점 P를 지나고 x축에 수직인 직선이 직선 $y=-x-3$과 만나는 점을 Q라 하자. 선분 PQ 길이의 최솟값과 그때의 점 P의 x좌표의 합은?",
+     "choices": [
+      "① $15$",
+      "② $16$",
+      "③ $17$",
+      "④ $18$",
+      "⑤ $19$"
+     ],
+     "answer": "①",
+     "id": "ngd_gs_174428f0ba",
+     "출처": "학교 기출(족보)",
+     "해설": "함수는 \\(\\displaystyle y=f(x)=\\frac{18}{2x-3}\\) \\(\\displaystyle (x>\\frac32)\\)이고, 점 P는 \\(\\displaystyle \\mathrm{P}=\\left(t,\\ \\frac{18}{2t-3}\\right)\\) \\(\\displaystyle \\left(t>\\frac32\\right)\\)로 놓을 수 있다. 같은 x좌표를 갖는 직선 위의 점은 \\(\\mathrm{Q}=(t,\\ -t-3)\\)이다.\n\\(\\displaystyle t>\\frac32\\)이면 \\(\\displaystyle \\frac{18}{2t-3}>0\\)이고 \\(\\displaystyle -t-3<-\\frac92<0\\)이므로 P가 Q보다 항상 위쪽에 있다. 따라서\n\\[\\overline{\\mathrm{PQ}} = \\frac{18}{2t-3} - (-t-3) = \\frac{18}{2t-3} + t + 3.\\]\n\\(u=2t-3>0\\)으로 치환하면 \\(\\displaystyle t=\\dfrac{u+3}{2}\\)이므로\n\\[\\overline{\\mathrm{PQ}} = \\frac{18}{u} + \\frac{u+3}{2} + 3 = \\frac{18}{u} + \\frac{u}{2} + \\frac{9}{2}.\\]\n산술-기하평균을 이용하면\n\\[\\frac{18}{u} + \\frac{u}{2} \\ge 2\\sqrt{\\frac{18}{u}\\cdot\\frac{u}{2}} = 2\\sqrt{9} = 6,\\]\n등호는 \\(\\displaystyle \\dfrac{18}{u}=\\dfrac{u}{2}\\), 즉 \\(u^2=36\\)에서 \\(u=6\\)일 때 성립한다.\n따라서 최솟값은 \\(\\displaystyle \\overline{\\mathrm{PQ}}_{\\min} = 6 + \\dfrac{9}{2} = \\dfrac{21}{2}\\)이고, 이때 \\(\\displaystyle t = \\dfrac{u+3}{2} = \\dfrac{6+3}{2} = \\dfrac{9}{2}\\)이다.\n구하는 값은 최솟값과 그때의 x좌표의 합이므로\n\\[\\frac{21}{2} + \\frac{9}{2} = \\frac{30}{2} = 15.\\]\n따라서 정답은 ① 이다."
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "함수 $\\displaystyle y= \\frac{16}{x-2} (x>2)$의 그래프 위의 점 $\\mathrm{P}$에서 $x$축, $y$축에 내린 수선의 발을 각각 $\\mathrm{Q}, \\mathrm{R}$라 할 때, $\\mathrm{\\overline{PQ}} + {\\overline{\\mathrm{PR}}}$의 최솟값은?",
+     "choices": [
+      "①  $10$",
+      "②  $12$",
+      "③  $14$",
+      "④  $16$",
+      "⑤  $18$"
+     ],
+     "answer": "①",
+     "id": "ngd_3b10ae7cc8",
+     "출처": "용호고 기출 2020",
+     "해설": "점 \\(\\displaystyle \\mathrm{P} = \\left(t,\\ \\frac{16}{t-2}\\right)\\) (\\(t > 2\\))로 놓으면,\n\\(\\mathrm{Q}\\)는 \\(x\\)축 위의 수선의 발이므로 \\(\\displaystyle \\overline{\\mathrm{PQ}} = \\frac{16}{t-2}\\),\n\\(\\mathrm{R}\\)는 \\(y\\)축 위의 수선의 발이므로 \\(\\overline{\\mathrm{PR}} = t\\).\n\\(s = t - 2 > 0\\)으로 치환하면\n\\[\\overline{\\mathrm{PQ}} + \\overline{\\mathrm{PR}} = \\frac{16}{s} + s + 2\\]\nAM-GM 부등식에 의해\n\\[\\frac{16}{s} + s \\geq 2\\sqrt{\\frac{16}{s} \\cdot s} = 2\\sqrt{16} = 8\\]\n등호는 \\(s = 4\\) (즉 \\(t = 6\\))일 때 성립하므로\n\\[\\overline{\\mathrm{PQ}} + \\overline{\\mathrm{PR}} \\geq 8 + 2 = 10\\]\n따라서 정답은 ① 이다."
     },
     "강의": [
-     1,
-     8
+     0,
+     0
     ],
     "답변": []
    },
    {
-    "유형": "무리함수의 최대·최소",
+    "유형": "무리함수의 역함수(식 구하기)",
     "문제": {
-     "stem": "함수 $f(x)=-\\sqrt{6-2x}+k$에 대하여 <보기>에서 옳은 것만을 있는 대로 고른 것은? (단, $k$는 실수이다.)\n<보기>\nㄱ. $\\displaystyle f(\\frac{5}{2})=-3$일 때, $k=2$이다.\nㄴ. $-5 \\leq x \\leq 1$에서 함수 $y=f(x)$의 최댓값이 $-4$일 때, 최솟값은 $-6$이다.\nㄷ. 직선 $\\displaystyle y=\\frac{1}{3}x$와 $y=f(x)$의 그래프가 서로 다른 두 점에서 만나도록 하는 $k$의 최솟값은 $2$이다.",
+     "stem": "함수 $f \\left( x \\right) =\\sqrt{2x-4}$에 대하여 $f ^{-1} \\left( \\sqrt{6} \\right)$의 값은?",
      "choices": [
-      "① ㄱ",
-      "② ㄴ",
-      "③ ㄷ",
-      "④ ㄱ, ㄷ",
-      "⑤ ㄴ, ㄷ"
+      "①  $\\sqrt{23}$",
+      "②  $2\\sqrt{6}$",
+      "③  $5$",
+      "④  $\\sqrt{26}$",
+      "⑤  $3\\sqrt{3}$"
+     ],
+     "answer": "③",
+     "id": "ngd_4bcb8aae98",
+     "출처": "한가람고 기출 2020",
+     "해설": "\\(f^{-1}(\\sqrt{6}) = a\\)라고 하면, \\(f(a) = \\sqrt{6}\\)이다.\n\\(f(a) = \\sqrt{2a-4} = \\sqrt{6}\\)이므로,\n\\(2a-4=6\\), \\(\\therefore a=5\\)"
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "함수 $f(x)=\\sqrt{2x-6}$에 대하여 $f^{-1}(\\sqrt{10})$의 값은?",
+     "choices": [
+      "① $8$",
+      "② $\\sqrt{14}$",
+      "③ $5$",
+      "④ $2$",
+      "⑤ $10$"
+     ],
+     "answer": "①",
+     "id": "var_ngd_4bcb8aae98_20260802_1",
+     "해설": "\\(f^{-1}(\\sqrt{10})=a\\)라 하면 \\(f(a)=\\sqrt{10}\\)이다. \\(f(a)=\\sqrt{2a-6}=\\sqrt{10}\\)이므로 양변을 제곱하면 \\(2a-6=10\\)이다. \\(2a=16\\)이므로 \\(\\therefore a=8\\)이다. (오답 ②는 역함수를 착각해 \\(f(10)=\\sqrt{14}\\)를 계산한 경우, ③은 상수 \\(-6\\)을 무시해 \\(2a=10\\)으로 푼 경우, ④는 이항 부호를 반대로 적용해 \\(2a=10-6=4\\)로 푼 경우, ⑤는 역함수를 단순히 제곱으로 오해해 \\((\\sqrt{10})^2=10\\)이라 답한 경우이다.)"
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "유리함수가 서로 겹칠 조건",
+    "문제": {
+     "stem": "두 함수 $\\displaystyle f(x) = \\frac{1}{x} + a$, $\\displaystyle g(x) = -\\frac{1}{x-2} - a$가 있다. 정수 $a$에 대하여 두 곡선 $y = f(x)$, $y = g(x)$의 교점 중 $x$좌표가 양수인 점의 개수를 $h(a)$라 하자. 등식 $h(a) + h(a+1) + h(a+2) = 4$를 만족시키는 정수 $a$의 최솟값은?",
+     "choices": [
+      "① $-2$",
+      "② $-1$",
+      "③ $0$",
+      "④ 1",
+      "⑤ $2$"
      ],
      "answer": "②",
-     "id": "ngd_gs_d0f5614970",
+     "id": "ngd_gs_1bdcaeea5f",
      "출처": "학교 기출(족보)",
-     "해설": "함수 \\(f(x)=-\\sqrt{6-2x}+k\\)의 정의역은 \\(6-2x\\ge0\\), 즉 \\(x\\le3\\)이다.\n(ㄱ) \\(\\displaystyle f\\left(\\frac{5}{2}\\right)=-\\sqrt{6-5}+k=-1+k\\)이고 이것이 \\(-3\\)이면 \\(k=-2\\)이다. 보기에서는 \\(k=2\\)라 하였으므로 거짓이다.\n(ㄴ) \\(x\\)가 증가하면 \\(6-2x\\)는 감소하고 \\(\\sqrt{6-2x}\\)도 감소하므로 \\(-\\sqrt{6-2x}\\)는 증가한다. 따라서 \\(f(x)\\)는 \\(x\\le3\\)에서 증가함수이다.\n\\(-5\\le x\\le1\\)에서 최댓값은 \\(x=1\\)일 때, 최솟값은 \\(x=-5\\)일 때 나타난다.\n\\(f(1)=-\\sqrt{4}+k=-2+k=-4 \\Rightarrow k=-2\\).\n그러면 \\(f(-5)=-\\sqrt{16}+k=-4+(-2)=-6\\)이다.\n따라서 최솟값은 \\(-6\\)이 맞으므로 참이다.\n(ㄷ) \\(y=f(x)\\)를 \\(y\\le k\\)인 범위에서 \\(\\displaystyle x=3-\\dfrac{(y-k)^2}{2}\\) 형태로 바꿀 수 있다 (꼭짓점 \\((3,k)\\), \\(y\\)에 대해 왼쪽으로 열린 포물선, \\(y\\le k\\) 구간만 그래프에 해당).\n직선 \\(x=3y\\)와 연립하면 \\(\\displaystyle 3y=3-\\dfrac{(y-k)^2}{2}\\)에서\n\\((y-k)^2=6(1-y)\\)\n\\(y^2+(6-2k)y+(k^2-6)=0\\)\n실근이 2개이려면 판별식 \\(\\displaystyle  (6-2k)^2-4(k^2-6)>0 \\Rightarrow 60-24k>0 \\Rightarrow k<\\dfrac{5}{2}\\).\n근은 \\(\\displaystyle y=k-3\\pm\\dfrac{\\sqrt{60-24k}}{2}\\)이고, 그래프에 속하려면 각 근이 \\(y\\le k\\)를 만족해야 한다. '\\(-\\)'근은 항상 \\(y\\le k\\)를 만족하지만 '\\(+\\)'근은\n\\(\\displaystyle k-3+\\dfrac{\\sqrt{60-24k}}{2}\\le k \\Rightarrow \\sqrt{60-24k}\\le6 \\Rightarrow k\\ge1\\)\n일 때만 성립한다.\n따라서 두 점에서 만나려면 \\(\\displaystyle 1\\le k<\\dfrac{5}{2}\\)가 필요하며, 최솟값은 \\(k=1\\)이다.\n실제로 \\(k=1\\)일 때 직선과 \\(f(x)\\)를 연립하면 \\(x=3,\\,x=-15\\)에서 모두 유효한 교점을 얻어 두 점에서 만남이 확인된다.\n보기에서는 최솟값이 \\(2\\)라고 하였으나 실제 최솟값은 \\(1\\)이므로 거짓이다.\n결론적으로 옳은 것은 ㄴ뿐이다.\n따라서 정답은 ② 이다."
+     "해설": "(ⅰ) \\(a>0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(1\\)이다.\n(ⅱ) \\(a=0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(1\\)이다.\n(ⅲ) \\(a<0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(2\\)이다.\n(ⅰ) ~ (ⅲ)에 의하여 \\(h \\left( a \\right) = {\\begin{cases} 1&&&&\\left( a \\geq 0 \\right) \\\\ 2&&&&\\left( a<0 \\right) \\end{cases}}\\)\n연속하는 세 정수 \\(a\\), \\(a+1\\), \\(a+2\\)에 대하여 등식\n\\(h \\left( a \\right) +h \\left( a+1 \\right) +h \\left( a+2 \\right) =4\\)\\(\\cdots \\cdots\\)㉠\n가 성립하려면\n\\(h \\left( a \\right) =2\\), \\(h \\left( a+1 \\right) =1\\), \\(h \\left( a+2 \\right) =1\\)이어야 한다.\n이때, \\(h \\left( -1 \\right) =2\\), \\(h \\left( 0 \\right) =1\\), \\(h \\left( 1 \\right) =1\\)이므로 등식 ㉠을 만족시키는 정수 \\(a\\)의 값은 \\(-1\\)이다."
     },
-    "내답": "blank",
-    "유사": {
-     "stem": "함수 $\\displaystyle y= \\frac{-3x+5}{x-2}$의 그래프는 함수 $\\displaystyle y= \\frac{a}{x}$의 그래프를 평행이동한 것이고, 점근선은 $x=b, y=c$이다. 함수 $f(x) = \\sqrt{ax+b} +c$에 대하여 보기에서 옳은 것만을 있는 대로 고른 것은? (단, $a \\ne 0$) 보기: ㄱ. 함수 $y=f(x)$의 그래프는 함수 $y= \\sqrt{-x}$의 그래프를 평행이동하여 일치시킬 수 있다. ㄴ. 함수 $y=f(x)$의 그래프는 제3사분면을 지난다. ㄷ. $-7 \\leq x \\leq 2$에서 함수 $y=f(x)$의 최댓값과 최솟값의 합은 $-3$이다.",
-     "choices": [
-      "① ㄱ",
-      "② ㄷ",
-      "③ ㄱ, ㄴ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
-     ],
-     "answer": "⑤",
-     "id": "ngd_gs_6b58b160e3",
-     "출처": "학교 기출(족보)",
-     "해설": "주어진 유리함수의 식을 정리하면 \\(\\displaystyle y= \\frac{-3 \\left( x-2 \\right) -1}{x-2} = \\frac{-1}{x-2} -3\\)이므로 \\(\\displaystyle y= \\frac{-1}{x}\\)의 그래프를 \\(x\\)축 방향으로 \\(2\\)만큼, \\(y\\)축 방향으로 \\(-3\\)만큼 평행이동한 것이므로 점근선은 \\(x=2, y=-3\\)이다. 따라서 \\(a=-1, b=2, c=-3\\)이고,\n\\(f \\left( x \\right) = \\sqrt{-x+2} -3\\)가 된다.\nㄱ. \\(y= \\sqrt{-x}\\)의 그래프를 \\(x\\)축 방향으로 \\(2\\), \\(y\\)축 방향으로 \\(-3\\)만큼 평행 이동하여 일치시킬 수 있다. (참)\nㄴ. 그래프를 그려보면 다음과 같다.\n그래프가 제 \\(3\\)사분면을 지나게 된다. (참)\nㄷ. ㄴ의 그래프에 의해 \\(f \\left( -7 \\right) =0\\)이고 \\(f \\left( 2 \\right) =-3\\)이므로 최댓값과 최솟값의 합은 \\(-3\\)이다. (참)\n따라서, ㄱ,ㄴ,ㄷ 모두 옳다."
-    },
+    "내답": "(미표기)",
+    "유사": null,
     "강의": null,
     "답변": []
    }
@@ -185,26 +241,19 @@ window.ME_DATA = {
     ],
     "답변": [],
     "유사": {
-     "stem": "$\\overline{\\mathrm{AC}}=\\overline{\\mathrm{BC}}$인 이등변삼각형 $\\mathrm{ABC}$의 선분 $\\mathrm{AB}$의 중점을 $\\mathrm{M}$, 선분 $\\mathrm{AB}$를 $3:2$로 내분하는 점을 $\\mathrm{P}$, 선분 $\\mathrm{AB}$를 $3:2$로 외분하는 점을 $\\mathrm{Q}$, 선분 $\\mathrm{AC}$를 $3:2$로 외분하는 점을 $\\mathrm{R}$이라 하자. $\\overline{\\mathrm{AB}}=\\overline{\\mathrm{CM}}$일 때, 삼각형 $\\mathrm{AQR}$의 넓이가 $50$이다. 선분 $\\mathrm{AP}$의 길이는?",
+     "stem": "수직선 위의 서로 다른 세 점 $\\mathrm{A}(a)$, $\\mathrm{B}(b)$, $\\mathrm{C}(c)$에 대하여 선분 AC를 $m:n$으로 내분하는 점 $\\mathrm{P}(p)$가 선분 BC를 $m:n$으로 외분하는 점이 될 때, 옳은 것은? (단, $m>0, n>0$) ㄱ. $a=1, b=5, m=1, n=3$이면 $c=9$ ㄴ. $m>n$이면 $a<p<b<c$ ㄷ. $\\displaystyle p=\\frac{a+b}{2}$",
      "choices": [
-      "① $1$",
-      "② $2$",
-      "③ $3$",
-      "④ $4$",
-      "⑤ $5$"
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ,ㄷ",
+      "⑤ ㄱ,ㄴ,ㄷ"
      ],
-     "answer": "②",
-     "id": "ngd_gs_c93c38f2c1",
+     "answer": "③",
+     "id": "ngd_gs_dd981cadee",
      "출처": "학교 기출(족보)",
-     "해설": "\\(\\mathrm{M}\\)을 원점으로, \\(\\mathrm{A}=(-a,0)\\), \\(\\mathrm{B}=(a,0)\\) (단 \\(\\overline{\\mathrm{AB}}=2a\\))로 놓자. \\(\\overline{\\mathrm{AC}}=\\overline{\\mathrm{BC}}\\)이므로 \\(\\mathrm{C}\\)는 \\(\\mathrm{AB}\\)의 수직이등분선 위에 있고, \\(\\overline{\\mathrm{AB}}=\\overline{\\mathrm{CM}}\\)이므로 \\(\\overline{\\mathrm{CM}}=2a\\), 즉 \\(\\mathrm{C}=(0,2a)\\)이다.\n점 \\(\\mathrm{P}\\)는 \\(\\overline{\\mathrm{AB}}\\)를 \\(3:2\\)로 내분하므로\n\\(\\displaystyle \\mathrm{P} = \\mathrm{A} + \\dfrac{3}{5}(\\mathrm{B}-\\mathrm{A}) = \\left(\\dfrac{a}{5},0\\right)\\)이고\n\\(\\displaystyle \\overline{\\mathrm{AP}} = \\dfrac{a}{5}-(-a) = \\dfrac{6a}{5}\\).\n점 \\(\\mathrm{Q}\\)는 \\(\\overline{\\mathrm{AB}}\\)를 \\(3:2\\)로 외분하므로\n\\(\\mathrm{Q} = \\mathrm{A} + 3(\\mathrm{B}-\\mathrm{A}) = (5a,0)\\)이고 \\(\\overline{\\mathrm{AQ}} = 6a\\).\n점 \\(\\mathrm{R}\\)는 \\(\\overline{\\mathrm{AC}}\\)를 \\(3:2\\)로 외분하므로\n\\(\\mathrm{R} = \\mathrm{A} + 3(\\mathrm{C}-\\mathrm{A}) = (2a,6a)\\)이고\n\\(\\overline{\\mathrm{AR}} = |\\mathrm{R}-\\mathrm{A}| = |(3a,6a)| = 3a\\sqrt5\\).\n\\(\\mathrm{Q}\\)는 벡터 \\(\\overrightarrow{\\mathrm{AB}}\\)와 같은 방향, \\(\\mathrm{R}\\)는 벡터 \\(\\overrightarrow{\\mathrm{AC}}\\)와 같은 방향이므로 \\(\\angle \\mathrm{QAR} = \\angle \\mathrm{BAC}\\)이다.\n\\(\\sin(\\angle \\mathrm{BAC})\\)를 구하면, \\(\\overrightarrow{\\mathrm{AB}}=(2a,0)\\), \\(\\overrightarrow{\\mathrm{AC}}=(a,2a)\\)이므로\n\\(\\displaystyle \\sin(\\angle \\mathrm{BAC}) = \\dfrac{|2a\\cdot 2a - 0\\cdot a|}{|\\overrightarrow{\\mathrm{AB}}||\\overrightarrow{\\mathrm{AC}}|} = \\dfrac{4a^2}{2a\\cdot a\\sqrt5} = \\dfrac{2}{\\sqrt5}\\).\n삼각형 \\(\\mathrm{AQR}\\)의 넓이는\n\\(\\displaystyle \\dfrac{1}{2}\\cdot \\overline{\\mathrm{AQ}}\\cdot \\overline{\\mathrm{AR}}\\cdot \\sin(\\angle \\mathrm{QAR}) = \\dfrac{1}{2}\\cdot 6a \\cdot 3a\\sqrt5 \\cdot \\dfrac{2}{\\sqrt5} = 18a^2\\).\n\\(18a^2 = 50\\)이므로 \\(\\displaystyle a^2 = \\dfrac{25}{9}\\), \\(\\displaystyle a = \\dfrac{5}{3}\\).\n따라서 \\(\\displaystyle \\overline{\\mathrm{AP}} = \\dfrac{6a}{5} = \\dfrac{6}{5}\\cdot\\dfrac{5}{3} = 2\\).\n따라서 정답은 ② 이다."
-    },
-    "힌트": [
-     "이등변삼각형 ABC와 점 M, P, Q, R을 하나의 좌표평면 위에 순서대로 표시해보면서, 각 점이 선분 AB나 AC를 어떤 비로 나누는지부터 그림으로 정리해보자.",
-     "선분을 $m:n$으로 내분·외분하는 점의 위치를 나타내는 공식을 기억하지?",
-     "먼저 AB의 길이를 문자로 놓고, AP, AQ, AR 등을 그 문자를 이용한 식으로 나타내는 것부터 시작해보자.",
-     "외분점 Q, R은 P보다 훨씬 먼 위치에 있다는 점, 그리고 $\\overline{AB}=\\overline{CM}$ 조건이 삼각형 AQR의 밑변·높이 어디에 들어가는지 천천히 확인해보자.",
-     "삼각형 AQR의 넓이를 AB 길이(문자)로 나타낸 식을 세웠으면, 그 식이 50이 되도록 방정식을 풀어서 AB부터 구하고 마지막에 AP를 계산해보자."
-    ]
+     "해설": "선분 \\(\\mathrm{AC}\\)를 \\(m : n\\)으로 내분하는 점 \\(\\mathrm{P}\\)의 좌표는\n\\(\\displaystyle p= \\frac{mc+na}{m}+n \\cdots ㉠\\)이고 선분 \\(\\mathrm{BC}\\)를 \\(m : n\\)으로 외분하는 점 \\(\\mathrm{P}\\)의 좌표는\n\\(\\displaystyle p= \\frac{mc-nb}{m}-n \\cdots ㉡\\)\n따라서 \\(\\displaystyle \\frac{mc+na}{m}+n\\)\\(\\displaystyle {}= \\frac{mc-nb}{m}-n\\)\\(\\cdots ㉢\\)이다.\nㄱ. \\(a=1, b= 5, m = 1, n=3\\)을 \\(\\displaystyle \\frac{mc+na}{m}+n\\)\\(\\displaystyle {}= \\frac{mc-nb}{m}-n\\)에 대입하면\n\\(\\displaystyle c+\\frac{3}{4} = c\\frac{-15}{-2}\\)이므로 식을 정리하면 \\(c=9\\) (참)\nㄴ. \\(a=0, c= 3, m = 2, n=1\\)을 \\(㉢\\)식에 대입하면\n\\(\\displaystyle 6+\\frac{0}{3} = 6\\frac{-b}{1}\\)에서 \\(p=2, b= 4\\)가 되어 \\(a<p<c<b\\)이다. (거짓)\nㄷ. \\(㉠\\)식의 양변에 \\(m+n\\)을 곱하면\n\\((m+n)p = mc+na \\cdots ㉣\\)이다.\n\\(㉡\\)식의 양변에 \\(m-n\\)을 곱하면\n\\((m-n)p = mc-nb \\cdots ㉤\\)이 때, \\(㉣, ㉤\\)을 연립하여 \\(p\\)에 대하여 정리하면 \\(\\displaystyle p= a+\\frac{b}{2}\\)이다. (참)\n따라서 옳은 것은 ㄱ,ㄷ이다."
+    }
    },
    {
     "유형": "삼각형의 중점 조건 활용 (꼭짓점·무게중심 복원)",
@@ -217,25 +266,25 @@ window.ME_DATA = {
     ],
     "답변": [],
     "유사": {
-     "stem": "다음 세 점을 꼭짓점으로 하는 삼각형 $\\mathrm{OAB}$의 내부에 점 $\\mathrm{P}$가 있다. $\\mathrm{O}(0, 0)$, $\\mathrm{A}(4, 12)$, $\\mathrm{B}(12, 3)$. 삼각형 $\\mathrm{PBA}$, $\\mathrm{PAO}$, $\\mathrm{POB}$의 넓이의 비가 $1:2:3$이 되도록 하는 점 $\\mathrm{P}$의 좌표가 $(a, b)$일 때, $a+b$의 값은?",
+     "stem": "삼각형 ABC에서 꼭짓점 A의 좌표가 (-1, 0)이고, 변 AB를 3:1로 외분하는 점을 P, 변 AC를 3:1로 외분하는 점을 Q라 할 때, 선분 PQ의 중점의 좌표가 (8, 9)이다. 삼각형 ABC의 무게중심의 좌표가 (a, b)일 때, $a+b$의 값은?",
      "choices": [
-      "① $11$",
-      "② $12$",
-      "③ $13$",
-      "④ $14$",
-      "⑤ $15$"
+      "① 1",
+      "② $3$",
+      "③ $5$",
+      "④ $7$",
+      "⑤ $9$"
      ],
-     "answer": "③",
-     "id": "ngd_gs_ba14eec6ec",
+     "answer": "④",
+     "id": "ngd_gs_3875eba42c",
      "출처": "학교 기출(족보)",
-     "해설": "삼각형 \\(\\mathrm{OAB}\\) 내부의 점 \\(\\mathrm{P}\\)에 대해, 각 꼭짓점의 무게중심좌표(barycentric coordinate)는 그 꼭짓점과 마주한(즉 그 꼭짓점을 포함하지 않는) 작은 삼각형의 넓이에 비례한다.\n꼭짓점 \\(\\mathrm{O}\\)에 대응하는 작은 삼각형은 \\(\\mathrm{PAB}\\), 꼭짓점 \\(\\mathrm{A}\\)에 대응하는 삼각형은 \\(\\mathrm{PBO}\\), 꼭짓점 \\(\\mathrm{B}\\)에 대응하는 삼각형은 \\(\\mathrm{POA}\\)이다.\n주어진 조건에서 \\([\\mathrm{PBA}]:[\\mathrm{PAO}]:[\\mathrm{POB}]=1:2:3\\) 이므로\n\\([\\mathrm{PAB}]=1,\\ [\\mathrm{POA}]=2,\\ [\\mathrm{PBO}]=3\\) (단위 비율)\n따라서 가중치는\n- \\(\\mathrm{O}\\)의 가중치 \\({}=[\\mathrm{PAB}]=1\\)\n- \\(\\mathrm{A}\\)의 가중치 \\({}=[\\mathrm{PBO}]=3\\)\n- \\(\\mathrm{B}\\)의 가중치 \\({}=[\\mathrm{POA}]=2\\)\n이므로\n\\[\\mathrm{P}=\\dfrac{1\\cdot \\mathrm{O}+3\\cdot \\mathrm{A}+2\\cdot \\mathrm{B}}{1+3+2}\\]\n\\(\\mathrm{O}=(0,0),\\ \\mathrm{A}=(4,12),\\ \\mathrm{B}=(12,3)\\) 을 대입하면\n\\[\\mathrm{P}=\\dfrac{(0,0)+3(4,12)+2(12,3)}{6}=\\dfrac{(12+24,\\,36+6)}{6}=\\dfrac{(36,42)}{6}=(6,7)\\]\n따라서 \\(a=6,\\ b=7\\) 이므로 \\(a+b=13\\).\n따라서 정답은 ③ 이다."
+     "해설": "두 점 \\(\\mathrm{P}, \\mathrm{Q}\\)는 각각 \\(\\overline{\\mathrm{AB}}\\)와 \\(\\overline{\\mathrm{AC}}\\)를 \\(3:1\\)로 외분하는 점이므로 점 \\(\\mathrm{B}\\)와 점 \\(\\mathrm{C}\\)는 각각 \\(\\overline{\\mathrm{AP}}\\)와 \\(\\overline{\\mathrm{AQ}}\\)를 \\(2:1\\)로 내분하는 점이다. 따라서 삼각형 \\(\\mathrm{APQ}\\)와 삼각형 \\(\\mathrm{ABC}\\)는 \\(3:2\\)닮음이다. 선분 \\(\\mathrm{BC}\\)의 중점을 \\(\\mathrm{M}\\), 선분 \\(\\mathrm{PQ}\\)의 중점을 \\({\\mathrm{N}}(8, 9)\\)라 하면, \\(\\overline{\\mathrm{AM}}:\\overline{\\mathrm{AN}}=\\overline{\\mathrm{AB}}:\\overline{\\mathrm{AP}}=2:3\\)에서 \\(\\overline{\\mathrm{AM}}:\\overline{\\mathrm{MN}}=2:1\\)이다. 따라서 점 \\(\\mathrm{M}\\)은 선분 \\(\\mathrm{AN}\\)의 \\(2:1\\)내분점이므로 \\({\\mathrm{M}}(5, 6)\\)이다. 한편, 삼각형 \\(\\mathrm{ABC}\\)의 무게중심은 점 \\(\\mathrm{A}\\)와 선분 \\(\\mathrm{BC}\\)의 중점 \\(\\mathrm{M}\\)을 연결한 선분 \\(\\mathrm{AM}\\)의 \\(2:1\\)내분점이므로 \\((3, 4)\\)이다.\n\\(\\therefore a=3, b=4, a+b=7\\)이다."
     },
     "힌트": [
-     "삼각형 $OAB$ 내부의 점 $P$와 세 넓이의 비 조건을 이용해서 $P$를 세 꼭짓점의 가중합 형태로 표현할 방향을 잡아보자.",
-     "삼각형 안의 점을 넓이 비로 나타낼 때, 각 작은 삼각형의 넓이는 그 안에 포함되지 않은 꼭짓점의 가중치에 비례한다는 걸 기억하지?",
-     "먼저 $PBA : PAO : POB = 1:2:3$이 각각 어떤 꼭짓점(포함되지 않은 꼭짓점)에 대응하는 가중치인지 짝지어보는 것부터 시작해보자.",
-     "넓이와 꼭짓점을 짝지을 때 $PBA$는 $O$, $PAO$는 $B$, $POB$는 $A$에 대응한다는 점을 헷갈리지 않도록 순서를 하나씩 다시 확인해봐.",
-     "세 가중치의 합이 1이 되도록 비율을 정리한 뒤, $P = (\\text{가중치})\\cdot O + (\\text{가중치})\\cdot A + (\\text{가중치})\\cdot B$ 형태로 좌표를 계산해보자."
+     "삼각형 ABC와 외분점 P, Q를 그림으로 그려서, A를 기준으로 B와 P, C와 Q가 각각 어떤 위치 관계에 있는지 정리해보자.",
+     "외분점 공식을 이용하면 P, Q의 좌표를 A, B(또는 A, C)의 좌표로 표현할 수 있다는 걸 기억하지?",
+     "먼저 점 P의 좌표를 A와 B의 좌표를 이용한 식으로 나타내는 것부터 시작해보자.",
+     "P, Q를 각각 B, C로 표현한 뒤 PQ의 중점 조건을 이용하면 B와 C의 합, 즉 무게중심과 바로 연결되는 값을 얻을 수 있다는 점을 놓치기 쉬우니, A와의 관계까지 이어서 생각해보자.",
+     "PQ 중점 좌표 조건으로 B+C에 대한 식을 구했으면, 무게중심 공식 $\\left(\\frac{a_A+a_B+a_C}{3},\\ \\frac{b_A+b_B+b_C}{3}\\right)$에 대입해서 $a$, $b$를 계산해보자."
     ]
    },
    {
@@ -249,18 +298,18 @@ window.ME_DATA = {
     ],
     "답변": [],
     "유사": {
-     "stem": "좌표평면 위에 점 $\\mathrm{A}(0,1)$이 있다. 이차함수 $\\displaystyle f(x)=\\frac{1}{4}x^2$의 그래프 위의 점 $\\displaystyle \\mathrm{P}(t,\\frac{t^2}{4})$ $(t>0)$을 지나고 기울기가 $\\displaystyle \\frac{t}{2}$인 직선이 $x$축과 만나는 점을 $\\mathrm{Q}$라 하자. 선분 $\\mathrm{QA}$를 $5:2$로 외분하는 점 $\\mathrm{R}$이 함수 $y=f(x)$의 그래프 위의 점일 때, 삼각형 $\\mathrm{PQR}$의 넓이는?",
+     "stem": "좌표평면 위에 점 $\\mathrm{A}(0, 1)$이 있다. 이차함수 $\\displaystyle f(x)=\\frac{1}{4}x^2$의 그래프 위의 점 $\\displaystyle \\mathrm{P}(t, \\frac{t^2}{4})$ ($t>0$)을 지나고 기울기가 $\\displaystyle \\frac{t}{2}$인 직선이 $x$축과 만나는 점을 $\\mathrm{Q}(a, 0)$라 하자. 선분 $\\mathrm{QA}$를 $3:2$로 외분하는 점 $\\mathrm{R}$이 함수 $y=f(x)$의 그래프 위의 점이다. 삼각형 $\\mathrm{RQP}$의 넓이를 $S$라 할 때, $S+a$의 값은?",
      "choices": [
-      "① $\\displaystyle \\frac{40}{3} \\sqrt{15}$",
-      "② $\\displaystyle \\frac{41}{3} \\sqrt{15}$",
-      "③ $14 \\sqrt{15}$",
-      "④ $\\displaystyle \\frac{43}{3} \\sqrt{15}$",
-      "⑤ $\\displaystyle \\frac{44}{3} \\sqrt{15}$"
+      "① $5 \\sqrt{3}$",
+      "② $\\displaystyle \\frac{11 \\sqrt{3}}{2}$",
+      "③ $6 \\sqrt{3}$",
+      "④ $\\displaystyle \\frac{13 \\sqrt{3}}{2}$",
+      "⑤ $7 \\sqrt{3}$"
      ],
-     "answer": "①",
-     "id": "ngd_gs_c37dbbcc0e",
+     "answer": "⑤",
+     "id": "ngd_gs_f160e276d0",
      "출처": "학교 기출(족보)",
-     "해설": "점 \\(\\displaystyle \\mathrm{P}(t,\\frac{t^2}{4})\\)를 지나고 기울기 \\(\\displaystyle \\frac{t}{2}\\)인 직선:\n\\(\\displaystyle y-\\frac{t^2}{4}=\\frac{t}{2}(x-t)\\)\n\\(x\\)축과의 교점 \\(\\mathrm{Q}\\)를 구하면 \\(y=0\\)일 때\n\\(\\displaystyle -\\frac{t^2}{4}=\\frac{t}{2}x-\\frac{t^2}{2}\\), \\(\\displaystyle \\frac{t}{2}x=\\frac{t^2}{4}\\), \\(\\displaystyle x=\\frac{t}{2}\\)\n따라서 \\(\\displaystyle \\mathrm{Q}=\\left(\\frac{t}{2},0\\right)\\)\n선분 \\(\\mathrm{QA}\\)를 \\(5:2\\)로 외분하는 점은\n\\(\\displaystyle \\mathrm{R}=\\frac{5\\mathrm{A}-2\\mathrm{Q}}{5-2}\\)\n\\(\\mathrm{A}=(0,1)\\)이므로\n\\(\\displaystyle \\mathrm{R}_x=\\frac{5\\cdot0-2\\cdot\\frac{t}{2}}{3}=-\\frac{t}{3}\\),\n\\(\\displaystyle \\mathrm{R}_y=\\frac{5\\cdot1-2\\cdot0}{3}=\\frac{5}{3}\\)\n즉 \\(\\displaystyle \\mathrm{R}=\\left(-\\frac{t}{3},\\frac{5}{3}\\right)\\)\n\\(\\mathrm{R}\\)이 \\(\\displaystyle y=\\frac{1}{4}x^2\\) 위의 점이므로\n\\(\\displaystyle \\frac{5}{3}=\\frac{1}{4}\\left(\\frac{t}{3}\\right)^2=\\frac{t^2}{36}\\)\n\\(t^2=60\\), \\(t=2\\sqrt{15}\\) (\\(t>0\\))\n이제 세 점의 좌표:\n\\(\\mathrm{P}=(2\\sqrt{15},15)\\), \\(\\mathrm{Q}=(\\sqrt{15},0)\\), \\(\\displaystyle \\mathrm{R}=\\left(-\\frac{2\\sqrt{15}}{3},\\frac{5}{3}\\right)\\)\n삼각형 넓이 공식 적용:\n\\(\\displaystyle S=\\frac12\\left|x_\\mathrm{P}(y_\\mathrm{Q}-y_R)+x_\\mathrm{Q}(y_R-y_\\mathrm{P})+x_R(y_\\mathrm{P}-y_\\mathrm{Q})\\right|\\)\n각 항 계산:\n\\(\\displaystyle x_\\mathrm{P}(y_\\mathrm{Q}-y_R)=2\\sqrt{15}\\left(0-\\frac53\\right)=-\\frac{10\\sqrt{15}}{3}\\)\n\\(\\displaystyle x_\\mathrm{Q}(y_R-y_\\mathrm{P})=\\sqrt{15}\\left(\\frac53-15\\right)=\\sqrt{15}\\left(-\\frac{40}{3}\\right)=-\\frac{40\\sqrt{15}}{3}\\)\n\\(\\displaystyle x_R(y_\\mathrm{P}-y_\\mathrm{Q})=-\\frac{2\\sqrt{15}}{3}(15-0)=-10\\sqrt{15}\\)\n합:\n\\(\\displaystyle -\\frac{10\\sqrt{15}}{3}-\\frac{40\\sqrt{15}}{3}-10\\sqrt{15}=-\\frac{50\\sqrt{15}}{3}-\\frac{30\\sqrt{15}}{3}=-\\frac{80\\sqrt{15}}{3}\\)\n따라서\n\\(\\displaystyle S=\\frac12\\cdot\\frac{80\\sqrt{15}}{3}=\\frac{40\\sqrt{15}}{3}\\)\n따라서 정답은 ① 이다."
+     "해설": "점 \\(\\mathrm{P}\\)를 지나고 기울기가 \\(\\displaystyle \\frac{t}{2}\\)인 직선을 식으로 나타내면\n\\(\\displaystyle y- \\frac{t ^{2}}{4} = \\frac{t}{2} (x-t)\\), \\(\\displaystyle y= \\frac{t}{2} x- \\frac{t ^{2}}{4}\\)이다.\n이 직선의 \\(x\\)절편은 \\(\\displaystyle \\frac{t}{2}\\)이므로 \\(\\displaystyle \\mathrm{Q} \\left( \\frac{t}{2} , 0 \\right)\\)이다.\n또, 선분 \\(\\mathrm{QA}\\)를 \\(3 : 2\\)로 외분하는 점이 \\(\\mathrm{R}\\)이므로\n\\(\\displaystyle \\mathrm{R} \\left( \\frac{-t}{3-2} , \\frac{3}{3-2} \\right)\\)\\({}=\\mathrm{R}(-t, 3)\\)이다.\n이때, \\(\\mathrm{R}\\)은 \\(\\displaystyle y= \\frac{1}{4} x ^{2}\\) 위의 점이므로\n\\(\\displaystyle \\frac{1}{4} t ^{2} =3\\)에서 \\(t=2 \\sqrt{3}\\)이다. (\\(\\because t>0\\))\n따라서 \\(a= \\sqrt{3}\\)\n이때, \\( {\\overline{\\mathrm{QR}}}\\)의 직선의 방정식을 구하면\n기울기는 \\(\\displaystyle \\frac{3}{- \\frac{3}{2} t} =-2t\\)이므로 \\(\\displaystyle y= \\frac{t}{2} x- \\frac{t ^{2}}{4}\\)과 수직임을 알 수 있다.\n따라서, 삼각형 \\(\\mathrm{RQP}\\)의 넓이는 \\( {\\overline{\\mathrm{RQ}}} \\times {\\overline{\\mathrm{QP}}}\\)이며\n\\( {\\overline{\\mathrm{RQ}}}\\)\\({}= \\sqrt{27+9} =6\\), \\( {\\overline{\\mathrm{QP}}} = \\sqrt{3+9} =2 \\sqrt{3}\\)이므로\n넓이 \\(\\displaystyle S = \\frac{1}{2} \\times 2 \\sqrt{3} \\times 6=6 \\sqrt{3}\\)\n\\(\\therefore S+a=6 \\sqrt{3} + \\sqrt{3} =7 \\sqrt{3}\\)"
     }
    }
   ],
@@ -283,15 +332,7 @@ window.ME_DATA = {
    }
   ],
   "리더코드": "ks3m",
-  "복습": [
-   {
-    "유형": "유리함수와 거리(직선까지의 최솟값)",
-    "강의": [
-     0,
-     0
-    ]
-   }
-  ],
+  "복습": [],
   "자유답변": []
  },
  "FiX91SBiihqTfUL-dwMElg": {
@@ -299,64 +340,67 @@ window.ME_DATA = {
   "상태": "few",
   "오답": [
    {
-    "유형": "무리함수와 역함수의 그래프 관계 (접함)",
+    "유형": "무리함수의 역함수",
     "문제": {
-     "stem": "다음 <보기>중에서 옳은 것만을 있는 대로 고르면?\nㄱ. 함수 $y=-\\sqrt{3x-6}+3$의 그래프는 제$2$사분면, 제$3$사분면을 지나지 않는다.\nㄴ. 함수 $y=-\\sqrt{3x-6}+3$과 그 역함수의 그래프는 오직 한 점에서 만난다.\nㄷ. 함수 $\\displaystyle y= \\frac{-4x-1}{x-2}$의 그래프는 $\\displaystyle y=- \\frac{9}{x}$를 평행이동하여 그릴 수 있다.",
+     "stem": "함수 $f(x)=\\sqrt{x-3}+4$의 역함수를 $g(x)$라고 할 때, <보기>의 설명 중 옳은 것만을 있는 대로 고른 것은?\n\n< 보 기 >\n\nㄱ. $g(4)=3$\n\nㄴ. $y=g(x)$의 그래프는 제$1,2$사분면을 지난다.\n\nㄷ. $y=f(x)$와 $y=g(x)$의 그래프는 서로 다른 두 점에서 만난다.",
      "choices": [
-      "① ㄱ",
-      "② ㄷ",
-      "③ ㄱ, ㄴ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① ㄴ,ㄷ",
+      "② ㄱ",
+      "③ ㄴ",
+      "④ ㄱ,ㄷ",
+      "⑤ ㄱ,ㄴ"
      ],
-     "answer": "⑤",
-     "id": "ngd_gs_21eb140329",
-     "출처": "학교 기출(족보)"
+     "answer": "②",
+     "id": "var_ngd_gs_71a077aa99_20261106_2",
+     "해설": "\\(f(3)=4\\)이므로 \\(g(4)=3\\), 즉 ㄱ은 참이다. \\(g(x)=(x-4)^2+3\\ (x\\geq4)\\)는 \\(x>0,y>0\\)에서만 정의되어 제1사분면만 지나므로 ㄴ은 거짓이다. \\(f(x)=x\\), 즉 \\(\\sqrt{x-3}+4=x\\)를 \\(t=\\sqrt{x-3}\\)로 치환하면 \\(t^2-t-1=0\\)에서 양의 해가 하나뿐이므로 교점은 한 점이고 ㄷ도 거짓이다. 따라서 답은 ②"
     },
-    "내답": "①",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "함수 $y=f(x)$의 그래프는 무리함수 $y= \\sqrt{2x} -3$의 그래프를 $x$방향으로 $n$만큼 평행이동한 것이다. 이때, 함수 $y=f(x)$의 그래프와 그 역함수 $y=f^{-1} (x)$의 그래프가 서로 접한다. <보기>에서 함수 $y=f(x)$의 설명 중 옳은 것만을 있는대로 고른 것은? ㄱ. 그래프는 제$4$사분면을 지난다. ㄴ. $\\displaystyle f^{-1} (x)= \\frac{1}{2} (x+3)^2 - \\frac{5}{2} (x \\ge-3)$이다. ㄷ. $y=f(x)$의 그래프와 $x$축, $x=10$으로 둘러싸인 도형의 넓이를 $A$, $y=f^{-1} (x)$의 그래프와 $x$축, $y$축, $x=2$로 둘러싸인 도형의 넓이를 $B$라 할 때, $A+B=20$이다.",
+     "stem": "함수 $f(x)=\\sqrt{x-2}+3$의 역함수를 $g(x)$라고 할 때, <보기>의 설명 중 옳은 것만을 있는 대로 고른 것은?\n\n< 보 기 >\n\nㄱ. $g(3)=2$\n\nㄴ. $y=g(x)$의 그래프는 제$1,2$사분면을 지난다.\n\nㄷ. $y=f(x)$와 $y=g(x)$의 그래프는 서로 다른 두 점에서 만난다.",
      "choices": [
-      "① ㄱ",
-      "② ㄷ",
-      "③ ㄱ,ㄷ",
-      "④ ㄴ,ㄷ",
-      "⑤ ㄱ,ㄴ,ㄷ"
+      "① ㄴ",
+      "② ㄱ,ㄴ",
+      "③ ㄴ,ㄷ",
+      "④ ㄱ",
+      "⑤ ㄱ,ㄷ"
      ],
-     "answer": "⑤",
-     "id": "ngd_gs_0e75042f34",
-     "출처": "학교 기출(족보)"
+     "answer": "④",
+     "id": "var_ngd_gs_71a077aa99_20261106_1",
+     "해설": "\\(f(2)=3\\)이므로 \\(g(3)=2\\), 즉 ㄱ은 참이다. \\(g(x)=(x-3)^2+2\\ (x\\geq3)\\)는 \\(x>0,y>0\\)에서만 정의되어 제1사분면만 지나므로 ㄴ은 거짓이다. 증가함수와 그 역함수의 교점은 \\(y=x\\) 위에서만 생기는데 \\(f(x)=x\\), 즉 \\(\\sqrt{x-2}+3=x\\)를 풀면 \\(t=\\sqrt{x-2}\\)로 치환해 \\(t^2-t-1=0\\)에서 양의 해가 하나뿐이므로 교점은 한 개이다. 따라서 ㄷ도 거짓이고, 옳은 것은 ㄱ뿐이므로 답은 ④"
     },
     "강의": null,
     "답변": []
    },
    {
-    "유형": "무리함수의 역함수(y=x 위의 교점)",
+    "유형": "무리함수와 곡선(시작점 이용)",
     "문제": {
-     "stem": "함수 $f(x) = \\sqrt{3x-5}+1$의 그래프와 그 역함수 $y = f^{-1}(x)$의 그래프가 만나는 두 점을 각각 $\\mathrm{P}$와 $\\mathrm{Q}$라 할 때, $\\overline{\\mathrm{PQ}}$의 길이를 구하시오.",
-     "choices": [],
-     "answer": "$\\sqrt{2}$",
-     "id": "tbg_331",
-     "출처": "교과서"
-    },
-    "내답": "?",
-    "유사": {
-     "stem": "함수 $\\displaystyle y=\\frac{-3x+5}{x-2}$의 그래프는 함수 $\\displaystyle y=\\frac{a}{x}$의 그래프를 평행이동한 것이고, 점근선은 $x=b$, $y=c$이다. 함수 $f(x)=\\sqrt{ax+b}+c$에 대하여 옳은 것은? ㄱ. 함수 $y=f(x)$의 그래프는 함수 $y=\\sqrt{-x}$의 그래프를 평행이동하여 일치시킬 수 있다. ㄴ. 함수 $y=f(x)$의 그래프는 제3사분면을 지난다. ㄷ. 함수 $y=f(x)$의 그래프는 함수 $y=f^{-1}(x)$의 그래프와 오직 한 점에서 만난다.",
+     "stem": "함수 $\\displaystyle f(x)=\\frac{3}{x-a}+b$의 역함수 $y=f^{-1}(x)$의 그래프가 함수 $g(x)=\\sqrt{x+1}$의 그래프와 서로 다른 두 점에서 만나도록 하는 정수 $a, b$의 순서쌍 $(a, b)$의 개수는? (단, $|a| \\leq 2, |b| \\leq 3$)",
      "choices": [
-      "① ㄱ",
-      "② ㄱ, ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① $4$",
+      "② $5$",
+      "③ 6",
+      "④ $7$",
+      "⑤ $8$"
      ],
-     "answer": "⑤",
-     "id": "ngd_gs_a30c64de74",
+     "answer": "②",
+     "id": "ngd_gs_bd8cb538fa",
      "출처": "학교 기출(족보)"
     },
-    "강의": [
-     1,
-     4
-    ],
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "두 함수 $\\displaystyle y=\\frac{4x+2}{x-1}$, $y=\\sqrt{2x-k}+k+1$의 그래프가 만나는 서로 다른 점의 개수를 $f(k)$라 할 때, $f(a)+f(a+3)=2$가 되도록 하는 정수 $a$의 최댓값은?",
+     "choices": [
+      "① $2$",
+      "② $3$",
+      "③ $4$",
+      "④ $5$",
+      "⑤ $6$"
+     ],
+     "answer": "②",
+     "id": "ngd_gs_83f0498e4e",
+     "출처": "학교 기출(족보)"
+    },
+    "강의": null,
     "답변": []
    }
   ],
@@ -382,7 +426,8 @@ window.ME_DATA = {
      ],
      "answer": "④",
      "id": "ngd_gs_ae926fcecc",
-     "출처": "학교 기출(족보)"
+     "출처": "학교 기출(족보)",
+     "해설": "외심의 좌표를 구하면 연립방정식 \\({\\begin{cases} (a-5) ^{2} +(b-7) ^{2} =(a+2) ^{2} +b ^{2}& \\\\ (a+2) ^{2} +b ^{2} =(a+1) ^{2} +(b+1) ^{2}& \\end{cases}}\\)를 풀면 된다. 먼저 윗 식을 정리하면 \\(a+b=5\\)이며, 아랫 식을 정리하면 \\(a-b=-1\\)이므로 식을 연립하면 \\(a=2, b=3\\)이므로 외심의 좌표는 \\(\\mathrm{O}(2, 3)\\)이다. 조건에 의해 점 \\(\\mathrm{P}\\) 또한 원의 외부의 점이고, 직선 \\(\\mathrm{OB}\\)는 원의 중심을 지나므로 삼각형 \\(\\mathrm{PAB}\\)는 선분 \\(\\mathrm{PB}\\)를 빗변으로 하는 직각삼각형이다. 따라서 \\(\\displaystyle S = {\\overline{\\mathrm{AB}}} \\times {\\overline{\\mathrm{PA}}} \\times \\frac{1}{2}\\)이며, \\( {\\overline{\\mathrm{AB}}} = \\sqrt{49+49} =7 \\sqrt{2}\\)이고, \\( {\\overline{\\mathrm{PA}}}\\)의 길이를 구하기 위해 \\(\\mathrm{OB}\\)와 원이 만나는 교점의 좌표를 구하면 원 \\(\\mathrm{O}\\)의 원의 방정식은 \\((x-2) ^{2} +(y-3) ^{2} =25\\)이고, \\(\\displaystyle \\mathrm{OB} : y= \\frac{3}{4} x+ \\frac{3}{2}\\)를 원의 방정식에 대입하여 정리하면 \\(x ^{2} -4x-12=0\\), \\((x+2)(x-6)=0\\)이므로 교점의 \\(x\\)좌표는 \\(-2\\) 또는 \\(6\\)이다. 교점의 \\(x\\)좌표가 \\(-2\\)일 때는 점 \\(\\mathrm{B}\\)이므로 \\(x=6\\)을 대입하면 점 \\(\\mathrm{P}\\)의 좌표는 \\(\\left( 6, 6 \\right)\\)이 되며, \\( {\\overline{\\mathrm{PA}}} = \\sqrt{1+1} = \\sqrt{2}\\)이다. 따라서 \\(\\displaystyle S = \\frac{1}{2} \\times \\sqrt{2} \\times 7 \\sqrt{2} =7\\)이므로 \\(7S +2ab=49+12=61\\)"
     },
     "힌트": [
      "외심 O의 좌표를 먼저 구하고, 직선 OB가 외접원과 다시 만나는 점 P의 위치를 그림으로 떠올려보는 방향으로 시작해보자.",
@@ -413,7 +458,8 @@ window.ME_DATA = {
      ],
      "answer": "③",
      "id": "ngd_gs_8b3be0fd0e",
-     "출처": "학교 기출(족보)"
+     "출처": "학교 기출(족보)",
+     "해설": "조건(가)에서 점 \\(\\left(0 , b \\right)\\)와 직선 \\(y=2x+a\\), 즉 \\(2x-y+a=0\\) 사이의 거리는\n\\(\\displaystyle {\\left|-b+a \\right|}\\over{\\sqrt{2^2 +\\left(-1\\right)^2 }} = \\frac{6}{5} \\sqrt{5}\\)\n\\(\\left| a-b \\right|= 6\\)\n\\(a-b= 6\\) 또는 \\(a-b= -6\\)\\(\\cdots \\cdots\\)㉠\n조건(나)에서\n(ⅰ) \\(a>2b\\)일 때,\n세 직선 \\(y=2x+a\\), \\(y=2b\\), \\(x=0\\)의 교점을 구하면\n\\(2x+a=2b\\), \\(2x=2b-a\\), \\(\\displaystyle x= b- \\frac{a}{2}\\)\n\\(a>2b\\)이므로 \\(2b-a<0\\)이고 \\(\\displaystyle b- \\frac{a}{2} <0\\)\n이때 삼각형의 넓이는\n\\(\\displaystyle \\frac{1}{2} \\times \\left(a-2b \\right) \\times \\left( \\frac{a}{2} -b \\right)=25\\)\n\\(\\displaystyle \\frac{1}{2} \\times \\left(a-2b \\right) \\times \\frac{1}{2} \\times \\left( a -2b \\right)=25\\)\n\\(\\left( a -2b \\right)^2 =100\\)\n\\(\\therefore\\)\\(a -2b =10\\)\\(\\cdots \\cdots\\)㉡\n이때, \\(a>2b\\)이므로 \\(a-b > b > 0\\)이다.\n따라서 ㉠에서 \\(a-b= 6\\)이 성립하고, ㉡과 연립하면\n\\(-b=4\\), \\(b=-4\\)이므로 \\(b>0\\)인 조건을 만족시키지 않는다.\n(ⅱ) \\(a<2b\\)일 때,\n세 직선 \\(y=2x+a\\), \\(y=2b\\), \\(x=0\\)의 교점을 구하면\n\\(2x+a=2b\\), \\(2x=2b-a\\), \\(\\displaystyle x= b- \\frac{a}{2}\\)\n\\(a<2b\\)이므로 \\(2b-a>0\\)이고 \\(\\displaystyle b- \\frac{a}{2} >0\\)\n이때 삼각형의 넓이는\n\\(\\displaystyle \\frac{1}{2} \\times \\left(2b-a \\right) \\times \\left(b- \\frac{a}{2} \\right)=25\\)\n\\(\\displaystyle \\frac{1}{2} \\times \\left(2b-a \\right) \\times \\frac{1}{2} \\times \\left( 2b-a \\right)=25\\)\n\\(\\left(2b-a \\right)^2 =100\\)\n\\(\\therefore\\)\\(2b-a =10\\)\\(\\cdots \\cdots\\)㉢\n㉠, ㉢을 연립하면\n\\(2b-a =10\\), \\(a-b= 6\\)일 때,\n두 식을 더하면 \\(b=16\\)\n\\(a-16= 6\\), \\(a=22\\)\n\\(\\therefore\\)\\(a+b=22+16=38\\)\n\\(2b-a =10\\), \\(a-b= -6\\)일 때,\n두 식을 더하면 \\(b=4\\)\n\\(a-4=- 6\\), \\(a=-2\\)이므로 \\(a>0\\)인 조건을 만족시키지 않는다.\n(ⅰ), (ⅱ)에 의하여 \\(a+b=38\\)이다."
     },
     "힌트": [
      "그림을 그려서 조건 (가)는 점과 직선 사이 거리로, 조건 (나)는 세 직선이 둘러싼 삼각형의 넓이로 각각 정리하는 방향을 잡아보자.",
@@ -444,7 +490,8 @@ window.ME_DATA = {
      ],
      "answer": "⑤",
      "id": "ngd_gs_9c67b5c5d9",
-     "출처": "학교 기출(족보)"
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ: \\(k=0\\)이면 \\(-x+y=0\\), 즉 \\(y=x\\)이므로 \\(y=-x\\)와 일치한다는 설명은 거짓. ㄴ: \\(k=1\\)이면 \\((0)x+3y=4\\), 즉 \\(y=4/3\\)으로 \\(x\\)축에 평행한 직선이므로 참. ㄷ: 주어진 식은 \\((k-1)x+(2k+1)y-4k = k(x+2y-4)-(x-y)\\)로 변형되므로, \\(k(x+2y-4)-(x-y)=0\\) 형태이다. 두 직선 \\(x+2y-4=0\\)과 \\(x-y=0\\)의 교점은 \\((4/3,4/3)\\)이고 이 점을 식에 대입하면 모든 \\(k\\)에 대해 \\(0=0\\)이 되어 항상 성립하므로 \\(k\\)값에 관계없이 그 교점을 지난다. 따라서 참인 것은 ㄴ, ㄷ이다."
     }
    }
   ],
@@ -452,7 +499,7 @@ window.ME_DATA = {
   "리더코드": "hd8x",
   "복습": [
    {
-    "유형": "유리함수와 무리함수의 그래프 (교점 존재 조건)",
+    "유형": "무리함수의 역함수(y=x 위의 교점)",
     "강의": [
      1,
      4
@@ -462,133 +509,129 @@ window.ME_DATA = {
   "자유답변": []
  },
  "haOPA17TodCIFf0HoU8z3A": {
-  "진도": "정적분의 활용",
+  "진도": "부정적분과 정적분",
   "상태": "many",
   "오답": [
    {
-    "유형": "넓이(두 부분이 같음)",
+    "유형": "부정적분의 선형성",
     "문제": {
-     "stem": "다항함수 $f(x)$와 상수 $p$가 다음 조건을 만족시킨다. (가) $\\displaystyle \\lim\\limits_{x \\to \\infty} { \\frac{f(x)+x}{x^2} } = a$ ($a$는 양수) (나) 모든 실수 $t$에 대하여 $f'(t) + f'(2p-t) = 0$ 이다. (다) $k>p$인 상수 $k$에 대하여 $f(k) = 0$ 이고, $\\displaystyle \\int\\nolimits _{0}^{k} f(x) dx = 0, \\int\\nolimits _{0}^{p} |f(x)| dx = 6$ 이때, $\\displaystyle \\int\\nolimits _{p}^{k} |f(x)| dx$ 의 값은?",
+     "stem": "함수 $f(x)$의 부정적분을 $F(x)$라고 할 때, 다음 중 옳은 것만을 있는 대로 고른 것은? (단, $C$는 적분상수) ㄱ. $\\displaystyle \\int\\nolimits \\{2+f(x)\\} dx=2x+F(x)+C$ ㄴ. $\\displaystyle \\int\\nolimits 2xf(x) dx=x^{2} F(x)+C$ ㄷ. $\\displaystyle \\int\\nolimits \\{F(x)+xf(x)\\} dx=xF(x)+C$",
      "choices": [
-      "① $1$",
-      "② $2$",
-      "③ $3$",
-      "④ $4$",
-      "⑤ $5$"
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
-     "answer": "②",
-     "id": "ngd_su2_e36d8bc281",
+     "answer": "③",
+     "id": "ngd_su2_3bfee74d4b",
      "출처": "학교 기출(족보)",
-     "해설": "(가) 조건에 의해 \\(f \\left( x \\right)\\)는 최고차항의 계수가 \\(a\\)인 이차함수이다.\n이때 \\(f ' \\left( x \\right)\\)는 일차함수이므로 (나) 조건에 의해 \\(f'\\left( p \\right) = 0\\) 임을 알 수 있다.\n따라서 \\(f \\left( x \\right)\\)의 그래프는 \\(x=p\\) 를 대칭축으로 가진다.\n\\(\\displaystyle \\int\\nolimits _{p} ^{k} {\\left| f \\left( x \\right) \\right|} dx\\) 를 넓이 \\(S\\) 라고 하면,\n\\(\\displaystyle \\int\\nolimits _{p} ^{k} {f \\left( x \\right)} dx = \\int\\nolimits _{2p-k} ^{p} {f \\left( x \\right)} dx =-S\\)\n(다) 조건에 의해 \\(\\displaystyle \\int\\nolimits _{0} ^{k} {f \\left( x \\right)} dx = 0\\) 이므로\n\\(\\displaystyle \\int\\nolimits _{0} ^{2p-k} {f \\left( x \\right)} dx = 2S\\)\n또한, \\(\\displaystyle \\int\\nolimits _{0} ^{p} {\\left| f \\left( x \\right) \\right|} dx = 6\\) 에서 \\(2S + S =6\\)\n\\(\\displaystyle \\therefore S=\\int\\nolimits _{p} ^{k} {\\left| f \\left( x \\right) \\right|} dx = 2\\)"
+     "해설": "ㄱ. \\(\\displaystyle \\int\\nolimits _{} ^{} {\\left\\{ 2+f(x) \\right\\}} dx=2x+F(x)+C\\) [참]\nㄴ. \\(\\displaystyle \\int\\nolimits _{} ^{} {2xf(x)} dx=x ^{2} F(x)+C\\) [거짓]\\(\\because\\)\\(\\left\\{x^2 F(x) \\right\\} '\\)\\({}= 2xF(x) +x^2 f(x)\\)\nㄷ. \\(\\displaystyle \\int\\nolimits _{} ^{} {\\left\\{ F(x)+xf(x) \\right\\}} dx=xF(x)+C\\) [참]"
     },
-    "내답": "③",
-    "유사": {
-     "stem": "다항함수 $f(x)$가 모든 실수 $x$에 대하여 $\\displaystyle \\int\\nolimits _0^x \\{f(t)-3\\}dt = x^3 - \\frac{3}{8}x^2 \\int\\nolimits _{-1}^1 f(t)dt$를 만족하고, $g(x) = \\begin{cases} f(-x) & (x<0) \\\\ f(x) & (x \\geq 0) \\end{cases}$이다. 곡선 $y = g(x)$와 직선 $y = k$가 서로 다른 네 점에서 만나고, 둘러싸인 세 부분의 넓이가 모두 같을 때, 상수 $k$의 값은?",
+    "내답": "(미표기)",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "부등식이 항상 성립할 조건",
+    "문제": {
+     "stem": "직선 $x=2$에 대하여 대칭인 이차함수 $f(x)$와 최고차항의 계수가 1인 삼차함수 $g(x)$에 대하여 함수 $h(x)=f(x)+\\left| g(x) \\right|$는 실수 전체의 집합에서 미분가능하고, 다음 조건을 모두 만족시킨다. (가) 함수 $y=h(x)$의 그래프는 직선 $x=2$에 대하여 대칭이다. (나) 모든 실수 $x$에 대하여 $h(x) \\geq -2x+4$가 성립한다. (다) $h(1)=2$ $2h(0)$의 값은?",
      "choices": [
-      "① $1$",
-      "② $\\displaystyle \\frac{5}{4}$",
-      "③ $\\displaystyle \\frac{3}{2}$",
-      "④ $\\displaystyle \\frac{7}{4}$",
-      "⑤ $2$"
+      "① $15$",
+      "② $21$",
+      "③ $27$",
+      "④ $33$",
+      "⑤ $39$"
      ],
      "answer": "①",
-     "id": "ngd_su2_060cb38a7b",
+     "id": "ngd_su2_800d36c3c1",
      "출처": "학교 기출(족보)",
-     "해설": "\\(\\displaystyle \\int\\nolimits _{-1} ^{1} {f \\left( t \\right) dt=p} \\cdots ㉠\\)라고 하자.\n\\(\\displaystyle \\int\\nolimits _{0} ^{x} {\\left\\{ f \\left( t \\right) -3 \\right\\} dt=x ^{3} - \\frac{3}{8} px ^{2}}\\)\n양변을 \\(x\\)에 대해서 미분하면\n\\(\\displaystyle f \\left( x \\right) -3=3x ^{2} - \\frac{3}{4} px\\)\n\\(\\displaystyle f \\left( x \\right) =3x ^{2} - \\frac{3}{4} px+3\\)\n㉠식에 대입하여 식을 정리하면 \\(p=8\\).\n\\(f \\left( x \\right) =3x ^{2} -6x+3\\)\n\\(g \\left( x \\right)\\)는 \\(y\\)축 대칭함수이므로 \\(x \\geq 0\\)부분에서 \\(f \\left( x \\right) >k\\)인 부분과 \\(f \\left( x \\right) <k\\)인 부분의 넓이의 비가 \\(2 :1\\)이어야 한다.\n따라서 \\(f \\left( x \\right) -k\\) 함수의 \\(x=1\\)이라는 대칭축까지의 적분값이 \\(0\\)이어야한다.\n\\(\\displaystyle \\int\\nolimits _{0} ^{1} {\\left( f \\left( x \\right) -k \\right) dx=0 \\cdots ㉡}\\).\n따라서 \\(k=1\\)"
+     "해설": "\\(t=x-2\\)로 놓으면 \\(f(x)=at^2+b\\) 꼴이다.\n① \\(g\\)의 모양: \\(h\\)와 \\(f\\)가 모두 \\(x=2\\)에 대칭이므로 \\(|g|\\)도 대칭이다. 즉 \\(|g(4-x)|=|g(x)|\\)이고, 다항식이므로 \\(g(4-x)=\\pm g(x)\\). 최고차항을 비교하면 \\(g(4-x)=-g(x)\\)뿐이므로 \\(g(x)=t^3+qt\\) (\\(t=x-2\\)).\n② 미분가능 조건: \\(f\\)는 미분가능하므로 \\(|g|\\)가 미분가능해야 한다. \\(|g|\\)는 \\(g\\)의 부호가 바뀌는 단순근에서 꺾인다.\n \\(q>0\\): \\(t=0\\)이 단순근, \\(q<0\\): 단순근 3개 → 모두 꺾임. 따라서 \\(q=0\\), \\(g(x)=(x-2)^3\\) (삼중근이면 \\(|t^3|\\)은 미분가능).\n③ 식 세우기: \\(h(x)=|t|^3+at^2+b\\). (다) \\(h(1)=2\\)에서 \\(t=-1\\): \\(1+a+b=2\\), \\(b=1-a\\).\n④ 접할 조건: 직선 \\(y=-2x+4\\)도 점 \\((1,2)\\)를 지난다. (나)에서 \\(h(x)-(-2x+4)\\ge0\\)이고 \\(x=1\\)에서 \\(0\\)이므로 \\(x=1\\)은 이 함수의 최솟값 → \\(h'(1)=-2\\).\n \\(x<2\\)에서 \\(h=-t^3+at^2+b\\), \\(h'=-3t^2+2at\\). \\(t=-1\\): \\(-3-2a=-2\\) → \\(\\displaystyle a=-\\frac12\\), \\(\\displaystyle b=\\frac32\\).\n⑤ 확인: \\(x<2\\)에서 \\(\\displaystyle h-(-2x+4)=(t+1)^2\\left(\\frac32-t\\right)\\ge0\\), \\(x\\ge2\\)에서 \\(\\displaystyle t^3-\\frac12t^2+2t+\\frac32>0\\) → (나) 성립.\n⑥ \\(h(0)\\): \\(t=-2\\) (\\(x<2\\) 쪽): \\(\\displaystyle 8-2+\\frac32=\\frac{15}{2}\\). \\(\\therefore 2h(0)=15\\) (①)"
     },
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "부정적분(변화율이 주어짐)",
-    "문제": {
-     "stem": "새로 출시된 전기 자전거의 구입 가격이 $B$ 원이고, 이 전기 자전거를 구입한 지 $t$ 개월이 지난 때의 감가상각비의 변화율과 유지 관리비의 변화율이 각각 $\\displaystyle \\left( \\frac{1}{20} - \\frac{t}{400} \\right) B$, $\\displaystyle \\frac{3t^2}{16000} B$ 라고 할 때, 감가상각비와 유지 관리비의 합이 전기 자전거의 구입 가격과 같아지는 시기에 새 전기 자전거로 교체하려고 한다. 전기 자전거를 구입하고 몇 개월 후에 새 전기 자전거로 교체해야 하는지 말하시오.",
-     "choices": [
-      "① 10",
-      "② 40",
-      "③ 25",
-      "④ 15",
-      "⑤ 20"
-     ],
-     "answer": "⑤",
-     "id": "var_tb_3b2835154f_20260801_2",
-     "해설": "\\(a\\) 개월 후에 교체한다고 하면 \\(\\displaystyle \\int\\nolimits _0^a \\!\\left( \\frac{1}{20} - \\frac{t}{400} \\right) B\\,dt + \\int\\nolimits _0^a \\frac{3t^2}{16000} B\\,dt = B\\) 이다. 적분하면 \\(\\displaystyle B\\!\\left[ \\frac{t}{20} - \\frac{t^2}{800} + \\frac{t^3}{16000} \\right]_0^a = B\\) 이고, 양변을 \\(B\\) 로 나누고 \\(16000\\) 을 곱하면 \\(a^3 - 20a^2 + 800a - 16000 = 0\\) 이다. 인수분해하면 \\((a - 20)(a^2 + 800) = 0\\) 이고 \\(a > 0\\) 이므로 \\(a = 20\\) 이다. 따라서 전기 자전거를 구입하고 \\(20\\) 개월 후에 교체해야 한다."
-    },
-    "내답": "blank",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "단면이 한 변의 길이가 $1$ 인 정사각형 모양인 파이프에 물이 가득 차서 흐르고 있다. 흐르는 물의 시각 $t$ 에서의 속도가 $v \\left( t \\right) =6t-t ^{2}$ $\\left( 0 \\leq t \\leq 6 \\right)$ 일 때, 이 물이 흐르기 시작하여 멈출 때까지 흘러나온 물의 양은?",
+     "stem": "함수 $f(x)=x^3+3x^2-9x+13$에 대하여 부등식 $f(x) \\geq k(x-1)$이 $x \\geq 0$인 모든 실수 $x$에서 성립하도록 하는 양수 $k$의 최댓값은?",
      "choices": [
-      "① 18",
-      "② 24",
-      "③ 30",
-      "④ 42",
-      "⑤ 36"
+      "① $15$",
+      "② $16$",
+      "③ $17$",
+      "④ $18$",
+      "⑤ $19$"
      ],
-     "answer": "⑤",
-     "id": "var_tb_55388c0a7d_20261024_1",
-     "해설": "단면적이 \\(1\\)이므로 흘러나온 물의 양은 유속의 적분값과 같다. \\(\\displaystyle\\int\\nolimits _0^6 (6t-t^2)\\,dt=\\left[3t^2-\\frac{t^3}{3}\\right]_0^6=108-72=36\\). 따라서 답은 ⑤"
+     "answer": "①",
+     "id": "ngd_su2_1910a10a1d",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(f \\left( x \\right)\\)\\({}= x^3 +3x^2 -9x+13\\)이라 하자.\n\\(f ' \\left( x \\right)\\)\\({}=3x^2 +6x-9\\)라 하면 \\(f \\left( x \\right) \\ge k \\left( x-1 \\right)\\)이어야 한다.\n즉 \\(\\left(1, 0 \\right)\\)을 지나는 직선 중 \\(f \\left( x \\right)\\)에 접하는 직선의 기울기를 찾아야 한다.\n접점의 좌표를 \\(x=t\\)라 하면\n\\(y= \\left( 3t^2 +6t-9 \\right) \\left( x-t \\right) +t^3 +3t^2 -9t+13\\)이고 \\(\\left( 1, 0 \\right)\\)을 지나므로\n\\(0=-2t^3 +6t+4\\)\n즉 \\(\\left( t+1 \\right)^2 \\left( t-2 \\right)=0\\) 따라서 \\(t=2\\) 또는 \\(t=-1\\)\n\\(f ' \\left( -1 \\right) =-12\\), \\(f ' \\left( 2 \\right)=15\\)이므로 \\(-12 \\le k \\le 15\\)"
     },
     "강의": null,
     "답변": []
    },
    {
-    "유형": "극대와 극소(극값 구하기)",
+    "유형": "속도와 거리(두 점이 만남)",
     "문제": {
-     "stem": "최고차항의 계수가 $-1$인 삼차함수 $f(x)$와 함수 $g(x)=xf(x)$가 다음 조건을 만족시킨다. (가) 함수 $|g(x)|$는 모든 실수에서 미분가능하다. (나) $\\displaystyle f'(0)=f'(\\frac{4}{3})<0$ (다) 함수 $f(x)$의 극댓값은 음수가 아니다. 함수 $g(x)$의 극솟값은?",
+     "stem": "원점을 동시에 출발하여 수직선 위를 움직이는 두 점 $\\mathrm{P}, \\mathrm{Q}$의 시각 $t$에서의 속도가 각각 $\\displaystyle v_{\\mathrm{P}}(t)= \\frac{1}{2} t^2 -4t$, $\\displaystyle v_{\\mathrm{Q}}(t)= - \\frac{1}{2} t^2 +2t$이다. 두 점 $\\mathrm{P}, \\mathrm{Q}$가 출발 후 처음으로 만날 때까지 두 점 $\\mathrm{P}, \\mathrm{Q}$ 사이의 거리의 최댓값은?",
      "choices": [
-      "① $\\displaystyle - \\frac{5}{16}$",
-      "② $\\displaystyle - \\frac{3}{16}$",
-      "③ $\\displaystyle - \\frac{1}{16}$",
-      "④ $\\displaystyle \\frac{1}{16}$",
-      "⑤ $\\displaystyle \\frac{3}{16}$"
+      "① $30$",
+      "② $32$",
+      "③ $36$",
+      "④ $38$",
+      "⑤ $40$"
      ],
      "answer": "③",
-     "id": "ngd_su2_a9221e907a",
+     "id": "ngd_su2_1f6a46a0d4",
      "출처": "학교 기출(족보)",
-     "해설": "(가), (다) 조건에서 \\(f(x)\\)는 \\(x\\)를 인수로 가지고 완전제곱식을 인수로 가진다\n(나) 조건에서 \\(f'(x)\\)의 축의 방정식은 \\(\\displaystyle x=\\frac{2}{3}\\)이다.\n\\(f(x)= -x(x+a) ^{2}\\)이라 하면 \\(f ' (x)= - \\left\\{ (x+a) ^{2} +2x(x+a) \\right\\}\\)\n따라서 \\(f'(x)= - (3x^{2}+4ax+a^{2})\\) \\(a= -1\\)\n\\(g(x)= -x^{2}(x-1)^{2}\\)\n\\(g(x)\\)의 증감표를 그려보면 다음과 같다.\n\\({x}\\)\n\\({\\cdots }\\)\n\\(0\\)\n\\({\\cdots }\\)\n\\(\\displaystyle \\frac{1}{2}\\)\n\\({\\cdots }\\)\n\\(1\\)\n\\({\\cdots }\\)\n\\(g ' (x)\\)\n\\(+\\)\n\\(0\\)\n\\(-\\)\n\\(0\\)\n\\(+\\)\n\\(0\\)\n\\(-\\)\n\\(g(x)\\)\n\\(\\nearrow\\)\n\\(0\\)\n\\(\\searrow\\)\n\\(\\displaystyle - \\frac{1}{16}\\)\n\\(\\nearrow\\)\n\\(0\\)\n\\(\\searrow\\)\n그러므로 함수 \\(g(x)\\)의 극솟값은 \\(\\displaystyle g \\left( \\frac{1}{2} \\right) =- \\frac{1}{16}\\)이다."
+     "해설": "위치를 적분으로 구한다.\n\\[x_\\mathrm{P}(t) = \\frac{1}{6}t^3 - 2t^2, \\quad x_\\mathrm{Q}(t) = -\\frac{1}{6}t^3 + t^2\\]\n처음 만나는 조건 \\(x_\\mathrm{P}(t)=x_\\mathrm{Q}(t)\\):\n\\[\\frac{1}{3}t^3 - 3t^2 = 0 \\;\\Rightarrow\\; t^2\\!\\left(\\frac{t}{3}-3\\right)=0\\]\n\\(t>0\\)이므로 처음 만나는 시각은 \\(t=9\\).\n두 점 사이의 거리:\n\\[D(t)=|x_\\mathrm{P}(t)-x_\\mathrm{Q}(t)|=\\frac{1}{3}t^2|t-9|\\]\n\\(0<t<9\\)에서 \\(|t-9|=9-t\\)이므로\n\\[D(t)=\\frac{1}{3}t^2(9-t)=3t^2-\\frac{1}{3}t^3\\]\n\\[D'(t)=6t-t^2=t(6-t)\\]\n\\(D'(t)=0\\)의 양의 근: \\(t=6\\).\n\\(D'(t)>0\\) (\\(0<t<6\\)), \\(D'(t)<0\\) (\\(6<t<9\\))이므로 \\(t=6\\)에서 최대.\n\\[D(6)=3\\cdot36-\\frac{1}{3}\\cdot216=108-72=36\\]\n검증: \\(\\displaystyle x_\\mathrm{P}(6)=\\frac{216}{6}-72=36-72=-36\\), \\(x_\\mathrm{Q}(6)=-36+36=0\\), 거리 \\({}=36\\). ✓\n따라서 정답은 ③ 이다."
     },
-    "내답": "②",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "최고차항의 계수가 1인 삼차함수 $f(x)$에 대하여 함수 $g(x)=\\begin{cases} 2 & (x>1) \\\\ f(x) & (x \\le 1) \\end{cases}$이다. $g(x)$가 실수 전체의 집합에서 미분가능하고 $g(x)$의 최댓값이 34일 때, $g(-1)$의 값은?",
+     "stem": "원점을 동시에 출발하여 수직선 위를 움직이는 두 점 $\\mathrm{P}, \\mathrm{Q}$의 시각 $t \\left( t \\geq 0 \\right)$에서의 속도는 각각 $v _{1} =8t-7$, $v _{2} =3t ^{2} -8t+6$이다. 출발한 후 두 점 $\\mathrm{P}, \\mathrm{Q}$ 사이의 거리가 두 번째로 $6$이 될 때까지 점 $\\mathrm{Q}$가 움직인 거리는?",
      "choices": [
-      "① ${{16}}$",
-      "② ${17}$",
-      "③ ${18}$",
-      "④ ${19}$",
-      "⑤ ${20}$"
+      "① $7$",
+      "② $8$",
+      "③ $9$",
+      "④ $10$",
+      "⑤ 11"
      ],
      "answer": "③",
-     "id": "ngd_su2_58b0fa80ba",
+     "id": "ngd_su2_03b0ad43e5",
      "출처": "학교 기출(족보)",
-     "해설": "\\({g \\left( x \\right)}\\)가 실수 전체의 집합에서 미분가능하고 최댓값이 \\({34}\\)이기 위해서는 \\({f \\left( x \\right)}\\)가 \\({x=1}\\)에서 \\(y=2\\)와 접하고 그 값이 극솟값이어야한다.\n\\({{f \\left( x \\right)}}\\)가 \\({x=t}\\)에서 극댓값을 갖는다고 하면\n\\({f \\left( x \\right) =x ^{3} +ax ^{2} +bx+c}\\)라고 하면 \\({f ' \\left( x \\right) =3x ^{2} +2ax+b}\\)이므로\n\\({f ' \\left( 1 \\right) =3+2a+b=0}\\)에서 \\({b=-2a-3}\\)이고 두 근은 \\(1\\)과 \\({{t}}\\)이므로 근과 계수의 관계에 의해 \\(\\displaystyle {t+1=- \\frac{2}{3} a}\\)이다.\n이때 \\({f \\left( t \\right) -f \\left( 1 \\right) =32}\\)이므로\n\\({\\left( t ^{3} -1 \\right) +a \\left( t ^{2} -1 \\right) +b \\left( t-1 \\right) =32}\\)\n\\({\\left( t ^{3} -1 \\right) +a \\left( t ^{2} -1 \\right) - \\left( 2a+3 \\right) \\left( t-1 \\right) =32}\\) \\({\\cdots \\cdots}\\) ㉠\n\\(\\displaystyle \\left( t ^{3} -1 \\right) - \\frac{3}{2} \\left( t+1 \\right) \\left( t ^{2} -1 \\right) +3t \\left( t-1 \\right) =32\\)\n\\({{t ^{3} -3t ^{2} +3t+63=0}}\\)\n\\({\\left( t+3 \\right) \\left( t ^{2} -6t+21 \\right) =0}\\)\n\\({\\therefore}\\) \\({t=-3}\\)이것을 ㉠에 대입하면 \\({a=3}\\), \\({b=-9}\\)이다.\n또한 \\(f \\left( 1 \\right) =2\\)이므로 \\({{1+a+b+c=2}}\\)에서 \\({c=7}\\)\n\\({\\therefore }\\) \\({f \\left( -1 \\right) =-1+3+9+7}\\)\\({=18}\\)"
+     "해설": "점 P, Q의 위치를 각각 구하면 \\(\\displaystyle x_\\mathrm{P}(t)=\\int\\nolimits _0^t(8t-7)dt=4t^2-7t\\), \\(\\displaystyle x_\\mathrm{Q}(t)=\\int\\nolimits _0^t(3t^2-8t+6)dt=t^3-4t^2+6t\\) 이다.\n두 점 사이의 (방향 포함) 차이를 \\(f(t)=x_\\mathrm{P}(t)-x_\\mathrm{Q}(t)=4t^2-7t-(t^3-4t^2+6t)=-t^3+8t^2-13t\\) 로 정의한다. 거리는 \\(|f(t)|\\) 이다.\n\\(f'(t)=-3t^2+16t-13=-(3t-13)(t-1)\\) 이므로 \\(f'(t)=0\\) 은 \\(\\displaystyle t=1,\\ \\dfrac{13}{3}\\) 에서 성립한다.\n\\(t\\in(0,1)\\) 에서 \\(f'(t)<0\\), \\(\\displaystyle t\\in\\left(1,\\dfrac{13}{3}\\right)\\) 에서 \\(f'(t)>0\\), \\(\\displaystyle t>\\dfrac{13}{3}\\) 에서 \\(f'(t)<0\\) 이므로 \\(f\\)는 \\(t=1\\)에서 극소, \\(\\displaystyle t=\\dfrac{13}{3}\\)에서 극대이다.\n\\(f(0)=0\\), \\(f(1)=-1+8-13=-6\\) 이므로 \\(t\\in[0,1]\\) 구간에서 \\(f\\)는 \\(0\\)에서 \\(-6\\)까지 단조 감소하여 \\(|f(t)|\\)는 \\(0\\)에서 \\(6\\)까지 단조 증가한다. 따라서 \\(|f(t)|=6\\) 이 되는 첫 번째 시각은 \\(t=1\\) 이다.\n\\(t=1\\) 이후 \\(f\\)는 증가하므로 \\(|f(t)|\\)는 한 번 \\(0\\)을 지난 뒤 다시 증가하여 두 번째로 \\(6\\)이 되는 시각은 \\(f(t)=6\\) 을 만족하는 \\(\\displaystyle t\\in\\left(1,\\dfrac{13}{3}\\right)\\) 의 해이다.\n\\(f(t)=6\\) ⟺ \\(-t^3+8t^2-13t-6=0\\) ⟺ \\(t^3-8t^2+13t+6=0\\).\n인수분해하면 \\(t^3-8t^2+13t+6=(t-3)(t^2-5t-2)=0\\) 이다. \\(t^2-5t-2=0\\) 의 해는 \\(\\displaystyle t=\\dfrac{5\\pm\\sqrt{33}}{2}\\) 로 그 중 양의 해는 약 \\(5.37\\)이며 \\(\\displaystyle \\dfrac{13}{3}\\approx4.33\\) 보다 크므로 구간 \\(\\displaystyle \\left(1,\\dfrac{13}{3}\\right)\\) 안에 있지 않다.\n따라서 구간 안의 해는 \\(t=3\\) 이고, 이때 거리가 두 번째로 \\(6\\)이 된다.\n점 \\(\\mathrm{Q}\\)의 속도 \\(v_2=3t^2-8t+6\\) 의 판별식은 \\(64-72=-8<0\\) 이므로 모든 \\(t\\)에서 \\(v_2>0\\), 즉 \\(\\mathrm{Q}\\)는 항상 양의 방향으로만 움직인다. 따라서 \\(\\mathrm{Q}\\)가 움직인 거리는 \\(x_\\mathrm{Q}(3)-x_\\mathrm{Q}(0)\\) 이다.\n\\(x_\\mathrm{Q}(3)=3^3-4\\cdot3^2+6\\cdot3=27-36+18=9\\), \\(x_\\mathrm{Q}(0)=0\\).\n따라서 \\(\\mathrm{Q}\\)가 움직인 거리는 \\(9\\)이다.\n따라서 정답은 ③ 이다."
     },
-    "강의": null,
+    "강의": [
+     0,
+     0
+    ],
     "답변": []
    },
    {
-    "유형": "함수의 증가와 감소(극값 없을 조건)",
+    "유형": "극값 조건으로 미정계수 결정",
     "문제": {
-     "stem": "함수 $f(x)=2x^3-2ax^2+3ax-2$와 모든 실수 $t$에 대하여 $y=t$가 만나는 점의 개수가 1이 되도록 하는 정수 $a$의 개수는?",
-     "choices": [],
-     "answer": "5",
-     "id": "ngd_su2_a9bbbfc0bf",
-     "출처": "학교 기출(족보)",
-     "해설": "③\n모든 실수 \\(t\\)에 대하여 \\(y=t\\)와 함수 \\(f(x)\\)가 만나는 점의 개수가 \\(1\\)이 되려면 함수 \\(f(x)\\)는 모든 실수 \\(x\\)에 대하여 증가함수이어야 한다.\n즉, 함수 \\(f(x)\\)는 극댓값과 극솟값을 갖지 않으므로\n\\(f ' (x)=6x ^{2} -4ax+3a=0\\)에서 실근이 존재하지 않는다.\n따라서, \\(\\displaystyle \\frac{D}{4} =4a ^{2} -18a \\leq 0\\), \\(\\displaystyle 0 \\leq a \\leq \\frac{9}{2}\\) 이다.\n범위에 속하는 정수 \\(a\\)는 \\(0\\), \\(1\\), \\(2\\), \\(3\\), \\(4\\)이므로 정수 \\(a\\)의 개수는 \\(5\\)개다."
-    },
-    "내답": "?",
-    "유사": {
-     "stem": "함수 $f(x)=2x^3-ax^2+ax+5$가 임의의 두 실수 $x_1, x_2$에 대하여 $x_1 > x_2$일 때, $f(x_1) > f(x_2)$가 성립한다. 이 때, 상수 $a$의 최댓값은?",
+     "stem": "함수  $f(x)=ax ^{3} -6ax ^{2} +b$ 가  $-1 \\le x \\le 2$ 에서 최댓값  $3$ , 최솟값  $-13$ 을 가질 때, 상수  $a, b$ 에 대하여  $a+b$ 의 값은?\n(단,  $a>0$ )",
      "choices": [
-      "① $2$",
-      "② $3$",
-      "③ $4$",
-      "④ $5$",
-      "⑤ $6$"
+      "①  $1$",
+      "②  $2$",
+      "③  $3$",
+      "④  $4$",
+      "⑤  $6$"
      ],
-     "answer": "⑤",
-     "id": "ngd_su2_30eae28eb2",
-     "출처": "학교 기출(족보)",
-     "해설": "⑤\n임의의 두 실수 \\(x _{1} , x _{2}\\)에 대하여 \\(x _{1} > x _{2}\\)일 때, \\(f(x _{1} ) > f(x _{2} )\\)이므로 \\(f(x)\\)는 증가함수이다.\n\\(f '(x)=6x ^{2} -2ax+a \\ge 0\\)\n\\(\\therefore 0 \\leq a \\leq 6\\)"
+     "answer": "④",
+     "id": "tb_4e4e13df37",
+     "해설종이": true
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "함수 $f \\left( x \\right) =x ^{3} - \\left( a+3 \\right) x ^{2} + \\left( a+1 \\right) x$ 가 $-1<x<0$ 에서 극댓값을 갖고, $x>0$ 에서 극솟값을 갖도록 하는 모든 정수 $a$ 의 값의 곱은?",
+     "choices": [
+      "① $6$",
+      "② $-6$",
+      "③ $3$",
+      "④ $9$",
+      "⑤ $12$"
+     ],
+     "answer": "①",
+     "id": "var_tb_97b8cc604a_20261014_2",
+     "해설": "\\(f'(x)=3x^2-2(a+3)x+(a+1)\\)은 위로 열린 포물선이므로 작은 근에서 극대, 큰 근에서 극소를 갖는다. \\(0\\)이 두 근 사이에 있어야 하므로 \\(f'(0)=a+1<0\\), \\(-1\\)은 두 근 밖에 있어야 하므로 \\(f'(-1)=3a+10>0\\). 따라서 \\(\\displaystyle -\\frac{10}{3}<a<-1\\)이고 정수 \\(a\\)는 \\(-3,-2\\)이다. 곱은 \\((-3)(-2)=6\\)이므로 답은 ①"
     },
     "강의": null,
     "답변": []
@@ -632,18 +675,18 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "함수 $f(x) =x ^{3} -2x ^{2} +2x$에 대하여 원점을 지나고 곡선 $y=f(x)$에 접하는 직선은 두 개이다. 두 접선과 곡선 $y=f(x)$의 교점 중 원점이 아닌 두 점을 각각 $A$, $B$라 할 때, 삼각형 $OAB$의 넓이는? (단, $O$는 원점이다.)",
+     "stem": "두 꼭짓점 A, C는 $y$축 위에 있고, 두 꼭짓점 B, D는 $x$축 위에 있는 사각형 ABCD가 있다. 두 직선 AB, CD는 곡선 $y=x^3-9x$에 접하고 기울기가 같다. $\\overline{\\mathrm{AC}}:\\overline{\\mathrm{BD}}=3:1$일 때, 다음 <보기>에서 옳은 것만을 있는 대로 고르면? (단, 점 A의 $y$좌표는 양수, 점 C의 $y$좌표는 음수이고 점 B의 $x$좌표는 음수, 점 D의 $x$좌표는 양수이다.) <보기> ㄱ. 직선 AD와 직선 BC는 원점에 대해 대칭이다. ㄴ. 직선 AB의 접점의 $x$좌표는 $-3$이다. ㄷ. 사각형 ABCD의 넓이는 $\\displaystyle \\frac{512}{3}$이다.",
      "choices": [
-      "① $\\displaystyle \\frac{1}{4}$",
-      "② $\\displaystyle \\frac{1}{2}$",
-      "③ $1$",
-      "④ $\\displaystyle \\frac{3}{2}$",
-      "⑤ $2$"
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
      "answer": "③",
-     "id": "ngd_su2_19deff99bd",
+     "id": "ngd_su2_4826324fd4",
      "출처": "학교 기출(족보)",
-     "해설": "함수 \\(f(x)=x^3-2x^2+2x\\)에서 \\(f'(x)=3x^2-4x+2\\)이다.\n곡선 위의 점 \\((a, f(a))\\)에서의 접선이 원점을 지나려면, 접선 \\(y=f'(a)(x-a)+f(a)\\)에 \\(x=0, y=0\\)을 대입한 조건\n\\(f(a)-a f'(a)=0\\)\n이 성립해야 한다. 계산하면\n\\(f(a)-af'(a) = (a^3-2a^2+2a) - a(3a^2-4a+2) = -2a^3+2a^2 = -2a^2(a-1)\\)\n이므로 \\(a=0\\) 또는 \\(a=1\\)이다. (\\(f(0)=0\\)이므로 원점도 곡선 위의 점이고, \\(a=0\\)일 때 접선은 원점에서의 접선이다.)\n(ⅰ) \\(a=0\\)일 때\n\\(f'(0)=2\\)이므로 접선은 \\(y=2x\\)이다.\n이 직선과 곡선의 교점을 구하면\n\\(x^3-2x^2+2x=2x \\Rightarrow x^3-2x^2=0 \\Rightarrow x^2(x-2)=0\\)\n이므로 \\(x=0\\)(중근, 원점) 또는 \\(x=2\\)이다.\n따라서 원점이 아닌 교점은 \\(x=2\\)일 때, \\(f(2)=8-8+4=4\\)이므로 \\(\\mathrm{A}=(2,4)\\)이다.\n(ⅱ) \\(a=1\\)일 때\n\\(f(1)=1\\), \\(f'(1)=3-4+2=1\\)이므로 접선은\n\\(y=1+(x-1)=x\\)\n이고 이는 원점을 지난다.\n이 직선과 곡선의 교점을 구하면\n\\(x^3-2x^2+2x=x \\Rightarrow x^3-2x^2+x=0 \\Rightarrow x(x-1)^2=0\\)\n이므로 \\(x=0\\) 또는 \\(x=1\\)(중근)이다.\n따라서 원점이 아닌 교점은 \\(x=1\\)일 때, \\(f(1)=1\\)이므로 \\(\\mathrm{B}=(1,1)\\)이다.\n이제 \\(\\mathrm{O}=(0,0)\\), \\(\\mathrm{A}=(2,4)\\), \\(\\mathrm{B}=(1,1)\\)이므로 삼각형 \\(\\mathrm{OAB}\\)의 넓이는\n\\(\\displaystyle \\dfrac{1}{2}\\left| x_\\mathrm{A} y_\\mathrm{B} - x_\\mathrm{B} y_\\mathrm{A} \\right| = \\dfrac{1}{2}\\left|2\\cdot1-1\\cdot4\\right| = \\dfrac{1}{2}\\times 2 = 1\\)\n따라서 정답은 ③ 이다."
+     "해설": "ㄱ. \\(y=x ^{3} -9x\\)의 그래프는 원점에 대하여 대칭이므로 \\(y=x ^{3} -9x\\)에 접하고 기울기가 같은 두 선분 \\( {\\overline{\\mathrm{AB}}} , {\\overline{\\mathrm{CD}}}\\)는 평행하고 길이가 같다. 또한, 두 직선 \\(\\mathrm{AC}, \\mathrm{BD}\\)가 서로 직교하므로 \\(\\mathrm{ABCD}\\)는 마름모이다. 따라서 직선 \\(\\mathrm{AD}\\)와 직선 \\(\\mathrm{BC}\\)는 원점에 대해 대칭이다. (참)\nㄴ. \\(\\overline{\\mathrm{AC}}:\\overline{\\mathrm{BD}}\\)\\({}=3:1\\)이므로 직선 \\(\\mathrm{AB}\\)의 기울기는 \\(3\\)이다. (참)\\(f ' \\left( t \\right) =3t ^{2} -9\\)\\({}=3\\)\\(\\therefore t=2\\) 또는 \\(-2\\)따라서 접점의 \\(x\\)좌표는 \\(-2\\)이다. (거짓)\nㄷ. 직선 \\(\\mathrm{AB}: y=3 \\left( x+2 \\right) +10\\)\\({}=3x+16\\)\\(\\displaystyle \\therefore \\triangle \\mathrm{OAB}= \\frac{1}{2} \\times \\frac{16}{3} \\times 16\\)\\(□ \\mathrm{ABCD}= \\triangle \\mathrm{OAB}{ \\times }4\\)\\(\\displaystyle {}= \\frac{512}{3}\\) (참)"
     }
    },
    {
@@ -654,18 +697,17 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "세 실수 $p$$(p>3)$, $a$$(a>0)$, $b$에 대하여 $\\displaystyle f(x)=\\begin{cases} \\frac{2}{x-3}&&(x<6-p \\text{ 또는 } x>p) \\\\ ax+b&&(6-p \\leq x \\leq p) \\end{cases}$ 이다. 자연수 $m$에 대하여 $2p-6=m$일 때, 함수 $\\left|f(x) \\right|$가 실수 전체의 집합에서 연속이 되도록 하는 $b$의 값을 $b_m$이라 하자. $\\displaystyle \\sum\\limits _{ k=1} ^{ 7} \\left| \\frac{1}{b_k} \\right| = \\frac{t}{s}$일 때, $s+t$의 값은? (단, $s$와 $t$는 서로소인 자연수이다.)",
+     "stem": "실수 $a, b$에 대하여 함수 $f(x)$는 $\\displaystyle f(x) = \\begin{cases} |-2x^{2} +ax+b| & (x<0) \\\\ - \\frac{3}{2} x(x-4) & (x \\geq 0) \\end{cases}$이다. 실수 $t$에 대하여 $f(x)=t$인 모든 $x$를 작은 수부터 큰 수 순으로 나열한 것을 $x _{1} , x _{2} , x _{3} , \\cdots, x _{m}$라 할 때, 함수 $g(t)$를 $g(t)=x _{m}$이라 하자. 함수 $f(x)$는 실수 전체의 집합에서 연속이고, 함수 $g(t)$는 $t=6, t=8$에서만 불연속이라는 조건을 만족할 때, $f(-3)$의 값은?",
      "choices": [
-      "① $41$",
-      "② $43$",
-      "③ $45$",
-      "④ $47$",
-      "⑤ $49$"
+      "① $-42$",
+      "② $-26$",
+      "③ $-6$",
+      "④ $6$",
+      "⑤ $26$"
      ],
-     "answer": "①",
-     "id": "ngd_su2_ebc57afb88",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(p>3\\)이므로 \\(6-p<3<p\\)이다. 즉 \\(x=3\\)은 구간 \\([6-p,p]\\) 안에 있으므로 \\(f\\)는 그 구간에서 \\(ax+b\\)로 정의되어 특이점 \\(x=3\\) 문제는 발생하지 않는다.\n\\(f(x)\\)가 불연속이 될 수 있는 점은 두 구간이 만나는 \\(x=6-p\\)와 \\(x=p\\)뿐이다. \\(\\left|f(x)\\right|\\)가 연속이려면 이 두 점에서 양쪽 극한의 절댓값이 같아야 한다.\n\\(x=6-p\\)에서 유리식 쪽 극한값은 \\(\\displaystyle \\dfrac{2}{(6-p)-3}=\\dfrac{2}{3-p}\\)이고, \\(x=p\\)에서는 \\(\\displaystyle \\dfrac{2}{p-3}\\)이다. \\(p>3\\)이므로 \\(\\displaystyle \\left|\\dfrac{2}{3-p}\\right|=\\left|\\dfrac{2}{p-3}\\right|=\\dfrac{2}{p-3}=c\\) (단, \\(c>0\\))로 둔다.\n조건은 \\(\\left|a(6-p)+b\\right|=c\\), \\(\\left|ap+b\\right|=c\\)이다. 네 가지 부호 조합을 확인하면, \\(a>0\\)을 만족하는 경우는\n\\(a(6-p)+b=-c,\\quad ap+b=c\\)\n인 경우뿐이다. 두 식을 빼면 \\(a(6-2p)=-2c\\)에서 \\(\\displaystyle a=\\dfrac{c}{p-3}=\\dfrac{2}{(p-3)^2}>0\\) (조건 만족).\n\\(\\displaystyle b=c-ap=\\dfrac{2}{p-3}-\\dfrac{2p}{(p-3)^2}=\\dfrac{2(p-3)-2p}{(p-3)^2}=\\dfrac{-6}{(p-3)^2}\\).\n이제 \\(2p-6=m\\)에서 \\(\\displaystyle p-3=\\dfrac{m}{2}\\)이므로\n\\(\\displaystyle b_m=\\dfrac{-6}{(m/2)^2}=\\dfrac{-24}{m^2}\\).\n따라서 \\(\\displaystyle \\left|\\dfrac{1}{b_k}\\right|=\\dfrac{k^2}{24}\\)이고,\n\\(\\displaystyle \\sum\\limits _{k=1}^{7} \\left|\\dfrac{1}{b_k}\\right|=\\dfrac{1}{24}\\sum\\limits _{k=1}^{7} k^2=\\dfrac{1}{24}\\cdot140=\\dfrac{35}{6}\\).\n\\(s=6\\), \\(t=35\\)는 서로소이므로 \\(s+t=41\\).\n따라서 정답은 ① 이다."
+     "answer": "④",
+     "id": "ngd_su2_2e49c238bb",
+     "출처": "학교 기출(족보)"
     }
    }
   ],
@@ -680,7 +722,7 @@ window.ME_DATA = {
    },
    {
     "유형": "접선의 방정식(넓이 구하기)",
-    "단계": 3,
+    "단계": 4,
     "다음": "",
     "마지막오답": "2026-10-13",
     "강의": null,
@@ -933,104 +975,141 @@ window.ME_DATA = {
   "자유답변": []
  },
  "L-0jFQ2UTmnO4308juedZw": {
-  "진도": "미분계수와 도함수",
+  "진도": "부정적분과 정적분",
   "상태": "many",
   "오답": [
    {
-    "유형": "접선의 방정식(곡선 밖의 점)",
+    "유형": "정적분과 미분의 관계(극한값 구하기)",
     "문제": {
-     "stem": "점 $(-1, 4)$ 에서 곡선  $y = x^3 - 5x^2 + 6x$ 에 그은 접선 중 기울기가 유리수인 접선의 방정식을  $y = ax + b$ 라 할 때, 상수  $a, b$ 에 대하여  $ab$ 의 값은?",
+     "stem": "$\\displaystyle\\lim\\limits_{h \\to 0} \\frac{1}{h}\\int\\nolimits _3^{3+3h}(x^3-x^2)\\,dx$의 값은?",
      "choices": [
-      "①  $-8$",
-      "②  $-5$",
-      "③  $-3$",
-      "④  $4$",
-      "⑤  $6$"
+      "① $18$",
+      "② $36$",
+      "③ $54$",
+      "④ $72$",
+      "⑤ $90$"
      ],
      "answer": "③",
-     "id": "tb_cfb159c904",
-     "출처": "교과서"
+     "id": "tb_6541b0d363",
+     "출처": "교과서",
+     "해설종이": true
     },
-    "내답": "②",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "점 $\\mathrm{A}(0, 7)$에서 곡선 $y=x ^{3} -3x ^{2} +6$에 그은 두 접선의 기울기를 각각 $m _{1} , m _{2}$라 할 때, $m _{1} +m _{2}$의 값은?",
+     "stem": "함수 $f(x) = x^3 +x$일 때, <보기>에서 옳은 것만을 있는 대로 고른 것은? <보기> ㄱ. $\\displaystyle \\frac{d}{dx} \\int\\nolimits {f(x)} dx =\\int\\nolimits { \\frac{d}{dx} f(x) dx}$ ㄴ. $\\displaystyle \\int\\nolimits _{-2} ^{2 } { f(x) } dx = \\int\\nolimits _{2} ^{ 2} { f(x) } dx$ ㄷ. $\\displaystyle \\lim\\limits _{x \\to 1} \\frac{\\int\\nolimits _{1}^{x } { f(t) } dt}{x-1} =2$",
      "choices": [
-      "① $\\displaystyle \\frac{1}{4}$",
-      "② $\\displaystyle \\frac{3}{4}$",
-      "③ $\\displaystyle \\frac{7}{4}$",
-      "④ $\\displaystyle \\frac{9}{4}$",
-      "⑤ $\\displaystyle \\frac{13}{4}$"
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
-     "answer": "②",
-     "id": "ngd_su2_2293aff93d",
-     "출처": "학교 기출(족보)"
-    },
-    "강의": null,
-    "답변": [],
-    "힌트": [
-     "접점을 곡선 위의 점 $(t,\\ f(t))$로 놓고, 그 점에서 그은 접선이 외부 점 $(0,\\ 7)$을 지나는 조건을 그림에 표시해보는 방향으로 생각해봐.",
-     "곡선 $y=f(x)$ 위의 점 $(t,\\ f(t))$에서의 접선 기울기는 $f'(t)$야 — 접선의 방정식은 $y = f'(t)(x-t)+f(t)$로 쓸 수 있어.",
-     "접선의 방정식에 $x=0,\\ y=7$을 대입해서 $t$에 대한 방정식을 만드는 걸로 시작해봐.",
-     "$(0,\\ 7)$은 접점이 아니라 접선이 지나가는 외부 점이야 — $t$는 접점의 $x$좌표이고, $(0,\\ 7)$을 대입할 때 $t=0$으로 놓으면 안 돼.",
-     "$t$에 대한 방정식을 풀면 두 개의 값이 나오는데, 각각에 $f'(t)=3t^2-6t$를 대입해서 기울기 두 개를 구한 뒤 더해봐."
-    ]
-   },
-   {
-    "유형": "평균값 정리를 만족하는 상수 c 구하기",
-    "문제": {
-     "stem": "함수 $f(x)=x^2-4x+5$ 의 그래프 위 두 점 $\\mathrm{A}(0,\\ f(0))$, $\\mathrm{B}(5,\\ f(5))$ 를 잇는 직선을 생각하자. $0<c<5$ 일 때, 그래프 위 점 $(c,\\ f(c))$ 에서의 접선이 직선 $\\mathrm{AB}$ 와 평행하도록 하는 $c$ 의 값은?",
-     "choices": [
-      "① $1$",
-      "② $2$",
-      "③ $3$",
-      "④ $\\displaystyle \\dfrac72$",
-      "⑤ $\\displaystyle \\dfrac52$"
-     ],
-     "answer": "⑤",
-     "id": "var_astra_tb_e22105dba7_20260921_5_20261012_1"
-    },
-    "내답": "blank",
-    "유사": {
-     "stem": "함수 $f(x)=x^2-6x+8$ 의 그래프 위 두 점 $\\mathrm{A}(1,\\ f(1))$, $\\mathrm{B}(6,\\ f(6))$ 를 잇는 직선을 생각하자. $1<c<6$ 일 때, 그래프 위 점 $(c,\\ f(c))$ 에서의 접선이 직선 $\\mathrm{AB}$ 와 평행하도록 하는 $c$ 의 값은?",
-     "choices": [
-      "① $1$",
-      "② $2$",
-      "③ $3$",
-      "④ $4$",
-      "⑤ $\\displaystyle \\dfrac72$"
-     ],
-     "answer": "⑤",
-     "id": "var_astra_tb_e22105dba7_20260921_5_20261012_2"
+     "answer": "④",
+     "id": "ngd_su2_5f873e9009",
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ. \\(\\displaystyle \\dfrac{d}{dx}\\displaystyle\\int\\nolimits f(x)\\,dx = f(x)\\)이지만, \\(\\displaystyle\\int\\nolimits \\dfrac{d}{dx}f(x)\\,dx = f(x)+C\\) (적분상수 \\(C\\) 포함)이므로 두 식은 일반적으로 같지 않다. 따라서 ㄱ은 거짓이다.\nㄴ. \\(f(x)=x^3+x\\)는 모든 항의 차수가 홀수이므로 기함수이다. 기함수의 대칭구간 적분은 \\(\\displaystyle\\int\\nolimits _{-2}^{2} f(x)\\,dx = 0\\)이다.\n또한 \\(\\displaystyle\\int\\nolimits _{2}^{2} f(x)\\,dx = 0\\)이므로 두 값이 모두 \\(0\\)으로 같다. 따라서 ㄴ은 참이다.\nㄷ. \\(\\displaystyle F(x)=\\displaystyle\\int\\nolimits _{1}^{x} f(t)\\,dt\\)라 하면 \\(F(1)=0\\)이고, 미적분의 기본정리에 의해\n\\[\\lim\\limits_{x\\to 1}\\frac{\\int\\nolimits _{1}^{x}f(t)\\,dt}{x-1} = \\lim\\limits_{x\\to1}\\frac{F(x)-F(1)}{x-1} = F'(1) = f(1).\\]\n\\(f(1)=1^3+1=2\\)이므로 극한값은 \\(2\\)이다. 따라서 ㄷ은 참이다.\n결론적으로 참인 것은 ㄴ, ㄷ이다.\n따라서 정답은 ④ 이다."
     },
     "강의": null,
     "답변": []
    },
    {
-    "유형": "함수의 극대와 극소(극값이 주어짐)",
+    "유형": "정적분의 기하적 의미와 부호",
     "문제": {
-     "stem": "함수  $f(x)=3x ^{4} -4x ^{3} +6x ^{2} -12x+a$ 의 최솟값이  $1$ 일 때, 상수  $a$ 의 값은?",
+     "stem": "함수의 적분에 대한 다음 설명 중 옳은 것만을 있는 대로 고른 것은? ㄱ. 다항함수 $y = f(x)$의 부정적분은 무수히 많다 ㄴ. $\\displaystyle \\int\\nolimits _1^5 2xdx - \\int\\nolimits _5^3 2xdx = \\int\\nolimits _1^3 2xdx$이다 ㄷ. 다항함수 $f(x)$에 대하여 $\\displaystyle \\int\\nolimits _a^b f(x)dx > 0$이면 $\\displaystyle \\int\\nolimits _a^b f(x)dx$의 값은 $y = f(x)$와 $x$축 및 $x = a, x = b$로 둘러싸인 도형의 넓이와 같다",
      "choices": [
-      "①  $0$",
-      "②  $2$",
-      "③  $4$",
-      "④  $6$",
-      "⑤  $8$"
+      "① ㄱ",
+      "② ㄱ, ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
+     ],
+     "answer": "①",
+     "id": "ngd_su2_98acbcf2ad",
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ. 다항함수 \\(y=f(x)\\)의 부정적분은 무수히 많다. [참]\n\\(\\displaystyle \\int\\nolimits _{1} ^{5} {2xdx} - \\int\\nolimits _{3} ^{5} {2xdx= \\int\\nolimits _{1} ^{3} {2xdx}}\\)이므로\nㄴ. \\(\\displaystyle \\int\\nolimits _{1} ^{5} {2xdx} - \\int\\nolimits _{5} ^{3} {2xdx= \\int\\nolimits _{1} ^{3} {2xdx}}\\)이다. [거짓]\n\\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx>0}\\)에서 \\(x\\)축을 통과하면서 정적분의 값이 음수인 부분이 존재할 수도 있으므로\nㄷ. 다항함수 \\(f(x)\\)에 대하여 \\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx>0}\\)이면 \\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx}\\)의 값은 \\(y=f(x)\\)와 \\(x\\)축 및 \\(x=a\\), \\(x=b\\)로 둘러싸인 도형의 넓이와 같다. [거짓]"
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "최고차항의 계수가 양수인 삼차함수 $f(x)$는 $f(0) = 0$이고, $x>0$인 모든 실수 $x$에 대하여 $f'(x) \\geq 0$을 만족시킨다. 함수 $f(x)$의 역함수 $g(x)$에 대하여 $\\displaystyle h(x) = \\int\\nolimits ^x_0 \\{f(t)-g(t)\\} dt$ ($x \\geq 0$)라 하면 $h(x)$는 $x = 2$일 때, 극댓값 $\\displaystyle \\frac{3}{2}$을 갖고 $x = 3$일 때, 극솟값 $\\displaystyle \\frac{5}{4}$를 가진다. 이때, $\\displaystyle \\int\\nolimits ^3_0 g(t) dt$의 값을 구하시오.",
+     "choices": [
+      "① $\\displaystyle \\frac{7}{2}$",
+      "② $\\displaystyle \\frac{29}{8}$",
+      "③ $\\displaystyle \\frac{15}{4}$",
+      "④ $\\displaystyle \\frac{31}{8}$",
+      "⑤ $4$"
+     ],
+     "answer": "④",
+     "id": "ngd_su2_15085d5238",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(\\displaystyle h(x)=\\displaystyle\\int\\nolimits _0^x \\{f(t)-g(t)\\}dt\\) 이므로 \\(h'(x)=f(x)-g(x)\\)이다.\n\\(h(x)\\)가 \\(x=2\\)에서 극대, \\(x=3\\)에서 극소이므로 \\(h'(2)=0,\\ h'(3)=0\\), 즉 \\(f(2)=g(2)\\), \\(f(3)=g(3)\\)이다.\n\\(g=f^{-1}\\)이고 \\(x>0\\)에서 \\(f'(x)\\ge 0\\)이므로 \\(f\\)는 (적어도 양의 실수 구간에서) 증가함수이다. 증가함수인 \\(f\\)에 대해 \\(f(a)=f^{-1}(a)\\)이면 \\(f(f(a))=a\\)인데, \\(f\\)가 증가함수이면 2-주기점이 존재할 수 없으므로(만약 \\(f(a)=b,\\ f(b)=a,\\ a\\ne b\\)이면 \\(a<b \\Rightarrow f(a)<f(b)\\Rightarrow b<a\\)가 되어 모순) \\(a=f(a)\\)가 되어야 한다.\n따라서 \\(f(2)=2,\\ f(3)=3\\)이고, 역함수의 성질에 의해 \\(g(2)=2,\\ g(3)=3\\)이다.\n이제 역함수의 적분 공식(넓이 관계)을 이용한다. \\(f(0)=0\\)이고 \\(f\\)가 증가함수이므로, \\(f(a)=b\\)일 때\n\\(\\displaystyle\\int\\nolimits _0^a f(t)\\,dt+\\int\\nolimits _0^b g(t)\\,dt = ab\\)\n가 성립한다.\n\\(a=2,\\ f(2)=2\\)를 대입하면\n\\(\\displaystyle\\int\\nolimits _0^2 f(t)\\,dt+\\int\\nolimits _0^2 g(t)\\,dt = 4\\) ... (1)\n또한 \\(\\displaystyle h(2)=\\displaystyle\\int\\nolimits _0^2 f(t)dt-\\int\\nolimits _0^2 g(t)dt=\\frac{3}{2}\\) ... (2)\n(1),(2)를 연립하면 \\(\\displaystyle\\int\\nolimits _0^2 f(t)dt=\\frac{11}{4},\\ \\int\\nolimits _0^2 g(t)dt=\\frac{5}{4}\\).\n같은 방법으로 \\(a=3,\\ f(3)=3\\)을 대입하면\n\\(\\displaystyle\\int\\nolimits _0^3 f(t)\\,dt+\\int\\nolimits _0^3 g(t)\\,dt = 9\\) ... (3)\n또한 \\(\\displaystyle h(3)=\\displaystyle\\int\\nolimits _0^3 f(t)dt-\\int\\nolimits _0^3 g(t)dt=\\frac{5}{4}\\) ... (4)\n(3),(4)를 연립하면\n\\(\\displaystyle\\int\\nolimits _0^3 f(t)dt=\\frac{41}{8},\\quad \\int\\nolimits _0^3 g(t)dt=\\frac{31}{8}\\).\n따라서 \\(\\displaystyle\\int\\nolimits _0^3 g(t)dt=\\frac{31}{8}\\)이므로 정답은 ④ 이다."
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "정적분을 포함한 등식(안에도 x)",
+    "문제": {
+     "stem": "모든 실수 $x$ 에 대하여 함수 $f(x)$ 가 $\\displaystyle \\int\\nolimits _{-1}^x {(x-t)f(t)dt}=x^3 +3x^2 +3x+1$ 을 만족시킬 때, $f(0)$ 의 값은?",
+     "choices": [
+      "① $0$",
+      "② $2$",
+      "③ $4$",
+      "④ $6$",
+      "⑤ $8$"
+     ],
+     "answer": "④",
+     "id": "tb_ea251eb02b",
+     "출처": "교과서",
+     "해설종이": true
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "다항함수 $f(x)$가 모든 실수 $x$에 대하여 $\\displaystyle xf(x)=3x^4-4x^3+x^2+\\int\\nolimits _{1}^{x}(x-t)f'(t)dt$를 만족시킬 때, $f(2)$의 값은?",
+     "choices": [
+      "① $11$",
+      "② $12$",
+      "③ $13$",
+      "④ $14$",
+      "⑤ $15$"
+     ],
+     "answer": "②",
+     "id": "ngd_su2_7d8e95edfe",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(\\displaystyle x f \\left( x \\right) =3x ^{4} -4x ^{3} +x ^{2} + \\int\\nolimits _{1} ^{x} {\\left( x-t \\right)}f ' \\left( -1 \\right)dt\\)\n\\(x=1\\)을 대입하면 \\(f \\left( 1 \\right)=0\\)\n\\(\\displaystyle x f \\left( x \\right) =3x ^{4} -4x ^{3} +x ^{2} +x \\int\\nolimits _{1} ^{x} {} f ' \\left( t \\right) dt- \\int\\nolimits _{1} ^{x} {t} f ' \\left( t \\right) dt\\)\n양변을 \\(x\\)에 대하여 미분하면\n\\(\\displaystyle x f ' \\left( x \\right) +f \\left( x \\right) =12x ^{3} -12x ^{2} +12x+ \\int\\nolimits _{1} ^{x} {f ' \\left( t \\right)} dt+x f ' \\left( x \\right) -x f' \\left( x \\right)\\)\n\\({}=12x ^{3}-12x ^{ 2}+2x+f \\left( x \\right)\\)\n\\(f ' \\left( x \\right)=12x ^{ 2}-12x+2\\)\n\\(f \\left( x \\right)=4x ^{ 3}-6x ^{ 2}+2x+c\\)\n\\(\\left. f \\left( 1 \\right) \\right.=0\\)이므로\n\\(f \\left( x \\right)=4x ^{ 3}-6x ^{ 2}+2x\\)\n\\(f \\left( 2 \\right)=12\\)"
+    },
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "정적분을 포함한 등식(구간이 상수)",
+    "문제": {
+     "stem": "다항함수 $f(x)$가 모든 실수 $x$에 대하여 $\\displaystyle f(x)=x^2 -3x \\int\\nolimits _0^1 {f(t)} dt$를 만족시킬 때, $f(2)$의 값을 구하시오.",
+     "choices": [
+      "① $\\displaystyle \\frac{14}{5}$",
+      "② $2$",
+      "③ $\\displaystyle \\frac{18}{5}$",
+      "④ $4$",
+      "⑤ $\\displaystyle \\frac{16}{5}$"
      ],
      "answer": "⑤",
-     "id": "tb_53f509af77"
+     "id": "tb_745c98ab65",
+     "출처": "교과서",
+     "해설종이": true
     },
-    "내답": "③",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "삼차함수 $f(x)=ax^3+bx^2+cx$와 이차함수 $g(x)=ax^2+bx+c$에 대하여 함수 $f(x)$가 $x=-4$에서 극댓값을 가지고 $x=2$에서 극솟값을 가질 때, 함수 $g(x)$는 극값 $-105$를 갖는다. $g(-1)$의 값은?",
+     "stem": "함수 $f(x) = x^2 - x - 2$에 대하여 $\\displaystyle \\int\\nolimits _{-2}^t f(x)dx = g(t)$라 할 때, 옳은 것만을 <보기>에서 있는 대로 고른 것은? ㄱ. $\\displaystyle \\int\\nolimits _3^5 g(t)dt > 0$ ㄴ. $\\displaystyle \\int\\nolimits _{-2}^1 |g(t)|dt = \\int\\nolimits _{-2}^1 g(t)dt$ ㄷ. 닫힌구간 $[-2, 3]$에서 방정식 $g(t) = 0$의 실근의 개수는 $2$개이다.",
      "choices": [
-      "① $-112$",
-      "② $-80$",
-      "③ $-104$",
-      "④ $-56$",
-      "⑤ $-26$"
+      "① ㄱ",
+      "② ㄱ, ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
      "answer": "③",
-     "id": "var_ngd_su2_c3ca941d7f_20260909_1"
+     "id": "ngd_su2_39e97d03dc",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(g \\left( -2 \\right) =0\\)이고 주어진 식의 양변을 미분하면\n\\(f \\left( t \\right) =g ' \\left( t \\right) =t ^{2} -t-2\\)\\({}= \\left( t-2 \\right) \\left( t+1 \\right)\\)\n\\(\\displaystyle g \\left( t \\right) = \\frac{1}{3} t ^{3} - \\frac{1}{2} t ^{2} -2t+C\\)이고 \\(g \\left( -2 \\right) =0\\)이므로 \\(\\displaystyle g \\left( t \\right) = \\frac{1}{3} t ^{3} - \\frac{1}{2} t ^{2} -2t+ \\frac{2}{3}\\)\n\\(\\displaystyle g \\left( -1 \\right) =- \\frac{1}{3} - \\frac{1}{2} +2+ \\frac{2}{3} = \\frac{11}{6}\\)\\(\\displaystyle , g \\left( 2 \\right) = \\frac{8}{3} -4-4+ \\frac{2}{3} <0\\)\nㄱ. \\(\\displaystyle g \\left( 3 \\right) =9- \\frac{9}{2} -6+ \\frac{2}{3} <0, g \\left( 4 \\right) = \\frac{64}{3} -8-8+ \\frac{2}{3} >0\\)이므로 \\(\\displaystyle \\int\\nolimits _{3} ^{5} {g \\left( t \\right) dt>0}\\)이다. (참)\nㄴ. \\(\\displaystyle g \\left( 1 \\right) = \\frac{1}{3} - \\frac{1}{2} -2+ \\frac{2}{3} <0\\)\\(, g \\left( -2 \\right) =0\\)이므로 \\(\\displaystyle \\int\\nolimits _{-2} ^{1} {\\left| g \\left( t \\right) \\right| dt \\neq \\int\\nolimits _{-2} ^{1} {g \\left( t \\right) dt}}\\) (거짓)\nㄷ. \\(g \\left( -2 \\right) =0\\)\\(, g \\left( 2 \\right) <0\\)이고 극소이다. \\(g \\left( 3 \\right) <0\\)\n따라서 닫힌구간 \\(\\left[ -2, 3 \\right]\\)에서 \\(g \\left( t \\right) =0\\)은 서로 다른 두 개의 실근을 가진다. (참)\n따라서 구하는 옳은 것은 ㄱ, ㄷ이다."
     },
     "강의": null,
     "답변": []
@@ -1045,16 +1124,17 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "함수 $f \\left( x \\right) =x ^{3} - \\left( a+3 \\right) x ^{2} + \\left( a+1 \\right) x$ 가 $-1<x<0$ 에서 극댓값을 갖고, $x>0$ 에서 극솟값을 갖도록 하는 모든 정수 $a$ 의 값의 곱은?",
+     "stem": "함수 $f(x)=x^3-(a+3)x^2+ax$ 가 $-2<x<0$ 에서 극댓값을 갖고, $x>0$ 에서 극솟값을 갖도록 하는 모든 정수 $a$ 의 값의 곱은?",
      "choices": [
-      "① $6$",
+      "① $-24$",
       "② $-6$",
-      "③ $3$",
-      "④ $9$",
-      "⑤ $12$"
+      "③ $2$",
+      "④ $12$",
+      "⑤ $24$"
      ],
-     "answer": "①",
-     "id": "var_tb_97b8cc604a_20261014_2"
+     "answer": "⑤",
+     "id": "var_tb_97b8cc604a_20261014_1",
+     "해설": "\\(f'(x)=3x^2-2(a+3)x+a\\)는 위로 열린 포물선이므로 작은 근에서 극대, 큰 근에서 극소를 갖는다. 조건에서 \\(0\\)이 두 근 사이에 있어야 하므로 \\(f'(0)=a<0\\), 그리고 \\(-2\\)는 두 근 밖에 있어야 하므로 \\(f'(-2)=5a+24>0\\). 따라서 \\(\\displaystyle -\\frac{24}{5}<a<0\\)이고 정수 \\(a\\)는 \\(-4,-3,-2,-1\\)이다. 곱은 \\((-4)(-3)(-2)(-1)=24\\)이므로 답은 ⑤"
     }
    },
    {
@@ -1065,17 +1145,18 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "최고차항의 계수의 부호가 서로 다른 두 삼차다항식 $f(x)$, $g(x)$가 $\\left|f(x)\\right|=\\begin{cases}g(x)+6x^2-7x-80&(x\\le a)\\\\g(x)+2x^3-10x^2+3x+20&(x>a)\\end{cases}$를 만족시킬 때, <보기>에서 옳은 것만을 있는 대로 고른 것은? (단, $a$는 상수이다.) <보기> ㄱ. 방정식 $f(x)+a\\left|x-5\\right|=0$은 서로 다른 세 실근을 갖는다. ㄴ. 함수 $h(x)=f(x)+a(x-k)^2$이 극댓값과 극솟값을 모두 갖도록 하는 자연수 $k$의 최댓값은 $7$이다. ㄷ. 방정식 $\\left|f(x)\\right|+a(x-k)^2=0$이 서로 다른 네 실근을 갖도록 하는 모든 자연수 $k$의 값의 합은 $16$이다.",
+     "stem": "삼차함수 $f(x)$의 도함수 $f'(x)$가 다음 조건을 만족시킨다. (가) $y=f'(x)$는 $x=-2$에서 최솟값을 갖는다. (나) $\\displaystyle \\lim\\limits _{h\\to 0} \\frac{f(h)-f(-h)}{h}=0$ 옳은 것만을 <보기>에서 있는 대로 고른 것은? <보기> ㄱ. 함수 $f(x)$는 극댓값과 극솟값을 모두 갖는다. ㄴ. $f(0)>0$이면 방정식 $\\left|f(x)\\right|=\\left|f(-4)\\right|+k$의 서로 다른 실근의 개수가 $3$인 양수 $k$가 존재한다. ㄷ. $-4<a<0$인 어떤 실수 $a$에 대하여 $f(0)=-f(a)$이면 방정식 $\\left|f(x)\\right|=\\left|f(0)\\right|$의 서로 다른 실근의 개수는 $5$이다.",
      "choices": [
-      "① ㄴ",
-      "② ㄷ",
-      "③ ㄱ, ㄴ",
-      "④ ㄱ, ㄷ",
-      "⑤ ㄴ, ㄷ"
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
-     "answer": "⑤",
-     "id": "ngd_su2_ce1cc04995",
-     "출처": "학교 기출(족보)"
+     "answer": "③",
+     "id": "ngd_su2_c535290317",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(f ′(x)\\)는 이차함수이다.\n조건 (가)에서 이차함수 \\(f ′(x)\\)의 최고차항의 계수가 양수, 대칭축이 \\(x= -2\\)임을 알 수 있고, 조건 (나)에서 \\(f ′(0) = 0\\)이므로\n\\(f ′(x) = 3p x(x-4)\\)라 할 수 있다. (단, \\(p>0\\)인 상수)\nㄱ. 방정식 \\(f ′(x) = 0\\)이 서로 다른 두 실근을 가지므로 함수 \\(f(x)\\)는 극댓값과 극솟값을 모두 갖는다. (참)\nㄴ. 함수 \\(f(x)\\)는 \\(x= -4\\)에서 극대이고 \\(x= 0\\)에서 극소이다.\\(f(0) > 0\\)일 때 함수 \\(y= \\left |f(x) \\right|\\)의 그래프는 다음과 같다.따라서 주어진 방정식의 서로 다른 실근의 개수는 \\(2\\)이다. (거짓)\nㄷ. \\(-4 < a < 0\\)인 \\(a\\)에 대하여 \\(f(a) < f(-4)\\)이므로\\(f(-4) + f(0) = f(-4) -f(a) > 0\\)이고, 함수 \\(y= \\left |f(x) \\right|\\)의 그래프는 다음과 같다.따라서 방정식 \\(\\left |f(x) \\right| = \\left |f(0) \\right|\\)의 서로 다른 실근의 개수는 \\(5\\)이다. (참)\n이상에서 옳은 것은 ㄱ, ㄷ이다."
     }
    },
    {
@@ -1096,7 +1177,8 @@ window.ME_DATA = {
      ],
      "answer": "⑤",
      "id": "ngd_su2_4c6667bedb",
-     "출처": "학교 기출(족보)"
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ. \\(\\displaystyle \\lim\\limits_{h \\to 0} \\dfrac{f(a)-f(a-h)}{h}\\)에서 \\(h\\to 0\\)일 때 \\(a-h \\to a\\)이므로, \\(t=a-h\\)로 치환하면 \\(h=a-t\\)이고 \\(t\\to a\\)일 때\n\\[\\lim\\limits_{t\\to a} \\frac{f(a)-f(t)}{a-t}=\\lim\\limits_{t\\to a} \\frac{f(t)-f(a)}{t-a}=f'(a)\\]\n따라서 ㄱ은 \\(f'(a)\\)와 같다.\nㄴ. \\(\\displaystyle \\lim\\limits_{x \\to \\frac{a}{4}} \\dfrac{f(4x)-f(a)}{4x-a}\\)에서 \\(t=4x\\)로 치환하면 \\(\\displaystyle x\\to \\frac{a}{4}\\)일 때 \\(t\\to a\\)이므로\n\\[\\lim\\limits_{t\\to a} \\frac{f(t)-f(a)}{t-a}=f'(a)\\]\n따라서 ㄴ도 \\(f'(a)\\)와 같다.\nㄷ. \\(\\displaystyle \\lim\\limits_{x \\to -2a} \\dfrac{f(x+3a)-f(a)}{x+2a}\\)에서 \\(u=x+3a\\)로 치환하면 \\(x=u-3a\\)이고, \\(x\\to -2a\\)일 때 \\(u\\to a\\)이다. 또한 분모는 \\(x+2a=u-3a+2a=u-a\\)이므로\n\\[\\lim\\limits_{u\\to a} \\frac{f(u)-f(a)}{u-a}=f'(a)\\]\n따라서 ㄷ도 \\(f'(a)\\)와 같다.\nㄱ, ㄴ, ㄷ 모두 \\(f'(a)\\)와 항상 같은 값을 가진다.\n따라서 정답은 ⑤ 이다."
     },
     "힌트": [
      "미분계수의 정의 $\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$ 꼴로 세 식을 각각 바꿔 쓸 수 있는지 살펴보는 방향으로 접근해보자.",
@@ -2471,61 +2553,39 @@ window.ME_DATA = {
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "진도": "회전체",
-  "상태": "many",
+  "상태": "few",
   "오답": [
-   {
-    "유형": "회전체의 전개도",
-    "문제": {
-     "stem": "오른쪽 그림과 같은 원뿔대에서 $a$의 값은?\n⟦FIG:m1local_b113d523a7bbb8dad84b.png⟧",
-     "choices": [
-      "① $\\frac{3}{2}$",
-      "② $\\frac{5}{3}$",
-      "③ $2$",
-      "④ $\\frac{7}{3}$",
-      "⑤ $\\frac{5}{2}$"
-     ],
-     "answer": "③",
-     "id": "m1local_b7bf083996ae5d"
-    },
-    "내답": "⑤",
-    "유사": null,
-    "강의": null,
-    "답변": []
-   },
    {
     "유형": "회전체의 단면",
     "문제": {
-     "stem": "다음 중 오른쪽 그림과 같은 직각삼각형을 직선 $l$을 회전축으로 하여 $1$회전 시킬 때 생기는 회전체에 대한 설명으로 옳지 않은 것은?\n⟦FIG:fullsrc_fc8cad01887933a93eb1.png⟧",
+     "stem": "어떤 회전체를 회전축을 포함하는 평면으로 잘랐더니 둘레의 길이가 $18 \\mathrm{ cm}$ 인 정삼각형 모양의 단면이 생겼다. 이 회전체의 밑면의 반지름의 길이는?",
      "choices": [
-      "① 회전축에 수직인 평면으로 자른 단면은 원이다.",
-      "② 밑면에 평행한 평면으로 자른 단면은 모두 합동이다.",
-      "③ 회전축을 포함하는 평면으로 자른 단면은 이등변삼각형이다.",
-      "④ 회전축에 수직인 평면으로 자르면 원뿔대가 생긴다.",
-      "⑤ 전개도에서 부채꼴의 반지름의 길이는 회전체의 모선의 길이와 같다."
+      "① $3 \\mathrm{ cm}$",
+      "② $4 \\mathrm{ cm}$",
+      "③ $5 \\mathrm{ cm}$",
+      "④ $6 \\mathrm{ cm}$",
+      "⑤ $7 \\mathrm{ cm}$"
      ],
-     "answer": "②",
-     "id": "mfull_af37f6231417c0"
+     "answer": "①",
+     "id": "tb_c34d1286e5",
+     "해설종이": true
     },
-    "내답": "⑤",
-    "유사": null,
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "회전체의 전개도",
-    "문제": {
-     "stem": "오른쪽 직각삼각형을 직선 $l$을 회전축으로 하여 $1$회전 시킬 때 생기는 원뿔의 전개도에서 부채꼴의 중심각의 크기를 구하시오.\n⟦FIG:fullsrc_d3f5819ced29dc523f8b.png⟧",
-     "choices": [],
-     "answer": "$135°$",
-     "id": "mfull_11fa063852aed3"
-    },
-    "내답": "?",
+    "내답": "(미표기)",
     "유사": null,
     "강의": null,
     "답변": []
    }
   ],
-  "복습대기": [],
+  "복습대기": [
+   {
+    "유형": "회전체의 전개도",
+    "단계": 0,
+    "다음": "2026-11-15",
+    "마지막오답": "2026-11-10",
+    "강의": null,
+    "답변": []
+   }
+  ],
   "도구함": [],
   "리더코드": "",
   "복습": [],
@@ -3440,7 +3500,54 @@ window.ME_DATA = {
   "자유답변": []
  },
  "ntn2FOM1mnEsfIw-T-0Z5Q": {
-  "대기": true,
-  "리더코드": ""
+  "진도": "입체도형의 겉넓이와 부피",
+  "상태": "few",
+  "오답": [
+   {
+    "유형": "합동조건의 활용",
+    "문제": {
+     "stem": "오른쪽 그림에서\n$\\angle \\mathrm{AOP} =\\angle \\mathrm{BOP}$, $\\angle \\mathrm{OAP} =\\angle \\mathrm{OBP}=90^{\\circ}$이다. 다음 중 $\\triangle \\mathrm{POA}\\equiv \\triangle \\mathrm{POB}$임을 설명하기 위해 필요한 조건을 바르게 나열한 것은?\n⟦FIG:fullsrc_8ce4fbb0429f8093d9ba.png⟧",
+     "choices": [
+      "① $\\overline{\\mathrm{AP}} =\\overline{\\mathrm{BP}}$, $\\overline{\\mathrm{OA}} =\\overline{\\mathrm{OB}}$, $\\overline{\\mathrm{OP}}$는 공통",
+      "② $\\overline{\\mathrm{AP}} =\\overline{\\mathrm{BP}}$, $\\overline{\\mathrm{OA}} =\\overline{\\mathrm{OB}}$, $\\angle \\mathrm{OAP} =\\angle \\mathrm{OBP}$",
+      "③ $\\overline{\\mathrm{OA}} =\\overline{\\mathrm{OB}}$, $\\overline{\\mathrm{OP}}$는 공통, $\\angle \\mathrm{AOP} =\\angle \\mathrm{BOP}$",
+      "④ $\\overline{\\mathrm{OA}} =\\overline{\\mathrm{OB}}$, $\\overline{\\mathrm{OP}}$는 공통, $\\angle \\mathrm{APO} =\\angle \\mathrm{BPO}$",
+      "⑤ $\\overline{\\mathrm{OP}}$는 공통, $\\angle \\mathrm{AOP} =\\angle \\mathrm{BOP}$, $\\angle \\mathrm{APO} =\\angle \\mathrm{BPO}$"
+     ],
+     "answer": "⑤",
+     "id": "mfull_d7e3df416d3f67",
+     "해설종이": true
+    },
+    "내답": "(미표기)",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "다면체의 면 모서리 꼭짓점",
+    "문제": {
+     "stem": "다음은 정십이면체의 꼭짓점의 개수를 구하는 과정이다. 이때 $b$의 값을 구하시오.\n정십이면체의 한 면을 이루는 다각형의 꼭짓점의 개수는 $5$이다. 이때 각 꼭짓점은 $b$개의 면에 공통으로 포함되므로 정십이면체의 꼭짓점의 개수는 $\\displaystyle \\frac{5 \\times 12}{b}=c$이다.",
+     "choices": [
+      "① $6$",
+      "② $3$",
+      "③ $5$",
+      "④ $4$",
+      "⑤ $2$"
+     ],
+     "answer": "②",
+     "id": "tb_260dc35704",
+     "해설종이": true
+    },
+    "내답": "(미표기)",
+    "유사": null,
+    "강의": null,
+    "답변": []
+   }
+  ],
+  "복습대기": [],
+  "도구함": [],
+  "리더코드": "",
+  "복습": [],
+  "자유답변": []
  }
 };
