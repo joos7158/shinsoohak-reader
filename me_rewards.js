@@ -1,18 +1,19 @@
 // me_rewards.py 생성 — 🎁 도장판(토큰 키, 이름 없음). 손대지 말 것.
 window.ME_REWARDS = {
  "GJSwV5R8jDgHJD6W-IODzg": {
-  "stamps": 2,
+  "stamps": 3,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
   "gold": [
-   "직선에 대한 대칭이동(수직이등분선)"
+   "직선에 대한 대칭이동(수직이등분선)",
+   "산술평균과 기하평균(곱이 일정할 때)"
   ],
   "scan": [
    "2026-09-23"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
   "stamps": 6,
@@ -30,7 +31,7 @@ window.ME_REWARDS = {
    "2026-10-17",
    "2026-10-22"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "IywvFfBf-6KH3O4MS7PqqQ": {
   "stamps": 8,
@@ -51,7 +52,7 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-28"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "mzsdyDG658RvaW4ZeG2qsA": {
   "stamps": 4,
@@ -66,7 +67,7 @@ window.ME_REWARDS = {
    "2026-10-14",
    "2026-10-16"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "PbcD92Dv87ukiUoSIhypUw": {
   "stamps": 5,
@@ -82,7 +83,7 @@ window.ME_REWARDS = {
    "2026-10-16",
    "2026-10-21"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "FiX91SBiihqTfUL-dwMElg": {
   "stamps": 3,
@@ -97,7 +98,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-10-13"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "stamps": 10,
@@ -120,7 +121,7 @@ window.ME_REWARDS = {
    "2026-10-10",
    "2026-10-13"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "stamps": 4,
@@ -136,7 +137,7 @@ window.ME_REWARDS = {
    "2026-09-30",
    "2026-10-13"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 11,
@@ -160,15 +161,14 @@ window.ME_REWARDS = {
    "2026-10-21",
    "2026-10-24"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "qyW_ZLn0AEWZmFat76kQ4w": {
-  "stamps": 48,
+  "stamps": 54,
   "redeemed": 3,
   "per": 10,
   "gift": "선생님이 준비한 선물",
   "days": [
-   "2026-10-27",
    "2026-10-28",
    "2026-10-29",
    "2026-10-30",
@@ -181,7 +181,8 @@ window.ME_REWARDS = {
    "2026-11-07",
    "2026-11-08",
    "2026-11-09",
-   "2026-11-10"
+   "2026-11-10",
+   "2026-11-17"
   ],
   "gold": [
    "조건부확률",
@@ -195,14 +196,19 @@ window.ME_REWARDS = {
    "확률의 덧셈정리",
    "순열·조합을 이용한 확률",
    "사건의 독립과 종속 판정",
-   "표준화하여 미지수(m·σ·경계값) 구하기"
+   "표준화하여 미지수(m·σ·경계값) 구하기",
+   "상황에서 이항분포의 평균·분산 구하기(점수·상금 Y=aX+b 포함)",
+   "이항분포를 정규분포로 근사하여 확률 구하기",
+   "상황에서 분포를 세워 평균·분산 구하기",
+   "정규분포의 활용(실생활 확률·인원·상위 k%)",
+   "정규분포곡선의 성질(대칭·σ에 따른 모양)"
   ],
   "scan": [
    "2026-09-28",
    "2026-09-29",
    "2026-10-07"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "L-0jFQ2UTmnO4308juedZw": {
   "stamps": 3,
@@ -216,7 +222,7 @@ window.ME_REWARDS = {
    "2026-10-13",
    "2026-11-05"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
   "stamps": 0,
@@ -226,7 +232,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
   "stamps": 2,
@@ -239,7 +245,7 @@ window.ME_REWARDS = {
    "2026-09-23",
    "2026-09-28"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 15,
@@ -264,7 +270,7 @@ window.ME_REWARDS = {
    "2026-11-07",
    "2026-11-10"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "Mvyuvyc4aXfF7qK_a79DZw": {
   "stamps": 8,
@@ -283,7 +289,7 @@ window.ME_REWARDS = {
    "2026-10-29",
    "2026-11-10"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "4fWLMN7ybNWqk_IWZYr5zQ": {
   "stamps": 21,
@@ -314,7 +320,7 @@ window.ME_REWARDS = {
    "2026-11-14",
    "2026-11-16"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "QymwTX87H7xSJtAsB2q4jg": {
   "stamps": 18,
@@ -344,7 +350,7 @@ window.ME_REWARDS = {
    "2026-10-22",
    "2026-10-24"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 22,
@@ -371,7 +377,7 @@ window.ME_REWARDS = {
    "2026-11-13",
    "2026-11-16"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "1Qlq0AOK91srR56Do-v28g": {
   "stamps": 0,
@@ -381,7 +387,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "two5_UoBGrOoKWv6uWq5-w": {
   "stamps": 1,
@@ -393,7 +399,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-10-24"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "aG8aMT-yg-zPFfl5YqoAVw": {
   "stamps": 4,
@@ -408,7 +414,7 @@ window.ME_REWARDS = {
    "2026-11-05",
    "2026-11-10"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "-y2XKWWWXqVLfhP2QgYBxg": {
   "stamps": 6,
@@ -426,7 +432,7 @@ window.ME_REWARDS = {
    "2026-11-13",
    "2026-11-16"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
   "stamps": 4,
@@ -441,7 +447,7 @@ window.ME_REWARDS = {
    "2026-11-13",
    "2026-11-16"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "8bPDj77vIvmNSOpRs3PzVQ": {
   "stamps": 1,
@@ -453,7 +459,7 @@ window.ME_REWARDS = {
   "scan": [
    "2026-11-10"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "ntn2FOM1mnEsfIw-T-0Z5Q": {
   "stamps": 0,
@@ -463,7 +469,7 @@ window.ME_REWARDS = {
   "days": [],
   "gold": [],
   "scan": [],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  },
  "demo": {
   "stamps": 6,
@@ -474,6 +480,6 @@ window.ME_REWARDS = {
   "gold": [
    "(예시) 두 점 사이의 거리"
   ],
-  "today": "2026-11-16"
+  "today": "2026-11-17"
  }
 };
