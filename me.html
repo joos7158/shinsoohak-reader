@@ -285,6 +285,7 @@
 <script src="me_final_plan.js"></script>
 <script src="school_feed.js"></script>
 <script src="me_rewards.js"></script>
+<script src="book_index.js"></script>
 <script src="question-photo.js?v=20261011-board"></script>
 <script src="board-recorder.js?v=20261014-mp4"></script>
 <script>
@@ -483,6 +484,20 @@ function finalPlanHtml(){
   </div>`;
 }
 
+// 📘 시험 대비 교재 해설 — 2026-11-18 원장 "오답노트 프로그램에 기말대비교재 해설을 탑재해줘".
+//   화면·자료는 book.html + book/<토큰>.js (따로). 여기서는 그 토큰에 교재가 있을 때 들어가는 카드만 띄운다.
+//   book_index.js 가 없거나 못 읽어도 이 카드만 안 보일 뿐 나머지는 그대로다.
+function bookHtml(){
+  const K = (window.BOOK_INDEX||{})[SID];
+  if (!K) return '';
+  const u = 'book.html?s=' + encodeURIComponent(SID) + (TEACHER ? '&v=t' : '');
+  return `
+  <a class="card" href="${u}" style="display:block;text-decoration:none;color:inherit">
+    <div class="qhead">📘 ${esc(K.t||'시험 대비 교재')} 해설</div>
+    <div class="sub" style="margin-top:6px">종이 교재 ${esc(K.n||'')}문항 · 단원 힌트 → 한 단계씩 → 정답. 막힌 번호만 찾아 보세요 ›</div>
+  </a>`;
+}
+
 // 🏫 학교 카드 — 2026-08-28 원장 승인(공개 repo에 토큰↔학교 결합 생김을 알고 승인).
 //   급식·D-day 는 학생이 학교를 고르지 않아도 자기 학교 것이 그냥 뜬다(명단 정본에 이미 있으니까).
 //   D-day 정본 = master CSV 시험일(원장 확정값). 급식은 NEIS, 오늘 없으면(주말·방학) 다음 급식.
@@ -598,7 +613,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261114-135927';
+const BUILD = '20261118-135042';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -807,6 +822,7 @@ function render(){
     app.innerHTML = `${noticeHtml()}<div class="nav">${rlink('▶ 유형별 강의')}</div>
       <h1>📕 나의 오답노트</h1>
       ${schoolHtml()}
+      ${bookHtml()}
       <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>
       <div id="pending" class="pending" style="display:none"></div>
       ${freeAskHtml(D)}
@@ -853,6 +869,7 @@ function render(){
     ${rewardHtml()}
 
     ${schoolHtml()}
+    ${bookHtml()}
     ${questHtml()}
     ${finalPlanHtml()}
 

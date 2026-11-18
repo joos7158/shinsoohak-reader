@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>시험 대비 교재 해설</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* 2026-11-18 원장 "오답노트 프로그램에 기말대비교재 해설을 탑재 — 각 단원 힌트로 나눠서 볼 수 있는 구조".
+     종이 교재의 **번호**로 찾는다(문제 원문은 싣지 않는다 — 이 저장소는 공개다).
+     한 번에 답을 보여 주지 않는다: 단원 힌트 → 한 단계씩 → 정답. 색·모양은 me.html 과 맞춘다. */
+  :root { --ink:#191f28; --body:#4e5968; --muted:#8b95a1; --accent:#3182f6; --accent-h:#2272eb;
+          --surface:#f2f4f6; --line:#e5e8eb; --ok:#00a86b; --warm:#f59f00; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+         color:var(--ink); max-width:720px; margin:0 auto; padding:16px 16px 40px; background:var(--surface);
+         line-height:1.6; -webkit-text-size-adjust:100%; }
+  a { color:var(--accent); text-decoration:none; }
+  .top { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; font-size:.9rem; }
+  .card { background:#fff; border-radius:20px; padding:18px; margin-bottom:12px; }
+  h1 { font-size:1.3rem; margin:0 0 4px; letter-spacing:-.4px; }
+  .sub { color:var(--muted); font-size:.88rem; }
+  .dday { display:inline-block; background:#e8f3ff; color:var(--accent); font-weight:700; font-size:.82rem;
+          padding:3px 10px; border-radius:999px; margin-left:6px; }
+  .how { margin-top:10px; font-size:.88rem; color:var(--body); }
+  .units { display:flex; gap:8px; overflow-x:auto; padding:2px 0 10px; -webkit-overflow-scrolling:touch; }
+  .units button { flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--body); border-radius:999px;
+                  padding:9px 14px; font-size:.92rem; font-weight:600; min-height:44px; cursor:pointer; white-space:nowrap; }
+  .units button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .units button .c { font-weight:400; opacity:.75; margin-left:4px; font-size:.82rem; }
+  details.uh { background:#fff; border-radius:20px; padding:4px 18px; margin-bottom:12px; }
+  details.uh summary { cursor:pointer; list-style:none; font-weight:700; padding:14px 0; min-height:44px; }
+  details.uh summary::-webkit-details-marker { display:none; }
+  details.uh summary::after { content:"펼치기"; float:right; color:var(--muted); font-weight:400; font-size:.85rem; }
+  details.uh[open] summary::after { content:"접기"; }
+  .cc { border-top:1px solid var(--line); padding:12px 0; }
+  .cc b.t { display:block; color:var(--accent); font-size:.92rem; margin-bottom:4px; }
+  .cc .b { font-size:.93rem; color:var(--ink); line-height:1.8; overflow-x:auto; }
+  .lab { font-weight:700; font-size:.95rem; margin:4px 0 10px; }
+  .lab span { font-weight:400; color:var(--muted); font-size:.82rem; margin-left:6px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(52px,1fr)); gap:8px; }
+  .grid button { height:48px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--ink);
+                 font-size:1rem; font-weight:600; cursor:pointer; position:relative; }
+  .grid button.ex { border-style:dashed; color:var(--body); }
+  .grid button.seen { background:#eef6ff; border-color:#b9d8ff; }
+  .grid button.done { background:#e9f9f1; border-color:#9fe0c4; color:#087a52; }
+  .grid button.on { outline:2px solid var(--accent); outline-offset:1px; }
+  .legend { font-size:.8rem; color:var(--muted); margin-top:10px; }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:4px; border:1px solid var(--line);
+              vertical-align:-1px; margin:0 4px 0 10px; }
+  .legend i.ex { border-style:dashed; } .legend i.seen { background:#eef6ff; border-color:#b9d8ff; }
+  .legend i.done { background:#e9f9f1; border-color:#9fe0c4; }
+  .pn { font-size:1.15rem; font-weight:700; }
+  .tag { font-size:.78rem; font-weight:600; border-radius:6px; padding:2px 8px; margin-left:8px; vertical-align:2px;
+         background:#f2f4f6; color:var(--body); }
+  .step { border-left:3px solid var(--accent); background:#f8fbff; border-radius:0 12px 12px 0; padding:10px 12px;
+          margin:10px 0; font-size:.98rem; line-height:1.85; white-space:pre-wrap; overflow-x:auto; }
+  .step .sl { display:block; font-size:.78rem; font-weight:700; color:var(--accent); margin-bottom:2px; white-space:normal; }
+  .ans { border:1px solid #9fe0c4; background:#f1fbf6; border-radius:12px; padding:12px; margin:10px 0; font-size:1.02rem; }
+  .ans b { color:#087a52; margin-right:8px; }
+  .msg { color:var(--body); font-size:.93rem; margin:10px 0; }
+  .btn { display:block; width:100%; min-height:48px; border:0; border-radius:14px; background:var(--accent); color:#fff;
+         font-size:1rem; font-weight:700; cursor:pointer; margin-top:10px; }
+  .btn:active { background:var(--accent-h); }
+  .btn.ghost { background:#f2f4f6; color:var(--body); font-weight:600; }
+  .ask { display:block; text-align:center; margin-top:12px; font-size:.9rem; }
+  .empty { text-align:center; color:var(--body); padding:28px 12px; }
+  .note { color:var(--muted); font-size:.8rem; text-align:center; margin-top:18px; line-height:1.7; }
+  .katex { font-size:1.02em; } .katex-display { margin:.4em 0; overflow-x:auto; overflow-y:hidden; }
+  @media (max-width:380px){ body{ padding:12px 12px 36px; } .card{ padding:16px; } }
+</style>
+</head>
+<body>
+<div id="app"><div class="card empty">불러오는 중…</div></div>
+<script src="book_index.js"></script>
+<script>
+'use strict';
+var QS = new URLSearchParams(location.search);
+var SID = QS.get('s') || '';
+try { if (!SID) SID = localStorage.getItem('me_sid') || ''; } catch (e) {}
+var TEACHER = QS.get('v') === 't';
+var app = document.getElementById('app');
+// 열람 기록 — me.html 과 같은 폼(같은 시트). 낱말은 "교재 N번 힌트k" 꼴: 오답노트 집계(힌트N 유형명)와 섞이지 않는다.
+var LOG = { action: 'https://docs.google.com/forms/d/e/1FAIpQLSf4uKawAYL5SKV4A2yGv8ok_2VGIs-4opvnh6CpeljkY35LeA/formResponse',
+            code: 'entry.1580342508', text: 'entry.1507722106' };
+var _logged = {};
+function log(label) {
+  if (!SID || SID === 'demo' || TEACHER || _logged[label]) return;
+  _logged[label] = 1;
+  try {
+    var b = new URLSearchParams(); b.append(LOG.code, SID); b.append(LOG.text, label);
+    fetch(LOG.action, { method: 'POST', mode: 'no-cors', body: b }).catch(function () {});
+  } catch (e) {}
+}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+  return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function math(el) {
+  if (window.renderMathInElement) renderMathInElement(el, { throwOnError: false,
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }] });
+}
+// 이 기기에 남기는 진행 표시 — {번호: 본 단계 수 | 'a'(정답까지)}
+var PKEY = 'book_p_' + SID, UKEY = 'book_u_' + SID;
+function pget() { try { return JSON.parse(localStorage.getItem(PKEY) || '{}'); } catch (e) { return {}; } }
+function pset(n, v) { try { var m = pget(); m[n] = v; localStorage.setItem(PKEY, JSON.stringify(m)); } catch (e) {} }
+
+var B = null, U = 0, CUR = null, SHOWN = 0, ANS = false;
+var KIND = { exam: '학교 기출', school: '학교 자료', own: '' };
+
+function dday(d) {
+  if (!d) return '';
+  var t = new Date(); t.setHours(0, 0, 0, 0);
+  var x = new Date(d + 'T00:00:00');
+  if (isNaN(x)) return '';
+  var n = Math.round((x - t) / 86400000);
+  return n > 0 ? 'D-' + n : (n === 0 ? 'D-DAY' : '');
+}
+
+function render() {
+  var back = 'me.html?s=' + encodeURIComponent(SID) + (TEACHER ? '&v=t' : '');
+  var dd = dday(B.exam);
+  var unit = B.units[U] || B.units[0];
+  var prog = pget();
+  var chips = B.units.map(function (u, i) {
+    return '<button class="' + (i === U ? 'on' : '') + '" data-u="' + i + '">' + esc(u.name) +
+           '<span class="c">' + u.items.length + '</span></button>';
+  }).join('');
+  var cc = (unit.concepts || []).map(function (c) {
+    return '<div class="cc"><b class="t">' + esc(c[0]) + '</b><div class="b">' + c[1] + '</div></div>';
+  }).join('');
+  var nums = unit.items.map(function (it) {
+    var p = prog[it.n];
+    var cls = (it.k === 'exam' ? 'ex ' : '') + (p === 'a' ? 'done ' : (p ? 'seen ' : '')) + (CUR && CUR.n === it.n ? 'on' : '');
+    return '<button class="' + cls + '" data-n="' + it.n + '">' + it.n + '</button>';
+  }).join('');
+  app.innerHTML =
+    '<div class="top"><a href="' + back + '">← 오답노트</a><span class="sub">종이 교재의 번호로 찾아요</span></div>' +
+    '<div class="card"><h1>📘 ' + esc(B.title) + (dd ? '<span class="dday">' + dd + '</span>' : '') + '</h1>' +
+      '<div class="how">먼저 혼자 풀어 보고, 막히면 <b>한 단계씩</b>만 열어 보세요. 답부터 보면 시험장에서 손이 안 움직여요.</div></div>' +
+    '<div class="units" id="units">' + chips + '</div>' +
+    (cc ? '<details class="uh" id="uh"><summary>💡 ' + esc(unit.name) + ' — 단원 힌트</summary>' + cc + '</details>' : '') +
+    '<div class="card"><div class="lab">문제 번호<span>' + esc(unit.name) + ' · ' + unit.items.length + '문항</span></div>' +
+      '<div class="grid" id="grid">' + nums + '</div>' +
+      '<div class="legend"><i class="seen"></i>힌트 봄<i class="done"></i>정답 확인<i class="ex"></i>학교 기출</div></div>' +
+    '<div id="panel"></div>' +
+    '<div class="note">신수학 재원생 전용 · 교재를 받은 학생만 볼 수 있어요.<br>모르는 문제는 오답노트에서 언제든 질문하세요 — 선생님만 봐요.</div>';
+  document.getElementById('units').onclick = function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    U = +b.getAttribute('data-u'); CUR = null; SHOWN = 0; ANS = false;
+    try { localStorage.setItem(UKEY, String(U)); } catch (x) {}
+    render(); window.scrollTo(0, 0);
+  };
+  document.getElementById('grid').onclick = function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    openItem(+b.getAttribute('data-n'));
+  };
+  var uh = document.getElementById('uh');
+  if (uh) { math(uh); uh.addEventListener('toggle', function () { if (uh.open) log('교재 단원힌트 ' + unit.name); }); }
+  if (CUR) panel();
+}
+
+function openItem(n) {
+  var unit = B.units[U];
+  CUR = null;
+  for (var i = 0; i < unit.items.length; i++) if (unit.items[i].n === n) CUR = unit.items[i];
+  if (!CUR) return;
+  var p = pget()[n];
+  SHOWN = (typeof p === 'number') ? Math.min(p, (CUR.s || []).length) : (p === 'a' ? (CUR.s || []).length : 0);
+  ANS = (p === 'a');
+  render();
+  var el = document.getElementById('panel');
+  if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function panel() {
+  var el = document.getElementById('panel');
+  var it = CUR, steps = it.s || [], h = '';
+  h += '<div class="card"><div class="pn">' + it.n + '번' + (KIND[it.k] ? '<span class="tag">' + KIND[it.k] + '</span>' : '') + '</div>';
+  if (!steps.length) {
+    h += '<div class="msg">' + (it.k === 'exam'
+        ? '학교 기출 문제예요. 위의 <b>단원 힌트</b>를 먼저 보고, 그래도 막히면 풀이는 학원에서 같이 봐요.'
+        : '이 문제는 풀이가 아직 없어요. 학원에서 같이 봐요.') + '</div>';
+  }
+  for (var i = 0; i < SHOWN; i++) {
+    h += '<div class="step"><span class="sl">' + (i + 1) + '단계' + (i === steps.length - 1 ? ' · 마무리' : '') + '</span>' + esc(steps[i]) + '</div>';
+  }
+  if (ANS) h += '<div class="ans"><b>정답</b>' + esc(it.a || '교재 뒤 빠른 정답을 보세요') + '</div>';
+  if (SHOWN < steps.length) {
+    h += '<button class="btn" id="b_next">' + (SHOWN === 0 ? '💡 힌트 한 단계 보기' : '다음 단계 보기 (' + SHOWN + '/' + steps.length + ')') + '</button>';
+  }
+  if (!ANS) h += '<button class="btn ghost" id="b_ans">정답만 확인하기</button>';
+  h += '<a class="ask" href="me.html?s=' + encodeURIComponent(SID) + '">✋ 이 문제 질문하러 가기 (오답노트 맨 아래 질문 칸)</a></div>';
+  el.innerHTML = h;
+  math(el);
+  var bn = document.getElementById('b_next'), ba = document.getElementById('b_ans');
+  if (bn) bn.onclick = function () {
+    SHOWN += 1;
+    if (pget()[it.n] !== 'a') pset(it.n, SHOWN);
+    log('교재 ' + it.n + '번 힌트' + SHOWN);
+    if (SHOWN === steps.length) log('교재 ' + it.n + '번 풀이끝');
+    mark(); panel();
+  };
+  if (ba) ba.onclick = function () {
+    ANS = true; pset(it.n, 'a');
+    log('교재 ' + it.n + '번 정답' + (SHOWN ? '' : '만'));
+    mark(); panel();
+  };
+}
+
+function mark() {   // 번호 칸의 색만 다시 칠한다(화면 전체를 다시 그리면 풀이가 접힌다)
+  var prog = pget();
+  [].forEach.call(document.querySelectorAll('#grid button'), function (b) {
+    var n = +b.getAttribute('data-n'), p = prog[n];
+    b.classList.toggle('done', p === 'a');
+    b.classList.toggle('seen', !!p && p !== 'a');
+  });
+}
+
+function fail(msg) {
+  app.innerHTML = '<div class="top"><a href="me.html' + (SID ? '?s=' + encodeURIComponent(SID) : '') + '">← 오답노트</a></div>' +
+                  '<div class="card empty">' + msg + '</div>';
+}
+
+(function boot() {
+  var IDX = window.BOOK_INDEX || {};
+  if (!SID) return fail('개인 링크로 열어 주세요.<br>오답노트에서 「교재 해설」 카드를 누르면 들어올 수 있어요.');
+  if (!IDX[SID]) return fail('아직 올라온 교재 해설이 없어요.<br>시험 대비 교재를 받으면 여기에 해설이 올라옵니다.');
+  var s = document.createElement('script');
+  s.src = 'book/' + encodeURIComponent(SID) + '.js?v=' + encodeURIComponent((IDX[SID].m || '') + (IDX[SID].n || ''));
+  s.onload = function () {
+    B = window.BOOK_DATA;
+    if (!B || !(B.units || []).length) return fail('교재 해설을 불러오지 못했어요. 잠시 뒤 다시 열어 주세요.');
+    try { U = Math.min(+(localStorage.getItem(UKEY) || 0) || 0, B.units.length - 1); } catch (e) { U = 0; }
+    var go = function () { render(); log('교재 열기'); };
+    if (window.renderMathInElement) go(); else window.addEventListener('load', go);
+  };
+  s.onerror = function () { fail('교재 해설을 불러오지 못했어요. 인터넷 연결을 확인하고 다시 열어 주세요.'); };
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
