@@ -141,9 +141,9 @@ window.ME_REWARDS = {
  },
  "Dq57-e2nPl01TtHsM-Xtuw": {
   "stamps": 11,
-  "redeemed": 0,
+  "redeemed": 1,
   "per": 10,
-  "gift": "편의점 5천원 기프티콘",
+  "gift": "문화상품권 5천원",
   "days": [
    "2026-09-01",
    "2026-09-04"
@@ -354,9 +354,9 @@ window.ME_REWARDS = {
  },
  "UQ43f7baq7LRh0t_2B4m7Q": {
   "stamps": 22,
-  "redeemed": 1,
+  "redeemed": 2,
   "per": 10,
-  "gift": "문화상품권 5천원",
+  "gift": "문화상품권 1만원",
   "days": [],
   "gold": [
    "부등식"
