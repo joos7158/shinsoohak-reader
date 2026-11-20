@@ -181,6 +181,40 @@
   .bk-jump button { flex:0 0 auto; height:48px; border:0; border-radius:14px; background:var(--accent); color:#fff;
     font:inherit; font-weight:700; font-size:1rem; padding:0 18px; cursor:pointer; }
   .bookbar .bk-all { display:inline-block; margin-top:10px; font-size:.9rem; color:var(--accent); text-decoration:none; }
+  /* 📘 2026-11-20(2) 힌트를 그 자리에서 — 번호 칸 바로 아래에 열린다(우리 집 띠는 student-home.css 가 색만 덧입힌다) */
+  .bookbar { scroll-margin-top:10px; }
+  .bk-panel { margin-top:12px; }
+  .bk-panel:empty { display:none; }
+  .bk-msg { color:#d9480f; font-size:.9rem; }
+  .bk-load { color:var(--muted); font-size:.9rem; }
+  .bk-item { background:#fff; border:1px solid #c9dcf7; border-radius:16px; padding:14px; }
+  .bk-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .bk-no { font-size:1.12rem; font-weight:700; color:var(--ink); }
+  .bk-unit, .bk-kind { font-size:.76rem; font-weight:600; border-radius:6px; padding:2px 8px; background:#f2f4f6; color:var(--body); }
+  .bk-kind { background:#fff4e0; color:#a8660b; }
+  .bk-x { margin-left:auto; border:0; background:transparent; color:var(--muted); font:inherit; font-size:.85rem;
+    min-height:36px; padding:0 4px; cursor:pointer; }
+  .bk-note { color:var(--body); font-size:.92rem; line-height:1.7; margin-top:10px; }
+  .bk-step { border-left:3px solid var(--accent); background:#f8fbff; border-radius:0 12px 12px 0; padding:10px 12px;
+    margin-top:10px; font-size:.98rem; line-height:1.85; white-space:pre-wrap; overflow-x:auto; color:var(--ink); }
+  .bk-step .bk-sl { display:block; font-size:.78rem; font-weight:700; color:var(--accent); margin-bottom:2px; white-space:normal; }
+  .bk-ans { border:1px solid #9fe0c4; background:#f1fbf6; border-radius:12px; padding:12px; margin-top:10px; font-size:1.02rem; color:var(--ink); }
+  .bk-ans b { color:#087a52; margin-right:8px; }
+  .bk-btn { display:block; width:100%; min-height:48px; border:0; border-radius:14px; background:var(--accent); color:#fff;
+    font:inherit; font-size:1rem; font-weight:700; cursor:pointer; margin-top:10px; }
+  .bk-btn.soft { background:#fff3cf; color:#8a6400; font-weight:600; }
+  .bk-btn.ghost { background:#f2f4f6; color:var(--body); font-weight:600; }
+  .bk-cc { margin-top:8px; border:1px solid #f1e3b5; background:#fffcf2; border-radius:12px; padding:2px 12px; }
+  .bk-c { padding:10px 0; border-top:1px solid #f3ead0; }
+  .bk-c:first-child { border-top:0; }
+  .bk-c b.t { display:block; color:#8a6400; font-size:.9rem; margin-bottom:2px; }
+  .bk-c .b { font-size:.93rem; line-height:1.8; overflow-x:auto; color:var(--ink); }
+  .bk-nav { display:flex; justify-content:space-between; gap:8px; margin-top:12px; }
+  .bk-nav button, .bk-nav span { flex:1 1 0; }
+  .bk-nav button { min-height:44px; border:1px solid var(--line); background:#fff; border-radius:12px; font:inherit;
+    font-size:.92rem; color:var(--body); cursor:pointer; }
+  .bk-ask { display:block; width:100%; margin-top:6px; min-height:40px; border:0; background:transparent; font:inherit;
+    font-size:.88rem; color:var(--accent); cursor:pointer; }
   .foot { text-align:center; margin:28px 0 10px; color:var(--body); font-size:1rem; font-weight:700; letter-spacing:-.3px; }
   .foot img { width:160px; display:block; margin:0 auto 8px; opacity:.95;
     mix-blend-mode:multiply; /* 로고 PNG의 흰 배경을 회색 캔버스에 녹인다 */ }
@@ -516,24 +550,176 @@ function bookDday(d){
 function bookHtml(){
   const K = (window.BOOK_INDEX||{})[SID];
   if (!K) return '';
-  const dd = bookDday(K.d), max = +K.n || 0;
+  const dd = bookDday(K.d);
   return `
   <div class="card bookbar" id="bookbar">
     <a class="bk-head" href="${bookUrl()}"><span>📘 ${esc(K.t||'시험 대비 교재')} 풀이</span>${dd?`<span class="bk-dd">${dd}</span>`:''}</a>
-    <div class="sub">종이 교재에서 막힌 번호를 적으면 힌트부터 한 단계씩 보여줘요.</div>
-    <form class="bk-jump" novalidate>
-      <input type="number" inputmode="numeric" min="1" ${max?`max="${max}"`:''} placeholder="막힌 번호${max?` (1~${max})`:''}" aria-label="교재 문제 번호">
-      <button type="submit">풀이 보기</button>
-    </form>
+    <div class="sub">종이 교재에서 막힌 번호를 적으면 <b>여기서 바로</b> 힌트가 한 단계씩 열려요.</div>
+    ${bookFormHtml()}
     <a class="bk-all" href="${bookUrl()}">단원별로 전체 보기 ›</a>
   </div>`;
 }
-// 번호 칸은 화면이 다시 그려져도 살아 있어야 하니 문서에 한 번만 건다(우리 집 띠·오답노트 칸 공용).
+
+// 📘 2026-11-20(2) 원장 "QR 을 다시 붙이는 건 별로 — 바로 첫 화면에서 해설서 힌트를 볼 수 있는 형태로".
+//   번호를 적으면 **다른 화면으로 넘어가지 않고 그 자리에서** 힌트가 열린다(우리 집 교재 띠·오답노트 맨 위 교재 칸 공용).
+//   · 자료는 book.html 과 같은 book/<토큰>.js — 번호 칸을 처음 건드릴 때 한 번만 불러온다.
+//   · 「힌트 보기」를 눌렀으니 1단계는 바로 보여 준다. 그다음은 한 단계씩(답부터 보여 주지 않는 원칙은 그대로).
+//   · 단계 풀이가 없는 문제(학교 기출)는 그 단원 힌트를 바로 펼친다 — 번호를 적었는데 빈손으로 끝나지 않게.
+//   · 진행 표시(book_p_)·기록 낱말(교재 N번 힌트k)은 book.html 과 같다. 여기서 연 것은 "교재 N번 첫화면".
+const BK = { data:null, wait:null, busy:false, it:null, unit:null, shown:0, ans:false, cc:false, msg:'', val:'' };
+const BK_KIND = { exam:'학교 기출', school:'학교 자료' };
+function bookFormHtml(){   // 번호 칸 + 그 아래 힌트 자리. 화면이 다시 그려져도 BK 에 든 상태로 되살아난다.
+  const max = +((window.BOOK_INDEX||{})[SID]||{}).n || 0;
+  return `<form class="bk-jump" novalidate>
+      <input type="number" inputmode="numeric" min="1" ${max?`max="${max}"`:''} value="${BK.val}" placeholder="막힌 번호${max?` (1~${max})`:''}" aria-label="교재 문제 번호">
+      <button type="submit">힌트 보기</button>
+    </form>
+    <div class="bk-panel" data-bk-panel>${bkPanelHtml()}</div>`;
+}
+function bkProg(){ try { return JSON.parse(localStorage.getItem('book_p_' + SID) || '{}'); } catch(e) { return {}; } }
+function bkProgSet(n, v){
+  if (TEACHER || IS_DEMO) return;
+  try { const m = bkProg(); m[n] = v; localStorage.setItem('book_p_' + SID, JSON.stringify(m)); } catch(e) {}
+}
+function bkLoad(){
+  if (BK.data) return Promise.resolve(BK.data);
+  if (BK.wait) return BK.wait;
+  const K = (window.BOOK_INDEX||{})[SID] || {};
+  BK.wait = new Promise((ok, no) => {
+    const s = document.createElement('script');
+    s.src = 'book/' + encodeURIComponent(SID) + '.js?v=' + encodeURIComponent((K.m||'') + (K.n||''));
+    s.onload = () => {
+      const B = window.BOOK_DATA;
+      if (B && (B.units||[]).length) { BK.data = B; ok(B); } else { BK.wait = null; no(new Error('empty')); }
+    };
+    s.onerror = () => { BK.wait = null; s.remove(); no(new Error('load')); };
+    document.head.appendChild(s);
+  });
+  return BK.wait;
+}
+function bkFind(n){
+  let hit = null;
+  ((BK.data||{}).units||[]).forEach(u => (u.items||[]).forEach(it => { if (!hit && it.n === n) hit = { u, it }; }));
+  return hit;
+}
+function bkLast(){
+  let m = 0;
+  ((BK.data||{}).units||[]).forEach(u => (u.items||[]).forEach(it => { if (it.n > m) m = it.n; }));
+  return m;
+}
+function bkOpen(n){
+  BK.msg = ''; BK.it = null;
+  if (!(n > 0)) { BK.msg = '막힌 문제 번호를 숫자로 적어 주세요.'; bkPaint(); return; }
+  BK.val = String(n);
+  document.querySelectorAll('.bk-jump input').forEach(i => { i.value = BK.val; });
+  BK.busy = !BK.data; if (BK.busy) bkPaint();
+  bkLoad().then(() => {
+    BK.busy = false;
+    const hit = bkFind(n);
+    if (!hit) { BK.msg = `${n}번은 이 교재에 없어요. 1번부터 ${bkLast()}번까지 있어요.`; bkPaint(); return; }
+    const steps = hit.it.s || [], p = bkProg()[n];
+    BK.it = hit.it; BK.unit = hit.u; BK.ans = (p === 'a');
+    BK.shown = p === 'a' ? steps.length : Math.min(steps.length, Math.max(1, +p || 0));
+    BK.cc = !steps.length;
+    logView(`교재 ${n}번 첫화면`);
+    if (!p && BK.shown) {
+      bkProgSet(n, BK.shown);
+      logView(`교재 ${n}번 힌트1`);
+      if (steps.length === 1) logView(`교재 ${n}번 풀이끝`);
+    }
+    if (BK.cc && (hit.u.concepts||[]).length) logView('교재 단원힌트 ' + hit.u.name);
+    bkPaint('open');
+  }).catch(() => {
+    BK.busy = false;
+    BK.msg = '교재 해설을 불러오지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.';
+    bkPaint();
+  });
+}
+function bkPanelHtml(){
+  if (BK.busy) return '<div class="bk-load">힌트를 불러오는 중…</div>';
+  if (!BK.it) return BK.msg ? `<div class="bk-msg" role="status">${esc(BK.msg)}</div>` : '';
+  const it = BK.it, u = BK.unit, n = it.n, steps = it.s || [], cs = u.concepts || [];
+  let h = `<div class="bk-item"><div class="bk-top"><b class="bk-no">${n}번</b><span class="bk-unit">${esc(u.name)}</span>${
+    BK_KIND[it.k] ? `<span class="bk-kind">${BK_KIND[it.k]}</span>` : ''}<button type="button" class="bk-x" data-bk="close">닫기 ✕</button></div>`;
+  if (!steps.length) h += `<div class="bk-note">${it.k === 'exam' ? '학교 기출 문제예요. 단계 풀이 대신' : '이 문제는 단계 풀이가 아직 없어요.'} <b>이 단원 힌트</b>부터 보고, 그래도 막히면 학원에서 같이 봐요.</div>`;
+  for (let i = 0; i < BK.shown; i++) {
+    h += `<div class="bk-step"><span class="bk-sl">${i+1}단계${i === steps.length-1 ? ' · 마무리' : ''}</span>${esc(steps[i])}</div>`;
+  }
+  if (BK.shown < steps.length) h += `<button type="button" class="bk-btn" data-bk="next">다음 단계 보기 (${BK.shown}/${steps.length})</button>`;
+  if (cs.length) {
+    h += `<button type="button" class="bk-btn soft" data-bk="cc" aria-expanded="${BK.cc}">💡 ${esc(u.name)} 단원 힌트 ${BK.cc ? '접기' : '보기'}</button>`;
+    if (BK.cc) h += `<div class="bk-cc">${cs.map(c => `<div class="bk-c"><b class="t">${esc(c[0])}</b><div class="b">${c[1]}</div></div>`).join('')}</div>`;
+  }
+  // 정답은 누른 단추가 있던 바로 그 자리에 뜬다(위쪽에 뜨면 화면 밖이라 안 보인다).
+  h += BK.ans ? `<div class="bk-ans"><b>정답</b>${esc(it.a || '교재 뒤 빠른 정답을 보세요')}</div>`
+              : `<button type="button" class="bk-btn ghost" data-bk="ans">${steps.length && BK.shown >= steps.length ? '정답 확인하기' : '정답만 확인하기'}</button>`;
+  h += `<div class="bk-nav">${bkFind(n-1) ? `<button type="button" data-bk="go" data-n="${n-1}">‹ ${n-1}번</button>` : '<span></span>'}${
+    bkFind(n+1) ? `<button type="button" data-bk="go" data-n="${n+1}">${n+1}번 ›</button>` : '<span></span>'}</div>`;
+  if (document.body.classList.contains('student-home-active')) h += '<button type="button" class="bk-ask" data-sh="nav" data-tab="questions">✋ 그래도 막히면 질문하기 →</button>';
+  return h + '</div>';
+}
+function bkMath(el){
+  if (window.renderMathInElement) renderMathInElement(el, { throwOnError:false,
+    delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}] });
+}
+// 힌트 자리를 다시 그린다. why 가 있으면(방금 아이가 누른 것) 새로 열린 줄이 아래 메뉴에 가리지 않게만 민다.
+function bkPaint(why){
+  let live = null;
+  document.querySelectorAll('[data-bk-panel]').forEach(el => {
+    el.innerHTML = bkPanelHtml(); bkMath(el);
+    if (el.offsetParent !== null) live = el;
+  });
+  if (!live || !why) return;
+  if (why === 'open') {
+    const band = live.closest('.sh-book, .bookbar') || live;
+    band.scrollIntoView({ block:'start' });   // 부드럽게 밀면 폰 자판이 내려가는 도중에 끊긴다 — 바로 옮긴다
+    return;
+  }
+  const steps = live.querySelectorAll('.bk-step');
+  const top = why === 'next' ? steps[steps.length-1] : live.querySelector(why === 'ans' ? '.bk-ans' : '.bk-cc');
+  if (!top) return;
+  const end = (why === 'next' && live.querySelector('[data-bk="next"]')) || top;
+  const nav = document.getElementById('student-home-nav');
+  const room = window.innerHeight - (nav ? nav.getBoundingClientRect().height + 28 : 12);
+  const a = top.getBoundingClientRect().top - 12, b = end.getBoundingClientRect().bottom - room;
+  if (b > 0 && a > 0) window.scrollBy(0, Math.min(a, b));
+}
+// 번호 칸·힌트 단추는 화면이 다시 그려져도 살아 있어야 하니 문서에 한 번만 건다(우리 집 띠·오답노트 칸 공용).
 document.addEventListener('submit', e => {
   const f = e.target.closest ? e.target.closest('.bk-jump') : null;
   if (!f) return;
   e.preventDefault();
-  location.href = bookUrl(parseInt(f.querySelector('input').value, 10));
+  const inp = f.querySelector('input');
+  inp.blur();   // 폰 자판을 내려야 방금 열린 힌트가 보인다
+  bkOpen(parseInt(inp.value, 10));
+});
+document.addEventListener('input', e => {
+  if (e.target.closest && e.target.closest('.bk-jump')) BK.val = String(e.target.value || '').replace(/\D/g, '');
+});
+document.addEventListener('focusin', e => {
+  if (e.target.closest && e.target.closest('.bk-jump')) bkLoad().catch(() => {});
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest ? e.target.closest('[data-bk]') : null;
+  if (!b || b.disabled) return;
+  const a = b.dataset.bk, it = BK.it;
+  if (a === 'close') { BK.it = null; BK.msg = ''; bkPaint(); return; }
+  if (a === 'go') { bkOpen(+b.dataset.n); return; }
+  if (!it) return;
+  const steps = it.s || [];
+  if (a === 'next' && BK.shown < steps.length) {
+    BK.shown += 1;
+    if (bkProg()[it.n] !== 'a') bkProgSet(it.n, BK.shown);
+    logView(`교재 ${it.n}번 힌트${BK.shown}`);
+    if (BK.shown === steps.length) logView(`교재 ${it.n}번 풀이끝`);
+  } else if (a === 'ans') {
+    BK.ans = true; bkProgSet(it.n, 'a');
+    logView(`교재 ${it.n}번 정답${BK.shown ? '' : '만'}`);
+  } else if (a === 'cc') {
+    BK.cc = !BK.cc;
+    if (BK.cc) logView('교재 단원힌트 ' + BK.unit.name);
+  } else return;
+  bkPaint(a);
 });
 
 // 🏫 학교 카드 — 2026-08-28 원장 승인(공개 repo에 토큰↔학교 결합 생김을 알고 승인).
@@ -651,7 +837,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261120-153419';
+const BUILD = '20261120-180330';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -865,6 +1051,7 @@ function render(){
       <div id="pending" class="pending" style="display:none"></div>
       ${freeAskHtml(D)}
       ${footHtml()}`;   /* 채점 전에도 물어볼 수 있어야 한다 (2026-08-25 (나)) */
+    app.querySelectorAll('[data-bk-panel]').forEach(bkMath);   // 열려 있던 교재 힌트의 수식
     renderPending(qGet().length);
     flushQueue(renderPending);
     return;
@@ -1623,7 +1810,7 @@ document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP)
 <script src="student-home-persona.js?v=20261028"></script>
 <script src="student-home-cat.js?v=20261028"></script>
 <script src="student-home-feed.js?v=20261011"></script>
-<script src="student-home.js?v=20261120"></script>
+<script src="student-home.js?v=20261120b"></script>
 </body>
 </html>
 
