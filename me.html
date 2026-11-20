@@ -169,6 +169,18 @@
     padding:3px 9px; font-weight:700; }
   .school .meal { font-size:.9rem; color:var(--body); line-height:1.7; margin-top:8px; }
   .school .meal b { color:var(--weakfg); }
+  /* 📘 시험 대비 교재 칸 (2026-11-20) — 맨 위에서 눈에 띄게, 번호를 적으면 바로 그 풀이로 */
+  .card.bookbar { border:2px solid var(--accent); background:#f5f9ff; }
+  .bookbar .bk-head { display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:700;
+    font-size:1.08rem; letter-spacing:-.3px; color:var(--ink); text-decoration:none; }
+  .bookbar .bk-dd { flex:0 0 auto; font-size:.78rem; background:var(--accent); color:#fff; border-radius:999px; padding:3px 10px; }
+  .bookbar .sub { margin-top:4px; }
+  .bk-jump { display:flex; gap:8px; margin-top:12px; }
+  .bk-jump input { flex:1 1 auto; min-width:0; height:48px; border:1px solid #c9dcf7; border-radius:14px; padding:0 14px;
+    font:inherit; font-size:1.02rem; background:#fff; color:var(--ink); }
+  .bk-jump button { flex:0 0 auto; height:48px; border:0; border-radius:14px; background:var(--accent); color:#fff;
+    font:inherit; font-weight:700; font-size:1rem; padding:0 18px; cursor:pointer; }
+  .bookbar .bk-all { display:inline-block; margin-top:10px; font-size:.9rem; color:var(--accent); text-decoration:none; }
   .foot { text-align:center; margin:28px 0 10px; color:var(--body); font-size:1rem; font-weight:700; letter-spacing:-.3px; }
   .foot img { width:160px; display:block; margin:0 auto 8px; opacity:.95;
     mix-blend-mode:multiply; /* 로고 PNG의 흰 배경을 회색 캔버스에 녹인다 */ }
@@ -487,16 +499,42 @@ function finalPlanHtml(){
 // 📘 시험 대비 교재 해설 — 2026-11-18 원장 "오답노트 프로그램에 기말대비교재 해설을 탑재해줘".
 //   화면·자료는 book.html + book/<토큰>.js (따로). 여기서는 그 토큰에 교재가 있을 때 들어가는 카드만 띄운다.
 //   book_index.js 가 없거나 못 읽어도 이 카드만 안 보일 뿐 나머지는 그대로다.
+//   🔴 2026-11-20 원장 "교재 풀이를 찾는 게 쉽지 않다 — 위치를 지정하거나 교재란을 따로". 실측(11-18 14시~11-20):
+//   해설이 올라간 20명 중 오답노트를 연 아이 3명(16회), 교재 해설까지 간 아이 0명. 카드가 도장판·학교 카드
+//   아래에 묻혀 있었다 → 맨 위(⭐ 위)로 올리고, **종이 교재 번호를 적으면 바로 그 풀이**로 간다.
+//   우리 집 화면의 교재 띠·아래 메뉴 「교재」 칸(student-home.js)도 같은 주소·같은 번호 칸(.bk-jump)을 쓴다.
+function bookUrl(n){
+  return 'book.html?s=' + encodeURIComponent(SID) + (TEACHER ? '&v=t' : '') + (n > 0 ? '&n=' + n : '');
+}
+function bookDday(d){
+  if (!d) return '';
+  const t = new Date(); t.setHours(0,0,0,0);
+  const x = new Date(d + 'T00:00:00'); if (isNaN(x)) return '';
+  const n = Math.round((x - t) / 864e5);
+  return n > 0 ? 'D-' + n : (n === 0 ? 'D-DAY' : '');
+}
 function bookHtml(){
   const K = (window.BOOK_INDEX||{})[SID];
   if (!K) return '';
-  const u = 'book.html?s=' + encodeURIComponent(SID) + (TEACHER ? '&v=t' : '');
+  const dd = bookDday(K.d), max = +K.n || 0;
   return `
-  <a class="card" href="${u}" style="display:block;text-decoration:none;color:inherit">
-    <div class="qhead">📘 ${esc(K.t||'시험 대비 교재')} 해설</div>
-    <div class="sub" style="margin-top:6px">종이 교재 ${esc(K.n||'')}문항 · 단원 힌트 → 한 단계씩 → 정답. 막힌 번호만 찾아 보세요 ›</div>
-  </a>`;
+  <div class="card bookbar" id="bookbar">
+    <a class="bk-head" href="${bookUrl()}"><span>📘 ${esc(K.t||'시험 대비 교재')} 풀이</span>${dd?`<span class="bk-dd">${dd}</span>`:''}</a>
+    <div class="sub">종이 교재에서 막힌 번호를 적으면 힌트부터 한 단계씩 보여줘요.</div>
+    <form class="bk-jump" novalidate>
+      <input type="number" inputmode="numeric" min="1" ${max?`max="${max}"`:''} placeholder="막힌 번호${max?` (1~${max})`:''}" aria-label="교재 문제 번호">
+      <button type="submit">풀이 보기</button>
+    </form>
+    <a class="bk-all" href="${bookUrl()}">단원별로 전체 보기 ›</a>
+  </div>`;
 }
+// 번호 칸은 화면이 다시 그려져도 살아 있어야 하니 문서에 한 번만 건다(우리 집 띠·오답노트 칸 공용).
+document.addEventListener('submit', e => {
+  const f = e.target.closest ? e.target.closest('.bk-jump') : null;
+  if (!f) return;
+  e.preventDefault();
+  location.href = bookUrl(parseInt(f.querySelector('input').value, 10));
+});
 
 // 🏫 학교 카드 — 2026-08-28 원장 승인(공개 repo에 토큰↔학교 결합 생김을 알고 승인).
 //   급식·D-day 는 학생이 학교를 고르지 않아도 자기 학교 것이 그냥 뜬다(명단 정본에 이미 있으니까).
@@ -613,7 +651,7 @@ function replyBody(t){
 //   · 저장은 이 기기 localStorage — **정본 아님**. 기기를 바꾸면 한 번 더 NEW 로 보일 뿐.
 //   · 원장 화면(TEACHER)에는 안 뜬다 — 아이 것을 원장이 대신 읽어치우면 안 되니까.
 // 🔖 배포 표식 — pre-commit 훅이 me.html 을 커밋할 때마다 자동으로 올린다(사람이 기억하지 않는다).
-const BUILD = '20261118-135042';
+const BUILD = '20261120-153419';
 // 🔄 페이지 캐시 무효화 (2026-09-13) — GitHub Pages 는 me.html 도 max-age=600 으로 준다.
 //   09-13 실측: 이다연 18:55~19:02 "오답노트 열기" 8회 = 답이 올라와 있는데 옛 화면을 보던 구간.
 //   (데이터는 refreshData 가 맡지만 페이지 파일 자체는 그대로였다)
@@ -821,8 +859,8 @@ function render(){
   if (D.대기) {
     app.innerHTML = `${noticeHtml()}<div class="nav">${rlink('▶ 유형별 강의')}</div>
       <h1>📕 나의 오답노트</h1>
-      ${schoolHtml()}
       ${bookHtml()}
+      ${schoolHtml()}
       <div class="card empty">일일테스트 채점이 끝나면<br>여기에 <b>내 오답 + 유사문제 재도전 + 강의</b>가 올라옵니다.${RC?`<br><br>그동안 ${rlink('유형별 강의')}로 복습해두세요!`:''}</div>
       <div id="pending" class="pending" style="display:none"></div>
       ${freeAskHtml(D)}
@@ -865,11 +903,12 @@ function render(){
       </div>
     </div>
     <!-- 🎨 2026-10-09 순서: 할 일(⭐) → 도장판 → 학교·플랜 → 목록. 아이 화면 원칙 "다음에 뭘 할지"가 맨 위 -->
+    <!-- 📘 2026-11-20 시험 대비 교재가 있는 동안은 교재 칸이 ⭐ 보다 위(실측: 아래에 있을 때 열람 0명) -->
+    ${bookHtml()}
     ${todayHtml}
     ${rewardHtml()}
 
     ${schoolHtml()}
-    ${bookHtml()}
     ${questHtml()}
     ${finalPlanHtml()}
 
@@ -1584,7 +1623,7 @@ document.addEventListener('DOMContentLoaded', function(){ render(); jumpTo(JUMP)
 <script src="student-home-persona.js?v=20261028"></script>
 <script src="student-home-cat.js?v=20261028"></script>
 <script src="student-home-feed.js?v=20261011"></script>
-<script src="student-home.js?v=20261028"></script>
+<script src="student-home.js?v=20261120"></script>
 </body>
 </html>
 

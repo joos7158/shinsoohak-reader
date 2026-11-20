@@ -17,3 +17,15 @@ body.student-home-active{--ink:#574c53;--muted:#8a7a81;--pink:#e999ae;--line:#ef
 .cute-room .kitten-character{transform-origin:200px 275px;animation:sh-breathe 3.4s ease-in-out infinite}
 @keyframes sh-breathe{50%{transform:scale(1.018,1.028)}}
 @media(prefers-reduced-motion:reduce){.cute-room .kitten-character{animation:none}}
+/* 2026-11-20 시험 대비 교재 칸 — 우리 집 첫 화면 띠 + 아래 메뉴 「교재」 */
+.sh-book{border:2px solid #bcd3f7;border-radius:24px;padding:18px 20px;background:#eef5ff;margin:0 0 20px}
+.sh-book .sh-section>b{font-size:16px;color:#34507f}.sh-book .sh-tag{background:#5a86d6;color:#fff;font-weight:700}
+#student-home .sh-book p{margin:6px 0 12px;font-size:13px;color:#5d6f8c}
+#student-home .bk-jump{display:flex;gap:8px;margin:0}
+#student-home .bk-jump input{flex:1 1 auto;min-width:0;height:48px;border:1px solid #bcd3f7;border-radius:15px;padding:0 14px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+#student-home .bk-jump button{flex:0 0 auto;height:48px;padding:0 18px;background:#5a86d6!important;color:#fff!important;font-weight:700!important;box-shadow:0 3px 0 #436bb5}
+#student-home .sh-book-all{margin-top:8px;padding:0 4px;font-size:13px!important;color:#4a76c9!important;min-height:36px}
+#student-home-nav button[data-tab=book]{color:#3f6cc4;font-weight:700}
+@media(max-width:420px){#student-home-nav button{font-size:10px;letter-spacing:-.3px}#student-home-nav button span{font-size:20px}}
+#student-home-toolbar{flex-wrap:wrap}#student-home-toolbar button{white-space:nowrap}#student-home-toolbar button[data-tab=book]{background:#e3edff;color:#3f6cc4;font-weight:700}
+@media(max-width:420px){#student-home-toolbar{gap:6px}#student-home-toolbar button{padding:8px 11px}}

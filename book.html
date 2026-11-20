@@ -31,6 +31,13 @@
                   padding:9px 14px; font-size:.92rem; font-weight:600; min-height:44px; cursor:pointer; white-space:nowrap; }
   .units button.on { background:var(--accent); border-color:var(--accent); color:#fff; }
   .units button .c { font-weight:400; opacity:.75; margin-left:4px; font-size:.82rem; }
+  /* 2026-11-20 원장 "풀이를 찾는 게 쉽지 않다" — 번호만 적으면 단원을 몰라도 바로 그 풀이로 간다 */
+  .jump { display:flex; gap:8px; margin-top:12px; }
+  .jump input { flex:1 1 auto; min-width:0; height:48px; border:1px solid #c9dcf7; border-radius:14px; padding:0 14px;
+                font:inherit; font-size:1.02rem; background:#fff; color:var(--ink); }
+  .jump button { flex:0 0 auto; height:48px; border:0; border-radius:14px; background:var(--accent); color:#fff;
+                 font:inherit; font-weight:700; font-size:1rem; padding:0 18px; cursor:pointer; }
+  .jmsg { color:#d9480f; font-size:.88rem; margin-top:8px; }
   details.uh { background:#fff; border-radius:20px; padding:4px 18px; margin-bottom:12px; }
   details.uh summary { cursor:pointer; list-style:none; font-weight:700; padding:14px 0; min-height:44px; }
   details.uh summary::-webkit-details-marker { display:none; }
@@ -106,7 +113,7 @@ var PKEY = 'book_p_' + SID, UKEY = 'book_u_' + SID;
 function pget() { try { return JSON.parse(localStorage.getItem(PKEY) || '{}'); } catch (e) { return {}; } }
 function pset(n, v) { try { var m = pget(); m[n] = v; localStorage.setItem(PKEY, JSON.stringify(m)); } catch (e) {} }
 
-var B = null, U = 0, CUR = null, SHOWN = 0, ANS = false;
+var B = null, U = 0, CUR = null, SHOWN = 0, ANS = false, JMSG = '';
 var KIND = { exam: '학교 기출', school: '학교 자료', own: '' };
 
 function dday(d) {
@@ -125,8 +132,9 @@ function render() {
   var prog = pget();
   var chips = B.units.map(function (u, i) {
     return '<button class="' + (i === U ? 'on' : '') + '" data-u="' + i + '">' + esc(u.name) +
-           '<span class="c">' + u.items.length + '</span></button>';
+           '<span class="c">' + span(u) + '</span></button>';
   }).join('');
+  var last = lastNo();
   var cc = (unit.concepts || []).map(function (c) {
     return '<div class="cc"><b class="t">' + esc(c[0]) + '</b><div class="b">' + c[1] + '</div></div>';
   }).join('');
@@ -136,9 +144,12 @@ function render() {
     return '<button class="' + cls + '" data-n="' + it.n + '">' + it.n + '</button>';
   }).join('');
   app.innerHTML =
-    '<div class="top"><a href="' + back + '">← 오답노트</a><span class="sub">종이 교재의 번호로 찾아요</span></div>' +
+    '<div class="top"><a href="' + back + '">← 처음 화면</a><span class="sub">종이 교재의 번호로 찾아요</span></div>' +
     '<div class="card"><h1>📘 ' + esc(B.title) + (dd ? '<span class="dday">' + dd + '</span>' : '') + '</h1>' +
-      '<div class="how">먼저 혼자 풀어 보고, 막히면 <b>한 단계씩</b>만 열어 보세요. 답부터 보면 시험장에서 손이 안 움직여요.</div></div>' +
+      '<div class="how">먼저 혼자 풀어 보고, 막히면 <b>한 단계씩</b>만 열어 보세요. 답부터 보면 시험장에서 손이 안 움직여요.</div>' +
+      '<form class="jump" id="jump" novalidate><input id="jn" type="number" inputmode="numeric" min="1" max="' + last +
+        '" placeholder="막힌 번호 (1~' + last + ')" aria-label="교재 문제 번호"><button type="submit">풀이 보기</button></form>' +
+      (JMSG ? '<div class="jmsg" role="status">' + esc(JMSG) + '</div>' : '') + '</div>' +
     '<div class="units" id="units">' + chips + '</div>' +
     (cc ? '<details class="uh" id="uh"><summary>💡 ' + esc(unit.name) + ' — 단원 힌트</summary>' + cc + '</details>' : '') +
     '<div class="card"><div class="lab">문제 번호<span>' + esc(unit.name) + ' · ' + unit.items.length + '문항</span></div>' +
@@ -146,9 +157,16 @@ function render() {
       '<div class="legend"><i class="seen"></i>힌트 봄<i class="done"></i>정답 확인<i class="ex"></i>학교 기출</div></div>' +
     '<div id="panel"></div>' +
     '<div class="note">신수학 재원생 전용 · 교재를 받은 학생만 볼 수 있어요.<br>모르는 문제는 오답노트에서 언제든 질문하세요 — 선생님만 봐요.</div>';
+  // 고른 단원 칩이 가로 줄 밖에 있으면 보이는 자리로 민다(번호로 넘어오면 뒤쪽 단원일 때가 많다).
+  var row = document.getElementById('units'), on = row.querySelector('button.on');
+  if (on) row.scrollLeft = Math.max(0, on.offsetLeft - row.offsetLeft - (row.clientWidth - on.offsetWidth) / 2);
+  document.getElementById('jump').onsubmit = function (e) {
+    e.preventDefault();
+    jumpTo(parseInt(document.getElementById('jn').value, 10), '번호찾기');
+  };
   document.getElementById('units').onclick = function (e) {
     var b = e.target.closest('button'); if (!b) return;
-    U = +b.getAttribute('data-u'); CUR = null; SHOWN = 0; ANS = false;
+    U = +b.getAttribute('data-u'); CUR = null; SHOWN = 0; ANS = false; JMSG = '';
     try { localStorage.setItem(UKEY, String(U)); } catch (x) {}
     render(); window.scrollTo(0, 0);
   };
@@ -161,9 +179,40 @@ function render() {
   if (CUR) panel();
 }
 
+// 단원 칩에 그 단원의 번호 범위를 보여 준다(번호가 이어져 있을 때만 — 아니면 문항 수).
+function span(u) {
+  var it = u.items || [];
+  if (!it.length) return '0';
+  for (var i = 1; i < it.length; i++) if (it[i].n !== it[i - 1].n + 1) return it.length + '문항';
+  return it.length === 1 ? it[0].n + '번' : it[0].n + '~' + it[it.length - 1].n;
+}
+function lastNo() {
+  var m = 0;
+  B.units.forEach(function (u) { u.items.forEach(function (it) { if (it.n > m) m = it.n; }); });
+  return m;
+}
+// 번호만으로 찾기 — 그 번호가 든 단원으로 옮겨서 바로 연다. 없는 번호면 안내만 한다.
+function jumpTo(n, how) {
+  var found = -1;
+  if (n > 0) B.units.forEach(function (u, i) {
+    u.items.forEach(function (it) { if (it.n === n && found < 0) found = i; });
+  });
+  if (found < 0) {
+    JMSG = (n > 0 ? n + '번은 이 교재에 없어요. ' : '') + '1번부터 ' + lastNo() + '번까지 있어요.';
+    render();
+    return false;
+  }
+  JMSG = '';
+  U = found;
+  try { localStorage.setItem(UKEY, String(U)); } catch (x) {}
+  log('교재 ' + n + '번 ' + how);
+  openItem(n);
+  return true;
+}
+
 function openItem(n) {
   var unit = B.units[U];
-  CUR = null;
+  CUR = null; JMSG = '';
   for (var i = 0; i < unit.items.length; i++) if (unit.items[i].n === n) CUR = unit.items[i];
   if (!CUR) return;
   var p = pget()[n];
@@ -233,7 +282,9 @@ function fail(msg) {
     B = window.BOOK_DATA;
     if (!B || !(B.units || []).length) return fail('교재 해설을 불러오지 못했어요. 잠시 뒤 다시 열어 주세요.');
     try { U = Math.min(+(localStorage.getItem(UKEY) || 0) || 0, B.units.length - 1); } catch (e) { U = 0; }
-    var go = function () { render(); log('교재 열기'); };
+    // ?n=37 — 우리 집·오답노트의 번호 칸에서 넘어온 경우: 그 번호의 단원으로 가서 바로 연다.
+    var want = parseInt(QS.get('n') || '', 10);
+    var go = function () { log('교재 열기'); if (!(want > 0) || !jumpTo(want, '바로가기')) render(); };
     if (window.renderMathInElement) go(); else window.addEventListener('load', go);
   };
   s.onerror = function () { fail('교재 해설을 불러오지 못했어요. 인터넷 연결을 확인하고 다시 열어 주세요.'); };
