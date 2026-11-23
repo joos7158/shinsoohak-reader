@@ -2146,12 +2146,10 @@ window.ME_DATA = {
   "자유답변": []
  },
  "NMo53UgyQxZ-PlLwoWaQiQ": {
-  "대기": true,
-  "리더코드": ""
+  "닫힘": true
  },
  "SY8OnpfaRwmJb7pmenzZvA": {
-  "대기": true,
-  "리더코드": ""
+  "닫힘": true
  },
  "HvtR5tsgR_p5hq3lWwUEwA": {
   "닫힘": true
@@ -2817,8 +2815,7 @@ window.ME_DATA = {
   "자유답변": []
  },
  "1Qlq0AOK91srR56Do-v28g": {
-  "대기": true,
-  "리더코드": ""
+  "닫힘": true
  },
  "two5_UoBGrOoKWv6uWq5-w": {
   "진도": "정적분의 활용",

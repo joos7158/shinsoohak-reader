@@ -226,29 +226,6 @@ window.ME_REWARDS = {
   ],
   "today": "2026-11-23"
  },
- "NMo53UgyQxZ-PlLwoWaQiQ": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
-  "today": "2026-11-23"
- },
- "SY8OnpfaRwmJb7pmenzZvA": {
-  "stamps": 2,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [
-   "2026-09-23",
-   "2026-09-28"
-  ],
-  "today": "2026-11-23"
- },
  "Bt0Gethtb19ScZineAI9AQ": {
   "stamps": 15,
   "redeemed": 1,
@@ -379,16 +356,6 @@ window.ME_REWARDS = {
    "2026-11-16",
    "2026-11-20"
   ],
-  "today": "2026-11-23"
- },
- "1Qlq0AOK91srR56Do-v28g": {
-  "stamps": 0,
-  "redeemed": 0,
-  "per": 10,
-  "gift": "편의점 5천원 기프티콘",
-  "days": [],
-  "gold": [],
-  "scan": [],
   "today": "2026-11-23"
  },
  "two5_UoBGrOoKWv6uWq5-w": {
