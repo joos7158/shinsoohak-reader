@@ -66,39 +66,39 @@ window.ME_DATA = {
   ]
  },
  "a2oUfrMpGPlQW0veGZoM5Q": {
-  "진도": "유리함수",
+  "진도": "절대부등식",
   "상태": "many",
   "오답": [
    {
-    "유형": "유리함수 y=k/x의 그래프",
+    "유형": "명제와 진리집합(포함 관계)",
     "문제": {
-     "stem": "함수 $\\displaystyle f(x) = \\frac{k}{x}$ ($k \\ne 0$)에 대하여 <보기>에서 옳은 것만을 있는 대로 고른 것은? \\n ㄱ. 함수 $y = f(x)$의 그래프는 원점에 대하여 대칭이다. ㄴ. $|k|$의 값이 클수록 곡선 $y = f(x)$는 원점에 가까워진다. ㄷ. 함수 $f(x)$의 역함수는 $\\displaystyle y = \\frac{k}{x}$이다.",
+     "stem": "두 조건 $p, q$의 진리집합을 각각 $P, Q$라고 하자. $\\sim p \\Rightarrow q$일 때, 다음 중 항상 옳은 것은?",
      "choices": [
-      "① ㄱ",
-      "② ㄱ, ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① $Q \\subset P$",
+      "② $P ^{c} -Q=P$",
+      "③ $P \\cap Q ^{c} =P$",
+      "④ $P ^{c} \\cup Q=Q$",
+      "⑤ $P ^{c} \\subset Q ^{c}$"
      ],
-     "answer": "③",
-     "id": "ngd_gs_92b64a8bc4",
-     "출처": "학교 기출(족보)",
-     "해설": "ㄱ. 함수 \\(\\displaystyle f \\left(x \\right)= \\frac{k}{x}\\)에서 점근선의 방정식은 \\(x=0 , y=0\\)이므로 \\(y=f \\left(x \\right)\\)의 그래프는 원점에 대하여 대칭이다. (참)\nㄴ. \\(\\left| k \\right|\\)의 값이 클수록 곡선 \\(y=f \\left(x \\right)\\)는 원점에서 멀어진다. (거짓)\nㄷ. \\(\\displaystyle y= \\frac{k}{x}\\)에서 \\(xy=k\\), \\(\\displaystyle x= \\frac{k}{y}\\) \\(\\therefore\\)\\(\\displaystyle f ^{-1} \\left(x \\right)= \\frac{k}{x}\\) (참)\n이상에서 옳은 것은 ㄱ, ㄷ이다."
+     "answer": "④",
+     "id": "ngd_306ff32f5c",
+     "출처": "오금고 기출 2020",
+     "해설": "④\n주어진 조건에서 \\(\\sim p \\rightarrow q\\)이므로 \\(P ^{c} \\subset Q\\)이므로"
     },
-    "내답": "(미표기)",
+    "내답": "③",
     "유사": {
-     "stem": "유리함수 $\\displaystyle y = \\frac{k}{x}$ ($k \\ne 0$)의 그래프에 대한 설명으로 옳은 것만을 <보기>에서 있는 대로 고른 것은? \\n ㄱ. 정의역과 치역은 실수 전체의 집합이다. ㄴ. $k > 0$이면 그래프는 제1사분면, 제3사분면에 있다. ㄷ. $y$축에 대하여 대칭이다. ㄹ. $|k|$의 값이 클수록 그래프는 원점에서 멀어진다. ㅁ. 점근선은 $x$축과 $y$축이다.",
+     "stem": "두 조건 $p, q$의 진리집합을 각각 $P, Q$라고 하자. $\\sim p \\Rightarrow q$일 때, 항상 옳은 것은?",
      "choices": [
-      "① ㄱ",
-      "② ㄴ, ㅁ",
-      "③ ㄴ, ㄷ",
-      "④ ㄱ, ㄷ, ㄹ",
-      "⑤ ㄴ, ㄹ, ㅁ"
+      "①  $Q{\\subset}P$",
+      "②  $Q ^{ c} \\subset P ^{ c}$",
+      "③  $P{\\cap}Q ^{ c} =P$",
+      "④  $P ^{ c} {\\cup}Q=P ^{ c}$",
+      "⑤  $P ^{ c} -Q=\\emptyset$"
      ],
      "answer": "⑤",
-     "id": "ngd_gs_20b4cfe900",
-     "출처": "학교 기출(족보)",
-     "해설": "ㄱ, 정의역은 \\(0\\)을 제외한 실수 전체 집합니다.\nㄷ. \\(y=x\\)에 의한 선대칭, \\((0, 0)\\)에 의한 점대칭이다.\nㄱ과 ㄷ을 제외한 ㄴ. ㄹ. ㅁ.은 참"
+     "id": "ngd_b8fab3a92d",
+     "출처": "동백고 기출 2020",
+     "해설": "⑤\n\\(P ^{c} {\\subset}Q\\)이므로 집합으로 표현해보면 다음과 같다.\n\\(\\therefore\\)빗금친 부분이 \\(P\\)이므로 ⑤ \\(P ^{c} -Q=P ^{c} {\\cap}Q ^{c} = \\left( P{\\cup}Q \\right) ^{c}\\)이므로 \\(\\left( P \\cup Q \\right) ^{c} =\\varnothing\\)\n\\(\\therefore\\)⑤가 항상 옳다."
     },
     "강의": null,
     "답변": []
@@ -119,7 +119,7 @@ window.ME_DATA = {
      "출처": "효문고 기출 2022",
      "해설": "\\(\\displaystyle y=\\dfrac{12}{2x-4}=\\dfrac{6}{x-2}\\) 로 변형된다.\n\\(x,y\\) 가 모두 정수이려면 \\(x-2\\) 가 \\(6\\) 의 약수여야 한다.\n\\(6\\) 의 약수는 \\(\\pm1, \\pm2, \\pm3, \\pm6\\) 으로 총 \\(8\\) 개이다.\n\\(x-2\\) 가 이 각각의 값을 가질 때마다 \\(x\\) 가 정수로 하나씩 정해지고, 그에 대응하는 \\(\\displaystyle y=\\dfrac{6}{x-2}\\) 도 정수로 하나씩 정해진다.\n따라서 조건을 만족하는 점 \\((x,y)\\) 는 \\(8\\) 개이다.\n따라서 정답은 ④ 이다."
     },
-    "내답": "(미표기)",
+    "내답": "blank",
     "유사": {
      "stem": "함수 $\\displaystyle y= \\frac{8x-9}{4x+3}$의 그래프 위의 점 중 $x, y$좌표가 모두 정수인 점의 개수는?",
      "choices": [
@@ -140,20 +140,20 @@ window.ME_DATA = {
    {
     "유형": "유리함수와 거리(거리의 합 최솟값)",
     "문제": {
-     "stem": "함수 $\\displaystyle y= \\frac{18}{2x-3}$ $\\displaystyle (x > \\frac{3}{2})$의 그래프와 직선 $y= -x-3$이 있다. 함수 $y=f(x)$의 그래프 위의 점 P를 지나고 x축에 수직인 직선이 직선 $y=-x-3$과 만나는 점을 Q라 하자. 선분 PQ 길이의 최솟값과 그때의 점 P의 x좌표의 합은?",
+     "stem": "정의역이 $\\displaystyle \\left\\{ x \\mid x > \\frac{1}{2} \\right\\}$ 인 함수 $\\displaystyle y=\\frac{8}{2x-1}$의 그래프 위의 점 $\\mathrm{P}$에서 $x$축, $y$축에 내린 수선의 발을 각각 $\\mathrm{Q}$, $\\mathrm{R}$라 할 때, $\\overline{\\mathrm{PQ}} + \\overline{\\mathrm{PR}}$의 최솟값은?",
      "choices": [
-      "① $15$",
-      "② $16$",
-      "③ $17$",
-      "④ $18$",
-      "⑤ $19$"
+      "①  $\\displaystyle \\frac{5}{2}$",
+      "②  $3$",
+      "③  $\\displaystyle \\frac{7}{2}$",
+      "④  $4$",
+      "⑤  $\\displaystyle \\frac{9}{2}$"
      ],
-     "answer": "①",
-     "id": "ngd_gs_174428f0ba",
-     "출처": "학교 기출(족보)",
-     "해설": "함수는 \\(\\displaystyle y=f(x)=\\frac{18}{2x-3}\\) \\(\\displaystyle (x>\\frac32)\\)이고, 점 P는 \\(\\displaystyle \\mathrm{P}=\\left(t,\\ \\frac{18}{2t-3}\\right)\\) \\(\\displaystyle \\left(t>\\frac32\\right)\\)로 놓을 수 있다. 같은 x좌표를 갖는 직선 위의 점은 \\(\\mathrm{Q}=(t,\\ -t-3)\\)이다.\n\\(\\displaystyle t>\\frac32\\)이면 \\(\\displaystyle \\frac{18}{2t-3}>0\\)이고 \\(\\displaystyle -t-3<-\\frac92<0\\)이므로 P가 Q보다 항상 위쪽에 있다. 따라서\n\\[\\overline{\\mathrm{PQ}} = \\frac{18}{2t-3} - (-t-3) = \\frac{18}{2t-3} + t + 3.\\]\n\\(u=2t-3>0\\)으로 치환하면 \\(\\displaystyle t=\\dfrac{u+3}{2}\\)이므로\n\\[\\overline{\\mathrm{PQ}} = \\frac{18}{u} + \\frac{u+3}{2} + 3 = \\frac{18}{u} + \\frac{u}{2} + \\frac{9}{2}.\\]\n산술-기하평균을 이용하면\n\\[\\frac{18}{u} + \\frac{u}{2} \\ge 2\\sqrt{\\frac{18}{u}\\cdot\\frac{u}{2}} = 2\\sqrt{9} = 6,\\]\n등호는 \\(\\displaystyle \\dfrac{18}{u}=\\dfrac{u}{2}\\), 즉 \\(u^2=36\\)에서 \\(u=6\\)일 때 성립한다.\n따라서 최솟값은 \\(\\displaystyle \\overline{\\mathrm{PQ}}_{\\min} = 6 + \\dfrac{9}{2} = \\dfrac{21}{2}\\)이고, 이때 \\(\\displaystyle t = \\dfrac{u+3}{2} = \\dfrac{6+3}{2} = \\dfrac{9}{2}\\)이다.\n구하는 값은 최솟값과 그때의 x좌표의 합이므로\n\\[\\frac{21}{2} + \\frac{9}{2} = \\frac{30}{2} = 15.\\]\n따라서 정답은 ① 이다."
+     "answer": "⑤",
+     "id": "ngd_18b8939763",
+     "출처": "하남고 기출 2020",
+     "해설": "점 \\(\\mathrm{P}\\)의 좌표를 \\(\\displaystyle \\left(x,\\, \\frac{8}{2x-1}\\right)\\)으로 놓자. 정의역 조건에서 \\(\\displaystyle x > \\frac{1}{2}\\)이므로 \\(2x-1>0\\), \\(y>0\\)이다.\n\\(\\mathrm{Q}\\)는 \\(\\mathrm{P}\\)에서 \\(x\\)축에 내린 수선의 발이므로 \\(\\displaystyle \\overline{\\mathrm{PQ}} = y = \\frac{8}{2x-1}\\)\n\\(\\mathrm{R}\\)은 \\(\\mathrm{P}\\)에서 \\(y\\)축에 내린 수선의 발이므로 \\(\\overline{\\mathrm{PR}} = x\\)\n따라서 최솟값을 구할 식은\n\\[f(x) = x + \\frac{8}{2x-1} \\quad \\left(x > \\frac{1}{2}\\right)\\]\n\\(t = 2x-1 > 0\\)으로 치환하면 \\(\\displaystyle x = \\frac{t+1}{2}\\)이므로\n\\[f = \\frac{t+1}{2} + \\frac{8}{t} = \\frac{1}{2} + \\frac{t}{2} + \\frac{8}{t}\\]\nAM-GM 부등식을 \\(\\displaystyle \\frac{t}{2}\\)와 \\(\\displaystyle \\frac{8}{t}\\)에 적용하면\n\\[\\frac{t}{2} + \\frac{8}{t} \\geq 2\\sqrt{\\frac{t}{2} \\cdot \\frac{8}{t}} = 2\\sqrt{4} = 4\\]\n등호 조건: \\(\\displaystyle \\frac{t}{2} = \\frac{8}{t}\\) \\(\\Rightarrow\\) \\(t^2 = 16\\) \\(\\Rightarrow\\) \\(t = 4\\) (즉 \\(\\displaystyle x = \\frac{5}{2}\\))\n\\[f_{\\min} = \\frac{1}{2} + 4 = \\frac{9}{2}\\]\n검증: \\(\\displaystyle x = \\frac{5}{2}\\)일 때 \\(\\displaystyle y = \\frac{8}{4} = 2\\)이므로 \\(\\displaystyle \\overline{\\mathrm{PQ}}+\\overline{\\mathrm{PR}} = \\frac{5}{2}+2 = \\frac{9}{2}\\) ✓\n따라서 정답은 ⑤ 이다."
     },
-    "내답": "(미표기)",
+    "내답": "blank",
     "유사": {
      "stem": "함수 $\\displaystyle y= \\frac{16}{x-2} (x>2)$의 그래프 위의 점 $\\mathrm{P}$에서 $x$축, $y$축에 내린 수선의 발을 각각 $\\mathrm{Q}, \\mathrm{R}$라 할 때, $\\mathrm{\\overline{PQ}} + {\\overline{\\mathrm{PR}}}$의 최솟값은?",
      "choices": [
@@ -172,60 +172,6 @@ window.ME_DATA = {
      0,
      0
     ],
-    "답변": []
-   },
-   {
-    "유형": "무리함수의 역함수(식 구하기)",
-    "문제": {
-     "stem": "함수 $f \\left( x \\right) =\\sqrt{2x-4}$에 대하여 $f ^{-1} \\left( \\sqrt{6} \\right)$의 값은?",
-     "choices": [
-      "①  $\\sqrt{23}$",
-      "②  $2\\sqrt{6}$",
-      "③  $5$",
-      "④  $\\sqrt{26}$",
-      "⑤  $3\\sqrt{3}$"
-     ],
-     "answer": "③",
-     "id": "ngd_4bcb8aae98",
-     "출처": "한가람고 기출 2020",
-     "해설": "\\(f^{-1}(\\sqrt{6}) = a\\)라고 하면, \\(f(a) = \\sqrt{6}\\)이다.\n\\(f(a) = \\sqrt{2a-4} = \\sqrt{6}\\)이므로,\n\\(2a-4=6\\), \\(\\therefore a=5\\)"
-    },
-    "내답": "(미표기)",
-    "유사": {
-     "stem": "함수 $f(x)=\\sqrt{2x-6}$에 대하여 $f^{-1}(\\sqrt{10})$의 값은?",
-     "choices": [
-      "① $8$",
-      "② $\\sqrt{14}$",
-      "③ $5$",
-      "④ $2$",
-      "⑤ $10$"
-     ],
-     "answer": "①",
-     "id": "var_ngd_4bcb8aae98_20260802_1",
-     "해설": "\\(f^{-1}(\\sqrt{10})=a\\)라 하면 \\(f(a)=\\sqrt{10}\\)이다. \\(f(a)=\\sqrt{2a-6}=\\sqrt{10}\\)이므로 양변을 제곱하면 \\(2a-6=10\\)이다. \\(2a=16\\)이므로 \\(\\therefore a=8\\)이다. (오답 ②는 역함수를 착각해 \\(f(10)=\\sqrt{14}\\)를 계산한 경우, ③은 상수 \\(-6\\)을 무시해 \\(2a=10\\)으로 푼 경우, ④는 이항 부호를 반대로 적용해 \\(2a=10-6=4\\)로 푼 경우, ⑤는 역함수를 단순히 제곱으로 오해해 \\((\\sqrt{10})^2=10\\)이라 답한 경우이다.)"
-    },
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "유리함수가 서로 겹칠 조건",
-    "문제": {
-     "stem": "두 함수 $\\displaystyle f(x) = \\frac{1}{x} + a$, $\\displaystyle g(x) = -\\frac{1}{x-2} - a$가 있다. 정수 $a$에 대하여 두 곡선 $y = f(x)$, $y = g(x)$의 교점 중 $x$좌표가 양수인 점의 개수를 $h(a)$라 하자. 등식 $h(a) + h(a+1) + h(a+2) = 4$를 만족시키는 정수 $a$의 최솟값은?",
-     "choices": [
-      "① $-2$",
-      "② $-1$",
-      "③ $0$",
-      "④ 1",
-      "⑤ $2$"
-     ],
-     "answer": "②",
-     "id": "ngd_gs_1bdcaeea5f",
-     "출처": "학교 기출(족보)",
-     "해설": "(ⅰ) \\(a>0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(1\\)이다.\n(ⅱ) \\(a=0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(1\\)이다.\n(ⅲ) \\(a<0\\)일 때,\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)를 좌표평면에 나타내면 다음과 같다.\n두 곡선 \\(y=f \\left( x \\right)\\), \\(y=g \\left( x \\right)\\)의 교점 중 \\(x\\)좌표가 양수인 점은 \\(2\\)이다.\n(ⅰ) ~ (ⅲ)에 의하여 \\(h \\left( a \\right) = {\\begin{cases} 1&&&&\\left( a \\geq 0 \\right) \\\\ 2&&&&\\left( a<0 \\right) \\end{cases}}\\)\n연속하는 세 정수 \\(a\\), \\(a+1\\), \\(a+2\\)에 대하여 등식\n\\(h \\left( a \\right) +h \\left( a+1 \\right) +h \\left( a+2 \\right) =4\\)\\(\\cdots \\cdots\\)㉠\n가 성립하려면\n\\(h \\left( a \\right) =2\\), \\(h \\left( a+1 \\right) =1\\), \\(h \\left( a+2 \\right) =1\\)이어야 한다.\n이때, \\(h \\left( -1 \\right) =2\\), \\(h \\left( 0 \\right) =1\\), \\(h \\left( 1 \\right) =1\\)이므로 등식 ㉠을 만족시키는 정수 \\(a\\)의 값은 \\(-1\\)이다."
-    },
-    "내답": "(미표기)",
-    "유사": null,
-    "강의": null,
     "답변": []
    }
   ],
@@ -298,18 +244,18 @@ window.ME_DATA = {
     ],
     "답변": [],
     "유사": {
-     "stem": "좌표평면 위에 점 $\\mathrm{A}(0, 1)$이 있다. 이차함수 $\\displaystyle f(x)=\\frac{1}{4}x^2$의 그래프 위의 점 $\\displaystyle \\mathrm{P}(t, \\frac{t^2}{4})$ ($t>0$)을 지나고 기울기가 $\\displaystyle \\frac{t}{2}$인 직선이 $x$축과 만나는 점을 $\\mathrm{Q}(a, 0)$라 하자. 선분 $\\mathrm{QA}$를 $3:2$로 외분하는 점 $\\mathrm{R}$이 함수 $y=f(x)$의 그래프 위의 점이다. 삼각형 $\\mathrm{RQP}$의 넓이를 $S$라 할 때, $S+a$의 값은?",
+     "stem": "좌표평면 위에 점 $\\mathrm{A}(0,1)$이 있다. 이차함수 $\\displaystyle f(x)=\\frac{1}{4}x^2$의 그래프 위의 점 $\\displaystyle \\mathrm{P}(t,\\frac{t^2}{4})$ $(t>0)$을 지나고 기울기가 $\\displaystyle \\frac{t}{2}$인 직선이 $x$축과 만나는 점을 $\\mathrm{Q}$라 하자. 선분 $\\mathrm{QA}$를 $5:2$로 외분하는 점 $\\mathrm{R}$이 함수 $y=f(x)$의 그래프 위의 점일 때, 삼각형 $\\mathrm{PQR}$의 넓이는?",
      "choices": [
-      "① $5 \\sqrt{3}$",
-      "② $\\displaystyle \\frac{11 \\sqrt{3}}{2}$",
-      "③ $6 \\sqrt{3}$",
-      "④ $\\displaystyle \\frac{13 \\sqrt{3}}{2}$",
-      "⑤ $7 \\sqrt{3}$"
+      "① $\\displaystyle \\frac{40}{3} \\sqrt{15}$",
+      "② $\\displaystyle \\frac{41}{3} \\sqrt{15}$",
+      "③ $14 \\sqrt{15}$",
+      "④ $\\displaystyle \\frac{43}{3} \\sqrt{15}$",
+      "⑤ $\\displaystyle \\frac{44}{3} \\sqrt{15}$"
      ],
-     "answer": "⑤",
-     "id": "ngd_gs_f160e276d0",
+     "answer": "①",
+     "id": "ngd_gs_c37dbbcc0e",
      "출처": "학교 기출(족보)",
-     "해설": "점 \\(\\mathrm{P}\\)를 지나고 기울기가 \\(\\displaystyle \\frac{t}{2}\\)인 직선을 식으로 나타내면\n\\(\\displaystyle y- \\frac{t ^{2}}{4} = \\frac{t}{2} (x-t)\\), \\(\\displaystyle y= \\frac{t}{2} x- \\frac{t ^{2}}{4}\\)이다.\n이 직선의 \\(x\\)절편은 \\(\\displaystyle \\frac{t}{2}\\)이므로 \\(\\displaystyle \\mathrm{Q} \\left( \\frac{t}{2} , 0 \\right)\\)이다.\n또, 선분 \\(\\mathrm{QA}\\)를 \\(3 : 2\\)로 외분하는 점이 \\(\\mathrm{R}\\)이므로\n\\(\\displaystyle \\mathrm{R} \\left( \\frac{-t}{3-2} , \\frac{3}{3-2} \\right)\\)\\({}=\\mathrm{R}(-t, 3)\\)이다.\n이때, \\(\\mathrm{R}\\)은 \\(\\displaystyle y= \\frac{1}{4} x ^{2}\\) 위의 점이므로\n\\(\\displaystyle \\frac{1}{4} t ^{2} =3\\)에서 \\(t=2 \\sqrt{3}\\)이다. (\\(\\because t>0\\))\n따라서 \\(a= \\sqrt{3}\\)\n이때, \\( {\\overline{\\mathrm{QR}}}\\)의 직선의 방정식을 구하면\n기울기는 \\(\\displaystyle \\frac{3}{- \\frac{3}{2} t} =-2t\\)이므로 \\(\\displaystyle y= \\frac{t}{2} x- \\frac{t ^{2}}{4}\\)과 수직임을 알 수 있다.\n따라서, 삼각형 \\(\\mathrm{RQP}\\)의 넓이는 \\( {\\overline{\\mathrm{RQ}}} \\times {\\overline{\\mathrm{QP}}}\\)이며\n\\( {\\overline{\\mathrm{RQ}}}\\)\\({}= \\sqrt{27+9} =6\\), \\( {\\overline{\\mathrm{QP}}} = \\sqrt{3+9} =2 \\sqrt{3}\\)이므로\n넓이 \\(\\displaystyle S = \\frac{1}{2} \\times 2 \\sqrt{3} \\times 6=6 \\sqrt{3}\\)\n\\(\\therefore S+a=6 \\sqrt{3} + \\sqrt{3} =7 \\sqrt{3}\\)"
+     "해설": "점 \\(\\displaystyle \\mathrm{P}(t,\\frac{t^2}{4})\\)를 지나고 기울기 \\(\\displaystyle \\frac{t}{2}\\)인 직선:\n\\(\\displaystyle y-\\frac{t^2}{4}=\\frac{t}{2}(x-t)\\)\n\\(x\\)축과의 교점 \\(\\mathrm{Q}\\)를 구하면 \\(y=0\\)일 때\n\\(\\displaystyle -\\frac{t^2}{4}=\\frac{t}{2}x-\\frac{t^2}{2}\\), \\(\\displaystyle \\frac{t}{2}x=\\frac{t^2}{4}\\), \\(\\displaystyle x=\\frac{t}{2}\\)\n따라서 \\(\\displaystyle \\mathrm{Q}=\\left(\\frac{t}{2},0\\right)\\)\n선분 \\(\\mathrm{QA}\\)를 \\(5:2\\)로 외분하는 점은\n\\(\\displaystyle \\mathrm{R}=\\frac{5\\mathrm{A}-2\\mathrm{Q}}{5-2}\\)\n\\(\\mathrm{A}=(0,1)\\)이므로\n\\(\\displaystyle \\mathrm{R}_x=\\frac{5\\cdot0-2\\cdot\\frac{t}{2}}{3}=-\\frac{t}{3}\\),\n\\(\\displaystyle \\mathrm{R}_y=\\frac{5\\cdot1-2\\cdot0}{3}=\\frac{5}{3}\\)\n즉 \\(\\displaystyle \\mathrm{R}=\\left(-\\frac{t}{3},\\frac{5}{3}\\right)\\)\n\\(\\mathrm{R}\\)이 \\(\\displaystyle y=\\frac{1}{4}x^2\\) 위의 점이므로\n\\(\\displaystyle \\frac{5}{3}=\\frac{1}{4}\\left(\\frac{t}{3}\\right)^2=\\frac{t^2}{36}\\)\n\\(t^2=60\\), \\(t=2\\sqrt{15}\\) (\\(t>0\\))\n이제 세 점의 좌표:\n\\(\\mathrm{P}=(2\\sqrt{15},15)\\), \\(\\mathrm{Q}=(\\sqrt{15},0)\\), \\(\\displaystyle \\mathrm{R}=\\left(-\\frac{2\\sqrt{15}}{3},\\frac{5}{3}\\right)\\)\n삼각형 넓이 공식 적용:\n\\(\\displaystyle S=\\frac12\\left|x_\\mathrm{P}(y_\\mathrm{Q}-y_R)+x_\\mathrm{Q}(y_R-y_\\mathrm{P})+x_R(y_\\mathrm{P}-y_\\mathrm{Q})\\right|\\)\n각 항 계산:\n\\(\\displaystyle x_\\mathrm{P}(y_\\mathrm{Q}-y_R)=2\\sqrt{15}\\left(0-\\frac53\\right)=-\\frac{10\\sqrt{15}}{3}\\)\n\\(\\displaystyle x_\\mathrm{Q}(y_R-y_\\mathrm{P})=\\sqrt{15}\\left(\\frac53-15\\right)=\\sqrt{15}\\left(-\\frac{40}{3}\\right)=-\\frac{40\\sqrt{15}}{3}\\)\n\\(\\displaystyle x_R(y_\\mathrm{P}-y_\\mathrm{Q})=-\\frac{2\\sqrt{15}}{3}(15-0)=-10\\sqrt{15}\\)\n합:\n\\(\\displaystyle -\\frac{10\\sqrt{15}}{3}-\\frac{40\\sqrt{15}}{3}-10\\sqrt{15}=-\\frac{50\\sqrt{15}}{3}-\\frac{30\\sqrt{15}}{3}=-\\frac{80\\sqrt{15}}{3}\\)\n따라서\n\\(\\displaystyle S=\\frac12\\cdot\\frac{80\\sqrt{15}}{3}=\\frac{40\\sqrt{15}}{3}\\)\n따라서 정답은 ① 이다."
     }
    }
   ],
@@ -510,23 +456,22 @@ window.ME_DATA = {
  },
  "haOPA17TodCIFf0HoU8z3A": {
   "진도": "부정적분과 정적분",
-  "상태": "many",
+  "상태": "few",
   "오답": [
    {
-    "유형": "부정적분의 선형성",
+    "유형": "부정적분(변화율이 주어짐)",
     "문제": {
-     "stem": "함수 $f(x)$의 부정적분을 $F(x)$라고 할 때, 다음 중 옳은 것만을 있는 대로 고른 것은? (단, $C$는 적분상수) ㄱ. $\\displaystyle \\int\\nolimits \\{2+f(x)\\} dx=2x+F(x)+C$ ㄴ. $\\displaystyle \\int\\nolimits 2xf(x) dx=x^{2} F(x)+C$ ㄷ. $\\displaystyle \\int\\nolimits \\{F(x)+xf(x)\\} dx=xF(x)+C$",
+     "stem": "새로 출시된 전기 자전거의 구입 가격이 $B$ 원이고, 이 전기 자전거를 구입한 지 $t$ 개월이 지난 때의 감가상각비의 변화율과 유지 관리비의 변화율이 각각 $\\displaystyle \\left( \\frac{1}{20} - \\frac{t}{400} \\right) B$, $\\displaystyle \\frac{3t^2}{16000} B$ 라고 할 때, 감가상각비와 유지 관리비의 합이 전기 자전거의 구입 가격과 같아지는 시기에 새 전기 자전거로 교체하려고 한다. 전기 자전거를 구입하고 몇 개월 후에 새 전기 자전거로 교체해야 하는지 말하시오.",
      "choices": [
-      "① ㄱ",
-      "② ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① 10",
+      "② 40",
+      "③ 25",
+      "④ 15",
+      "⑤ 20"
      ],
-     "answer": "③",
-     "id": "ngd_su2_3bfee74d4b",
-     "출처": "학교 기출(족보)",
-     "해설": "ㄱ. \\(\\displaystyle \\int\\nolimits _{} ^{} {\\left\\{ 2+f(x) \\right\\}} dx=2x+F(x)+C\\) [참]\nㄴ. \\(\\displaystyle \\int\\nolimits _{} ^{} {2xf(x)} dx=x ^{2} F(x)+C\\) [거짓]\\(\\because\\)\\(\\left\\{x^2 F(x) \\right\\} '\\)\\({}= 2xF(x) +x^2 f(x)\\)\nㄷ. \\(\\displaystyle \\int\\nolimits _{} ^{} {\\left\\{ F(x)+xf(x) \\right\\}} dx=xF(x)+C\\) [참]"
+     "answer": "⑤",
+     "id": "var_tb_3b2835154f_20260801_2",
+     "해설": "\\(a\\) 개월 후에 교체한다고 하면 \\(\\displaystyle \\int\\nolimits _0^a \\!\\left( \\frac{1}{20} - \\frac{t}{400} \\right) B\\,dt + \\int\\nolimits _0^a \\frac{3t^2}{16000} B\\,dt = B\\) 이다. 적분하면 \\(\\displaystyle B\\!\\left[ \\frac{t}{20} - \\frac{t^2}{800} + \\frac{t^3}{16000} \\right]_0^a = B\\) 이고, 양변을 \\(B\\) 로 나누고 \\(16000\\) 을 곱하면 \\(a^3 - 20a^2 + 800a - 16000 = 0\\) 이다. 인수분해하면 \\((a - 20)(a^2 + 800) = 0\\) 이고 \\(a > 0\\) 이므로 \\(a = 20\\) 이다. 따라서 전기 자전거를 구입하고 \\(20\\) 개월 후에 교체해야 한다."
     },
     "내답": "(미표기)",
     "유사": null,
@@ -534,107 +479,44 @@ window.ME_DATA = {
     "답변": []
    },
    {
-    "유형": "부등식이 항상 성립할 조건",
+    "유형": "접선의 방정식(곡선 위의 점)",
     "문제": {
-     "stem": "직선 $x=2$에 대하여 대칭인 이차함수 $f(x)$와 최고차항의 계수가 1인 삼차함수 $g(x)$에 대하여 함수 $h(x)=f(x)+\\left| g(x) \\right|$는 실수 전체의 집합에서 미분가능하고, 다음 조건을 모두 만족시킨다. (가) 함수 $y=h(x)$의 그래프는 직선 $x=2$에 대하여 대칭이다. (나) 모든 실수 $x$에 대하여 $h(x) \\geq -2x+4$가 성립한다. (다) $h(1)=2$ $2h(0)$의 값은?",
+     "stem": "이차함수 $y=f(x)$의 그래프와 직선 $y=3x$가 두 점 $\\mathrm{A}$, $\\mathrm{B}$에서 만난다. 곡선 $y=f(x)$ 위의 점 $\\mathrm{A}$에서의 접선의 기울기가 $-2$일 때, 이 곡선 위의 점 $\\mathrm{B}$에서의 접선의 기울기는?",
      "choices": [
-      "① $15$",
-      "② $21$",
-      "③ $27$",
-      "④ $33$",
-      "⑤ $39$"
+      "① 4",
+      "② 8",
+      "③ 5",
+      "④ 6",
+      "⑤ 2"
      ],
-     "answer": "①",
-     "id": "ngd_su2_800d36c3c1",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(t=x-2\\)로 놓으면 \\(f(x)=at^2+b\\) 꼴이다.\n① \\(g\\)의 모양: \\(h\\)와 \\(f\\)가 모두 \\(x=2\\)에 대칭이므로 \\(|g|\\)도 대칭이다. 즉 \\(|g(4-x)|=|g(x)|\\)이고, 다항식이므로 \\(g(4-x)=\\pm g(x)\\). 최고차항을 비교하면 \\(g(4-x)=-g(x)\\)뿐이므로 \\(g(x)=t^3+qt\\) (\\(t=x-2\\)).\n② 미분가능 조건: \\(f\\)는 미분가능하므로 \\(|g|\\)가 미분가능해야 한다. \\(|g|\\)는 \\(g\\)의 부호가 바뀌는 단순근에서 꺾인다.\n \\(q>0\\): \\(t=0\\)이 단순근, \\(q<0\\): 단순근 3개 → 모두 꺾임. 따라서 \\(q=0\\), \\(g(x)=(x-2)^3\\) (삼중근이면 \\(|t^3|\\)은 미분가능).\n③ 식 세우기: \\(h(x)=|t|^3+at^2+b\\). (다) \\(h(1)=2\\)에서 \\(t=-1\\): \\(1+a+b=2\\), \\(b=1-a\\).\n④ 접할 조건: 직선 \\(y=-2x+4\\)도 점 \\((1,2)\\)를 지난다. (나)에서 \\(h(x)-(-2x+4)\\ge0\\)이고 \\(x=1\\)에서 \\(0\\)이므로 \\(x=1\\)은 이 함수의 최솟값 → \\(h'(1)=-2\\).\n \\(x<2\\)에서 \\(h=-t^3+at^2+b\\), \\(h'=-3t^2+2at\\). \\(t=-1\\): \\(-3-2a=-2\\) → \\(\\displaystyle a=-\\frac12\\), \\(\\displaystyle b=\\frac32\\).\n⑤ 확인: \\(x<2\\)에서 \\(\\displaystyle h-(-2x+4)=(t+1)^2\\left(\\frac32-t\\right)\\ge0\\), \\(x\\ge2\\)에서 \\(\\displaystyle t^3-\\frac12t^2+2t+\\frac32>0\\) → (나) 성립.\n⑥ \\(h(0)\\): \\(t=-2\\) (\\(x<2\\) 쪽): \\(\\displaystyle 8-2+\\frac32=\\frac{15}{2}\\). \\(\\therefore 2h(0)=15\\) (①)"
+     "answer": "②",
+     "id": "var_ngd_su2_d69af4dfb0_20260731_2",
+     "해설": "\\(g(x)=f(x)-3x\\)라 하면 두 점 \\(\\mathrm{A}\\), \\(\\mathrm{B}\\)의 \\(x\\)좌표를 각각 \\(\\alpha\\), \\(\\beta\\)라 할 때 \\(g(\\alpha)=g(\\beta)=0\\)이다. \\(g(x)\\)는 이차함수이므로 \\(g'(\\alpha)+g'(\\beta)=0\\), 즉 \\(g'(\\alpha)=-g'(\\beta)\\)이다. \\(f'(\\alpha)=-2\\)이므로 \\(g'(\\alpha)=f'(\\alpha)-3=-5\\)이고, \\(g'(\\beta)=5\\)이다. 따라서 \\(f'(\\beta)=g'(\\beta)+3=5+3=8\\)이다."
     },
     "내답": "(미표기)",
     "유사": {
-     "stem": "함수 $f(x)=x^3+3x^2-9x+13$에 대하여 부등식 $f(x) \\geq k(x-1)$이 $x \\geq 0$인 모든 실수 $x$에서 성립하도록 하는 양수 $k$의 최댓값은?",
-     "choices": [
-      "① $15$",
-      "② $16$",
-      "③ $17$",
-      "④ $18$",
-      "⑤ $19$"
-     ],
-     "answer": "①",
-     "id": "ngd_su2_1910a10a1d",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(f \\left( x \\right)\\)\\({}= x^3 +3x^2 -9x+13\\)이라 하자.\n\\(f ' \\left( x \\right)\\)\\({}=3x^2 +6x-9\\)라 하면 \\(f \\left( x \\right) \\ge k \\left( x-1 \\right)\\)이어야 한다.\n즉 \\(\\left(1, 0 \\right)\\)을 지나는 직선 중 \\(f \\left( x \\right)\\)에 접하는 직선의 기울기를 찾아야 한다.\n접점의 좌표를 \\(x=t\\)라 하면\n\\(y= \\left( 3t^2 +6t-9 \\right) \\left( x-t \\right) +t^3 +3t^2 -9t+13\\)이고 \\(\\left( 1, 0 \\right)\\)을 지나므로\n\\(0=-2t^3 +6t+4\\)\n즉 \\(\\left( t+1 \\right)^2 \\left( t-2 \\right)=0\\) 따라서 \\(t=2\\) 또는 \\(t=-1\\)\n\\(f ' \\left( -1 \\right) =-12\\), \\(f ' \\left( 2 \\right)=15\\)이므로 \\(-12 \\le k \\le 15\\)"
-    },
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "속도와 거리(두 점이 만남)",
-    "문제": {
-     "stem": "원점을 동시에 출발하여 수직선 위를 움직이는 두 점 $\\mathrm{P}, \\mathrm{Q}$의 시각 $t$에서의 속도가 각각 $\\displaystyle v_{\\mathrm{P}}(t)= \\frac{1}{2} t^2 -4t$, $\\displaystyle v_{\\mathrm{Q}}(t)= - \\frac{1}{2} t^2 +2t$이다. 두 점 $\\mathrm{P}, \\mathrm{Q}$가 출발 후 처음으로 만날 때까지 두 점 $\\mathrm{P}, \\mathrm{Q}$ 사이의 거리의 최댓값은?",
-     "choices": [
-      "① $30$",
-      "② $32$",
-      "③ $36$",
-      "④ $38$",
-      "⑤ $40$"
-     ],
-     "answer": "③",
-     "id": "ngd_su2_1f6a46a0d4",
-     "출처": "학교 기출(족보)",
-     "해설": "위치를 적분으로 구한다.\n\\[x_\\mathrm{P}(t) = \\frac{1}{6}t^3 - 2t^2, \\quad x_\\mathrm{Q}(t) = -\\frac{1}{6}t^3 + t^2\\]\n처음 만나는 조건 \\(x_\\mathrm{P}(t)=x_\\mathrm{Q}(t)\\):\n\\[\\frac{1}{3}t^3 - 3t^2 = 0 \\;\\Rightarrow\\; t^2\\!\\left(\\frac{t}{3}-3\\right)=0\\]\n\\(t>0\\)이므로 처음 만나는 시각은 \\(t=9\\).\n두 점 사이의 거리:\n\\[D(t)=|x_\\mathrm{P}(t)-x_\\mathrm{Q}(t)|=\\frac{1}{3}t^2|t-9|\\]\n\\(0<t<9\\)에서 \\(|t-9|=9-t\\)이므로\n\\[D(t)=\\frac{1}{3}t^2(9-t)=3t^2-\\frac{1}{3}t^3\\]\n\\[D'(t)=6t-t^2=t(6-t)\\]\n\\(D'(t)=0\\)의 양의 근: \\(t=6\\).\n\\(D'(t)>0\\) (\\(0<t<6\\)), \\(D'(t)<0\\) (\\(6<t<9\\))이므로 \\(t=6\\)에서 최대.\n\\[D(6)=3\\cdot36-\\frac{1}{3}\\cdot216=108-72=36\\]\n검증: \\(\\displaystyle x_\\mathrm{P}(6)=\\frac{216}{6}-72=36-72=-36\\), \\(x_\\mathrm{Q}(6)=-36+36=0\\), 거리 \\({}=36\\). ✓\n따라서 정답은 ③ 이다."
-    },
-    "내답": "(미표기)",
-    "유사": {
-     "stem": "원점을 동시에 출발하여 수직선 위를 움직이는 두 점 $\\mathrm{P}, \\mathrm{Q}$의 시각 $t \\left( t \\geq 0 \\right)$에서의 속도는 각각 $v _{1} =8t-7$, $v _{2} =3t ^{2} -8t+6$이다. 출발한 후 두 점 $\\mathrm{P}, \\mathrm{Q}$ 사이의 거리가 두 번째로 $6$이 될 때까지 점 $\\mathrm{Q}$가 움직인 거리는?",
-     "choices": [
-      "① $7$",
-      "② $8$",
-      "③ $9$",
-      "④ $10$",
-      "⑤ 11"
-     ],
-     "answer": "③",
-     "id": "ngd_su2_03b0ad43e5",
-     "출처": "학교 기출(족보)",
-     "해설": "점 P, Q의 위치를 각각 구하면 \\(\\displaystyle x_\\mathrm{P}(t)=\\int\\nolimits _0^t(8t-7)dt=4t^2-7t\\), \\(\\displaystyle x_\\mathrm{Q}(t)=\\int\\nolimits _0^t(3t^2-8t+6)dt=t^3-4t^2+6t\\) 이다.\n두 점 사이의 (방향 포함) 차이를 \\(f(t)=x_\\mathrm{P}(t)-x_\\mathrm{Q}(t)=4t^2-7t-(t^3-4t^2+6t)=-t^3+8t^2-13t\\) 로 정의한다. 거리는 \\(|f(t)|\\) 이다.\n\\(f'(t)=-3t^2+16t-13=-(3t-13)(t-1)\\) 이므로 \\(f'(t)=0\\) 은 \\(\\displaystyle t=1,\\ \\dfrac{13}{3}\\) 에서 성립한다.\n\\(t\\in(0,1)\\) 에서 \\(f'(t)<0\\), \\(\\displaystyle t\\in\\left(1,\\dfrac{13}{3}\\right)\\) 에서 \\(f'(t)>0\\), \\(\\displaystyle t>\\dfrac{13}{3}\\) 에서 \\(f'(t)<0\\) 이므로 \\(f\\)는 \\(t=1\\)에서 극소, \\(\\displaystyle t=\\dfrac{13}{3}\\)에서 극대이다.\n\\(f(0)=0\\), \\(f(1)=-1+8-13=-6\\) 이므로 \\(t\\in[0,1]\\) 구간에서 \\(f\\)는 \\(0\\)에서 \\(-6\\)까지 단조 감소하여 \\(|f(t)|\\)는 \\(0\\)에서 \\(6\\)까지 단조 증가한다. 따라서 \\(|f(t)|=6\\) 이 되는 첫 번째 시각은 \\(t=1\\) 이다.\n\\(t=1\\) 이후 \\(f\\)는 증가하므로 \\(|f(t)|\\)는 한 번 \\(0\\)을 지난 뒤 다시 증가하여 두 번째로 \\(6\\)이 되는 시각은 \\(f(t)=6\\) 을 만족하는 \\(\\displaystyle t\\in\\left(1,\\dfrac{13}{3}\\right)\\) 의 해이다.\n\\(f(t)=6\\) ⟺ \\(-t^3+8t^2-13t-6=0\\) ⟺ \\(t^3-8t^2+13t+6=0\\).\n인수분해하면 \\(t^3-8t^2+13t+6=(t-3)(t^2-5t-2)=0\\) 이다. \\(t^2-5t-2=0\\) 의 해는 \\(\\displaystyle t=\\dfrac{5\\pm\\sqrt{33}}{2}\\) 로 그 중 양의 해는 약 \\(5.37\\)이며 \\(\\displaystyle \\dfrac{13}{3}\\approx4.33\\) 보다 크므로 구간 \\(\\displaystyle \\left(1,\\dfrac{13}{3}\\right)\\) 안에 있지 않다.\n따라서 구간 안의 해는 \\(t=3\\) 이고, 이때 거리가 두 번째로 \\(6\\)이 된다.\n점 \\(\\mathrm{Q}\\)의 속도 \\(v_2=3t^2-8t+6\\) 의 판별식은 \\(64-72=-8<0\\) 이므로 모든 \\(t\\)에서 \\(v_2>0\\), 즉 \\(\\mathrm{Q}\\)는 항상 양의 방향으로만 움직인다. 따라서 \\(\\mathrm{Q}\\)가 움직인 거리는 \\(x_\\mathrm{Q}(3)-x_\\mathrm{Q}(0)\\) 이다.\n\\(x_\\mathrm{Q}(3)=3^3-4\\cdot3^2+6\\cdot3=27-36+18=9\\), \\(x_\\mathrm{Q}(0)=0\\).\n따라서 \\(\\mathrm{Q}\\)가 움직인 거리는 \\(9\\)이다.\n따라서 정답은 ③ 이다."
-    },
-    "강의": [
-     0,
-     0
-    ],
-    "답변": []
-   },
-   {
-    "유형": "극값 조건으로 미정계수 결정",
-    "문제": {
-     "stem": "함수  $f(x)=ax ^{3} -6ax ^{2} +b$ 가  $-1 \\le x \\le 2$ 에서 최댓값  $3$ , 최솟값  $-13$ 을 가질 때, 상수  $a, b$ 에 대하여  $a+b$ 의 값은?\n(단,  $a>0$ )",
-     "choices": [
-      "①  $1$",
-      "②  $2$",
-      "③  $3$",
-      "④  $4$",
-      "⑤  $6$"
-     ],
-     "answer": "④",
-     "id": "tb_4e4e13df37",
-     "해설종이": true
-    },
-    "내답": "(미표기)",
-    "유사": {
-     "stem": "함수 $f \\left( x \\right) =x ^{3} - \\left( a+3 \\right) x ^{2} + \\left( a+1 \\right) x$ 가 $-1<x<0$ 에서 극댓값을 갖고, $x>0$ 에서 극솟값을 갖도록 하는 모든 정수 $a$ 의 값의 곱은?",
+     "stem": "이차함수 $f(x)$와 직선 $y=2x-1$의 그래프가 서로 다른 두 점 $\\mathrm{A}, \\mathrm{B}$에서 만난다. 곡선 $y=f(x)$ 위의 점 $\\mathrm{A}$에서의 접선의 기울기가 $-3$일 때, 이 곡선 위의 점 $\\mathrm{B}$에서의 접선의 기울기는?",
      "choices": [
       "① $6$",
-      "② $-6$",
-      "③ $3$",
+      "② $7$",
+      "③ $8$",
       "④ $9$",
-      "⑤ $12$"
+      "⑤ $10$"
      ],
-     "answer": "①",
-     "id": "var_tb_97b8cc604a_20261014_2",
-     "해설": "\\(f'(x)=3x^2-2(a+3)x+(a+1)\\)은 위로 열린 포물선이므로 작은 근에서 극대, 큰 근에서 극소를 갖는다. \\(0\\)이 두 근 사이에 있어야 하므로 \\(f'(0)=a+1<0\\), \\(-1\\)은 두 근 밖에 있어야 하므로 \\(f'(-1)=3a+10>0\\). 따라서 \\(\\displaystyle -\\frac{10}{3}<a<-1\\)이고 정수 \\(a\\)는 \\(-3,-2\\)이다. 곱은 \\((-3)(-2)=6\\)이므로 답은 ①"
+     "answer": "②",
+     "id": "ngd_su2_b4720d4b72",
+     "출처": "학교 기출(족보)",
+     "해설": "이차함수를 \\(f(x)=ax^2+bx+c\\)라 하고, \\(g(x)=f(x)-(2x-1)\\)이라 하자. \\(g(x)\\)는 이차함수이고 \\(\\mathrm{A},\\mathrm{B}\\)의 \\(x\\)좌표를 각각 \\(p,q\\)라 하면\n\\[g(x)=a(x-p)(x-q)\\]이다. 양변을 미분하면\n\\[g'(x)=f'(x)-2\\]이고, \\(g'(x)=a\\{(x-q)+(x-p)\\}\\)이므로\n\\[g'(p)=a(p-q),\\qquad g'(q)=a(q-p)=-a(p-q)\\]\n즉 \\(g'(p)=-g'(q)\\)이다.\n따라서\n\\[f'(p)-2=-(f'(q)-2)\\]\n점 \\(\\mathrm{A}\\)에서의 접선의 기울기가 \\(f'(p)=-3\\)이므로\n\\[-3-2=-(f'(q)-2)\\]\n\\[-5=-f'(q)+2\\]\n\\[f'(q)=7\\]\n즉 점 \\(\\mathrm{B}\\)에서의 접선의 기울기는 \\(7\\)이다.\n따라서 정답은 ② 이다."
     },
     "강의": null,
-    "답변": []
+    "답변": [],
+    "힌트": [
+     "$f(x)$를 $ax^2+bx+c$로 놓고, $f(x)-(2x-1)=0$의 두 근이 A, B의 $x$좌표임을 이용해서 근과 계수의 관계를 적어보자.",
+     "이차함수 $f(x)=ax^2+bx+c$이면 $f'(x)=2ax+b$이고, 두 근의 합은 $\\alpha+\\beta=-\\dfrac{(b-2)}{a}$야 — $f(x)-(2x-1)$의 계수를 기준으로 생각해봐.",
+     "A의 $x$좌표를 $\\alpha$, B의 $x$좌표를 $\\beta$라 하면, $f'(\\alpha)+f'(\\beta)=2a(\\alpha+\\beta)+2b$를 근과 계수의 관계로 정리해보자.",
+     "$f'(\\alpha)+f'(\\beta)$를 계산할 때 $a$, $b$가 섞여서 헷갈릴 수 있어 — $f(x)-(2x-1)=a(x-\\alpha)(x-\\beta)$ 전개식의 계수를 $f(x)$와 비교해서 $\\alpha+\\beta$를 깔끔하게 구해봐.",
+     "$f'(\\alpha)+f'(\\beta)$가 $a$, $b$에 무관한 상수로 정리되면, $f'(\\alpha)=-3$을 대입해서 $f'(\\beta)$를 바로 구할 수 있어."
+    ]
    }
   ],
   "복습대기": [
@@ -717,6 +599,14 @@ window.ME_DATA = {
     "단계": 3,
     "다음": "",
     "마지막오답": "2026-07-28",
+    "강의": null,
+    "답변": []
+   },
+   {
+    "유형": "방정식의 실근의 개수(계수의 범위)",
+    "단계": 3,
+    "다음": "",
+    "마지막오답": "2026-09-17",
     "강의": null,
     "답변": []
    },
@@ -979,55 +869,69 @@ window.ME_DATA = {
   "상태": "few",
   "오답": [
    {
-    "유형": "변형 후 부정적분",
+    "유형": "정적분을 포함한 등식(안에도 x)",
     "문제": {
-     "stem": "함수 $f(x)=x^3+x^2+ax+b$에 대하여 함수 $g(x)$를 $g(x)=f(x)+(x+1)f'(x)$라 하자. <보기>에서 옳은 것만을 있는 대로 고른 것은? (단, $a, b$는 상수이다.)\\n\\n<보기>\\nㄱ. $G'(x)=g(x)$인 연속함수 $G(x)$가 존재한다.\\nㄴ. 함수 $f(x)$가 $x=1$에서 극값 0을 가지면 $\\displaystyle \\int_0^1 g(x)dx=3$이다.\\nㄷ. $f(0)=0$이면 방정식 $g(x)=0$은 열린구간 $(-1, 0)$에서 적어도 하나의 실근을 갖는다.",
+     "stem": "모든 실수 $x$ 에 대하여 함수 $f(x)$ 가 $\\displaystyle \\int\\nolimits _{-1}^x {(x-t)f(t)dt}=x^3 +3x^2 +3x+1$ 을 만족시킬 때, $f(0)$ 의 값은?",
      "choices": [
-      "① ㄱ",
-      "② ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① $0$",
+      "② $2$",
+      "③ $4$",
+      "④ $6$",
+      "⑤ $8$"
      ],
-     "answer": "③",
-     "id": "ngd_su2_8acd54bdbe",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(f(x)=x^3+x^2+ax+b\\), \\(f'(x)=3x^2+2x+a\\) 이다.\n\\(G(x)=(x+1)f(x)\\) 라 하면\n\\(G'(x)=f(x)+(x+1)f'(x)=g(x)\\)\n이고 \\(G(x)\\)는 다항함수이므로 모든 실수에서 연속이고 미분가능하다. 따라서 \\(G'(x)=g(x)\\)인 연속함수 \\(G(x)\\)가 존재하므로 ㄱ은 옳다.\nㄴ. \\(f(x)\\)가 \\(x=1\\)에서 극값 \\(0\\)을 가지면\n\\(f(1)=0,\\ f'(1)=0\\)\n\\(f'(1)=3+2+a=0 \\Rightarrow a=-5\\)\n\\(f(1)=1+1+a+b=0 \\Rightarrow 2-5+b=0 \\Rightarrow b=3\\)\n\\(G(x)=(x+1)f(x)\\) 이므로\n\\(\\displaystyle \\int\\nolimits _0^1 g(x)dx=G(1)-G(0)=2f(1)-1\\cdot f(0)=2\\cdot0-f(0)=-f(0)\\)\n이때 \\(f(0)=b=3\\)이므로\n\\(\\displaystyle \\int\\nolimits _0^1 g(x)dx=-3\\)\n따라서 \\(3\\)이 아니라 \\(-3\\)이므로 ㄴ은 옳지 않다.\nㄷ. \\(f(0)=0\\)이면 \\(b=0\\)이다.\n\\(G(-1)=(-1+1)f(-1)=0\\)\n\\(G(0)=(0+1)f(0)=f(0)=0\\)\n즉 \\(G(-1)=G(0)=0\\)이고 \\(G(x)\\)는 다항함수이므로 열린구간 \\((-1,0)\\)에서 미분가능하고 닫힌구간 \\([-1,0]\\)에서 연속이다. 롤의 정리에 의해 \\(G'(c)=0\\)인 \\(c\\in(-1,0)\\)이 존재하고, \\(G'(x)=g(x)\\)이므로 \\(g(c)=0\\)이다.\n따라서 방정식 \\(g(x)=0\\)은 열린구간 \\((-1,0)\\)에서 적어도 하나의 실근을 가지므로 ㄷ은 옳다.\n옳은 것은 ㄱ, ㄷ이다.\n따라서 정답은 ③ 이다."
+     "answer": "④",
+     "id": "tb_ea251eb02b",
+     "출처": "교과서",
+     "해설종이": true
     },
-    "내답": "⑤",
-    "유사": null,
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "다항함수 $f(x)$가 모든 실수 $x$에 대하여 $\\displaystyle xf(x)=3x^4-4x^3+x^2+\\int\\nolimits _{1}^{x}(x-t)f'(t)dt$를 만족시킬 때, $f(2)$의 값은?",
+     "choices": [
+      "① $11$",
+      "② $12$",
+      "③ $13$",
+      "④ $14$",
+      "⑤ $15$"
+     ],
+     "answer": "②",
+     "id": "ngd_su2_7d8e95edfe",
+     "출처": "학교 기출(족보)",
+     "해설": "\\(\\displaystyle x f \\left( x \\right) =3x ^{4} -4x ^{3} +x ^{2} + \\int\\nolimits _{1} ^{x} {\\left( x-t \\right)}f ' \\left( -1 \\right)dt\\)\n\\(x=1\\)을 대입하면 \\(f \\left( 1 \\right)=0\\)\n\\(\\displaystyle x f \\left( x \\right) =3x ^{4} -4x ^{3} +x ^{2} +x \\int\\nolimits _{1} ^{x} {} f ' \\left( t \\right) dt- \\int\\nolimits _{1} ^{x} {t} f ' \\left( t \\right) dt\\)\n양변을 \\(x\\)에 대하여 미분하면\n\\(\\displaystyle x f ' \\left( x \\right) +f \\left( x \\right) =12x ^{3} -12x ^{2} +12x+ \\int\\nolimits _{1} ^{x} {f ' \\left( t \\right)} dt+x f ' \\left( x \\right) -x f' \\left( x \\right)\\)\n\\({}=12x ^{3}-12x ^{ 2}+2x+f \\left( x \\right)\\)\n\\(f ' \\left( x \\right)=12x ^{ 2}-12x+2\\)\n\\(f \\left( x \\right)=4x ^{ 3}-6x ^{ 2}+2x+c\\)\n\\(\\left. f \\left( 1 \\right) \\right.=0\\)이므로\n\\(f \\left( x \\right)=4x ^{ 3}-6x ^{ 2}+2x\\)\n\\(f \\left( 2 \\right)=12\\)"
+    },
     "강의": null,
     "답변": []
    },
    {
-    "유형": "정적분으로 정의된 함수",
+    "유형": "정적분의 기하적 의미와 부호",
     "문제": {
-     "stem": "함수 $f(x) = |x|^3 - 6x^2 + 9|x|$에 대하여 $-3 \\le x \\le t$에서 $f(x)$의 최댓값을 $g(t)$라 할 때, $\\displaystyle \\int\\nolimits _{-3}^3 g(t)dt$의 값은? (단, $t \\ge -3$)",
+     "stem": "함수의 적분에 대한 다음 설명 중 옳은 것만을 있는 대로 고른 것은? ㄱ. 다항함수 $y = f(x)$의 부정적분은 무수히 많다 ㄴ. $\\displaystyle \\int\\nolimits _1^5 2xdx - \\int\\nolimits _5^3 2xdx = \\int\\nolimits _1^3 2xdx$이다 ㄷ. 다항함수 $f(x)$에 대하여 $\\displaystyle \\int\\nolimits _a^b f(x)dx > 0$이면 $\\displaystyle \\int\\nolimits _a^b f(x)dx$의 값은 $y = f(x)$와 $x$축 및 $x = a, x = b$로 둘러싸인 도형의 넓이와 같다",
      "choices": [
-      "① $16$",
-      "② $17$",
-      "③ $18$",
-      "④ $19$",
-      "⑤ $20$"
+      "① ㄱ",
+      "② ㄱ, ㄴ",
+      "③ ㄱ, ㄷ",
+      "④ ㄴ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
      ],
-     "answer": "⑤",
-     "id": "ngd_su2_874a64d453",
-     "출처": "학교 기출(족보)"
+     "answer": "①",
+     "id": "ngd_su2_98acbcf2ad",
+     "출처": "학교 기출(족보)",
+     "해설": "ㄱ. 다항함수 \\(y=f(x)\\)의 부정적분은 무수히 많다. [참]\n\\(\\displaystyle \\int\\nolimits _{1} ^{5} {2xdx} - \\int\\nolimits _{3} ^{5} {2xdx= \\int\\nolimits _{1} ^{3} {2xdx}}\\)이므로\nㄴ. \\(\\displaystyle \\int\\nolimits _{1} ^{5} {2xdx} - \\int\\nolimits _{5} ^{3} {2xdx= \\int\\nolimits _{1} ^{3} {2xdx}}\\)이다. [거짓]\n\\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx>0}\\)에서 \\(x\\)축을 통과하면서 정적분의 값이 음수인 부분이 존재할 수도 있으므로\nㄷ. 다항함수 \\(f(x)\\)에 대하여 \\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx>0}\\)이면 \\(\\displaystyle \\int\\nolimits _{a} ^{b} {f(x)dx}\\)의 값은 \\(y=f(x)\\)와 \\(x\\)축 및 \\(x=a\\), \\(x=b\\)로 둘러싸인 도형의 넓이와 같다. [거짓]"
     },
-    "내답": "blank",
+    "내답": "(미표기)",
     "유사": {
-     "stem": "최고차항의 계수가 1인 삼차함수 $f(x)$가 다음 조건을 만족시킨다. (가) 모든 실수 $x$에 대하여 $f'(x) \\ge f'(2)$ (나) 함수 $f(x)$의 극값 중 하나는 0. 함수 $g(x)$는 실수 전체에서 미분가능하고 $g(x) = f(|x|)$일 때, $\\displaystyle \\int\\nolimits _{-t}^{t} g(x)dx$이 최솟값을 갖는 양수 $t$는?",
+     "stem": "최고차항의 계수가 양수인 삼차함수 $f(x)$는 $f(0) = 0$이고, $x>0$인 모든 실수 $x$에 대하여 $f'(x) \\geq 0$을 만족시킨다. 함수 $f(x)$의 역함수 $g(x)$에 대하여 $\\displaystyle h(x) = \\int\\nolimits ^x_0 \\{f(t)-g(t)\\} dt$ ($x \\geq 0$)라 하면 $h(x)$는 $x = 2$일 때, 극댓값 $\\displaystyle \\frac{3}{2}$을 갖고 $x = 3$일 때, 극솟값 $\\displaystyle \\frac{5}{4}$를 가진다. 이때, $\\displaystyle \\int\\nolimits ^3_0 g(t) dt$의 값을 구하시오.",
      "choices": [
-      "① $3$",
-      "② $4$",
-      "③ $5$",
-      "④ $6$",
-      "⑤ $7$"
+      "① $\\displaystyle \\frac{7}{2}$",
+      "② $\\displaystyle \\frac{29}{8}$",
+      "③ $\\displaystyle \\frac{15}{4}$",
+      "④ $\\displaystyle \\frac{31}{8}$",
+      "⑤ $4$"
      ],
      "answer": "④",
-     "id": "ngd_su2_16c5f008e3",
+     "id": "ngd_su2_15085d5238",
      "출처": "학교 기출(족보)",
-     "해설": "\\(f(x)\\)는 최고차항 계수가 \\(1\\)인 삼차함수이므로 \\(f'(x)=3x^2+2ax+b\\) 꼴이다.\n조건 (가)에서 모든 실수 \\(x\\)에 대해 \\(f'(x)\\ge f'(2)\\)이므로 \\(f'(x)-f'(2)\\ge 0\\)이고 등호가 \\(x=2\\)에서 성립한다. \\(f'(x)\\)는 최고차항 계수가 \\(3\\)인 이차함수이므로\n\\(f'(x)=3(x-2)^2+k\\)\n형태로 쓸 수 있다 (\\(k\\)는 상수, \\(k=f'(2)\\)).\n함수 \\(g(x)=f(|x|)\\)가 실수 전체에서 미분가능해야 하므로 \\(x=0\\)에서 좌우 도함수가 일치해야 한다. \\(x>0\\)에서 \\(g'(x)=f'(x)\\), \\(x<0\\)에서 \\(g'(x)=-f'(-x)\\)이므로 \\(x\\to 0\\)에서\n\\(f'(0)=-f'(0)\\)\n이 성립해야 하고, 따라서 \\(f'(0)=0\\)이다.\n\\(f'(0)=3(0-2)^2+k=12+k=0\\)에서 \\(k=-12\\).\n따라서\n\\(f'(x)=3(x-2)^2-12=3x^2-12x=3x(x-4)\\)\n이를 적분하면\n\\(f(x)=x^3-6x^2+C\\)\n\\(f'(x)\\)의 부호에 의해 \\(x=0\\)에서 극대, \\(x=4\\)에서 극소이다.\n\\(f(0)=C\\) (극대값), \\(f(4)=64-96+C=C-32\\) (극소값)\n조건 (나)에서 극값 중 하나가 \\(0\\)이므로 두 경우가 있다.\n경우 1: \\(C=0\\) ⇒ \\(f(x)=x^3-6x^2=x^2(x-6)\\), 극대값 \\(0\\), 극소값 \\(-32\\).\n경우 2: \\(C=32\\) ⇒ \\(f(x)=x^3-6x^2+32=(x+2)(x-4)^2\\), 극소값 \\(0\\), 극대값 \\(32\\).\n\\(g(x)=f(|x|)\\)는 우함수이므로\n\\(\\displaystyle\\int\\nolimits _{-t}^{t} g(x)\\,dx = 2\\int\\nolimits _0^t f(x)\\,dx =: F(t)\\)\n\\(F'(t)=2f(t)\\)이고, \\(F(t)\\)가 최솟값을 가지려면 \\(f(t)\\)가 음에서 양으로 바뀌는 점에서 최소가 된다.\n경우 2를 확인하면 \\(f(x)=(x+2)(x-4)^2\\)이고, \\(x>0\\)에서 \\(f(x)\\ge 0\\) (등호는 \\(x=4\\)에서, 부호변화 없음)이므로 \\(F(t)\\)는 \\(t>0\\)에서 단조증가(비감소)하여 양의 \\(t\\)에서 뚜렷한 최솟값(주어진 선지와 일치하는 값)을 주지 못한다.\n경우 1을 확인하면 \\(f(x)=x^2(x-6)\\)이고, \\(0<t<6\\)에서 \\(f(t)<0\\), \\(t>6\\)에서 \\(f(t)>0\\)이다. 따라서 \\(F(t)\\)는 \\(t=6\\)에서 감소에서 증가로 바뀌어 최솟값을 가진다.\n따라서 \\(\\displaystyle\\int\\nolimits _{-t}^{t} g(x)\\,dx\\)이 최솟값을 갖는 양수 \\(t\\)는 \\(6\\)이다.\n따라서 정답은 ④ 이다."
+     "해설": "\\(\\displaystyle h(x)=\\displaystyle\\int\\nolimits _0^x \\{f(t)-g(t)\\}dt\\) 이므로 \\(h'(x)=f(x)-g(x)\\)이다.\n\\(h(x)\\)가 \\(x=2\\)에서 극대, \\(x=3\\)에서 극소이므로 \\(h'(2)=0,\\ h'(3)=0\\), 즉 \\(f(2)=g(2)\\), \\(f(3)=g(3)\\)이다.\n\\(g=f^{-1}\\)이고 \\(x>0\\)에서 \\(f'(x)\\ge 0\\)이므로 \\(f\\)는 (적어도 양의 실수 구간에서) 증가함수이다. 증가함수인 \\(f\\)에 대해 \\(f(a)=f^{-1}(a)\\)이면 \\(f(f(a))=a\\)인데, \\(f\\)가 증가함수이면 2-주기점이 존재할 수 없으므로(만약 \\(f(a)=b,\\ f(b)=a,\\ a\\ne b\\)이면 \\(a<b \\Rightarrow f(a)<f(b)\\Rightarrow b<a\\)가 되어 모순) \\(a=f(a)\\)가 되어야 한다.\n따라서 \\(f(2)=2,\\ f(3)=3\\)이고, 역함수의 성질에 의해 \\(g(2)=2,\\ g(3)=3\\)이다.\n이제 역함수의 적분 공식(넓이 관계)을 이용한다. \\(f(0)=0\\)이고 \\(f\\)가 증가함수이므로, \\(f(a)=b\\)일 때\n\\(\\displaystyle\\int\\nolimits _0^a f(t)\\,dt+\\int\\nolimits _0^b g(t)\\,dt = ab\\)\n가 성립한다.\n\\(a=2,\\ f(2)=2\\)를 대입하면\n\\(\\displaystyle\\int\\nolimits _0^2 f(t)\\,dt+\\int\\nolimits _0^2 g(t)\\,dt = 4\\) ... (1)\n또한 \\(\\displaystyle h(2)=\\displaystyle\\int\\nolimits _0^2 f(t)dt-\\int\\nolimits _0^2 g(t)dt=\\frac{3}{2}\\) ... (2)\n(1),(2)를 연립하면 \\(\\displaystyle\\int\\nolimits _0^2 f(t)dt=\\frac{11}{4},\\ \\int\\nolimits _0^2 g(t)dt=\\frac{5}{4}\\).\n같은 방법으로 \\(a=3,\\ f(3)=3\\)을 대입하면\n\\(\\displaystyle\\int\\nolimits _0^3 f(t)\\,dt+\\int\\nolimits _0^3 g(t)\\,dt = 9\\) ... (3)\n또한 \\(\\displaystyle h(3)=\\displaystyle\\int\\nolimits _0^3 f(t)dt-\\int\\nolimits _0^3 g(t)dt=\\frac{5}{4}\\) ... (4)\n(3),(4)를 연립하면\n\\(\\displaystyle\\int\\nolimits _0^3 f(t)dt=\\frac{41}{8},\\quad \\int\\nolimits _0^3 g(t)dt=\\frac{31}{8}\\).\n따라서 \\(\\displaystyle\\int\\nolimits _0^3 g(t)dt=\\frac{31}{8}\\)이므로 정답은 ④ 이다."
     },
     "강의": null,
     "답변": []
@@ -1774,100 +1678,37 @@ window.ME_DATA = {
  },
  "BrCadZk4dgNpTxQg8u8qcQ": {
   "진도": "부정적분과 정적분",
-  "상태": "many",
+  "상태": "few",
   "오답": [
-   {
-    "유형": "정적분(다항함수)",
-    "문제": {
-     "stem": "구간 $[0, 8]$에서 정의된 함수 $f(x) = \\begin{cases} -x(x-4) & (0 \\leq x < 4) \\\\ x-4 & (4 \\leq x \\leq 8) \\end{cases}$ 이다. $\\displaystyle F(a) = \\int\\nolimits _a^{a+4} f(x) dx$라 할 때, $F(a)$의 최댓값은 $\\displaystyle \\frac{q}{p}$이다. 서로소인 자연수 $p$, $q$에 대하여 $p+q$의 값은? (단, $0 \\leq a \\leq 4$)",
-     "choices": [
-      "① $27$",
-      "② $29$",
-      "③ $31$",
-      "④ $33$",
-      "⑤ $35$"
-     ],
-     "answer": "⑤",
-     "id": "ngd_su2_7e20d4c62c",
-     "출처": "학교 기출(족보)",
-     "해설": "구간 \\(0 \\le a \\le 4\\)이므로 적분 구간 \\([a, a+4]\\)는 \\(a \\in [0,4]\\), \\(a+4 \\in [4,8]\\)로 나뉘어 \\(f(x)\\)의 두 식을 모두 포함한다.\n\\[F(a) = \\int\\nolimits _a^{4} (-x^2+4x)\\,dx + \\int\\nolimits _4^{a+4} (x-4)\\,dx\\]\n첫 번째 적분: \\(\\displaystyle G(x) = -\\dfrac{x^3}{3} + 2x^2\\) 라 하면\n\\[G(4) = -\\frac{64}{3}+32 = \\frac{32}{3}, \\quad G(a) = -\\frac{a^3}{3}+2a^2\\]이므로 첫 적분값은 \\(\\displaystyle \\dfrac{32}{3} + \\dfrac{a^3}{3} - 2a^2\\).\n두 번째 적분: \\(u=x-4\\)로 치환하면 \\(\\displaystyle \\int\\nolimits _0^a u\\,du = \\dfrac{a^2}{2}\\).\n따라서\n\\[F(a) = \\frac{a^3}{3} - 2a^2 + \\frac{a^2}{2} + \\frac{32}{3} = \\frac{a^3}{3} - \\frac{3}{2}a^2 + \\frac{32}{3}\\]\n이를 미분하면 \\(F'(a) = a^2 - 3a = a(a-3)\\)이므로, \\(0<a<3\\)에서 \\(F'(a)<0\\), \\(3<a<4\\)에서 \\(F'(a)>0\\)이다. 즉 \\(F(a)\\)는 \\([0,3]\\)에서 감소, \\([3,4]\\)에서 증가하므로 극값은 최소값 후보이고, 최댓값은 구간의 양 끝점 \\(a=0\\) 또는 \\(a=4\\)에서 나타난다.\n\\[F(0) = \\frac{32}{3}, \\qquad F(4) = \\frac{64}{3} - 24 + \\frac{32}{3} = 32-24 = 8\\]\n\\(\\displaystyle \\dfrac{32}{3} \\approx 10.67 > 8\\) 이므로 최댓값은 \\(\\displaystyle F(0) = \\dfrac{32}{3}\\).\n따라서 \\(p=3\\), \\(q=32\\)이고 \\(\\gcd(3,32)=1\\)이므로 \\(p+q = 35\\)이다.\n따라서 정답은 ⑤ 이다."
-    },
-    "내답": "③",
-    "유사": {
-     "stem": "$f'(x) = 6(x-1)(x-2)$이고 $f(0)=-4$일 때, $0 \\leq x \\leq t$에서 $f(x)$의 최댓값을 $g(t)$라고 하자. (단, $t \\geq0$) $\\displaystyle \\int\\nolimits _{\\frac{1}{2}}^{\\frac{5}{2}} g(t) dt$의 값은?",
-     "choices": [
-      "① $\\displaystyle \\frac{51}{32}$",
-      "② $\\displaystyle \\frac{53}{32}$",
-      "③ $\\displaystyle \\frac{55}{32}$",
-      "④ $\\displaystyle \\frac{57}{32}$",
-      "⑤ $\\displaystyle \\frac{59}{32}$"
-     ],
-     "answer": "⑤",
-     "id": "ngd_su2_47aa24fd6f",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(f'(x) = 6(x-1)(x-2)\\)를 적분하면 \\(f(x) = 2x^3 - 9x^2 + 12x + C\\).\n\\(f(0) = C = -4\\)이므로 \\(f(x) = 2x^3 - 9x^2 + 12x - 4\\).\n임계점: \\(x=1\\) (극대), \\(x=2\\) (극소).\n\\(f(0)=-4,\\quad f(1)=1,\\quad f(2)=0\\).\n\\(g(t) = \\max_{0 \\leq x \\leq t} f(x)\\)를 구간별로 분석한다.\n\\(t \\in [0,1]\\): \\(f'(x)>0\\)이므로 \\(f\\)는 증가, \\(g(t)=f(t)\\).\n\\(\\displaystyle t \\in [1,\\,\\frac{5}{2}]\\): \\(f(t)-1=(t-1)^2(2t-5)\\leq 0\\)이므로 \\(g(t)=f(1)=1\\).\n\\(\\displaystyle t>\\frac{5}{2}\\): \\(f(t)>1\\)이므로 \\(g(t)=f(t)\\).\n\\[\\int\\nolimits _{\\frac{1}{2}}^{\\frac{5}{2}} g(t)\\,dt = \\int\\nolimits _{\\frac{1}{2}}^{1} f(t)\\,dt + \\int\\nolimits _{1}^{\\frac{5}{2}} 1\\,dt.\\]\n\\(\\displaystyle \\int\\nolimits _{1}^{5/2} 1\\,dt = \\dfrac{3}{2}\\).\n\\(\\displaystyle F(t) = \\dfrac{t^4}{2} - 3t^3 + 6t^2 - 4t\\)로 놓으면,\n\\[F(1) = \\frac{1}{2} - 3 + 6 - 4 = -\\frac{1}{2},\\]\n\\[F\\!\\left(\\frac{1}{2}\\right) = \\frac{1}{32} - \\frac{12}{32} + \\frac{48}{32} - \\frac{64}{32} = -\\frac{27}{32}.\\]\n\\[\\int\\nolimits _{\\frac{1}{2}}^{1} f(t)\\,dt = F(1)-F\\!\\left(\\frac{1}{2}\\right) = -\\frac{16}{32}+\\frac{27}{32} = \\frac{11}{32}.\\]\n\\[\\int\\nolimits _{\\frac{1}{2}}^{\\frac{5}{2}} g(t)\\,dt = \\frac{11}{32} + \\frac{3}{2} = \\frac{11}{32}+\\frac{48}{32} = \\frac{59}{32}.\\]\n따라서 정답은 ⑤ 이다."
-    },
-    "강의": null,
-    "답변": []
-   },
-   {
-    "유형": "이계도함수+초기조건 2개로 함수 결정",
-    "문제": {
-     "stem": "최고차항의 계수가 $1$인 이차함수 $f(x)$가 다음 조건을 만족시킨다. (가) 모든 실수 $x$에 대하여 $f(x)=f(-x)$. (나) $\\displaystyle \\int\\nolimits _{-3}^{3} f(x) dx=0$. $\\displaystyle g(x) = \\int\\nolimits _0^x f(t)dt$라 할 때, 옳은 것만을 보기에서 있는 대로 고른 것은?\n\nㄱ. $\\displaystyle \\int\\nolimits _{-3}^{3} g'(x)dx=0$\n\nㄴ. 함수 $g(x)$의 극솟값은 $\\displaystyle -\\frac{9}{4}$\n\nㄷ. $0<t<\\sqrt{3}$인 모든 실수 $t$에 대하여 $\\displaystyle \\int\\nolimits _{-t}^{t} |g(x)| dx< \\frac{9}{2} t$",
-     "choices": [
-      "① ㄱ",
-      "② ㄱ, ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
-     ],
-     "answer": "③",
-     "id": "ngd_su2_e6955146b6",
-     "출처": "학교 기출(족보)",
-     "해설": "조건 (가)에서 \\(f(x)=f(-x)\\)이므로 \\(f\\)는 우함수이고, 최고차항 계수가 \\(1\\)인 이차함수이므로 \\(f(x)=x^2+c\\) 꼴이다.\n조건 (나)에서 \\(\\displaystyle \\int\\nolimits _{-3}^{3} f(x)dx = 2\\int\\nolimits _0^3 (x^2+c)dx = 2\\left[\\frac{x^3}{3}+cx\\right]_0^3 = 2(9+3c)=18+6c=0\\) 이므로 \\(c=-3\\).\n따라서 \\(f(x)=x^2-3\\), \\(\\displaystyle g(x)=\\displaystyle\\int\\nolimits _0^x f(t)dt = \\frac{x^3}{3}-3x\\), \\(g'(x)=f(x)=x^2-3\\).\nㄱ. \\(\\displaystyle\\int\\nolimits _{-3}^{3} g'(x)dx = \\int\\nolimits _{-3}^{3} f(x)dx = 0\\) (조건 (나)에 의해 성립). 참.\nㄴ. \\(g'(x)=x^2-3=0\\)에서 \\(x=\\pm\\sqrt{3}\\). \\(g''(x)=2x\\)이므로 \\(x=\\sqrt{3}\\)에서 극소. \\(\\displaystyle g(\\sqrt{3})=\\dfrac{3\\sqrt{3}}{3}-3\\sqrt{3}=\\sqrt{3}-3\\sqrt{3}=-2\\sqrt{3}\\).\n이는 \\(\\displaystyle -\\dfrac{9}{4}\\)가 아니므로 거짓.\nㄷ. \\(\\displaystyle g(x)=\\dfrac{x^3}{3}-3x=\\dfrac{x(x^2-9)}{3}\\)는 기함수이므로 \\(|g(x)|\\)는 우함수. \\(0<x<\\sqrt{3}\\)에서 \\(g'(x)=x^2-3<0\\)이고 \\(g(0)=0\\)이므로 \\(g(x)<0\\). 따라서 \\(\\displaystyle |g(x)|=3x-\\dfrac{x^3}{3}\\).\n\\(0<t<\\sqrt{3}\\)에 대해\n\\(\\displaystyle\\int\\nolimits _{-t}^{t} |g(x)|dx = 2\\int\\nolimits _0^t \\left(3x-\\frac{x^3}{3}\\right)dx = 2\\left[\\frac{3x^2}{2}-\\frac{x^4}{12}\\right]_0^t = 3t^2-\\frac{t^4}{6}\\).\n\\(\\displaystyle h(t)=\\dfrac{9}{2}t-\\left(3t^2-\\dfrac{t^4}{6}\\right)=\\dfrac{9}{2}t-3t^2+\\dfrac{t^4}{6}\\)라 하면 \\(h(0)=0\\)이고 \\(\\displaystyle h'(t)=\\dfrac{9}{2}-6t+\\dfrac{2}{3}t^3\\), \\(\\displaystyle h'(0)=\\dfrac{9}{2}>0\\)이므로 \\(t=0\\) 근방에서 \\(h\\)는 증가한다.\n\\(\\displaystyle h(\\sqrt{3})=\\dfrac{9\\sqrt{3}}{2}-9+\\dfrac{9}{6}=\\dfrac{9\\sqrt{3}}{2}-\\dfrac{15}{2}\\approx 0.29>0\\)이고, \\(h\\)는 구간 내에서 한 번 증가했다가 감소하는 형태이므로 끝값이 \\(0\\)보다 크면 구간 내내 \\(h(t)>0\\)이다.\n따라서 \\(0<t<\\sqrt{3}\\)인 모든 실수 \\(t\\)에 대해 \\(\\displaystyle\\int\\nolimits _{-t}^{t} |g(x)|dx < \\frac{9}{2}t\\)가 성립하므로 참.\nㄱ, ㄷ만 참이다.\n따라서 정답은 ③ 이다."
-    },
-    "내답": "①",
-    "유사": {
-     "stem": "실수 전체의 집합에서 미분가능한 함수 $f(x)$의 도함수 $f'(x)$가 $f'(x)= |x+1| +2x$이다. $f(-1)=3$일 때, <보기>에서 옳은 것만을 있는 대로 고른 것은?\n<보기>\nㄱ. $\\int_{-2}^2 x^2 f'(x)\\,dx = \\frac{49}{3}$\nㄴ. 함수 $f(x)$는 $x=-1$에서 극솟값을 갖지 않는다.\nㄷ. 방정식 $f(x)=3$은 서로 다른 두 실근을 갖는다.",
-     "choices": [
-      "① ㄴ",
-      "② ㄷ",
-      "③ ㄱ, ㄴ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
-     ],
-     "answer": "④",
-     "id": "ngd_su2_1d0727c6cc",
-     "출처": "학교 기출(족보)",
-     "해설": "\\(x\\ge-1\\)에서 \\(f'(x)=3x+1\\), \\(x<-1\\)에서 \\(f'(x)=x-1\\)이다. \\(f(-1)=3\\)을 이용해 적분하면 \\(x\\ge-1\\)에서 \\(\\displaystyle f(x)=\\frac{3}{2}x^2+x+\\frac{5}{2}\\), \\(x<-1\\)에서 \\(\\displaystyle f(x)=\\frac{1}{2}x^2-x+\\frac{3}{2}\\)이다.\nㄱ. \\(\\displaystyle \\int\\nolimits _{-2}^2 x^2f'(x)\\,dx=\\int\\nolimits _{-2}^2 x^2|x+1|\\,dx+\\int\\nolimits _{-2}^2 2x^3\\,dx\\)이고 뒤 항은 기함수라 \\(0\\)이다. \\(|x+1|\\) 부호에 따라 나눠 계산하면 \\(\\displaystyle \\int\\nolimits _{-2}^{-1} x^2(-(x+1))dx+\\int\\nolimits _{-1}^2 x^2(x+1)dx=\\frac{17}{12}+\\frac{27}{4}=\\frac{49}{6}\\)이므로 \\(\\displaystyle \\frac{49}{3}\\)가 아니다. (거짓)\nㄴ. \\(f'(-1)=|0|+2(-1)=-2\\neq0\\)이므로 \\(x=-1\\)은 임계점이 아니다. 따라서 \\(x=-1\\)에서 극값(극소)을 가질 수 없다. (참)\nㄷ. \\(x<-1\\)에서 \\(f'(x)=x-1<0\\)이므로 \\(f\\)는 감소하다가 \\(x\\to-\\infty\\)일 때 \\(f\\to\\infty\\), \\(x\\to-1^-\\)일 때 \\(f\\to3\\)이므로 이 구간에서는 \\(f(x)>3\\)이고 \\(f(x)=3\\)인 해가 없다. \\(x\\ge-1\\)에서 \\(\\displaystyle \\frac{3}{2}x^2+x+\\frac{5}{2}=3\\)을 풀면 \\(3x^2+2x-1=0\\), 즉 \\((3x-1)(x+1)=0\\)에서 \\(x=-1\\) 또는 \\(\\displaystyle x=\\frac{1}{3}\\)이다. 따라서 서로 다른 두 실근 \\(\\displaystyle x=-1,\\ \\frac{1}{3}\\)을 갖는다. (참)\n따라서 정답은 ④ 이다."
-    },
-    "강의": null,
-    "답변": []
-   },
    {
     "유형": "함수의 증가와 감소(극값 없을 조건)",
     "문제": {
-     "stem": "함수 $f(x)=2x^3-2ax^2+3ax-2$와 모든 실수 $t$에 대하여 $y=t$가 만나는 점의 개수가 1이 되도록 하는 정수 $a$의 개수는?",
-     "choices": [],
-     "answer": "5",
-     "id": "ngd_su2_a9bbbfc0bf",
-     "출처": "학교 기출(족보)",
-     "해설": "③\n모든 실수 \\(t\\)에 대하여 \\(y=t\\)와 함수 \\(f(x)\\)가 만나는 점의 개수가 \\(1\\)이 되려면 함수 \\(f(x)\\)는 모든 실수 \\(x\\)에 대하여 증가함수이어야 한다.\n즉, 함수 \\(f(x)\\)는 극댓값과 극솟값을 갖지 않으므로\n\\(f ' (x)=6x ^{2} -4ax+3a=0\\)에서 실근이 존재하지 않는다.\n따라서, \\(\\displaystyle \\frac{D}{4} =4a ^{2} -18a \\leq 0\\), \\(\\displaystyle 0 \\leq a \\leq \\frac{9}{2}\\) 이다.\n범위에 속하는 정수 \\(a\\)는 \\(0\\), \\(1\\), \\(2\\), \\(3\\), \\(4\\)이므로 정수 \\(a\\)의 개수는 \\(5\\)개다."
-    },
-    "내답": "?",
-    "유사": {
-     "stem": "함수 $f(x)=x^{3}-ax^{2}+ax$가 임의의 서로 다른 두 실수 $x_{1}, x_{2}$에 대하여 $(x_{1}-x_{2})\\{f(x_{1})-f(x_{2})\\} > 0$을 만족시키도록 하는 모든 정수 $a$의 합은? [$3.5$점]",
+     "stem": "함수 $f \\left( x \\right) =x ^{3} -ax ^{2} + \\left( a+6 \\right) x+5$ 가 실수 전체의 집합에서 증가하도록 하는 정수 $a$ 의 최댓값은?",
      "choices": [
-      "① $-6$",
-      "② $-3$",
-      "③ $0$",
-      "④ $3$",
-      "⑤ $6$"
+      "① $4$",
+      "② $5$",
+      "③ $6$",
+      "④ $7$",
+      "⑤ $8$"
      ],
-     "answer": "⑤",
-     "id": "ngd_su2_f0390b5193",
-     "출처": "학교 기출(족보)",
-     "해설": "\\((x_1-x_2)\\{f(x_1)-f(x_2)\\}>0\\)은 임의의 서로 다른 두 실수에 대해 성립하므로, \\(f\\)가 순증가 함수임을 의미한다.\n\\(f'(x)=3x^2-2ax+a \\geq 0\\) (등호는 고립점에서만)이 필요충분조건이다.\n판별식 조건 \\(D/4 \\leq 0\\):\n\\[a^2-3a \\leq 0 \\implies a(a-3)\\leq 0 \\implies 0\\leq a\\leq 3\\]\n\\(a=0\\): \\(f'(x)=3x^2\\geq 0\\), \\(x=0\\)에서만 \\(0\\) → 순증가 ✓  \n\\(a=3\\): \\(f'(x)=3(x-1)^2\\geq 0\\), \\(x=1\\)에서만 \\(0\\) → 순증가 ✓\n범위 \\([0,3]\\)에 속하는 정수: \\(0,1,2,3\\)\n\\[0+1+2+3=6\\]\n따라서 정답은 ⑤ 이다."
+     "answer": "③",
+     "id": "tb_01b33c0568",
+     "출처": "교과서",
+     "해설종이": true
+    },
+    "내답": "(미표기)",
+    "유사": {
+     "stem": "다음 보기의 함수 중 열린구간 $(-\\infty, \\infty)$에서 증가하는 것만을 있는 대로 고른 것은?\n\n< 보기 >\nㄱ. $f(x)=x^3+6x^2+12x-3$\nㄴ. $\\displaystyle g(x)=\\dfrac{1}{3}x^3-2x^2+3x+5$\nㄷ. $h(x)=2x^3-6x^2-18x+5$",
+     "choices": [
+      "① ㄱ",
+      "② ㄴ",
+      "③ ㄱ, ㄴ",
+      "④ ㄱ, ㄷ",
+      "⑤ ㄱ, ㄴ, ㄷ"
+     ],
+     "answer": "①",
+     "id": "var_tb_a882229083_20260822_2",
+     "해설": "ㄱ에서 \\(f'(x)=3x^2+12x+12=3(x+2)^2 \\geq 0\\)이므로 \\(f(x)\\)는 \\((-\\infty,\\infty)\\)에서 증가한다. ㄴ에서 \\(g'(x)=x^2-4x+3=(x-1)(x-3)\\)이므로 \\(1<x<3\\)일 때 \\(g'(x)<0\\)이 되어 \\(g(x)\\)는 \\((-\\infty,\\infty)\\)에서 증가하지 않는다. ㄷ에서 \\(h'(x)=6x^2-12x-18=6(x-3)(x+1)\\)이므로 \\(-1<x<3\\)일 때 \\(h'(x)<0\\)이 되어 \\(h(x)\\)도 \\((-\\infty,\\infty)\\)에서 증가하지 않는다. 따라서 열린구간 \\((-\\infty,\\infty)\\)에서 증가하는 함수는 ㄱ뿐이다."
     },
     "강의": null,
     "답변": []
@@ -1882,19 +1723,25 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "다항함수 $f(x)$에 대하여 보기에서 $f'(a)$의 값과 항상 같은 값을 갖는 것만을 있는 대로 고른 것은? ㄱ. $\\displaystyle \\lim\\limits_{h \\to 0} \\frac{f(a)-f(a-h)}{h}$ ㄴ. $\\displaystyle \\lim\\limits_{x \\to \\frac{a}{4}} \\frac{f(4x)-f(a)}{4x-a}$ ㄷ. $\\displaystyle \\lim\\limits_{x \\to -2a} \\frac{f(x+3a)-f(a)}{x+2a}$",
+     "stem": "미분가능한 함수 $f(x)$가 다음 조건을 만족시킬 때, $\\displaystyle \\dfrac{f'(x)}{f(x)}$의 값은?\n\n(가) 임의의 실수 $x, y$에 대하여 $f(x+y)=f(x)f(y)$\n\n(나) 모든 실수 $x$에 대하여 $f(x)>0$\n\n(다) $f'(0)=5$",
      "choices": [
-      "① ㄱ",
-      "② ㄱ, ㄴ",
-      "③ ㄱ, ㄷ",
-      "④ ㄴ, ㄷ",
-      "⑤ ㄱ, ㄴ, ㄷ"
+      "① 1",
+      "② 2",
+      "③ 3",
+      "④ 4",
+      "⑤ 5"
      ],
      "answer": "⑤",
-     "id": "ngd_su2_4c6667bedb",
-     "출처": "학교 기출(족보)",
-     "해설": "ㄱ. \\(\\displaystyle \\lim\\limits_{h \\to 0} \\dfrac{f(a)-f(a-h)}{h}\\)에서 \\(h\\to 0\\)일 때 \\(a-h \\to a\\)이므로, \\(t=a-h\\)로 치환하면 \\(h=a-t\\)이고 \\(t\\to a\\)일 때\n\\[\\lim\\limits_{t\\to a} \\frac{f(a)-f(t)}{a-t}=\\lim\\limits_{t\\to a} \\frac{f(t)-f(a)}{t-a}=f'(a)\\]\n따라서 ㄱ은 \\(f'(a)\\)와 같다.\nㄴ. \\(\\displaystyle \\lim\\limits_{x \\to \\frac{a}{4}} \\dfrac{f(4x)-f(a)}{4x-a}\\)에서 \\(t=4x\\)로 치환하면 \\(\\displaystyle x\\to \\frac{a}{4}\\)일 때 \\(t\\to a\\)이므로\n\\[\\lim\\limits_{t\\to a} \\frac{f(t)-f(a)}{t-a}=f'(a)\\]\n따라서 ㄴ도 \\(f'(a)\\)와 같다.\nㄷ. \\(\\displaystyle \\lim\\limits_{x \\to -2a} \\dfrac{f(x+3a)-f(a)}{x+2a}\\)에서 \\(u=x+3a\\)로 치환하면 \\(x=u-3a\\)이고, \\(x\\to -2a\\)일 때 \\(u\\to a\\)이다. 또한 분모는 \\(x+2a=u-3a+2a=u-a\\)이므로\n\\[\\lim\\limits_{u\\to a} \\frac{f(u)-f(a)}{u-a}=f'(a)\\]\n따라서 ㄷ도 \\(f'(a)\\)와 같다.\nㄱ, ㄴ, ㄷ 모두 \\(f'(a)\\)와 항상 같은 값을 가진다.\n따라서 정답은 ⑤ 이다."
-    }
+     "id": "var_wb_574d299a72_20260731_1",
+     "해설": "조건 (가)에 \\(x=0,\\,y=0\\)을 대입하면 \\(f(0)=\\{f(0)\\}^2\\)이고, 조건 (나)에서 \\(f(x)>0\\)이므로 \\(f(0)=1\\)이다. 도함수의 정의와 조건 (가)를 이용하면 \\(\\displaystyle f'(x)=\\lim\\limits_{h \\to 0} \\dfrac{f(x)f(h)-f(x)}{h}=f(x)\\lim\\limits_{h \\to 0} \\dfrac{f(h)-f(0)}{h}=f(x)f'(0)\\)이다. 따라서 \\(\\displaystyle \\dfrac{f'(x)}{f(x)}=\\dfrac{f(x)f'(0)}{f(x)}=f'(0)=5\\)이다."
+    },
+    "힌트": [
+     "조건 (가)에 특별한 값을 대입해서 $f(0)$이 얼마인지 먼저 파악하는 방향으로 가보자. 그다음 도함수 정의식에 조건 (가)를 엮는 흐름이야.",
+     "도함수의 정의 $f'(x) = \\lim_{h \\to 0} \\dfrac{f(x+h)-f(x)}{h}$ 기억나? 여기에 조건 (가)를 적용할 거야.",
+     "조건 (가)에 $x=0,\\, y=0$을 대입해서 $f(0)$을 먼저 구해봐.",
+     "$f'(x)$를 정의대로 쓴 뒤 $f(x+h)$에 조건 (가)를 적용하면 $f(x)$를 앞으로 꺼낼 수 있어. 그러면 남은 극한이 딱 $f'(0)$과 같은 형태가 된다는 걸 놓치지 말자.",
+     "$f'(x) = f(x) \\cdot \\lim_{h \\to 0} \\dfrac{f(h)-f(0)}{h}$ 까지 왔으면, 이 극한이 $f'(0)$임을 확인하고 $\\dfrac{f'(x)}{f(x)}$를 정리해봐."
+    ]
    },
    {
     "유형": "함수식에서 접선의 기울기 구하기",
@@ -1926,17 +1773,17 @@ window.ME_DATA = {
     "강의": null,
     "답변": [],
     "유사": {
-     "stem": "미분가능한 함수 $f(x)$가 모든 실수 $x, y$에 대하여 $f(x+y)=f(x)+f(y)+5xy$를 만족시키고 $f'(0)=3$일 때, $f'(x)$는?",
+     "stem": "최고차항의 계수가 $a$ 인 이차함수 $f(x)$ 가 모든 실수 $x$ 에 대하여 $\\left| f ' (x) \\right| \\leq 2x ^{2} +24$ 를 만족시킨다. 함수 $y=f(x)$ 의 그래프의 대칭축이 직선 $x=2$ 일 때, 실수 $a$ 의 최댓값은?",
      "choices": [
-      "① $f'(x)=3$",
-      "② $f'(x)=-5x+3$",
-      "③ $f'(x)=3x+5$",
-      "④ $f'(x)=5x+3$",
-      "⑤ $f'(x)=5x^2+3$"
+      "① $3$",
+      "② $\\displaystyle \\frac{7}{2}$",
+      "③ $\\displaystyle \\frac{9}{2}$",
+      "④ $4$",
+      "⑤ $5$"
      ],
      "answer": "④",
-     "id": "var_tb_d862828df3_20260804_1",
-     "해설": "\\(x=0,\\ y=0\\)을 대입하면 \\(f(0)=2f(0)\\)이므로 \\(f(0)=0\\)이다. 도함수의 정의에 의해 \\(\\displaystyle f'(x)=\\lim\\limits_{h \\to 0} \\dfrac{f(x+h)-f(x)}{h}=\\lim\\limits_{h \\to 0} \\dfrac{f(x)+f(h)+5xh-f(x)}{h}\\)이다. 이를 정리하면 \\(\\displaystyle \\lim\\limits_{h \\to 0} \\left(\\dfrac{f(h)-f(0)}{h}+5x\\right)=f'(0)+5x\\)이다. \\(f'(0)=3\\)을 대입하면 \\(f'(x)=5x+3\\)이다."
+     "id": "var_tb_3840a0f030_20260929_2",
+     "해설": "\\(f'(x)=2ax+b\\)이고 대칭축이 \\(x=2\\)이므로 \\(b=-4a\\)이다. \\(|2ax+b|\\le2x^2+24\\)는 \\(2x^2-2ax+(24-b)\\ge0\\)과 \\(2x^2+2ax+(24+b)\\ge0\\)이 항상 성립함을 의미하며, 판별식 조건에서 \\(a^2\\le2(24+4a)\\), \\(a^2\\le2(24-4a)\\)를 얻는다. 정리하면 \\(-4\\le a\\le12\\)와 \\(-12\\le a\\le4\\)이므로 공통 범위는 \\(-4\\le a\\le4\\)이다. 따라서 \\(a\\)의 최댓값은 \\(4\\)이므로 답은 ④"
     }
    }
   ],
