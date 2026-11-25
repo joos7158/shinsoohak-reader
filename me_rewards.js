@@ -409,12 +409,14 @@ window.ME_REWARDS = {
   "today": "2026-11-25"
  },
  "H-U7NmlUs5ml7lFC0Dtvgw": {
-  "stamps": 7,
+  "stamps": 8,
   "redeemed": 0,
   "per": 10,
   "gift": "편의점 5천원 기프티콘",
   "days": [],
-  "gold": [],
+  "gold": [
+   "삼각형의 두 변의 중점을 연결한 선분"
+  ],
   "scan": [
    "2026-11-04",
    "2026-11-06",
