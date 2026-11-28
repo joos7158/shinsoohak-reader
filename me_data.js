@@ -3384,5 +3384,9 @@ window.ME_DATA = {
   "리더코드": "",
   "복습": [],
   "자유답변": []
+ },
+ "rgWEUQtcI-YzuOb7yGfXBw": {
+  "대기": true,
+  "리더코드": ""
  }
 };
